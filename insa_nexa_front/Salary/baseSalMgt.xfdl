@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="baseSalMgt" width="1300" height="720" titletext="New Form" onload="baseSalMgt_onload">
+    <Layouts>
+      <Layout height="720" width="1300">
+        <Tab id="Tab00" taborder="0" tabindex="0" left="40" top="33" width="1920" height="1080" onchanged="Tab00_onchanged" font="normal 700 12px/normal &quot;Gulim&quot;">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="호봉제" font="normal 700 12px/normal &quot;Gulim&quot;">
+              <Layouts>
+                <Layout>
+                  <Div id="Div00" taborder="0" text="Div00" left="32" top="2" width="1248" height="48" border="0px none, 0px none, 2px solid black">
+                    <Layouts>
+                      <Layout>
+                        <Button id="Button01" taborder="0" text="일괄등록" left="67.31%" top="10" width="6.17%" height="60.87%" background="#d0e3ed" font="bold 12px/normal &quot;나눔고딕&quot;" borderRadius="5px" onclick="Tab00_Tabpage1_Div00_Button01_onclick"/>
+                        <Button id="Button02" taborder="1" text="일괄인상" left="75.40%" top="10" width="6.17%" height="60.87%" background="#d0e3ed" font="bold 12px/normal &quot;나눔고딕&quot;12px/normal &quot;나눔고딕&quot;" borderRadius="5px" onclick="Tab00_Tabpage1_Div00_Button02_onclick"/>
+                        <Button id="Button03" taborder="2" text="호봉복사" left="83.57%" top="10" width="6.17%" height="60.87%" onclick="Div00_Button00_00_onclick" background="#d0e3ed" font="bold 12px/normal &quot;나눔고딕&quot;" borderRadius="5px"/>
+                        <Button id="Button04" taborder="3" text="코드설정" left="91.67%" top="10" width="6.17%" height="60.87%" background="#d0e3ed" font="bold 12px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage1_Div00_Button04_onclick"/>
+                        <Static id="Static00" taborder="4" text="호봉테이블등록" left="21" top="10" width="142" height="31" onclick="Div00_Static00_onclick" font="bold 18px/normal &quot;나눔고딕&quot;"/>
+                      </Layout>
+                    </Layouts>
+                  </Div>
+                  <Div id="Div01" taborder="1" text="Div01" left="39" top="60" width="220" height="341" border="2px solid skyblue">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="Grid00" taborder="0" left="10" top="9" width="220" height="325" binddataset="ds_rank" oncellclick="Div01_Grid00_oncellclick">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="48"/>
+                                <Column size="112"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell colspan="2" text="대상직급" background="#6092ff" color="white"/>
+                                <Cell row="1" text="코드" background="#6092ff" color="white"/>
+                                <Cell row="1" col="1" text="직급" background="#6092ff" color="white"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:POSITION_CODE"/>
+                                <Cell col="1" text="bind:POSITION"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                      </Layout>
+                    </Layouts>
+                  </Div>
+                  <Div id="Div02" taborder="2" text="Div02" left="39" top="402" width="220" height="281" border="2px solid skyblue">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="Grid01" taborder="0" left="9" top="6" width="220" height="260" binddataset="ds_rank">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="94"/>
+                                <Column size="86"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell colspan="2" text="호봉이력" background="#6092ff" color="white"/>
+                                <Cell row="1" text="적용시작연월" background="#6092ff" color="white"/>
+                                <Cell row="1" col="1" text="적용종료연월" background="#6092ff" color="white"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell edittype="mask" displaytype="mask" text="bind:startDate" maskeditformat="####/##" maskedittype="string"/>
+                                <Cell col="1" edittype="mask" displaytype="mask" text="bind:endDate" maskedittype="string" maskeditformat="####/##"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                      </Layout>
+                    </Layouts>
+                  </Div>
+                  <Div id="Div03" taborder="3" text="Div03" left="261" top="60" width="1000" height="623" border="2px solid skyblue">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="Grid02" taborder="0" left="7" top="8" width="230" height="243">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="64"/>
+                                <Column size="90"/>
+                                <Column size="70"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell rowspan="2" text="호봉" color="white" background="#6092ff"/>
+                                <Cell col="1" text="호봉테이블" background="#6092ff" color="white"/>
+                                <Cell col="2" rowspan="2" text="합계" background="#6092ff" color="white"/>
+                                <Cell row="1" col="1" text="기본급" background="#6092ff" color="white"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:"/>
+                                <Cell col="1"/>
+                                <Cell col="2"/>
+                                <Cell row="1"/>
+                                <Cell row="1" col="1"/>
+                                <Cell row="1" col="2"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                      </Layout>
+                    </Layouts>
+                  </Div>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="연봉제" font="normal 700 12px/normal &quot;Gulim&quot;">
+              <Layouts>
+                <Layout>
+                  <Div id="Div00" taborder="0" text="Div00" left="32" top="2" width="1248" height="48" border="0px none, 0px none, 2px solid black">
+                    <Layouts>
+                      <Layout>
+                        <Button id="Button01" taborder="0" text="수정완료" left="72.52%" top="10" width="6.17%" height="60.87%" background="#d0e3ed" onclick="Div00_Button01_onclick" font="bold 12px/normal &quot;나눔고딕&quot;" borderRadius="5px"/>
+                        <Static id="Static00" taborder="1" text="급여기준관리" left="11" top="10" width="142" height="31" onclick="Div00_Static00_onclick" font="bold 18px/normal &quot;나눔고딕&quot;"/>
+                        <Button id="Button02" taborder="2" text="추가" left="58.17%" top="10" width="6.17%" height="60.87%" background="#d0e3ed" onclick="Div00_Button03_onclick" font="bold 12px/normal &quot;나눔고딕&quot;" borderRadius="5px"/>
+                        <Button id="Button03" taborder="3" text="삭제" left="65.38%" top="10" width="6.17%" height="60.87%" background="#d0e3ed" onclick="Div00_Button02_onclick" font="bold 12px/normal &quot;나눔고딕&quot;" borderRadius="5px"/>
+                      </Layout>
+                    </Layouts>
+                  </Div>
+                  <Div id="Div03" taborder="1" text="Div03" left="32" top="59" width="1000" height="623" border="2px solid skyblue">
+                    <Layouts>
+                      <Layout>
+                        <Div id="Div00_00" taborder="0" text="" left="4" top="3" width="1010" height="560">
+                          <Layouts>
+                            <Layout>
+                              <Grid id="Grid00" taborder="0" left="5" top="4" width="605" height="370" binddataset="ds_basesalary" autoenter="none">
+                                <Formats>
+                                  <Format id="default">
+                                    <Columns>
+                                      <Column size="151"/>
+                                      <Column size="151"/>
+                                      <Column size="151"/>
+                                      <Column size="151"/>
+                                    </Columns>
+                                    <Rows>
+                                      <Row size="24" band="head"/>
+                                      <Row size="24"/>
+                                    </Rows>
+                                    <Band id="head">
+                                      <Cell text="직책코드" background="#6092ff" color="white"/>
+                                      <Cell col="1" text="직책" background="#6092ff" color="white"/>
+                                      <Cell col="2" text="기본급" background="#6092ff" color="white"/>
+                                      <Cell col="3" text="호봉인상률" background="#6092ff" color="white"/>
+                                    </Band>
+                                    <Band id="body">
+                                      <Cell text="bind:POSITION_CODE" edittype="text"/>
+                                      <Cell col="1" text="bind:POSITION" edittype="text"/>
+                                      <Cell col="2" text="bind:BASE_SALARY" edittype="text"/>
+                                      <Cell col="3" text="bind:HOBONG_RATIO" edittype="text"/>
+                                    </Band>
+                                  </Format>
+                                </Formats>
+                              </Grid>
+                            </Layout>
+                          </Layouts>
+                        </Div>
+                      </Layout>
+                    </Layouts>
+                  </Div>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_basesalary">
+        <ColumnInfo>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="BASE_SALARY" type="STRING" size="256"/>
+          <Column id="HOBONG_RATIO" type="STRING" size="256"/>
+          <Column id="ALLOWANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_basesalary00">
+        <ColumnInfo>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="BASE_SALARY" type="STRING" size="256"/>
+          <Column id="HOBONG_RATIO" type="STRING" size="256"/>
+          <Column id="ALLOWANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_rank">
+        <ColumnInfo>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="startDate" type="STRING" size="256"/>
+          <Column id="endDate" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="POSITION_CODE">100</Col>
+            <Col id="POSITION">대표이사</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">200</Col>
+            <Col id="POSITION">상무</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">300</Col>
+            <Col id="POSITION">이사</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">400</Col>
+            <Col id="POSITION">부장</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">500</Col>
+            <Col id="POSITION">차장</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">600</Col>
+            <Col id="POSITION">과장</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">700</Col>
+            <Col id="POSITION">대리</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">800</Col>
+            <Col id="POSITION">주임</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">900</Col>
+            <Col id="POSITION">사원</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_salary_step">
+        <ColumnInfo>
+          <Column id="hobong" type="STRING" size="256"/>
+          <Column id="baseSalary" type="STRING" size="256"/>
+          <Column id="totalSalary" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_hobong_recode">
+        <ColumnInfo>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="startDate" type="STRING" size="256"/>
+          <Column id="endDate" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//로딩시 - [로딩시 자동조회]
+this.baseSalMgt_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+this.transaction(
+             "baseSalMgtID",
+             "svcSalarystdinfomgmt::base-salary1",
+             "",
+             "ds_basesalary=gds_basesalary", 
+             "",
+             "fn_callback");   
+      
+};
+
+//저장 - [수정완료]
+this.Div00_Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+   var count=this.ds_basesalary.rowcount;
+   
+   for(var i=0;i<count;i++){
+      var positioncode=this.ds_basesalary.getColumn(i,"POSITION_CODE");
+      var position=this.ds_basesalary.getColumn(i,"POSITION");
+      var basesalary=this.ds_basesalary.getColumn(i,"BASE_SALARY");
+      var hobong=this.ds_basesalary.getColumn(i,"HOBONG_RATIO");
+
+      
+   if (positioncode==null){
+      this.alert("직급코드를 입력해주세요."); return;   
+   }if (position==null){
+      this.alert("직급를 입력해주세요"); return;
+       }
+      if (basesalary==null){
+      this.alert("기본급을 입력해주세요."); return;
+       }
+      if (hobong==null){
+      this.alert("호봉인상율을 입력해주세요."); return;
+       }
+   }if(confirm(" 저장하시겠습니까 ? ")){
+   this.transaction(
+               "updateID",
+                "svcSalarystdinfomgmt::base-salary2",
+                "gds_basesalary=ds_basesalary:u",
+                "",
+                "",
+                "fn_callback");   
+   }
+};
+
+this.fn_callback = function (trID , ErrorCode , ErrorMsg)
+{
+   if(trID=="positionListID"){
+      if (ErrorCode!=0){
+         alert("조회실패 : "+ErrorMsg);   
+      }else{
+      
+         var count=this.ds_positionList.rowcount;
+         
+         for(var i=0;i<count;i++){
+            var statusList=this.ds_positionList.setColumn(i,"STATUS","");
+         }
+      }
+   }
+   if(trID=="updateID"){
+      if (ErrorCode!=0){
+         alert("저장실패 : "+ErrorMsg+ErrorCode);   
+      }else{
+         alert("저장완료 ");   
+      }this.reload();
+   }
+};
+
+
+// 추가
+this.Div00_Button03_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_basesalary.addRow();
+	this.ds_basesalary.setColumn(this.ds_basesalary.rowposition,"STATUS","insert");
+};
+this.Div00_Button02_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var index = this.ds_basesalary.rowposition;
+	this.ds_basesalary.deleteRow(index);
+};
+
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dailyAttnd" width="1060" height="620" titletext="dailyAttnd" onload="dailyAttnd_onload" oninit="dailyAttnd_oninit" ontimer="dailyAttnd_ontimer">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00" taborder="0" text="Div00" left="30" top="25" width="725" height="371">
+          <Layouts>
+            <Layout>
+              <Button id="Button00_00" taborder="1" text="조회" left="410" top="59" width="120" height="35" onclick="Div00_00_Tab00_Tabpage2_Button00_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="1" left="74" top="140" width="556" height="450" binddataset="ds_test">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원코드"/>
+                <Cell col="1" text="근태코드"/>
+                <Cell col="2" text="적용일자"/>
+                <Cell col="3" text="근태타입코드"/>
+                <Cell col="4" text="근태타입명"/>
+                <Cell col="5" text="시간"/>
+                <Cell col="6" text="직원이름"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:DAY_ATTD_CODE"/>
+                <Cell col="2" text="bind:APPLY_DAY"/>
+                <Cell col="3" text="bind:ATTD_TYPE_CODE"/>
+                <Cell col="4" text="bind:ATTD_TYPE_NAME"/>
+                <Cell col="5" text="bind:TIME"/>
+                <Cell col="6" text="bind:EMP_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Calendar id="Calendar00" taborder="2" left="190" top="85" width="220" height="33" onchanged="Calendar00_onchanged"/>
+        <Static id="Static00" taborder="3" text=" ◼출퇴근 정보 조회" left="50" top="19" width="214" height="49" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+        <Static id="Static00_00" taborder="4" text="적용일자" left="118" top="77" width="64" height="47" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+        <TextArea id="TextArea00" taborder="5" left="734" top="383" width="176" height="34"/>
+        <Static id="Static00_00_00" taborder="6" text="사원명" left="676" top="210" width="64" height="47" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;" onclick="Static00_00_00_onclick"/>
+        <Static id="Static00_00_00_00" taborder="7" text="시간" left="690" top="377" width="44" height="47" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;" onclick="Static00_00_00_00_onclick"/>
+        <Static id="Static00_00_00_01" taborder="8" text="출/퇴근" left="676" top="297" width="64" height="47" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;" onclick="Static00_00_00_01_onclick"/>
+        <TextArea id="TextArea00_00" taborder="9" left="734" top="303" width="176" height="34"/>
+        <TextArea id="TextArea00_00_00" taborder="10" left="734" top="223" width="176" height="34"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Div00_00_Tab00_Tabpage2_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+var applyDay = this.Calendar00.value
+ 	trace("aaaaaaaaaaaa"+applyDay);
+	//✔️캘린터 값을 뒷단으로 넘기고 싶으면 Div 밖에서 하나의 독립된컴포넌트로 만들어서 값만 넘겨라
+	
+	if(applyDay == null){
+	this.alert("조회 날짜를 입력하세요")
+	}else{
+	this.ds_test.set_keystring("S:-APPLY_DAY");
+	this.transaction(
+			"test", 
+			"svcAttdmgmt::daySearch1", 
+			"", 
+			"ds_test=gds_dayAttd",
+			"applyDay=" + applyDay, 
+			"fn_call"); 
+	}
+};
+
+//콜백함수
+this.fn_call = function(svcid, ecd, emsg) 
+{
+	if(ecd >=0 )
+	{
+	if(svcid == "test") 
+			{
+				alert('조회 성공');
+			}if(this.ds_test.getColumn(0,"EMP_CODE")==undefined){
+			alert("  "+this.Tab1.page2.form.searchEmpName.value+" 해당 날짜에 정보가 존재하지않습니다. ");
+		} 
+	}
+}
+//데이터가 없을때 뜨는 메세지 만들기
+
+]]></Script>
+    <Objects>
+      <Dataset id="ds_dayAttenMng">
+        <ColumnInfo>
+          <Column id="DAY_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_NAME" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="HALF_HOLIDAY_STATUS" type="STRING" size="256"/>
+          <Column id="ATTEND_TIME" type="STRING" size="256"/>
+          <Column id="QUIT_TIME" type="STRING" size="256"/>
+          <Column id="LATE_WHETHER" type="STRING" size="256"/>
+          <Column id="LATE_HOUR" type="STRING" size="256"/>
+          <Column id="LEAVE_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+          <Column id="APPLY_DAYS" type="STRING" size="256"/>
+          <Column id="EARLY_LEAVE_HOUR" type="STRING" size="256"/>
+          <Column id="PRIVATE_LEAVE_HOUR" type="STRING" size="256"/>
+          <Column id="PUBLIC_LEAVE_HOUR" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_test">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="APPLY_DAY" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="TIME" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Calendar00" propid="value" datasetid="ds_test" columnid="APPLY_DAY"/>
+      <BindItem id="item1" compid="Div00.form.Edit00" propid="value" datasetid="ds_test" columnid="EMP_NAME"/>
+      <BindItem id="item2" compid="Div00.form.Calendar00" propid="accessibilityaction" datasetid="ds_test" columnid="APPLY_DAY"/>
+      <BindItem id="item3" compid="TextArea00_00_00" propid="value" datasetid="ds_test" columnid="EMP_NAME"/>
+      <BindItem id="item4" compid="TextArea00_00" propid="value" datasetid="ds_test" columnid="ATTD_TYPE_NAME"/>
+      <BindItem id="item5" compid="TextArea00" propid="value" datasetid="ds_test" columnid="TIME"/>
+    </Bind>
+  </Form>
+</FDL>

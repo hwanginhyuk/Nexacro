@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="empmanage" width="1270" height="930" titletext="New Form" onload="dailyLaborEmpRegister_onload">
+    <Layouts>
+      <Layout height="930" width="1270" stepcount="0" stepindex="1">
+        <Static id="Static00" taborder="0" text="일용근로 근태신청" left="53" top="20" width="150" height="35" font="18px &quot;나눔고딕&quot;" onclick="Static00_onclick"/>
+        <Div id="Div00" taborder="1" text="Div00" left="53.00" top="70" width="907" height="830">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="0" top="96" width="887" height="289" binddataset="ds_dailyLaborEmp" scrolltype="both" onheadclick="Div00_Grid00_onheadclick" cellsizingtype="col" treeusecheckbox="false" border="1px solid #6092ff" borderRadius="5px">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="45"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="1" text="사원번호"/>
+                      <Cell col="2" text="성명"/>
+                      <Cell col="3" text="부서"/>
+                      <Cell col="4" text="프로젝트"/>
+                      <Cell col="5" text="근무시작일"/>
+                      <Cell col="6" text="근무종료일"/>
+                      <Cell col="7" text="전화번호"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="checkboxcontrol" edittype="checkbox" text="bind:CHK"/>
+                      <Cell col="1" text="bind:EMPLOYEE_ID"/>
+                      <Cell col="2" text="bind:EMPLOYEE_NAME"/>
+                      <Cell col="3" text="bind:DEPARTMENT"/>
+                      <Cell col="4" text="bind:PROJECT"/>
+                      <Cell col="5" text="bind:WORK_START_DATE" edittype="date" displaytype="date"/>
+                      <Cell col="6" text="bind:WORK_END_DATE" edittype="date" displaytype="date"/>
+                      <Cell col="7" text="bind:PHONE_NUMBER" displaytype="mask" edittype="mask" maskeditformat="###-####-####" maskedittype="string"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Div id="div_searchCondition" taborder="1" text="Div00" left="0" top="11" width="887" height="70" border="1px solid #6092ff" borderRadius="5px">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00_00" taborder="0" text="부서" left="51.00" top="17" width="100" height="35" font="14px &quot;나눔고딕&quot;" onclick="div_searchCondition_Static00_onclick"/>
+                    <Button id="btn_searchDept" taborder="1" left="300.00" top="17" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" text="" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+                    <Combo id="cmb_project" taborder="2" left="460.00" top="17" width="200" height="35" text=""/>
+                    <Button id="btn_searchProject" taborder="3" left="667.00" top="17" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+                    <Static id="Static01" taborder="4" text="프로젝트" left="388.00" top="17" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+                    <Combo id="cmb_dept" taborder="5" left="90.00" top="17" width="200" height="35" text="" onitemchanged="div_searchCondition_cmb_dept_onitemchanged"/>
+                    <Button id="btn_search" taborder="6" text="조회" left="749.00" top="17" width="75" height="35" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD" onclick="btn_search_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Grid id="Grid_dailyLaborAttend" taborder="2" left="0" top="496" width="887" height="289" binddataset="ds_dailyLaborAttend" scrolltype="both" onheadclick="Div00_Grid00_onheadclick" cellsizingtype="col" treeusecheckbox="false" border="1px solid #6092ff" borderRadius="5px" cellcombopopuptype="center">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="177"/>
+                      <Column size="177"/>
+                      <Column size="177"/>
+                      <Column size="177"/>
+                      <Column size="177"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="사원번호"/>
+                      <Cell col="1" text="성명"/>
+                      <Cell col="2" text="프로젝트"/>
+                      <Cell col="3" text="근무날짜"/>
+                      <Cell col="4" text="근무시간"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:EMPLOYEE_ID"/>
+                      <Cell col="1" text="bind:EMPLOYEE_NAME"/>
+                      <Cell col="2" text="bind:PROJECT"/>
+                      <Cell col="3" text="bind:WORK_DATE" displaytype="calendarcontrol" edittype="date"/>
+                      <Cell col="4" text="bind:WORK_START_TIME" displaytype="calendarcontrol" edittype="date" calendardateformat="yyyy-MM-dd HH:mm" calendareditformat="yyyy-MM-dd HH:mm"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Div id="div_searchCondition00" taborder="3" text="Div00" left="0" top="405" width="887" height="70" border="1px solid #6092ff" borderRadius="5px">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00_00" taborder="0" text="근무날짜" left="21.00" top="17" width="100" height="35" font="14px &quot;나눔고딕&quot;" onclick="div_searchCondition_Static00_onclick"/>
+                    <Static id="Static01" taborder="1" text="근무시간" left="308.00" top="17" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+                    <Button id="btn_batchReg" taborder="2" text="일괄등록" left="599.00" top="18" width="75" height="35" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD" onclick="Div00_div_searchCondition00_btn_batchReg_onclick"/>
+                    <Button id="btn_checkIn" taborder="3" text="출근" left="694.00" top="18" width="75" height="35" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD" onclick="Div00_div_searchCondition00_btn_checkIn_onclick"/>
+                    <Button id="btn_checkOut" taborder="4" text="퇴근" left="789.00" top="18" width="75" height="35" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+                    <Calendar id="Calendar_workDate" taborder="5" left="90" top="17" width="200" height="35" dateformat="yyyy-MM-dd"/>
+                    <Calendar id="Calendar_workTime" taborder="6" left="380" top="17" width="200" height="35" dateformat="yyyy-MM-dd HH:mm" editformat="yyyy-MM-dd HH:mm"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_dailyLaborEmp" oncolumnchanged="ds_dailyLaborEmp_onvaluechanged">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_ID" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENTIAL_NUMBER" type="STRING" size="256"/>
+          <Column id="NATIONALITY" type="STRING" size="256"/>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+          <Column id="PROJECT" type="STRING" size="256"/>
+          <Column id="WORK_START_DATE" type="STRING" size="256"/>
+          <Column id="WORK_END_DATE" type="STRING" size="256"/>
+          <Column id="EMPLOYMENT_INSURANCE_ELIGIBILITY" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY_TYPE" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY" type="STRING" size="256"/>
+          <Column id="OVERTIME_PAY_RATE" type="STRING" size="256"/>
+          <Column id="NIGHT_PAY_RATE" type="STRING" size="256"/>
+          <Column id="BANK_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NUMBER" type="STRING" size="256"/>
+          <Column id="ACCOUNT_HOLDER" type="STRING" size="256"/>
+          <Column id="PHONE_NUMBER" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyLaborAttend">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_ID" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="PROJECT" type="STRING" size="256"/>
+          <Column id="WORK_DATE" type="STRING" size="256"/>
+          <Column id="WORK_START_TIME" type="STRING" size="256"/>
+          <Column id="WORK_END_TIME" type="STRING" size="256"/>
+          <Column id="TOTAL_WORK_TIME" type="STRING" size="256"/>
+          <Column id="WORK_TIME" type="STRING" size="256"/>
+          <Column id="WORK_OVER_TIME" type="STRING" size="256"/>
+          <Column id="WORK_NIGHT_TIME" type="STRING" size="256"/>
+          <Column id="WORK_TYPE" type="STRING" size="256"/>
+          <Column id="DEADLINE_REQUEST" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs"; // 모달창 라이브러리
+
+var updateEdit;
+var codes = {};
+var modalUrl = "Base::Modal.xfdl";
+
+this.dailyLaborEmpRegister_onload = function(obj:nexacro.Form, e:nexacro.LoadEventInfo) {
+
+	this.ds_dailyLaborEmp.set_enableevent(false);
+
+	this.transaction("getDailyLaborEmpList",
+					 "svcDailyLaboremp::emp",
+					 "",
+					 "ds_dailyLaborEmp=ds_dailylaboremp",
+					 "",
+					 "");
+					 
+	this.ds_dailyLaborEmp.set_enableevent(true);
+};
+
+this.fn_Callback = function(trID, ErrorCode, ErrorMsg)
+{
+if(ErrorCode!=0){
+		alert("실패 : "+ErrorMsg);
+		this.reload();
+	}else{
+		alert(" 성공 ");
+		this.reload();
+	}
+}
+
+this.gfnSetGridCheckAll = function (obj, e)
+{
+	var sChk;
+	var sVal;
+	var objDs;
+	var nCellIdx  = e.cell;
+	var sColumnId;
+	
+	//그리드에 연결된 데이터셋 가져오기
+	objDs  = obj.getBindDataset();
+	
+	//데이터셋에 데이터가 없을 경우 리턴
+	if(objDs.rowcount < 1) return;
+	
+	//전체 체크/체크해제할 컬럼명 구하기
+	sColumnId = obj.getCellProperty("body", nCellIdx, "text");
+	sColumnId = sColumnId.toString().replace("bind:", "");
+		
+	//Head의 현재 Check설정 값 가져오기
+	sVal = obj.getCellProperty("head", nCellIdx, "text");
+
+	//현재 체크상태일 경우
+	if (sVal == "1" )
+	{
+		//Head의 값을 체크해제로 설정
+		obj.setCellProperty("head", nCellIdx, "text", "0");
+		sChk="0";
+	}
+	//현재 체크해제상태일 경우
+	else {
+		//Head의 값을 체크로 설정
+		obj.setCellProperty("head", nCellIdx, "text", "1");
+		sChk="1";
+	}
+	
+	
+	//성능 개선을 위해 이벤트 발생 정지
+	objDs.set_enableevent(false);
+	
+	// Body에 전체 체크/체크해제 상태 적용
+	for(var i=0 ; i< objDs.rowcount ; i++) 
+	{
+		objDs.setColumn(i, sColumnId, sChk);
+	}
+	
+	//성능 개선을 위해 이벤트 발생 재실행
+	objDs.set_enableevent(true);
+};
+
+this.Div00_Grid00_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(e.cell==0)
+	{
+		this.gfnSetGridCheckAll(obj, e);
+	}
+	this.fn_dailyLaborAttendBind()
+};
+
+this.fn_popupCallback = function(modalId, code)
+{
+	trace("code =" + code)
+	if(code != null){
+		this.codeInfo = code.split(":");
+		
+		switch(modalId){
+			case "dept" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.Div00.form.div_searchCondition.form.cmb_dept
+				);
+				break;
+			case "project" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.Div00.form.div_searchCondition.form.cmb_project
+				);
+				break;
+		}
+	}
+}
+
+this.fn_createSearchCmbDataset = function(modalId, codeInfo, combo) {
+
+	this.objs = this.objects;
+	for(var i=0; i<this.objs.length; i++){
+		if(this.objs[i].name == "ds_"+modalId){
+			this.removeChild("ds_"+modalId);
+		}
+	}
+	
+	var objDs = new Dataset();
+	
+	objDs.name = "ds_"+modalId;
+	objDs.addColumn("CODE", "string");
+	objDs.addColumn("CODE_NAME", "string");
+	
+	this.addChild("ds_"+modalId, objDs);
+	
+	objDs.addRow();
+	objDs.setColumn(0, "CODE", "all");
+	objDs.setColumn(0, "CODE_NAME", "전체선택");
+	
+	objDs.addRow();
+	
+	objDs.setColumn(1, "CODE", codeInfo[0]); //codeinfo[1]으로 바꾸면 코드입니다.
+	objDs.setColumn(1, "CODE_NAME", codeInfo[0]);
+	combo.setInnerDataset(objDs)
+	combo.set_codecolumn("CODE")
+	combo.set_datacolumn("CODE_NAME")
+	combo.set_text(codeInfo[0]);
+	
+}
+
+this.fn_dailyLaborAttendBind = function()
+{
+	this.ds_dailyLaborAttend.clearData();
+	
+	var sourceDs = this.objects["ds_dailyLaborEmp"];
+
+    if (sourceDs) {
+        var rowCount = sourceDs.getRowCount();
+        for (var i = 0; i < rowCount; i++) {
+            var chkValue = sourceDs.getColumn(i, "CHK");
+            if (chkValue === "1") {
+				var employeeId= sourceDs.getColumn(i, "EMPLOYEE_ID");
+				var employeeName = sourceDs.getColumn(i, "EMPLOYEE_NAME");
+				var project = sourceDs.getColumn(i, "PROJECT");
+				var workType = sourceDs.getColumn(i, "NORMAL_PAY_TYPE");
+				this.ds_dailyLaborAttend.insertRow();
+				this.ds_dailyLaborAttend.setColumn(0, "EMPLOYEE_ID", employeeName);
+				this.ds_dailyLaborAttend.setColumn(0, "EMPLOYEE_NAME", employeeName);
+				this.ds_dailyLaborAttend.setColumn(0, "PROJECT", project);
+				this.ds_dailyLaborAttend.setColumn(0, "WORK_TYPE", workType);
+				this.ds_dailyLaborAttend.setColumn(0, "DEADLINE_REQUEST", "N");
+            }
+        }
+    }
+}
+
+this.div_searchCondition_btn_searchWith_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.modalId = obj.id.substr(obj.id.indexOf("search")+6).toLowerCase();
+	this.code = null;
+	switch(this.modalId){
+		case "dept" : this.code = "CO-07"; break;
+		case "project" : this.code = "CO-28"; break;
+	}
+	var modalEvent = "fn_popupCallback";
+	if(this.code != null){
+		this.gfnOpen(
+			this.modalId,
+			modalUrl, modalEvent,
+			{code:this.code}
+		);
+	}else{alert("테이블에 데이터 없음")}
+};
+
+this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var searchDept = this.Div00.form.div_searchCondition.form.cmb_dept.value;
+	var searchProject = this.Div00.form.div_searchCondition.form.cmb_project.value;
+	
+	var combinedFilter = "";
+
+	if (searchDept && searchDept !== 'all') {
+		combinedFilter += "DEPARTMENT == '" + searchDept + "'";
+	}
+
+	if (searchProject && searchProject !== 'all') {
+		if (combinedFilter) {
+			combinedFilter += " && ";
+		}
+		combinedFilter += "PROJECT == '" + searchProject + "'";
+	}
+
+	this.ds_dailyLaborEmp.filter(combinedFilter);
+};
+
+this.ds_dailyLaborEmp_onvaluechanged = function(obj:nexacro.NormalDataset,e:nexacro.DSColChangeEventInfo)
+{
+	this.fn_dailyLaborAttendBind()
+};
+
+this.Div00_div_searchCondition00_btn_batchReg_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var rowCount = this.ds_dailyLaborAttend.getRowCount();
+ 	if(rowCount!=0){
+		for (var i = 0; i < rowCount; i++) {
+			var workDate = this.Div00.form.div_searchCondition00.form.Calendar_workDate.text;
+			var workTime = this.Div00.form.div_searchCondition00.form.Calendar_workTime.text;
+			this.ds_dailyLaborAttend.setColumn(i, "WORK_DATE", workDate);
+			this.ds_dailyLaborAttend.setColumn(i, "WORK_START_TIME", workTime);
+ 		}
+ 	}
+};
+
+this.Div00_div_searchCondition00_btn_checkIn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("dailyLaborAttendCheckIn",
+					 "svcDailyLaborattend::attned-checkin",
+					 "ds_dailylaborattend=ds_dailyLaborAttend",
+					 "",
+					 "",
+					 "fn_Callback");
+};
+
+]]></Script>
+  </Form>
+</FDL>

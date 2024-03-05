@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="receiptProof" width="1060" height="620" titletext="New Form" onload="receiptProof_onload">
+    <Layouts>
+      <Layout height="620" width="1060" stepcount="2">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="30" width="1010" height="560">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="   ◼ 증빙서류 신청/조회" left="-15" top="-20" width="290" height="65" textAlign="left" font="bold 18px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Static00_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Tab id="Tab00" taborder="1" tabindex="0" left="58" top="90" width="945" height="490">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="증빙서류신청">
+              <Layouts>
+                <Layout>
+                  <Static id="applicant" taborder="0" text="신 청 자" left="-25" top="27" width="109" height="40" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="applicantEdit" taborder="1" left="93" top="32" width="220" height="32" textAlign="center" readonly="true"/>
+                  <Static id="position" taborder="2" text="직     급" left="-25" top="74" width="109" height="40" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="positionEdit" taborder="3" left="93" top="79" width="220" height="32" readonly="true" textAlign="center"/>
+                  <Static id="dept" taborder="4" text="부     서" left="-25" top="121" width="109" height="40" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="deptEdit" taborder="5" left="93" top="126" width="220" height="32" textAlign="center" readonly="true"/>
+                  <Static id="amount" taborder="6" text="금     액" left="-25" top="168" width="109" height="40" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="amountEdit" taborder="7" left="93" top="173" width="220" height="32" textAlign="right" onchanged="Tab00_Tabpage1_amountEdit_onchanged"/>
+                  <Static id="applicationDate" taborder="8" text="신 청 일" left="-25" top="215" width="109" height="40" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                  <Static id="reason" taborder="9" text="사     유" left="-25" top="309" width="109" height="40" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="reasonEdit" taborder="10" left="93" top="314" width="219" height="32" textAlign="left"/>
+                  <Calendar id="applicationDateCal" taborder="11" left="93" top="220" width="220" height="32"/>
+                  <ImageViewer id="ImageViewer00" taborder="12" left="432" top="23" width="250" height="276"/>
+                  <Button id="ReceiptBtn" taborder="13" text="영수증첨부" left="434" top="306" width="123" height="40" onclick="Tab00_Tabpage1_ReceiptBtn_onclick"/>
+                  <Static id="proof" taborder="14" text="증빙구분" left="-25" top="262" width="109" height="40" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="proofEdit" taborder="15" left="93" top="267" width="220" height="32" textAlign="left" oneditclick="proofEdit_oneditclick" value="--선택하세요--" text="--선택하세요--"/>
+                  <Button id="applicationBtn" taborder="16" text="신청" left="362" top="429" width="45" height="32" onclick="Tab00_Tabpage1_applicationBtn_onclick"/>
+                  <Button id="cancellationBtn" taborder="17" text="취소" left="417" top="429" width="45" height="32" onclick="Tab00_Tabpage1_cancellationBtn_onclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="증빙서류조회">
+              <Layouts>
+                <Layout>
+                  <Static id="Static00" taborder="0" text="조회기간" left="1" top="24" width="68" height="17" textAlign="center" font="15px/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="inquiryAfterCal" taborder="1" left="276" top="16" width="163" height="31"/>
+                  <Static id="inquiryForm" taborder="2" text="~" left="232" top="16" width="48" height="22" textAlign="center" font="14pt/normal &quot;나눔고딕&quot;"/>
+                  <Button id="inquiryBtn" taborder="3" text="조회" left="727" top="17" width="50" height="31" onclick="inquiryBtn_onclick"/>
+                  <Button id="eliminationBtn" taborder="4" text="삭제" left="892" top="71" width="50" height="32" onclick="cancellationBtn_onclick"/>
+                  <Grid id="Grid00" taborder="5" left="5" top="111" width="940" height="330" binddataset="ds_receipt_list" oncellclick="Grid00_oncellclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="43"/>
+                          <Column size="107"/>
+                          <Column size="107"/>
+                          <Column size="107"/>
+                          <Column size="107"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="108"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="37" band="head"/>
+                          <Row size="37"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell/>
+                          <Cell col="1" text="사원명" font="13px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="2" text="증빙구분명" font="13px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="3" text="직급" font="13px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="4" text="부서" font="13px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="5" text="금액" font="13px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="6" text="신청일" font="13px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="7" text="사유" font="13px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="8" text="승인여부" font="13px/normal &quot;나눔고딕&quot;"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="checkboxcontrol" text="bind:STATUS" edittype="checkbox"/>
+                          <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                          <Cell col="2" text="bind:PROOF_TYPE_NAME" textAlign="center"/>
+                          <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                          <Cell col="4" text="bind:DEPT" textAlign="center"/>
+                          <Cell col="5" text="bind:CASH" textAlign="center"/>
+                          <Cell col="6" text="bind:START_DATE" textAlign="center"/>
+                          <Cell col="7" text="bind:CAUSE" textAlign="center"/>
+                          <Cell col="8" text="bind:APPLOVAL_STATUS" textAlign="center"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Calendar id="inquiryFormCal" taborder="6" left="78" top="16" width="163" height="31"/>
+                  <Static id="proof" taborder="7" text="구    분" left="473" top="22" width="62" height="17" textAlign="center" font="15px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage2_proof_onclick"/>
+                  <Edit id="proofEdit" taborder="8" left="549" top="17" width="163" height="31" oneditclick="proofEdit2_oneditclick" value=" --선택하세요--" text=" --선택하세요--"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Div id="Div00_00_00" taborder="2" text="" left="25" top="30" width="1010" height="560" positionstep="1">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="◼ 증빙서류 신청/조회" left="8" top="0" width="188" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Tab id="Tab00_00" taborder="3" tabindex="0" left="58" top="80" width="945" height="500" positionstep="1">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="증빙서류신청">
+              <Layouts>
+                <Layout>
+                  <Static id="applicant" taborder="0" text="신청자" left="80" top="231" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="applicantEdit" taborder="1" left="200" top="228" width="259" height="40" font="12pt/normal &quot;나눔고딕&quot;" textAlign="center" readonly="true"/>
+                  <Static id="position" taborder="2" text="직급" left="478" top="230" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="positionEdit" taborder="3" left="596" top="230" width="259" height="40" font="12pt/normal &quot;나눔고딕&quot;" readonly="true" textAlign="center"/>
+                  <Static id="dept" taborder="4" text="부서" left="80" top="276" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="deptEdit" taborder="5" left="200" top="273" width="259" height="40" font="12pt/normal &quot;나눔고딕&quot;" textAlign="center" readonly="true"/>
+                  <Static id="amount" taborder="6" text="금액" left="478" top="275" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="amountEdit" taborder="7" left="596" top="275" width="259" height="40" font="12pt/normal &quot;나눔고딕&quot;" textAlign="right"/>
+                  <Static id="applicationDate" taborder="8" text="신청일" left="80" top="321" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Static id="reason" taborder="9" text="사유" left="80" top="366" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="reasonEdit" taborder="10" left="200" top="363" width="655" height="40" font="12pt/normal &quot;나눔고딕&quot;" textAlign="left"/>
+                  <Calendar id="applicationDateCal" taborder="11" left="200" top="318" width="259" height="40" font="12pt/normal &quot;나눔고딕&quot;"/>
+                  <ImageViewer id="ImageViewer00" taborder="12" left="403" top="11" width="138" height="160"/>
+                  <Button id="ReceiptBtn" taborder="13" text="영수증" left="411" top="176" width="123" height="40" font="16px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage1_ReceiptBtn_onclick"/>
+                  <Static id="proof" taborder="14" text="증빙구분" left="478" top="318" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="proofEdit" taborder="15" left="596" top="319" width="259" height="40" font="12pt/normal &quot;나눔고딕&quot;" textAlign="center" oneditclick="proofEdit_oneditclick"/>
+                  <Button id="applicationBtn" taborder="16" text="신청" left="402" top="411" width="70" height="40" font="16px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage1_applicationBtn_onclick"/>
+                  <Button id="cancellationBtn" taborder="17" text="취소" left="487" top="412" width="70" height="40" font="16px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage1_cancellationBtn_onclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="증빙서류조회">
+              <Layouts>
+                <Layout>
+                  <Static id="Static00" taborder="0" text="조회범위 선택" left="27" top="18" width="205" height="40" textAlign="center" font="14pt/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="inquiryAfterCal" taborder="1" left="560" top="16" width="259" height="40" font="12pt/normal &quot;나눔고딕&quot;"/>
+                  <Static id="inquiryForm" taborder="2" text="부터" left="502" top="18" width="48" height="40" textAlign="center" font="14pt/normal &quot;나눔고딕&quot;"/>
+                  <Button id="inquiryBtn" taborder="3" text="조회하기" left="223" top="61" width="120" height="40" font="14pt/normal &quot;나눔고딕&quot;" onclick="inquiryBtn_onclick"/>
+                  <Button id="eliminationBtn" taborder="4" text="삭제하기" left="353" top="61" width="120" height="40" font="14pt/normal &quot;나눔고딕&quot;" onclick="cancellationBtn_onclick"/>
+                  <Grid id="Grid00" taborder="5" left="47" top="111" width="850" height="330" binddataset="ds_receipt_list" oncellclick="Grid00_oncellclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="37" band="head"/>
+                          <Row size="37" band="body"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell col="1" text="사원명" font="15px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="2" text="증빙구분명" font="15px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="3" text="직급" font="15px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="4" text="부서" font="15px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="5" text="금액" font="15px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="6" text="신청일" font="15px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="7" text="사유" font="15px/normal &quot;나눔고딕&quot;"/>
+                          <Cell col="8" text="승인여부" font="15px/normal &quot;나눔고딕&quot;"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="checkboxcontrol" text="bind:STATUS" edittype="checkbox"/>
+                          <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                          <Cell col="2" text="bind:PROOF_TYPE_NAME" textAlign="center"/>
+                          <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                          <Cell col="4" text="bind:DEPT" textAlign="center"/>
+                          <Cell col="5" text="bind:CASH" textAlign="center"/>
+                          <Cell col="6" text="bind:START_DATE" textAlign="center"/>
+                          <Cell col="7" text="bind:CAUSE" textAlign="center"/>
+                          <Cell col="8" text="bind:APPLOVAL_STATUS" textAlign="center"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Calendar id="inquiryFormCal" taborder="6" left="233" top="16" width="259" height="40" font="12pt/normal &quot;나눔고딕&quot;"/>
+                  <Static id="inquiryAfter" taborder="7" text="까지" left="829" top="17" width="48" height="40" textAlign="center" font="14pt/normal &quot;나눔고딕&quot;"/>
+                  <Static id="proof" taborder="8" text="구분" left="483" top="61" width="48" height="40" textAlign="center" font="14pt/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="proofEdit" taborder="9" left="541" top="63" width="206" height="40" font="12pt/normal &quot;나눔고딕&quot;" oneditclick="proofEdit2_oneditclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs";
+
+var nexa = nexacro.getApplication();
+
+//로딩
+this.receiptProof_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.Tab00.Tabpage1.form.applicantEdit.set_value(nexa.g_empName);
+	this.Tab00.Tabpage1.form.positionEdit.set_value(nexa.g_position);
+	this.Tab00.Tabpage1.form.deptEdit.set_value(nexa.g_deptName);
+};
+
+//증빙구분
+var updateEdit;
+var proofTypeCode;
+
+this.proofEdit_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("proof", "Base::Modal.xfdl", "fn_popupCallback", {code:"CO-19"});
+};
+
+this.fn_popupCallback = function(codename, code)
+{
+	var codeName = code.split(":")[0];
+	if(codeName=="교육"){ proofTypeCode = "ROF001";
+	}if(codeName=="기타"){ proofTypeCode = "ROF002";
+	}if(codeName=="출장"){ proofTypeCode = "ROF003";
+	}
+	
+	updateEdit.set_value(codeName);
+}
+
+
+//이미지
+var vFile;
+var empFilename;
+
+//파일다이얼로그 꺼질때 이벤트
+this.Tab00_Tabpage1_ReceiptBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.FileDialog.open( "FileOpen", FileDialog.LOAD );
+};
+
+//파일다이얼로그 꺼질때 이벤트
+this.FileDialog_onclose = function(obj:nexacro.FileDialog,e:nexacro.FileDialogEventInfo)
+{
+		vFile = e.virtualfiles[0];
+
+		vFile.addEventHandler("onsuccess", this.FileList_onsuccess, this);
+		vFile.addEventHandler("onerror", this.FileList_onerror, this);
+		vFile.open(vFile.fullpath, VirtualFile.openBinary);
+
+		empFileName = vFile.filename;
+		
+		var realPath = system.convertRealPath(vFile.fullpath);
+		this.Tab00.Tabpage1.form.ImageViewer00.set_image("file://"+realPath);
+		this.Tab00.Tabpage1.form.ImageViewer00.set_stretch("fit");
+};
+
+//신청
+this.Tab00_Tabpage1_applicationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.Tab00.Tabpage1.form.amountEdit.value==null){alert("금액을 입력해주세요."); return;
+	}if(this.Tab00.Tabpage1.form.applicationDateCal.value==null){alert("신청일을 입력해주세요."); return;
+	}if(this.Tab00.Tabpage1.form.proofEdit.value==null){alert("증빙구분을 등록해주세요."); return;
+	}if(this.Tab00.Tabpage1.form.reasonEdit.value==null){alert("사유를 입력해주세요."); return;
+	}else{
+		this.ds_receipt.setColumn(0,"EMP_CODE",nexa.g_empCode);
+		this.ds_receipt.setColumn(0,"PROOF_TYPE_CODE",proofTypeCode);
+		this.ds_receipt.setColumn(0,"PROOF_TYPE_NAME",this.Tab00.Tabpage1.form.proofEdit.value);
+		this.ds_receipt.setColumn(0,"START_DATE",this.Tab00.Tabpage1.form.applicationDateCal.value.substring(0,4)+"/"+
+												this.Tab00.Tabpage1.form.applicationDateCal.value.substring(4,6)+"/"+
+												this.Tab00.Tabpage1.form.applicationDateCal.value.substring(6,8));
+		this.ds_receipt.setColumn(0,"POSITION",this.Tab00.Tabpage1.form.positionEdit.value);
+		this.ds_receipt.setColumn(0,"DEPT",this.Tab00.Tabpage1.form.deptEdit.value);
+		this.ds_receipt.setColumn(0,"CASH",this.Tab00.Tabpage1.form.amountEdit.value);
+		this.ds_receipt.setColumn(0,"CAUSE",this.Tab00.Tabpage1.form.reasonEdit.value);
+		this.ds_receipt.setColumn(0,"RECEIPT","jpg");
+		this.ds_receipt.setColumn(0,"APPLOVAL_STATUS",'승인대기');
+		
+		this.transaction("receiptInsertID",
+					 "svcDocumentmgmt::receipt-proof",
+					 "ds_receipt=ds_receipt",
+					 "",
+					 "",
+					 "fn_TrCallback");
+	}
+};
+
+//신청콜백
+this.fn_TrCallback =function(trID ,ErrorCode ,ErrorMsg)
+{
+	if(ErrorCode!=0){
+         alert("신청실패 : "+ErrorMsg);
+      }else{ //성공시
+         alert("    신청완료.     ");
+         this.reload();
+      }
+}
+
+//취소
+this.Tab00_Tabpage1_cancellationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.reload();
+};
+
+//===================================Tabpage2=========================================
+
+var proofTypeCode2;
+
+//증빙구분
+this.proofEdit2_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("proof", "Base::Modal.xfdl", "fn_popupCallback2", {code:"CO-19"});
+};
+
+this.fn_popupCallback2 = function(codename, code)
+{
+	updateEdit.set_value(code.split(":")[0]);
+	proofTypeCode2 = code.split(":")[1];
+}
+
+//조회하기
+this.inquiryBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("daySearchID",
+					"svcDocumentmgmt::receipt-proof-inquiry",
+					"",
+					"ds_receipt_list=ds_receipt",
+					"empCode="+nexa.g_empCode.toString()+" startDate='"+this.Tab00.Tabpage2.form.inquiryFormCal.value+"'"+
+					 " endDate='"+this.Tab00.Tabpage2.form.inquiryAfterCal.value+"'"+" code='"+proofTypeCode2+"'",
+					"");
+};
+
+//그리드 클릭
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.ds_receipt_list.addColumn("STATUS","STRING");
+	
+	for(var i=0; i<this.ds_receipt_list.rowcount; i++){
+		this.ds_receipt_list.setColumn(i,"STATUS",undefined);
+	}
+	
+	this.ds_receipt_list.setColumn(this.ds_receipt_list.rowposition,"STATUS","Choice");
+}
+
+//삭제하기
+this.cancellationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(confirm(" 삭제 하시겠습니까? ")){
+		this.transaction("deleteID",
+						 "svcDocumentmgmt::receipt-proof-elimination",
+						 "ds_receipt=ds_receipt_list:u",
+						 "",
+						 "",
+						 "fn_callback");
+						 
+						 
+	}
+};
+
+this.fn_callback = function(trID, ErrorCode, ErrorMsg)
+{
+	if(ErrorCode!=0){
+			alert("삭제실패 : "+ErrorMsg);
+		}else{ //성공시
+			alert(" 삭제완료 ");
+			this.reload(); //현재의 FDL 화면을 다시 로딩하는 메소드method
+		}
+}
+this.Div00_00_Static00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Tab00_Tabpage1_amountEdit_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+    <Objects>
+      <FileDialog id="FileDialog" onclose="FileDialog_onclose"/>
+      <Dataset id="ds_receipt">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="PROOF_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="PROOF_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="DEPT" type="STRING" size="256"/>
+          <Column id="CASH" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="RECEIPT" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_receipt_list">
+        <ColumnInfo>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PROOF_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="DEPT" type="STRING" size="256"/>
+          <Column id="CASH" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

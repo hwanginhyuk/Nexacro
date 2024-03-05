@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Work" width="1270" height="820" titletext="HR ERP" onload="Form_Work_onload">
+    <Layouts>
+      <Layout width="1270" height="820" screenid="Desktop_screen">
+        <Div id="Div00" taborder="0" left="0" top="8" width="1250" height="820" onclick="Div00_onclick" text="" formscrolltype="vertical" formscrollbartype="auto none">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+      </Layout>
+      <Layout name="screen00" width="1280" height="720" screenid="screen00"/>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_scMenu">
+        <ColumnInfo>
+          <Column id="MENU_ID" type="STRING" size="256"/>
+          <Column id="MENU_STATUS" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="TITLE" compid="Div00" propid="text" datasetid="gds_api" columnid="1"/>
+    </Bind>
+  </Form>
+</FDL>

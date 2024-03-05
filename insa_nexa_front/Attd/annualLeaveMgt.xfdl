@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="anuualLeaveMgt" width="1060" height="620" titletext="New Form">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="30" width="1010" height="560" font="bold 14px/normal &quot;나눔고딕&quot;">
+          <Layouts>
+            <Layout>
+              <Button id="btn_search" taborder="0" text="조회하기" left="365" top="128" width="120" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_search_onclick" background="#6092ff" color="white"/>
+              <Button id="btn_finalize" taborder="1" text="전체마감하기" left="495" top="128" height="35" width="120" font="bold 14px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_finalize_onclick" background="#6092ff" color="white"/>
+              <Button id="btn_cancel" taborder="2" text="전체마감취소" left="625" top="128" height="35" width="120" font="bold 14px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_cancel_onclick" background="#6092ff" color="white"/>
+              <Grid id="Grid00" taborder="3" left="125" top="185" width="761" height="345" binddataset="ds_vacation" font="bold 14px/normal &quot;나눔고딕&quot;">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="106"/>
+                      <Column size="105"/>
+                      <Column size="110"/>
+                      <Column size="109"/>
+                      <Column size="109"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="34" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="사원코드" font="16px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="1" text="직원이름" font="16px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="2" text="적용년월" font="16px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="3" text="반차사용개수" font="16px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="4" text="연차사용개수" font="16px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="5" text="남은연차" font="16px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="6" text="마감여부" font="16px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:EMP_CODE"/>
+                      <Cell col="1" text="bind:EMP_NAME"/>
+                      <Cell col="2" text="bind:APPLY_YEAR_MONTH"/>
+                      <Cell col="3" text="bind:AFTERNOON_OFF"/>
+                      <Cell col="4" text="bind:MONTHLY_LEAVE"/>
+                      <Cell col="5" text="bind:REMAINING_HOLIDAY"/>
+                      <Cell col="6" text="bind:FINALIZE_STATUS"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static00" taborder="4" text="◼연차관리" left="8" top="0" width="188" height="49" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+              <Calendar id="Calendar00" taborder="5" left="195" top="125" width="159" height="40" dateformat="yyyy-MM" editformat="yyyy-MM" font="bold 14px/normal &quot;나눔고딕&quot;" onchanged="Div00_00_Calendar00_onchanged"/>
+              <Button id="Button00" taborder="6" text="저장" left="755" top="128" width="120" height="35" onclick="Div00_00_Button00_onclick" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+              <Static id="Static01" taborder="7" text="적용일" left="125" top="128" width="120" height="35" onclick="Div00_00_Static01_onclick" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_vacation">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="APPLY_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="AFTERNOON_OFF" type="STRING" size="256"/>
+          <Column id="MONTHLY_LEAVE" type="STRING" size="256"/>
+          <Column id="REMAINING_HOLIDAY" type="STRING" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+nexa = nexacro.getApplication();
+
+//조회하기
+this.Div00_00_btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+
+	var applyYearMonth= this.Div00_00.form.Calendar00.value.substring(0,6)
+	
+	var workplaceCode = nexa.g_workplaceCode
+	
+	trace(applyYearMonth)
+	trace(workplaceCode)
+	
+	this.transaction(
+					"searchAnnual",
+					"svcAttdappvl::annual-leaveMgt",
+					"", 
+					"ds_vacation=ds_vacation",
+					"applyYearMonth=" + applyYearMonth + 
+					" workplaceCode=" + workplaceCode,
+					"fn_callback"
+					);
+
+};
+
+//마감하기
+this.Div00_00_btn_finalize_onclick= function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace("마감하기");
+	var size=this.ds_vacation.rowcount;
+	for(var i=0;i<size;i++){
+		this.ds_vacation.setColumn(i,"FINALIZE_STATUS","Y");
+	}
+	
+//	this.annualLeaveUpdate();
+};
+
+//마감취소
+this.Div00_00_btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace("마감취소");
+	var size=this.ds_vacation.rowcount;
+	for(var i=0;i<size;i++){
+		this.ds_vacation.setColumn(i,"FINALIZE_STATUS","N");
+	}
+	
+//	this.annualLeaveUpdate();
+};
+
+//Y,N 
+this.fn_callback = function(trID,ErrorCode,ErrorMsg){
+	if(trID=="UpdateID"){
+		if(ErrorCode!=0){
+			alert("실패 :"+ErrorMsg);
+	 }else{
+		alert("처리되었습니다.");
+	}
+  }
+  
+  if(trID == "searchAnnual"){
+	
+	//this.reload();
+  }
+}
+
+
+
+
+this.Div00_00_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+		this.transaction(
+					"searchAnnual",
+					"svcAttdappvl::annual-leaveMgt/1",
+					"ds_vacation=ds_vacation:u", 
+					"", 
+					"",
+					"fn_callback2"
+					);
+};
+
+this.fn_callback2 = function(trID,ErrorCode,ErrorMsg){
+	if(trID=="searchAnnual"){
+		if(ErrorCode!=0){
+			alert("실패 :"+ErrorMsg);
+	 }else{
+		alert("처리되었습니다.");
+	}
+  }
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

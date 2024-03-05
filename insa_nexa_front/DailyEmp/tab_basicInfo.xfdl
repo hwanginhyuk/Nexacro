@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="tab_basicInfo" width="670" height="680" titletext="New Form" onload="tab_basicInfo_onload">
+    <Layouts>
+      <Layout height="680" mobileorientation="landscape" width="670" stepindex="0" stepcount="0">
+        <Static id="Static00" taborder="0" text="입    사    일    자" left="1" top="33" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static01" taborder="1" text="내 외 국 인 여 부" left="1" top="63" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static02" taborder="2" text="주 민 등 록 번 호" left="1" top="93" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static03" taborder="3" text="외국인등록번호" left="346" top="93" width="100" height="14" font="12px &quot;나눔고딕&quot;"/>
+        <Static id="Static04" taborder="4" text="우    편    번    호" left="1" top="123" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static05" taborder="5" text="주                  소" left="1" top="153" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static06" taborder="6" text="E - MAIL" left="13" top="213" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="left"/>
+        <Static id="Static07" taborder="7" text="전    화    번    호" left="1" top="243" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static08" taborder="8" text="핸  드  폰   번  호" left="328" top="243" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static09" taborder="9" text="부                  서" left="1" top="273" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static10" taborder="10" text="프    로    젝    트" left="328" top="273" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static11" taborder="11" text="직                  책" left="1" top="303" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static12" taborder="12" text="고    용    형    태" left="328" top="303" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static13" taborder="13" text="직                  무" left="1" top="333" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static14" taborder="14" text="급    여    형    태" left="328" top="333" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static15" taborder="15" text="급 여 이  체 구 좌" left="1" top="363" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static16" taborder="16" text="계    좌     번    호" left="1" top="393" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static17" taborder="17" text="예       금       주" left="328" top="393" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static18" taborder="18" text="급                  여" left="1" top="423" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static19" taborder="19" text="시    간    단    가" left="328" top="423" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static20" taborder="20" text="퇴    직    일    자" left="1" top="453" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static21" taborder="21" text="생산직비과세적용" left="1" top="483" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static22" taborder="22" text="고 용 보 험 여 부" left="328" top="483" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static23" taborder="23" text="국 민 연  금 여 부" left="1" top="513" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static24" taborder="24" text="건 강 보 험 여 부" left="328" top="513" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+        <Calendar id="calen_joinDate" taborder="25" left="145" top="28" width="170" height="25" onchanged="calen_joinDate_onchanged"/>
+        <Combo id="cmb_isForeign" taborder="26" left="145" top="58" width="170" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" canitemchange="cmb_isForeign_canitemchange" onitemchanged="cmb_isForeign_onitemchanged">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">0</Col>
+                <Col id="datacolumn">내국인</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1</Col>
+                <Col id="datacolumn">외국인</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <MaskEdit id="medt_juminNo" taborder="27" left="145" top="88" width="170" height="25" background="#FFFFC5" type="string" format="######-#######" enable="true"/>
+        <Edit id="edt_zipCode" taborder="29" left="145" top="118" width="170" height="25"/>
+        <Edit id="edt_addr" taborder="30" left="145" top="148" width="485" height="25"/>
+        <Edit id="edt_addrDetail" taborder="31" left="145" top="178" width="485" height="25"/>
+        <Edit id="edt_email" taborder="32" left="145" top="208" width="485" height="25"/>
+        <Edit id="edt_deptCode" taborder="35" left="145" top="268" width="170" height="25" background="#FFFFC5" canchange="edt_code_canchange"/>
+        <Edit id="edt_pjtCode" taborder="36" left="460" top="268" width="170" height="25"/>
+        <Edit id="edt_posCode" taborder="37" left="145" top="298" width="170" height="25"/>
+        <Edit id="edt_empStatCode" taborder="38" left="460" top="298" width="170" height="25" background="#FFFFC5"/>
+        <Edit id="edt_jobCode" taborder="39" left="145" top="328" width="170" height="25"/>
+        <Edit id="edt_payStatCode" taborder="40" left="460" top="328" width="170" height="25" background="#FFFFC5" canchange="edt_payStatCode_canchange"/>
+        <Edit id="edt_transAcCode" taborder="41" left="145" top="358" width="170" height="25"/>
+        <Edit id="edt_accountNo" taborder="42" left="145" top="388" width="170" height="25"/>
+        <Edit id="edt_depositor" taborder="43" left="460" top="388" width="170" height="25"/>
+        <Calendar id="calen_retireDate" taborder="46" left="145" top="448" width="170" height="25" onchanged="calen_retireDate_onchanged"/>
+        <Combo id="cmb_isTaxfree" taborder="47" text="Combo00" left="145" top="478" width="170" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">0</Col>
+                <Col id="datacolumn">안함</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1</Col>
+                <Col id="datacolumn">함</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Combo id="cmb_isEmpinsurance" taborder="48" text="Combo00" left="460" top="478" width="170" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">0</Col>
+                <Col id="datacolumn">부</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1</Col>
+                <Col id="datacolumn">여</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Combo id="cmb_isNationalannuity" taborder="49" text="Combo00" left="145" top="508" width="170" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">0</Col>
+                <Col id="datacolumn">부</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1</Col>
+                <Col id="datacolumn">여</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Combo id="cmb_isHealthinsurance" taborder="50" text="Combo00" left="460" top="508" width="170" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">0</Col>
+                <Col id="datacolumn">부</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1</Col>
+                <Col id="datacolumn">여</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <MaskEdit id="medt_foreignNo" taborder="28" left="460" top="85" width="170" height="25" type="string" format="######-#######" enable="false"/>
+        <MaskEdit id="medt_salary" taborder="44" left="145" top="418" width="170" height="25" type="number" format="#,###" canchange="medt_salary_canchange"/>
+        <MaskEdit id="medt_hourPrice" taborder="45" left="460" top="417" width="170" height="25" format="#,###" type="number"/>
+        <MaskEdit id="medt_tel" taborder="33" left="145" top="238" width="170" height="25" type="string" format="###-###-####"/>
+        <MaskEdit id="medt_phone" taborder="34" left="460" top="238" width="170" height="25" type="string" format="###-####-####"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs"; // 모달창 라이브러리
+
+this.tab_basicInfo_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	trace("basic info is loaded");
+// 	trace(this.parent.parent.parent.Static00.text);
+// 	trace(this.parent.parent.parent.ds_dailyEmp);
+
+	if(this.cmb_isForeign.value == 1){
+		this.medt_juminNo.set_enable(false);
+		this.medt_foreignNo.set_enable(true);
+	}else{
+		this.medt_juminNo.set_enable(true);
+		this.medt_foreignNo.set_enable(false);
+	}
+
+// 구분코드 데이터셋으로 받아 오는게 좋을듯
+};
+
+this.cmb_isForeign_canitemchange = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.medt_juminNo.set_value("");
+	this.medt_foreignNo.set_value("");
+	
+	if(e.postvalue == 0){
+		this.medt_juminNo.set_enable(true);
+		this.medt_foreignNo.set_enable(false);
+	}else{
+		this.medt_juminNo.set_enable(false);
+		this.medt_foreignNo.set_enable(true);
+	}
+};
+
+this.fn_popupCallback = function(modalId, code)
+{
+// 	trace("@@@@@@"+code);
+// 	/*trace("@@@@@@"+code.split(":")[1]);*/
+// 	trace("###"+modalId);
+	// 0 - name, 1 - code
+	if(code != null){
+		this.codeInfo = code.split(":");
+		
+		if(modalId == "dept"){
+			this.edt_deptCode.set_value(this.codeInfo[1]);
+			this.edt_deptName.set_value(this.codeInfo[0]);
+		}
+// 		if(modalId == "pjt"){
+// 			this.edt_pjtCode.set_value(this.codeInfo[1]);
+// 			this.edt_pjtName.set_value(this.codeInfo[0]);
+// 		}
+		if(modalId == "pos"){
+			this.edt_posCode.set_value(this.codeInfo[1]);
+			this.edt_posName.set_value(this.codeInfo[0]);
+		}
+		if(modalId == "empStat"){
+			this.edt_empStatCode.set_value(this.codeInfo[1]);
+			this.edt_empStatName.set_value(this.codeInfo[0]);
+		}
+		if(modalId == "job"){
+			this.edt_jobCode.set_value(this.codeInfo[1]);
+			this.edt_jobName.set_value(this.codeInfo[0]);
+		}
+		if(modalId == "payStat"){
+			this.edt_payStatCode.set_value(this.codeInfo[1]);
+			this.edt_payStatName.set_value(this.codeInfo[0]);
+			this.calcHourPrice();
+		}
+// 		if(modalId == "transAc"){
+// 			this.edt_transAcCode.set_value(this.codeInfo[1]);
+// 			this.edt_transAcName.set_value(this.codeInfo[0]);
+// 		}
+	}
+}
+
+// 일급, 월급 시간단가 계산하기
+// 급여형태코드와 급여를 들고 와야함
+// 급여 데이터가 바뀌면 실행
+this.calcHourPrice = function(){
+	if(this.edt_payStatCode.value != null && this.medt_salary.value != null){
+		this.edt_payStatCode.value == "MDC000"
+			? this.medt_hourPrice.set_value(nexacro.round(this.medt_salary.value / 8)) // 일급 시간단가 8시간 기준
+			: this.medt_hourPrice.set_value(nexacro.round(this.medt_salary.value / 22 / 8)); // 월급 시간단가 22일 하루 8시간 기준
+	}
+}
+
+this.medt_salary_canchange = function(obj:nexacro.MaskEdit,e:nexacro.ChangeEventInfo)
+{
+	this.calcHourPrice();
+};
+
+this.edt_payStatCode_canchange = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	this.edt_payStatName.set_value(this.parent.parent.parent.ds_codeList.lookup("DETAIL_CODE_NUMBER", obj.value, "DETAIL_CODE_NAME"));
+	this.calcHourPrice();
+};
+
+// 일용직 퇴직기간 설정
+// 입사일자와 퇴직일자의 차이가 3개월 이상이 될수 없음
+function fn_calcDate(join, retire){
+	
+	this.fYear = join.substr(0, 4);
+	this.fMonth = join.substr(4, 2);
+	this.fDay = join.substr(6, 2);
+	
+	this.tYear = retire.substr(0, 4);
+	this.tMonth = retire.substr(4, 2);
+	this.tDay = retire.substr(6, 2);
+	
+	this.from = new Date(this.fYear, this.fMonth-1, this.fDay);
+	this.to = new Date(this.tYear, this.tMonth-1, this.tDay);
+	
+	return (this.to - this.from) / (1000*60*60*24);
+	
+}
+
+this.calen_retireDate_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	this.diffDate = fn_calcDate(this.calen_joinDate.value, obj.value);
+	if(this.diffDate >= 90 && this.edt_empStatCode.value == "EMT003"){
+		alert("일용직은 3개월 이상 근무할수 없습니다.");
+		obj.set_value("");
+	}
+};
+
+
+
+var modalUrl = "Base::Modal.xfdl";
+var modalEvent = "fn_popupCallback";
+
+this.btn_searchDeptCode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.gfnOpen("dept", modalUrl, modalEvent, {code:"CO-07"});
+};
+
+this.btn_searchPjtCode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	/*this.gfnOpen("pjt", modalUrl, modalEvent, {code:""});*/
+};
+
+this.btn_searchPositionCode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.gfnOpen("pos", modalUrl, modalEvent, {code:"CO-04"});
+};
+
+this.btn_searchEmploymentStatCode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.gfnOpen("empStat", modalUrl, modalEvent, {code:"CO-05"});
+};
+
+this.btn_searchJobCode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.gfnOpen("job", modalUrl, modalEvent, {code:"CO-03"});
+};
+
+this.btn_searchPayStatCode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.gfnOpen("payStat", modalUrl, modalEvent, {code:"CO-25"});
+};
+
+this.btn_searchTransAc_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	/*this.gfnOpen("transAc", modalUrl, modalEvent, {code:""});*/
+};
+
+
+// 우편번호 검색 API
+this.postcode = "";
+this.address1 = "";
+this.address2 = "";
+
+this.btn_searchZipCode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//popup 화면으로 전달할 값
+	var oArg = {
+				};
+	
+	//modal popup open call
+	this.gfn_showModal("popupPostcode", oArg, "Base::postcodedaumapi_popup.xfdl", "popupCallBack", this, 10, 58, 340, 310);
+};
+
+//popup call back
+this.popupCallBack = function(sFormId, sArg)
+{
+	if(sFormId=="popupPostcode")
+	{
+		if(this.gfn_isNull(sArg))
+		{
+			this.edt_zipCode.set_value(this.postcode);
+			this.edt_addr.set_value(this.address1);
+			this.edt_addrDetail.set_value(this.address2)
+		}
+		
+		//sArg == 'x' : 닫기버튼 클릭
+	}
+}
+
+/**
+* @description null value check
+* @param  pvVal - object (input value)
+* @return true/false (Null is true)
+*/
+this.gfn_isNull = function (pvVal)
+{
+	if (new String(pvVal).valueOf() == "undefined") 
+	{
+		return true;
+	}
+	if (pvVal == null) 
+	{
+		return true;
+	}
+	if (("x" + pvVal == "xNaN") && (new String(pvVal.length).valueOf() == "undefined")) 
+	{
+		return true;
+	}
+	if (pvVal.length == 0) 
+	{
+		return true;
+	}
+
+	return false;
+}
+/**
+* @description Modal Dialog open
+* @param 	sPopupId = showmodal popup id,
+			arrArguments = null, 
+			sPopupUrl = popup form url, 
+			popupCallback = call back funtion, 
+			obj = this,
+			nPopupLeft = popup position left,
+			nPopupTop = popup position top,
+			nPopupWidth = popup position width, 
+			nPopupHeight = popup position height
+* @return	
+*/
+
+//옵션 간소화 팝업
+this.gfn_showModal = function (sPopupId, arrArguments, sPopupUrl, popupCallback, obj, nPopupLeft, nPopupTop, nPopupWidth, nPopupHeight)
+{
+	// child frame 생성
+	var childFrame = new ChildFrame();
+	
+	// parent frame 정의
+	var parentFrame = obj.getOwnerFrame();
+	
+	//child frame 초기화
+	childFrame.init(sPopupId, nPopupLeft, nPopupTop, nPopupWidth, nPopupHeight, null, null, sPopupUrl);
+	
+	// Modal Dialog 추가 옵션
+	//autosize default true
+	childFrame.set_autosize(false);	
+	//statusbar default true
+	childFrame.set_showtitlebar(false);
+	
+	// 동적으로 생성한 ChildFrame을 Modal Dialog로 보여줌.
+	childFrame.showModal(parentFrame, arrArguments, obj, popupCallback, true);
+};
+]]></Script>
+    <Objects/>
+  </Form>
+</FDL>

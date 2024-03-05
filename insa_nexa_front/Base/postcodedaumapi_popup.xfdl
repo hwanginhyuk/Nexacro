@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="postcodedaumapi_popup" width="500" height="300" titletext="New Form" onload="postcodepopup_onload">
+    <Layouts>
+      <Layout height="300" width="500">
+        <WebBrowser id="WebBrowser00" taborder="0" left="0" top="0" onusernotify="WebBrowser00_onusernotify" right="0" bottom="0" border="0px none"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.postcodepopup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var strURL = nexacro.Application.xadl;
+	
+	//html 파일 webbrowser 컴포넌트 연결 url
+	var strPostUrl = "http://localhost:8282/postcode.jsp";
+	this.WebBrowser00.set_url(strPostUrl);
+};
+
+this.WebBrowser00_onusernotify = function(obj:nexacro.WebBrowser,e:nexacro.WebUserNotifyEventInfo)
+{
+	var addData = e.userdata.split(",");
+	
+	if(addData.length > 1)
+	{
+		if(!this.opener.gfn_isNull(addData[0]))
+		{
+			this.opener.postcode = addData[0]; 
+			this.opener.address1 = addData[1];
+			this.opener.address2 = addData[2];
+			// popup이 닫히면 데이터 값이 셋팅한 곳으로 넘어간다
+			this.close(e.userdata);
+		}
+		else
+		{
+			this.close('x');
+		}
+		
+	}
+};
+
+
+]]></Script>
+  </Form>
+</FDL>

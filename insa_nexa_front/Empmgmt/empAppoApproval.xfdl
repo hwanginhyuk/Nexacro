@@ -1,0 +1,804 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="empEval" width="1270" height="930" titletext="New Form" onload="empEval_onload">
+    <Layouts>
+      <Layout height="930" width="1270">
+        <Div id="Div00_00" taborder="0" text="" left="0" top="0" width="1240" height="610" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Tab id="Tab00" taborder="3" tabindex="0" left="53" top="80" width="1127" height="650" canchange="Div00_00_Tab00_Tabpage2_onmove" onchanged="Div00_00_Tab00_onchanged">
+                <Tabpages>
+                  <Tabpage id="Tabpage1" text="호수등록">
+                    <Layouts>
+                      <Layout>
+                        <Button id="Button00_00" taborder="0" text="취소" left="751" top="553" width="99" height="37" onclick="empEval_onload"/>
+                        <Button id="Button00" taborder="1" text="취소" left="220" top="293" width="115" height="35" onclick="empEval_onload" font="14px &quot;나눔고딕&quot;" background="#6092ff" borderRadius="5px" color="white"/>
+                        <Button id="Button01" taborder="2" text="생성" left="260" top="206" width="75" height="35" onclick="regist" font="14px &quot;나눔고딕&quot;" background="#6092ff" borderRadius="5px" color="white"/>
+                        <Edit id="genratehosu" taborder="3" left="94" top="206" width="155" height="35" enable="false" font="14px &quot;나눔고딕&quot;"/>
+                        <Static id="Static03" taborder="4" text="발령근거" left="12" top="166" width="82" height="25" font="14px &quot;나눔고딕&quot;"/>
+                        <Combo id="reason" taborder="5" text="Combo00" left="95" top="161" width="240" height="35" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" font="14px &quot;나눔고딕&quot;">
+                          <Dataset id="innerdataset">
+                            <ColumnInfo>
+                              <Column id="codecolumn" size="256"/>
+                              <Column id="datacolumn" size="256"/>
+                            </ColumnInfo>
+                            <Rows>
+                              <Row>
+                                <Col id="codecolumn">정기인사발령</Col>
+                                <Col id="datacolumn">정기인사발령</Col>
+                              </Row>
+                              <Row>
+                                <Col id="codecolumn">수시인사발령</Col>
+                                <Col id="datacolumn">수시인사발령</Col>
+                              </Row>
+                              <Row>
+                                <Col id="codecolumn">기타인사발령</Col>
+                                <Col id="datacolumn">기타인사발령</Col>
+                              </Row>
+                            </Rows>
+                          </Dataset>
+                        </Combo>
+                        <Button id="Button02" taborder="6" text="등록" left="96" top="293" width="115" height="35" onclick="Button00_onclick" font="14px &quot;나눔고딕&quot;" background="#6092ff" borderRadius="5px" color="white"/>
+                        <Edit id="title" taborder="7" left="95" top="116" width="240" height="35" font="14px &quot;나눔고딕&quot;"/>
+                        <Static id="Static03_00" taborder="8" text="제      목" left="12" top="121" width="82" height="25" font="14px &quot;나눔고딕&quot;"/>
+                        <Grid id="hosuGrid" taborder="9" left="402" top="37" width="491" height="340" binddataset="ds_appointmentinfolist" oncellclick="Div00_00_Tab00_Tabpage2_evalGrid_oncellclick">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="80"/>
+                                <Column size="228"/>
+                                <Column size="93"/>
+                                <Column size="88"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="30" band="head"/>
+                                <Row size="30"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="호수" font="14px &quot;나눔고딕&quot;" textAlign="center"/>
+                                <Cell col="1" text="제목" font="14px &quot;나눔고딕&quot;" textAlign="center"/>
+                                <Cell col="2" text="발령일" font="14px &quot;나눔고딕&quot;" textAlign="center"/>
+                                <Cell col="3" text="발령근거" font="14px &quot;나눔고딕&quot;" textAlign="center"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:HOSU" font="14px &quot;나눔고딕&quot;" textAlign="center"/>
+                                <Cell col="1" text="bind:TITLE" font="14px &quot;나눔고딕&quot;" textAlign="center"/>
+                                <Cell col="2" text="bind:APPOINTMENT_DATE" calendardateformat="yyyy-MM-dd" displaytype="date" edittype="date" font="14px &quot;나눔고딕&quot;" textAlign="center"/>
+                                <Cell col="3" text="bind:APPOINTMENT_DETAIL" font="14px &quot;나눔고딕&quot;" textAlign="center"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Static id="Static00" taborder="10" text="인사발령 호수등록" left="57" top="31" width="223" height="60" font="18px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                        <Static id="Static03_01" taborder="11" text="문서번호" left="12" top="213" width="82" height="25" font="14px &quot;나눔고딕&quot;"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="Tabpage2" text="발령결재" onmove="Div00_00_Tab00_Tabpage2_onmove">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="evalGrid" taborder="0" left="4" top="37" width="460" height="219" binddataset="ds_appointmentinfolist" oncellclick="empAppointCount_oncellclick">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="80"/>
+                                <Column size="164"/>
+                                <Column size="68"/>
+                                <Column size="80"/>
+                                <Column size="65"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="30" band="head"/>
+                                <Row size="30"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="호수"/>
+                                <Cell col="1" text="제목"/>
+                                <Cell col="2" text="발령일"/>
+                                <Cell col="3" text="발령근거"/>
+                                <Cell col="4" text="발령인원"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:HOSU"/>
+                                <Cell col="1" text="bind:TITLE"/>
+                                <Cell col="2" text="bind:APPOINTMENT_DATE"/>
+                                <Cell col="3" text="bind:APPOINTMENT_DETAIL"/>
+                                <Cell col="4" text="bind:APPOINTMENT_COUNT"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Grid id="evalGrid00" taborder="1" left="490" top="37" width="430" height="414" binddataset="ds_appointmentlist">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="427"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="30" band="head"/>
+                                <Row size="30"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="호수"/>
+                                <Cell col="1" text="사원코드"/>
+                                <Cell col="2" text="사원명"/>
+                                <Cell col="3" text="현 부서"/>
+                                <Cell col="4" text="발령 부서"/>
+                                <Cell col="5" text="발령일"/>
+                                <Cell col="6" text="파견일"/>
+                                <Cell col="7" text="복귀일"/>
+                                <Cell col="8" text="파견 직책"/>
+                                <Cell col="9" text="현 호봉"/>
+                                <Cell col="10" text="승급 호봉"/>
+                                <Cell col="11" text="승급일"/>
+                                <Cell col="12" text="현 직책"/>
+                                <Cell col="13" text="발령 직책"/>
+                                <Cell col="14" text="은퇴일"/>
+                                <Cell col="15" text="휴직일"/>
+                                <Cell col="16" text="복직일"/>
+                                <Cell col="17" text="휴직사유"/>
+                                <Cell col="18" text="발령대상"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:HOSU"/>
+                                <Cell col="1" text="bind:EMP_CODE"/>
+                                <Cell col="2" text="bind:EMP_NAME"/>
+                                <Cell col="3" text="bind:LAST_DEPT"/>
+                                <Cell col="4" text="bind:NEXT_DEPT"/>
+                                <Cell col="5" text="bind:APPOINTMENT_DATE"/>
+                                <Cell col="6" text="bind:DISPATCH_DATE"/>
+                                <Cell col="7" text="bind:DISPATCH_RETURN_DATE"/>
+                                <Cell col="8" text="bind:DISPATCH_POSITION"/>
+                                <Cell col="9" text="bind:LAST_HOBONG"/>
+                                <Cell col="10" text="bind:NEXT_HOBONG"/>
+                                <Cell col="11" text="bind:PROMOTION_DATE"/>
+                                <Cell col="12" text="bind:LAST_POSITION"/>
+                                <Cell col="13" text="bind:NEXT_POSITION"/>
+                                <Cell col="14" text="bind:RETIREMENT_DATE"/>
+                                <Cell col="15" text="bind:LEAVE_DATE"/>
+                                <Cell col="16" text="bind:REINSTATEMENT_DATE"/>
+                                <Cell col="17" text="bind:LEAVE_TYPE"/>
+                                <Cell col="18"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Button id="Button00_00" taborder="2" text="등록" left="838" top="466" width="75" height="35" onclick="registempAppointmentlist" borderRadius="5px" background="#6092ff" color="white"/>
+                        <Grid id="evalGrid01" taborder="3" left="4" top="281" width="460" height="215" oncellclick="Div00_00_Tab00_Tabpage2_evalGrid_oncellclick" binddataset="dept">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="0"/>
+                                <Column size="350"/>
+                                <Column size="107"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="30" band="head"/>
+                                <Row size="30"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="호수"/>
+                                <Cell col="1" text="부서"/>
+                                <Cell col="2" text="인원"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:호수"/>
+                                <Cell col="1" text="bind:부서"/>
+                                <Cell col="2" text="bind:인원"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="Tabpage3" text="인사발령이력">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="evalGrid00" taborder="0" left="482" top="38" width="431" height="458" binddataset="ds_appointmentlist">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                                <Column size="429"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="30" band="head"/>
+                                <Row size="30"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="호수"/>
+                                <Cell col="1" text="사원코드"/>
+                                <Cell col="2" text="사원명"/>
+                                <Cell col="3" text="현 부서"/>
+                                <Cell col="4" text="발령 부서"/>
+                                <Cell col="5" text="발령일"/>
+                                <Cell col="6" text="파견일"/>
+                                <Cell col="7" text="복귀일"/>
+                                <Cell col="8" text="파견 직책"/>
+                                <Cell col="9" text="현 호봉"/>
+                                <Cell col="10" text="승급 호봉"/>
+                                <Cell col="11" text="승급일"/>
+                                <Cell col="12" text="현 직책"/>
+                                <Cell col="13" text="발령 직책"/>
+                                <Cell col="14" text="은퇴일"/>
+                                <Cell col="15" text="휴직일"/>
+                                <Cell col="16" text="복직일"/>
+                                <Cell col="17" text="휴직사유"/>
+                                <Cell col="18" text="발령대상"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:HOSU"/>
+                                <Cell col="1" text="bind:EMP_CODE"/>
+                                <Cell col="2" text="bind:EMP_NAME"/>
+                                <Cell col="3" text="bind:LAST_DEPT"/>
+                                <Cell col="4" text="bind:NEXT_DEPT"/>
+                                <Cell col="5" text="bind:APPOINTMENT_DATE"/>
+                                <Cell col="6" text="bind:DISPATCH_DATE"/>
+                                <Cell col="7" text="bind:DISPATCH_RETURN_DATE"/>
+                                <Cell col="8" text="bind:DISPATCH_POSITION"/>
+                                <Cell col="9" text="bind:LAST_HOBONG"/>
+                                <Cell col="10" text="bind:NEXT_HOBONG"/>
+                                <Cell col="11" text="bind:PROMOTION_DATE"/>
+                                <Cell col="12" text="bind:LAST_POSITION"/>
+                                <Cell col="13" text="bind:NEXT_POSITION"/>
+                                <Cell col="14" text="bind:RETIREMENT_DATE"/>
+                                <Cell col="15" text="bind:LEAVE_DATE"/>
+                                <Cell col="16" text="bind:REINSTATEMENT_DATE"/>
+                                <Cell col="17" text="bind:LEAVE_TYPE"/>
+                                <Cell col="18"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Grid id="evalGrid" taborder="1" left="4" top="37" width="460" height="230" binddataset="ds_appointmentinfolist2" oncellclick="empAppointCount_oncellclick2">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="80"/>
+                                <Column size="164"/>
+                                <Column size="68"/>
+                                <Column size="80"/>
+                                <Column size="65"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="30" band="head"/>
+                                <Row size="30"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="호수"/>
+                                <Cell col="1" text="제목"/>
+                                <Cell col="2" text="발령일"/>
+                                <Cell col="3" text="발령근거"/>
+                                <Cell col="4" text="발령인원"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:HOSU"/>
+                                <Cell col="1" text="bind:TITLE"/>
+                                <Cell col="2" text="bind:APPOINTMENT_DATE"/>
+                                <Cell col="3" text="bind:APPOINTMENT_DETAIL"/>
+                                <Cell col="4" text="bind:APPOINTMENT_COUNT"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Grid id="evalGrid01" taborder="2" left="4" top="281" width="460" height="215" oncellclick="Div00_00_Tab00_Tabpage3_evalGrid_oncellclick" binddataset="dept">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="0"/>
+                                <Column size="350"/>
+                                <Column size="107"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="30" band="head"/>
+                                <Row size="30"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="호수"/>
+                                <Cell col="1" text="부서"/>
+                                <Cell col="2" text="인원"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:호수"/>
+                                <Cell col="1" text="bind:부서"/>
+                                <Cell col="2" text="bind:인원"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+              <Static id="Static00" taborder="1" text="인사발령관리" left="53" top="20" width="188" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[var empName;
+var empCode;
+var empDept;
+var empPos;
+var hosu;
+var empHobong;
+var remarks;
+var appointmentDate
+var row;
+
+// 발령대상 불러오기
+this.empEval_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	
+	this.loadAppointList();
+	this.loadEndAppointList();
+	//첫번째 사원 값 받아오기
+	row=0;
+	this.ds_appointmentlist.clearData();
+};
+
+this.loadAppointList = function()
+{
+		this.transaction("loadAppointList",
+						 "svcEmpinfomgmt::appointment5",
+						 "",
+						 "ds_appointmentinfolist=gds_appointmentinfo",
+						 "searchType=승인대기",
+						 "fn_callback");	
+}
+
+
+ 
+this.loadEndAppointList = function()
+{
+		this.transaction("loadEndAppointList",
+						 "svcEmpinfomgmt::appointment5",
+						 "",
+						 "ds_appointmentinfolist2=gds_appointmentinfo",
+						 "searchType=승인",
+						 "fn_callback");	
+}
+
+//발령결재 - [등록]
+this.registempAppointmentlist = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+		this.transaction("registAppointment",
+						 "svcEmpinfomgmt::appointment2",
+						 "gds_appointmenttype=ds_appointmentlist",
+						 "",
+						 "hosu="+hosu,
+						 "fn_callback");	
+		this.loadAppointList();
+};
+
+
+this.regist = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+		this.transaction("registHosu",
+						 "svcEmpinfomgmt::appointment3",
+						 "",
+						 "ds_appointmentinfo=gds_appointmentinfo",
+						 "",
+						 "fn_callback");	
+};
+
+
+//호수등록 - [등록]
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.Div00_00.form.Tab00.Tabpage1.form.title.value==null){
+			this.alert("문서제목을 입력해주세요.");
+			return
+	}if(this.Div00_00.form.Tab00.Tabpage1.form.reason.value==null){
+			this.alert("발령근거를 선택해주세요.");
+			return
+	}if(this.Div00_00.form.Tab00.Tabpage1.form.genratehosu.value==null){
+			this.alert("문서번호를 생성해주세요.");
+			return
+	}
+	if(this.confirm(this.Div00_00.form.Tab00.Tabpage1.form.genratehosu.value +"호 "+this.Div00_00.form.Tab00.Tabpage1.form.reason.value+"을 생성합니다.")){
+		var currDate = new Date();
+		var year = currDate.getFullYear().toString().padLeft(4, "0");
+		var month = (currDate.getMonth()+1).toString().padLeft(2, "0");
+		var day = currDate.getDate().toString().padLeft(2, "0");
+	
+		this.ds_appointmentinfo.setColumn(0,"APPOINTMENT_DATE",year+month+day);
+		this.ds_appointmentinfo.setColumn(0,"TITLE",this.Div00_00.form.Tab00.Tabpage1.form.title.value);
+		this.ds_appointmentinfo.setColumn(0,"APPOINTMENT_DETAIL",this.Div00_00.form.Tab00.Tabpage1.form.reason.value);
+		this.ds_appointmentinfo.setColumn(0,"APPROVAL_STATUS","승인대기");
+		this.transaction("registAppointmentinfo",
+						 "svcEmpinfomgmt::appointment4",
+						 "gds_appointmentinfo=ds_appointmentinfo",
+						 "",
+						 "",
+						 "fn_callback");
+		}
+};
+
+this.fn_callback = function(trID ,ErrorCode ,ErrorMsg)
+		{
+		if(trID=="registAppointmentinfo"){
+			if(ErrorCode!=0){
+				alert("인사발령 등록 실패 : "+ErrorMsg);
+			}else{
+				alert("인사발령 등록 성공!");
+				this.Div00_00.form.Tab00.Tabpage1.form.genratehosu.set_value(null);
+				this.Div00_00.form.Tab00.Tabpage1.form.reason.set_value(null);
+				this.reload();
+			}
+		}
+		if(trID=="getAppointmentEmplist"){
+			if(ErrorCode!=0){
+				alert("검색 실패 : "+ErrorMsg);
+			}else{
+					for(var a=0;a<8;a++){
+					this.dept.setColumn(a,1,this.ds_appointcount.getColumn(0,a+2))
+				}
+			}
+		}
+	}
+
+/*
+this.Div00_00_Tab00_Tabpage2_onmove = function(obj:nexacro.Tabpage,e:nexacro.MoveEventInfo)
+{
+	trace("!!!!!!!!!!")
+	this.ds_appointmentlist.deleteAll();
+	this.appointmentlist();
+};
+*/
+
+//두번째 그리드 oncellclick 이벤트
+this.Div00_00_Tab00_Tabpage2_evalGrid_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(0, "size", 70);
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(1, "size", 60);
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(2, "size", 50);
+		
+		for(var i=3;i<19;i++){
+			this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(i, "size", 0);
+		}
+	
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="부서이동"){
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(3, "size", 91); //180 250 430
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(4, "size", 91); //320
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(5, "size", 68); //388
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="파견"){
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(6, "size", 80); // 250
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(7, "size", 80); // 320
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(8, "size", 90); // 390
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="호봉승급"){
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(9, "size", 91); //2 50
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(10, "size", 91); //
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(5, "size", 68); // 388
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="승진"){
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(12, "size", 91);
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(13, "size", 91);
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(5, "size", 68);
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="퇴직"){
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(14, "size", 126); // 250
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(5, "size", 124); // 318
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="휴직"){
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(15, "size", 70); //250
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(16, "size", 70); //320
+		this.Div00_00.form.Tab00.Tabpage2.form.evalGrid00.setFormatColProperty(17, "size", 110); // 390
+	}
+	
+	var type =this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1);
+	trace(hosu);
+	trace(type);
+
+	this.transaction("getAppointmentEmplist",
+					 "svcEmpinfomgmt::appointment6",
+					 "",
+					 "ds_appointmentlist=gds_appointmenttype",
+					 "hosu="+hosu
+					 +" type="+type,
+					 "fn_callback");	
+};
+
+
+this.empAppointCount_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	hosu =this.Div00_00.form.Tab00.Tabpage2.form.evalGrid.getCellValue(e.row,0);
+	this.ds_appointcount.setColumn(0,'HOSU',hosu);
+	trace(hosu);
+	this.transaction("getAppointmentEmplist",
+					 "svcEmpinfomgmt::appointment8",
+					 "",
+					 "ds_appointcount=gds_appointment ds_appointmentlistAll=gds_appointmenttype",
+					 "hosu="+hosu,
+					 "fn_callback");
+};
+	
+
+this.empAppointCount_oncellclick2 = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	hosu =this.Div00_00.form.Tab00.Tabpage3.form.evalGrid.getCellValue(e.row,0);
+	this.ds_appointcount.setColumn(0,'HOSU',hosu);
+	trace(hosu);
+	this.transaction("getAppointmentEmplist",
+					 "svcEmpinfomgmt::appointment8",
+					 "",
+					 "ds_appointcount=gds_appointment",
+					 "hosu="+hosu,
+					 "fn_callback");
+};
+
+this.Div00_00_Tab00_Tabpage3_evalGrid_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(0, "size", 70);
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(1, "size", 60);
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(2, "size", 50);
+		for(var i=3;i<19;i++){
+			this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(i, "size", 0);
+		}
+	
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="부서이동"){
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(3, "size", 91); //180 250 430
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(4, "size", 91); //320
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(5, "size", 68); //388
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="파견"){
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(6, "size", 80); // 250
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(7, "size", 80); // 320
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(8, "size", 90); // 390
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="호봉승급"){
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(9, "size", 91); //2 50
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(10, "size", 91); //
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(5, "size", 68); // 388
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="승진"){
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(12, "size", 91);
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(13, "size", 91);
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(5, "size", 68);
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="퇴직"){
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(14, "size", 126); // 250
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(5, "size", 124); // 318
+	}
+	if( this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellText(e.row,1)=="휴직"){
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(15, "size", 70); //250
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(16, "size", 70); //320
+		this.Div00_00.form.Tab00.Tabpage3.form.evalGrid00.setFormatColProperty(17, "size", 110); // 390
+	}
+
+	var type =this.Div00_00.form.Tab00.Tabpage3.form.evalGrid01.getCellValue(e.row,1);
+	trace(hosu);
+	trace(type);
+
+	this.transaction("getAppointmentEmplist",
+					 "svcEmpinfomgmt::appointment6",
+					 "",
+					 "ds_appointmentlist=gds_appointmenttype",
+					 "hosu="+hosu
+					 +" type="+type,
+					 "fn_callback");	
+};
+
+
+this.Div00_00_Tab00_Tabpage2_Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.Div00_00.form.Tab00.Tabpage2.form.empName.set_value(null);
+	this.Div00_00.form.Tab00.Tabpage2.form.type.set_value(null);
+	this.Div00_00.form.Tab00.Tabpage2.form.year.set_value(null);
+	
+	if(this.Div00_00.form.Tab00.Tabpage2.form.Combo00.value=="년도"){
+			this.Div00_00.form.Tab00.Tabpage2.form.year.set_left(150);
+			this.Div00_00.form.Tab00.Tabpage2.form.year.set_visible(true);
+			this.Div00_00.form.Tab00.Tabpage2.form.type.set_visible(false);
+			this.Div00_00.form.Tab00.Tabpage2.form.empName.set_visible(false);
+		return;
+	}
+		if(this.Div00_00.form.Tab00.Tabpage2.form.Combo00.value=="발령근거"){
+			this.Div00_00.form.Tab00.Tabpage2.form.type.set_left(150);
+			this.Div00_00.form.Tab00.Tabpage2.form.type.set_visible(true);
+			this.Div00_00.form.Tab00.Tabpage2.form.empName.set_visible(false);
+			this.Div00_00.form.Tab00.Tabpage2.form.year.set_visible(false);
+		return;
+	}
+		if(this.Div00_00.form.Tab00.Tabpage2.form.Combo00.value=="사원명"){
+			this.Div00_00.form.Tab00.Tabpage2.form.empName.set_left(150);
+			this.Div00_00.form.Tab00.Tabpage2.form.empName.set_visible(true);
+			this.Div00_00.form.Tab00.Tabpage2.form.type.set_visible(false);
+			this.Div00_00.form.Tab00.Tabpage2.form.year.set_visible(false);
+		return;
+	
+	}
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_empList">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="GENDER" type="STRING" size="256"/>
+          <Column id="MOBILE_NUMBER" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="ADDRESS" type="STRING" size="256"/>
+          <Column id="LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="IMG_EXTEND" type="STRING" size="256"/>
+          <Column id="BIRTHDATE" type="STRING" size="256"/>
+          <Column id="DETAIL_ADDRESS" type="STRING" size="256"/>
+          <Column id="POST_NUMBER" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+          <Column id="HOBONG" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_appointmentinfo">
+        <ColumnInfo>
+          <Column id="HOSU" type="STRING" size="256"/>
+          <Column id="TITLE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DATE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_TYPE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DETAIL" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_COUNT" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_appointmentlist">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="HOSU" type="STRING" size="256"/>
+          <Column id="LAST_DEPT" type="STRING" size="256"/>
+          <Column id="NEXT_DEPT" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DATE" type="STRING" size="256"/>
+          <Column id="DISPATCH_DATE" type="STRING" size="256"/>
+          <Column id="DISPATCH_RETURN_DATE" type="STRING" size="256"/>
+          <Column id="DISPATCH_POSITION" type="STRING" size="256"/>
+          <Column id="LAST_WORKPLACE" type="STRING" size="256"/>
+          <Column id="LAST_REGION" type="STRING" size="256"/>
+          <Column id="LAST_HOBONG" type="STRING" size="256"/>
+          <Column id="NEXT_HOBONG" type="STRING" size="256"/>
+          <Column id="PROMOTION_DATE" type="STRING" size="256"/>
+          <Column id="LAST_POSITION" type="STRING" size="256"/>
+          <Column id="NEXT_POSITION" type="STRING" size="256"/>
+          <Column id="RETIREMENT_DATE" type="STRING" size="256"/>
+          <Column id="LEAVE_DATE" type="STRING" size="256"/>
+          <Column id="REINSTATEMENT_DATE" type="STRING" size="256"/>
+          <Column id="LEAVE_TYPE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="chk" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_appointmentinfolist">
+        <ColumnInfo>
+          <Column id="HOSU" type="STRING" size="256"/>
+          <Column id="TITLE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DATE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_TYPE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DETAIL" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_COUNT" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_appointmentinfolist2">
+        <ColumnInfo>
+          <Column id="HOSU" type="STRING" size="256"/>
+          <Column id="TITLE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DATE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_TYPE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DETAIL" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_COUNT" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_appointcount">
+        <ColumnInfo>
+          <Column id="DEPT_CHANGE_STATUS" type="STRING" size="256"/>
+          <Column id="POSITION_CHANGE_STATUS" type="STRING" size="256"/>
+          <Column id="HOBONG_CHANGE_STATUS" type="STRING" size="256"/>
+          <Column id="RETIREMENT_STATUS" type="STRING" size="256"/>
+          <Column id="DISPATCH_STATUS" type="STRING" size="256"/>
+          <Column id="LEAVE_STATUS" type="STRING" size="256"/>
+          <Column id="HOSU" type="STRING" size="256"/>
+          <Column id="TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dept">
+        <ColumnInfo>
+          <Column id="부서" type="STRING" size="256"/>
+          <Column id="인원" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="부서">부서이동</Col>
+          </Row>
+          <Row>
+            <Col id="부서">승진</Col>
+          </Row>
+          <Row>
+            <Col id="부서">호봉승급</Col>
+          </Row>
+          <Row>
+            <Col id="부서">퇴직</Col>
+          </Row>
+          <Row>
+            <Col id="부서">파견</Col>
+          </Row>
+          <Row>
+            <Col id="부서">휴직</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_appointmentlistAll">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="HOSU" type="STRING" size="256"/>
+          <Column id="LAST_DEPT" type="STRING" size="256"/>
+          <Column id="NEXT_DEPT" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DATE" type="STRING" size="256"/>
+          <Column id="DISPATCH_DATE" type="STRING" size="256"/>
+          <Column id="DISPATCH_RETURN_DATE" type="STRING" size="256"/>
+          <Column id="DISPATCH_POSITION" type="STRING" size="256"/>
+          <Column id="LAST_WORKPLACE" type="STRING" size="256"/>
+          <Column id="LAST_REGION" type="STRING" size="256"/>
+          <Column id="LAST_HOBONG" type="STRING" size="256"/>
+          <Column id="NEXT_HOBONG" type="STRING" size="256"/>
+          <Column id="PROMOTION_DATE" type="STRING" size="256"/>
+          <Column id="LAST_POSITION" type="STRING" size="256"/>
+          <Column id="NEXT_POSITION" type="STRING" size="256"/>
+          <Column id="RETIREMENT_DATE" type="STRING" size="256"/>
+          <Column id="LEAVE_DATE" type="STRING" size="256"/>
+          <Column id="REINSTATEMENT_DATE" type="STRING" size="256"/>
+          <Column id="LEAVE_TYPE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="chk" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00_00.form.Tab00.Tabpage1.form.genratehosu" propid="value" datasetid="ds_appointmentinfo" columnid="HOSU"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,646 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppVariables version="2.0">
+  <Datasets>
+    <Dataset id="gds_emp">
+      <ColumnInfo>
+        <Column id="EMP_CODE" type="STRING" size="256"/>
+        <Column id="EMP_NAME" type="STRING" size="256"/>
+        <Column id="BIRTHDATE" type="STRING" size="256"/>
+        <Column id="GENDER" type="STRING" size="256"/>
+        <Column id="MOBILE_NUMBER" type="STRING" size="256"/>
+        <Column id="ADDRESS" type="STRING" size="256"/>
+        <Column id="DETAIL_ADDRESS" type="STRING" size="256"/>
+        <Column id="POST_NUMBER" type="STRING" size="256"/>
+        <Column id="EMAIL" type="STRING" size="256"/>
+        <Column id="LAST_SCHOOL" type="STRING" size="256"/>
+        <Column id="IMG_EXTEND" type="STRING" size="256"/>
+        <Column id="DEPT_NAME" type="STRING" size="256"/>
+        <Column id="POSITION" type="STRING" size="256"/>
+        <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+        <Column id="POSITION_CODE" type="STRING" size="256"/>
+        <Column id="HOBONG" type="STRING" size="256"/>
+        <Column id="OCCUPATION" type="STRING" size="256"/>
+        <Column id="STATUS" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_menu">
+      <ColumnInfo>
+        <Column id="menu_id" type="STRING" size="256"/>
+        <Column id="menu_nm" type="STRING" size="256"/>
+        <Column id="menu_lv" type="STRING" size="256"/>
+        <Column id="menu_st" type="STRING" size="256"/>
+        <Column id="menu_url" type="STRING" size="256"/>
+      </ColumnInfo>
+      <Rows>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">사원정보관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">사원등록</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Empmgmt::empReg.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">사원조회/사원정보수정</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Empmgmt::empDetail.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">인사고과등록</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Empmgmt::empEval.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">인사고과관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Empmgmt::empEvalApproval.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">인사발령등록</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Empmgmt::empAppo.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">인사발령관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Empmgmt::empAppoApproval.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">서류관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">서류신청/조회</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Empmgmt::documents.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">서류승인관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Empmgmt::documentsApproval.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">근태관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">출퇴근 정보 조회</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::dailyAttnd.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">근태외신청</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::excusedAttnd.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">연차신청</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::breakApplication.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">출장/교육신청</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::travel_new.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">초과근무신청</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::overwork.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">근태승인</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일근태관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::dailyAttndMgt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">월근태관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::monthlyAttndMgt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">근태외 승인관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::attndApproval.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">연차관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::annualLeaveMgt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">초과근무 관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Attd::overworkMgt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">급여정보관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">급여조회</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Salary::fullTimeSal.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">상여및성과급조회</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Salary::salaryAwards.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">퇴직금조회</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Salary::retirementSal.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">급여기준정보관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">급여기준관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Salary::baseSalMgt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">초과수당관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Salary::baseExtSalMgt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_nm">사회보험관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_url">Salary::socialIns.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">인사기초정보관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">휴일정보관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Comm::holidayList.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">부서정보관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Comm::deptList.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">직급정보관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Comm::positionList.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">기준근무시간관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Comm::baseWorkTime.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_nm">인적자원개발관리</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_nm">인력계획</Col>
+          <Col id="menu_url">NewEmp::documentmgmt/workforcePlanning.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_nm">교육훈련진행관리</Col>
+          <Col id="menu_url">NewEmp::documentmgmt/eduPlan.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_nm">채용승인</Col>
+          <Col id="menu_url">NewEmp::documentmgmt/final.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_nm">인적자원정보관리</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_nm">이력서조회</Col>
+          <Col id="menu_url">NewEmp::documentmgmt/resumemgmt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_nm">선발결정</Col>
+          <Col id="menu_url">NewEmp::documentmgmt/success.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">퇴직금정산관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">퇴직기준설정</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Retirement::retirementMgt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">퇴직금 산정현황</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Retirement::retirementPay.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_nm">퇴직소득 영수증관리</Col>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Retirement::retirementReceipt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_nm">일용직사원등록</Col>
+          <Col id="menu_url">DailyEmp::dailyEmpmgmt.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_nm">일용직급여지급일자등록</Col>
+          <Col id="menu_url">DailyEmp::dailyEmpPayDate.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_nm">일용직급여입력및계산</Col>
+          <Col id="menu_url">DailyEmp::dailyEmpPayCalc.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">인사시스템관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">권한관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Comm::empAuth.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">코드조회</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">Comm::codeList_copy0.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로관리</Col>
+          <Col id="menu_lv">0</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 사원관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 사원관리</Col>
+          <Col id="menu_lv">2</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">DailyLabor::empmanage.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 사원이력 관리</Col>
+          <Col id="menu_lv">2</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">DailyLabor::emplog.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 근태관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 근태등록</Col>
+          <Col id="menu_lv">2</Col>
+          <Col id="menu_st">1</Col>
+          <Col id="menu_url">DailyLabor::attendregister.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 근태관리</Col>
+          <Col id="menu_lv">2</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 급여관리</Col>
+          <Col id="menu_lv">1</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 급여등록</Col>
+          <Col id="menu_lv">2</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 급여관리</Col>
+          <Col id="menu_lv">2</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+        <Row>
+          <Col id="menu_id">currow</Col>
+          <Col id="menu_nm">일용직근로 공제관리</Col>
+          <Col id="menu_lv">2</Col>
+          <Col id="menu_st">1</Col>
+        </Row>
+      </Rows>
+    </Dataset>
+    <Dataset id="gds_dayattd">
+      <ColumnInfo>
+        <Column id="EMP_CODE" type="STRING" size="256"/>
+        <Column id="EMP_NAME" type="STRING" size="256"/>
+        <Column id="DAY_ATTD_CODE" type="STRING" size="256"/>
+        <Column id="APPLY_DAY" type="STRING" size="256"/>
+        <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+        <Column id="ATTD_TYPE_NAME" type="STRING" size="256"/>
+        <Column id="TIME" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="ds_s_zipcode">
+      <ColumnInfo>
+        <Column id="ZIP_NO" type="STRING" size="256"/>
+        <Column id="UPDDATE" type="STRING" size="256"/>
+        <Column id="REGDATE" type="STRING" size="256"/>
+        <Column id="SEQ" type="STRING" size="256"/>
+        <Column id="SIDO" type="STRING" size="256"/>
+        <Column id="GUGUN" type="STRING" size="256"/>
+        <Column id="UPDMODULE" type="STRING" size="256"/>
+        <Column id="REGMODULE" type="STRING" size="256"/>
+        <Column id="DONG" type="STRING" size="256"/>
+        <Column id="RI" type="STRING" size="256"/>
+        <Column id="BUNJI" type="STRING" size="256"/>
+        <Column id="AMENDER" type="STRING" size="256"/>
+        <Column id="REGISTRANT" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_auth">
+      <ColumnInfo>
+        <Column id="MENU_STATUS" type="STRING" size="256"/>
+        <Column id="MENU_ID" type="STRING" size="256"/>
+        <Column id="DEPT_CODE" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_api">
+      <ColumnInfo>
+        <Column id="THEMA" type="STRING" size="256"/>
+        <Column id="COURSEAREANAME" type="STRING" size="256"/>
+        <Column id="COURSENAME" type="STRING" size="256"/>
+        <Column id="SPOTNAME" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_group">
+      <ColumnInfo>
+        <Column id="THEMA" type="STRING" size="256"/>
+        <Column id="COURSEAREANAME" type="STRING" size="256"/>
+        <Column id="COURSENAME" type="STRING" size="256"/>
+        <Column id="SPOTNAME" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_resume">
+      <ColumnInfo>
+        <Column id="P_CODE" type="STRING" size="256"/>
+        <Column id="P_NAME" type="STRING" size="256"/>
+        <Column id="P_AGE" type="STRING" size="256"/>
+        <Column id="P_GENDER" type="STRING" size="256"/>
+        <Column id="P_ADDRESS" type="STRING" size="256"/>
+        <Column id="P_TEL" type="STRING" size="256"/>
+        <Column id="P_EMAIL" type="STRING" size="256"/>
+        <Column id="P_DEPT" type="STRING" size="256"/>
+        <Column id="P_LAST_SCHOOL" type="STRING" size="256"/>
+        <Column id="P_CAREER" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_empanddept">
+      <ColumnInfo>
+        <Column id="EMP_CODE" type="STRING" size="256"/>
+        <Column id="EMP_NAME" type="STRING" size="256"/>
+        <Column id="DEPT_CODE" type="STRING" size="256"/>
+        <Column id="DEPt_NAME" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_detailcode">
+      <ColumnInfo>
+        <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        <Column id="DETAIL_CODE_NUMBER" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_workInfoLis">
+      <ColumnInfo>
+        <Column id="EMP_CODE" type="STRING" size="256"/>
+        <Column id="WORK_INFO_DAYS" type="STRING" size="256"/>
+        <Column id="HIREDATE" type="STRING" size="256"/>
+        <Column id="RETIRE_DATE" type="STRING" size="256"/>
+        <Column id="OCCUPATION" type="STRING" size="256"/>
+        <Column id="EMPLOYMENT_TYPE" type="STRING" size="256"/>
+        <Column id="HOBONG" type="STRING" size="256"/>
+        <Column id="POSITION" type="STRING" size="256"/>
+        <Column id="DEPT_NAME" type="STRING" size="256"/>
+        <Column id="STATUS" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_empEval">
+      <ColumnInfo>
+        <Column id="EMP_CODE" type="STRING" size="256"/>
+        <Column id="EMP_NAME" type="STRING" size="256"/>
+        <Column id="APPLY_DAY" type="STRING" size="256"/>
+        <Column id="DEPT_CODE" type="STRING" size="256"/>
+        <Column id="POSITION_CODE" type="STRING" size="256"/>
+        <Column id="ACHIEVEMENT" type="INT" size="256"/>
+        <Column id="ABILITY" type="INT" size="256"/>
+        <Column id="ATTITUDE" type="INT" size="256"/>
+        <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+        <Column id="GRADE" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_appointment">
+      <ColumnInfo>
+        <Column id="HOSU" type="STRING" size="256"/>
+        <Column id="EMP_CODE" type="STRING" size="256"/>
+        <Column id="DEPT_CHANGE_STATUS" type="STRING" size="256"/>
+        <Column id="POSITION_CHANGE_STATUS" type="STRING" size="256"/>
+        <Column id="HOBONG_CHANGE_STATUS" type="STRING" size="256"/>
+        <Column id="RETIREMENT_STATUS" type="STRING" size="256"/>
+        <Column id="DISPATCH_STATUS" type="STRING" size="256"/>
+        <Column id="LEAVE_STATUS" type="STRING" size="256"/>
+        <Column id="REQUEST_DATE" type="STRING" size="256"/>
+        <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_appointmenttype">
+      <ColumnInfo>
+        <Column id="EMP_CODE" type="STRING" size="256"/>
+        <Column id="HOSU" type="STRING" size="256"/>
+        <Column id="LAST_DEPT" type="STRING" size="256"/>
+        <Column id="NEXT_DEPT" type="STRING" size="256"/>
+        <Column id="APPOINTMENT_DATE" type="DATE" size="256"/>
+        <Column id="DISPATCH_DATE" type="STRING" size="256"/>
+        <Column id="DISPATCH_RETURN_DATE" type="STRING" size="256"/>
+        <Column id="DISPATCH_POSITION" type="STRING" size="256"/>
+        <Column id="LAST_WORKPLACE" type="STRING" size="256"/>
+        <Column id="LAST_REGION" type="STRING" size="256"/>
+        <Column id="LAST_HOBONG" type="STRING" size="256"/>
+        <Column id="NEXT_HOBONG" type="STRING" size="256"/>
+        <Column id="LAST_POSITION" type="STRING" size="256"/>
+        <Column id="NEXT_POSITION" type="STRING" size="256"/>
+        <Column id="RETIREMENT_DATE" type="STRING" size="256"/>
+        <Column id="LEAVE_DATE" type="STRING" size="256"/>
+        <Column id="REINSTATEMENT_DATE" type="STRING" size="256"/>
+        <Column id="LEAVE_TYPE" type="STRING" size="256"/>
+        <Column id="EMP_NAME" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="gds_appointmenttypelist">
+      <ColumnInfo>
+        <Column id="HOSU" type="STRING" size="256"/>
+        <Column id="LAST_DEPT" type="STRING" size="256"/>
+        <Column id="NEXT_DEPT" type="STRING" size="256"/>
+        <Column id="APPOINTMENT_DATE" type="STRING" size="256"/>
+        <Column id="LAST_HOBONG" type="STRING" size="256"/>
+        <Column id="NEXT_HOBONG" type="STRING" size="256"/>
+        <Column id="LAST_POSITION" type="STRING" size="256"/>
+        <Column id="NEXT_POSITION" type="STRING" size="256"/>
+        <Column id="EMP_NAME" type="STRING" size="256"/>
+        <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+      </ColumnInfo>
+      <Rows>
+        <Row/>
+      </Rows>
+    </Dataset>
+  </Datasets>
+  <Variables>
+    <Variable id="g_empCode"/>
+    <Variable id="g_empName"/>
+    <Variable id="g_deptName"/>
+    <Variable id="g_position"/>
+    <Variable id="g_codeNumber"/>
+    <Variable id="g_code1"/>
+    <Variable id="g_code2"/>
+    <Variable id="g_code3"/>
+    <Variable id="g_detailCodeName"/>
+    <Variable id="g_detailCodeNumber"/>
+    <Variable id="g_post"/>
+    <Variable id="g_post_number"/>
+    <Variable id="g_address"/>
+    <Variable id="g_detail_address"/>
+    <Variable id="g_deptCode"/>
+    <Variable id="g_workplaceCode" initval=""/>
+  </Variables>
+  <DataObjects/>
+</AppVariables>

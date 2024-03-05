@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="eduPlan" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280" stepcount="0">
+        <Div id="Div00" taborder="0" text="Div00" left="21" top="17" width="1239" height="613" async="false" accessibilityenable="true">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="9" top="78" width="580" height="315" binddataset="EDU_PLAN">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="107"/>
+                      <Column size="107"/>
+                      <Column size="151"/>
+                      <Column size="107"/>
+                      <Column size="107"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="교육날짜"/>
+                      <Cell col="1" text="교육명"/>
+                      <Cell col="2" text="교육내용"/>
+                      <Cell col="3" text="교육주관"/>
+                      <Cell col="4" text="교육장소"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:EDU_DATE"/>
+                      <Cell col="1" text="bind:EDU_NAME"/>
+                      <Cell col="2" text="bind:EDU_CONTENT"/>
+                      <Cell col="3" text="bind:EDU_HOST"/>
+                      <Cell col="4" text="bind:EDU_PLACE"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="Grid01" taborder="1" left="627" top="78" width="442" height="315"/>
+              <Static id="Static00" taborder="2" text="교육 일정 등록" left="9" top="3" width="570" height="56" onclick="Div00_Static00_onclick" textAlign="center" font="bold 24px/normal &quot;Gulim&quot;"/>
+              <Static id="Static01" taborder="3" text="교육날짜" left="665" top="104" width="94" height="40"/>
+              <Static id="Static01_00" taborder="4" text="교육명" left="665" top="142" width="94" height="40"/>
+              <Static id="Static01_01" taborder="5" text="교육주관" left="665" top="219" width="94" height="40"/>
+              <Static id="Static01_02" taborder="6" text="교육내용" left="665" top="179" width="94" height="40" onclick="Div00_Static01_02_onclick" onchanged="Common_onchanged"/>
+              <TextArea id="TextArea00" taborder="7" left="779" top="141" width="174" height="40" font="15px/normal &quot;Gulim&quot;"/>
+              <TextArea id="TextArea01" taborder="8" left="779" top="180" width="174" height="40" onchanged="Common_onchanged" font="15px/normal &quot;Gulim&quot;"/>
+              <TextArea id="TextArea02" taborder="9" left="779" top="219" width="174" height="40" font="15px/normal &quot;Gulim&quot;"/>
+              <Static id="Static01_01_00" taborder="10" text="교육장소" left="665" top="259" width="94" height="40" onclick="Div00_Static01_01_00_onclick"/>
+              <TextArea id="TextArea03" taborder="11" left="779" top="258" width="174" height="40" font="15px/normal &quot;Gulim&quot;"/>
+              <Calendar id="Calendar00" taborder="12" left="779" top="104" width="174" height="40" editformat="yyyy-MM-dd" tooltiptext="yyyy-MM-dd" dateformat="yyyy-MM-dd" usesoftkeyboard="false" accessibilitydesclevel="child"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button00" taborder="1" text="등록" left="744" top="347" width="93" height="43" onclick="Button00_onclick"/>
+        <Button id="Button00_00" taborder="2" text="취소" left="904" top="347" width="93" height="43"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(this.Div00.form.Calendar00.value);
+	this.EDU_PLAN.setColumn(0,"EDU_DATE",this.form.Calendar00.value);
+	this.EDU_PLAN.setColumn(0,"EDU_NAME",this.form.TextArea00.value);
+	this.EDU_PLAN.setColumn(0,"EDU_CONTENT",this.form.TextArea01.value);
+	this.EDU_PLAN.setColumn(0,"EDU_HOST",this.form.TextArea02.value);
+	this.EDU_PLAN.setColumn(0,"EDU_PLACE",this.form.TextArea03.value);
+	
+	this.transaction("eduPlanID", //
+					 "svcDocumentmgmt::eduPlan", //svc url - prefix id 사용한 것(defalt URL 정보 등록되어 있음, 직접 경로를 작성한 효과) //http://localhost:9090/documentmgmt/condition
+					 "back_eduPlan=EDU_PLAN",//서<-클(저장) - client에서 받을 dataset명, server에서 보내는 dataset명 *TO에 @Dataset(name="gds_condition")
+					 "", //클<-서(조회)
+					 "", //조회 조건 파라미터
+					 "fn_callback"); //문장의 끝 function
+	trace(this.transaction.getUrl);
+};
+
+this.fn_callback = function (trID , ErrorCode , ErrorMsg)
+{
+	
+	if(trID=="eduPlanID"){ //콜백 하나 적고 파라미터로 svcid 넘겨주어 구분자로 사용하는 방식
+		if (ErrorCode!=0){ //성공한 것 0
+			alert(" 등록 실패 : "+ErrorMsg);	
+		}else{
+			nexacro.getApplication().trace("등록 성공");
+		}
+	}	
+}
+	
+	
+	
+]]></Script>
+    <Objects>
+      <Dataset id="EDU_PLAN">
+        <ColumnInfo>
+          <Column id="EDU_DATE" type="STRING" size="255"/>
+          <Column id="EDU_NAME" type="STRING" size="255"/>
+          <Column id="EDU_CONTENT" type="STRING" size="255"/>
+          <Column id="EDU_HOST" type="STRING" size="255"/>
+          <Column id="EDU_PLACE" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

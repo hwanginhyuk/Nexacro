@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="emplog" width="1270" height="930" titletext="New Form" onload="dailyLaborEmpLog_onload">
+    <Layouts>
+      <Layout height="930" width="1270" stepcount="0">
+        <Div id="Div00" taborder="0" text="Div00" left="53.00" top="70" width="1197" height="570">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="0" top="91" width="1177" height="401" binddataset="ds_dailyLaborEmpLog" scrolltype="both" onheadclick="Div00_Grid00_onheadclick" cellsizingtype="col" treeusecheckbox="false" border="1px solid #6092ff" borderRadius="5px">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="45"/>
+                      <Column size="103"/>
+                      <Column size="103"/>
+                      <Column size="101"/>
+                      <Column size="101"/>
+                      <Column size="103"/>
+                      <Column size="103"/>
+                      <Column size="103"/>
+                      <Column size="103"/>
+                      <Column size="103"/>
+                      <Column size="103"/>
+                      <Column size="103"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="1" text="성명"/>
+                      <Cell col="2" text="주민등록번호"/>
+                      <Cell col="3" text="내/외국인"/>
+                      <Cell col="4" text="부서"/>
+                      <Cell col="5" text="프로젝트"/>
+                      <Cell col="6" text="근무시작일"/>
+                      <Cell col="7" text="근무종료일"/>
+                      <Cell col="8" text="정상급여"/>
+                      <Cell col="9" text="연장급여"/>
+                      <Cell col="10" text="야간급여"/>
+                      <Cell col="11" text="전화번호"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="checkboxcontrol" edittype="checkbox" text="bind:CHK"/>
+                      <Cell col="1" text="bind:EMPLOYEE_NAME"/>
+                      <Cell col="2" text="bind:RESIDENTIAL_NUMBER" displaytype="mask" edittype="mask" maskeditformat="######-#######" maskedittype="string"/>
+                      <Cell col="3" text="bind:NATIONALITY"/>
+                      <Cell col="4" text="bind:DEPARTMENT"/>
+                      <Cell col="5" text="bind:PROJECT"/>
+                      <Cell col="6" text="bind:WORK_START_DATE" displaytype="date"/>
+                      <Cell col="7" text="bind:WORK_END_DATE" displaytype="date"/>
+                      <Cell col="8" text="bind:NORMAL_PAY" displaytype="number"/>
+                      <Cell col="9" text="bind:OVERTIME_PAY_RATE" displaytype="number"/>
+                      <Cell col="10" text="bind:NIGHT_PAY_RATE" displaytype="number"/>
+                      <Cell col="11" text="bind:PHONE_NUMBER" maskeditformat="###-####-####" displaytype="mask" edittype="mask" maskedittype="string"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Div id="div_searchCondition" taborder="1" text="Div00" left="0.00" top="11" width="1177" height="70" border="1px solid #6092ff" borderRadius="5px">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00_00" taborder="0" text="부서" left="21.00" top="17" width="100" height="35" font="14px &quot;나눔고딕&quot;" onclick="div_searchCondition_Static00_onclick"/>
+                    <Button id="btn_searchDept" taborder="1" left="270.00" top="17" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" text="" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+                    <Combo id="cmb_project" taborder="2" left="400.00" top="17" width="200" height="35" text=""/>
+                    <Button id="btn_searchProject" taborder="3" left="607.00" top="17" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+                    <Static id="Static02" taborder="4" text="급여유형" left="662.00" top="17" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+                    <Combo id="cmb_normalpaytype" taborder="5" left="735.00" top="17" width="200" height="35"/>
+                    <Button id="btn_searchNormalPayType" taborder="6" left="942.00" top="17" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+                    <Static id="Static01" taborder="7" text="프로젝트" left="328.00" top="17" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+                    <Combo id="cmb_dept" taborder="8" left="60.00" top="17" width="200" height="35" text="" onitemchanged="div_searchCondition_cmb_dept_onitemchanged"/>
+                    <Button id="btn_delEmp" taborder="9" text="삭제" left="1090.00" top="17" width="75" height="35" onclick="btn_delEmp_onclick" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+                    <Button id="btn_search" taborder="10" text="조회" left="996.00" top="17" width="75" height="35" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD" onclick="btn_search_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00" taborder="1" text="일용직 사원이력 관리" left="53.00" top="20" width="187" height="35" font="18px &quot;나눔고딕&quot;" onclick="Static00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs"; // 모달창 라이브러리
+
+var updateEdit;
+var codes = {};
+var modalUrl = "Base::Modal.xfdl";
+
+this.dailyLaborEmpLog_onload = function(obj:nexacro.Form, e:nexacro.LoadEventInfo) {
+
+	this.ds_dailyLaborEmpLog.set_enableevent(false);
+
+    this.transaction(
+        "getDailyLaborEmpLogList",
+        "svcDailyLaboremp::log",
+        "",
+        "ds_dailyLaborEmpLog=ds_dailylaboremplog",
+        "",
+        ""
+    );
+	this.ds_dailyLaborEmpLog.set_enableevent(true);
+};
+
+this.fn_Callback = function(trID, ErrorCode, ErrorMsg)
+{
+if(ErrorCode!=0){
+		alert("실패 : "+ErrorMsg);
+		this.reload();
+	}else{
+		alert(" 성공 ");
+		this.reload();
+	}
+}
+
+this.gfnSetGridCheckAll = function (obj, e)
+{
+	var sChk;
+	var sVal;
+	var objDs;
+	var nCellIdx  = e.cell;
+	var sColumnId;
+	
+	//그리드에 연결된 데이터셋 가져오기
+	objDs  = obj.getBindDataset();
+	
+	//데이터셋에 데이터가 없을 경우 리턴
+	if(objDs.rowcount < 1) return;
+	
+	//전체 체크/체크해제할 컬럼명 구하기
+	sColumnId = obj.getCellProperty("body", nCellIdx, "text");
+	sColumnId = sColumnId.toString().replace("bind:", "");
+		
+	//Head의 현재 Check설정 값 가져오기
+	sVal = obj.getCellProperty("head", nCellIdx, "text");
+
+	//현재 체크상태일 경우
+	if (sVal == "1" )
+	{
+		//Head의 값을 체크해제로 설정
+		obj.setCellProperty("head", nCellIdx, "text", "0");
+		sChk="0";
+	}
+	//현재 체크해제상태일 경우
+	else {
+		//Head의 값을 체크로 설정
+		obj.setCellProperty("head", nCellIdx, "text", "1");
+		sChk="1";
+	}
+	
+	
+	//성능 개선을 위해 이벤트 발생 정지
+	objDs.set_enableevent(false);
+	
+	// Body에 전체 체크/체크해제 상태 적용
+	for(var i=0 ; i< objDs.rowcount ; i++) 
+	{
+		objDs.setColumn(i, sColumnId, sChk);
+	}
+	
+	//성능 개선을 위해 이벤트 발생 재실행
+	objDs.set_enableevent(true);
+};
+
+this.Div00_Grid00_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(e.cell==0)
+	{
+		this.gfnSetGridCheckAll(obj, e);
+	}
+	trace("클릭했음");
+};
+
+this.fn_popupCallback = function(modalId, code)
+{
+	trace("code =" + code)
+	if(code != null){
+		this.codeInfo = code.split(":");
+		
+		switch(modalId){
+			case "dept" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.Div00.form.div_searchCondition.form.cmb_dept
+				);
+				break;
+			case "project" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.Div00.form.div_searchCondition.form.cmb_project
+				);
+				break;
+			case "normalpaytype" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.Div00.form.div_searchCondition.form.cmb_normalpaytype
+				);
+				break;
+		}
+	}
+}
+
+this.fn_createSearchCmbDataset = function(modalId, codeInfo, combo) {
+
+	this.objs = this.objects;
+	for(var i=0; i<this.objs.length; i++){
+		if(this.objs[i].name == "ds_"+modalId){
+			this.removeChild("ds_"+modalId);
+		}
+	}
+	
+	var objDs = new Dataset();
+	
+	objDs.name = "ds_"+modalId;
+	objDs.addColumn("CODE", "string");
+	objDs.addColumn("CODE_NAME", "string");
+	
+	this.addChild("ds_"+modalId, objDs);
+	
+	objDs.addRow();
+	objDs.setColumn(0, "CODE", "all");
+	objDs.setColumn(0, "CODE_NAME", "전체선택");
+	
+	objDs.addRow();
+	
+	objDs.setColumn(1, "CODE", codeInfo[0]); //codeinfo[1]으로 바꾸면 코드입니다.
+	objDs.setColumn(1, "CODE_NAME", codeInfo[0]);
+	combo.setInnerDataset(objDs)
+	combo.set_codecolumn("CODE")
+	combo.set_datacolumn("CODE_NAME")
+	combo.set_text(codeInfo[0]);
+	
+}
+
+this.div_searchCondition_btn_searchWith_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.modalId = obj.id.substr(obj.id.indexOf("search")+6).toLowerCase();
+	this.code = null;
+	switch(this.modalId){
+		case "dept" : this.code = "CO-07"; break;
+		case "project" : this.code = "CO-28"; break;
+		case "normalpaytype" : this.code = "CO-29"; break;
+	}
+	var modalEvent = "fn_popupCallback";
+	if(this.code != null){
+		this.gfnOpen(
+			this.modalId,
+			modalUrl, modalEvent,
+			{code:this.code}
+		);
+	}else{alert("테이블에 데이터 없음")}
+};
+
+this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var searchDept = this.Div00.form.div_searchCondition.form.cmb_dept.value;
+	var searchProject = this.Div00.form.div_searchCondition.form.cmb_project.value;
+	var searchType = this.Div00.form.div_searchCondition.form.cmb_normalpaytype.value;
+	
+	var combinedFilter = "";
+
+	if (searchDept && searchDept !== 'all') {
+		combinedFilter += "DEPARTMENT == '" + searchDept + "'";
+	}
+
+	if (searchProject && searchProject !== 'all') {
+		if (combinedFilter) {
+			combinedFilter += " && ";
+		}
+		combinedFilter += "PROJECT == '" + searchProject + "'";
+	}
+
+	if (searchType && searchType !== 'all') {
+		if (combinedFilter) {
+			combinedFilter += " && ";
+		}
+		combinedFilter += "NORMAL_PAY_TYPE == '" + searchType + "'";
+	}
+
+	this.ds_dailyLaborEmpLog.filter(combinedFilter);
+};
+
+this.btn_delEmp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_dailyLaborEmpLogDelete.clearData();
+	
+	var sourceDs = this.objects["ds_dailyLaborEmpLog"];
+    var targetDs = this.objects["ds_dailyLaborEmpLogDelete"];
+
+    if (sourceDs && targetDs) {
+        var rowCount = sourceDs.getRowCount();
+        for (var i = 0; i < rowCount; i++) {
+            var chkValue = sourceDs.getColumn(i, "CHK");
+            if (chkValue === "1") {
+				var employeeName = sourceDs.getColumn(i, "EMPLOYEE_NAME")
+				var residentalNumber = sourceDs.getColumn(i, "RESIDENTIAL_NUMBER")
+				this.ds_dailyLaborEmpLogDelete.insertRow();
+				this.ds_dailyLaborEmpLogDelete.setColumn(0, "EMPLOYEE_NAME", employeeName);
+				this.ds_dailyLaborEmpLogDelete.setColumn(0, "RESIDENTIAL_NUMBER", residentalNumber);
+            }
+        }
+    }
+	this.ds_dailyLaborEmpLogDelete.set_enableevent(false);
+    this.transaction(
+        "deleteLog",
+        "svcDailyLaboremp::log-delete",
+		"ds_dailylaboremplog=ds_dailyLaborEmpLogDelete",
+        "",
+        "",
+        "fn_Callback"
+    );
+	this.ds_dailyLaborEmpLogDelete.set_enableevent(true);
+};]]></Script>
+    <Objects>
+      <Dataset id="ds_dailyLaborEmpLog">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENTIAL_NUMBER" type="STRING" size="256"/>
+          <Column id="NATIONALITY" type="STRING" size="256"/>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+          <Column id="PROJECT" type="STRING" size="256"/>
+          <Column id="WORK_START_DATE" type="STRING" size="256"/>
+          <Column id="WORK_END_DATE" type="STRING" size="256"/>
+          <Column id="EMPLOYMENT_INSURANCE_ELIGIBILITY" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY_TYPE" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY" type="STRING" size="256"/>
+          <Column id="OVERTIME_PAY_RATE" type="STRING" size="256"/>
+          <Column id="NIGHT_PAY_RATE" type="STRING" size="256"/>
+          <Column id="BANK_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NUMBER" type="STRING" size="256"/>
+          <Column id="ACCOUNT_HOLDER" type="STRING" size="256"/>
+          <Column id="PHONE_NUMBER" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyLaborEmpLogDelete">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENTIAL_NUMBER" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

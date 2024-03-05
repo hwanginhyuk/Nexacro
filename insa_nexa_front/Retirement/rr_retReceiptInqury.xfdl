@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="rr_retReceiptInqury" width="1200" height="650" titletext="New Form" onload="rr_retReceiptInqury_onload">
+    <Layouts>
+      <Layout height="650" width="1200">
+        <Static id="Static00" taborder="0" text="부터" left="204" top="61" width="24" height="14" fittocontents="none" font="12px/normal &quot;나눔고딕&quot;"/>
+        <Static id="Static00_00" taborder="1" text="까지" left="398" top="61" width="24" height="14" onclick="Static00_00_onclick" fittocontents="none" font="12px/normal &quot;나눔고딕&quot;"/>
+        <Calendar id="calen_from" taborder="2" left="49" top="51" width="140" height="35" borderRadius="5px" font="12px/normal &quot;나눔고딕&quot;"/>
+        <Calendar id="calen_to" taborder="3" left="243" top="51" width="140" height="35" borderRadius="5px" font="12px/normal &quot;나눔고딕&quot;"/>
+        <Button id="btn_applyInquiry" taborder="4" text="신청 조회" left="475" top="51" width="100" height="35" onclick="btn_applyInquiry_onclick" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white" borderRadius="5px"/>
+        <Button id="btn_issueRetRece" taborder="5" text="퇴직영수증 발급" left="585" top="51" width="100" height="35" onclick="btn_issueRetRece_onclick" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white" borderRadius="5px"/>
+        <Grid id="grid_retReceInquiry" taborder="6" left="49" top="110" width="640" height="490" binddataset="ds_retPerson" readonly="true" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원명"/>
+                <Cell col="1" text="신청일"/>
+                <Cell col="2" text="부서"/>
+                <Cell col="3" text="사업장"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_NAME"/>
+                <Cell col="1" text="bind:RETIREMENT_DATE"/>
+                <Cell col="2" text="bind:DEPT_NAME"/>
+                <Cell col="3" text="bind:WORKPLACE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.rr_retReceiptInqury_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var currDate = new Date();
+    var year = currDate.getFullYear().toString().padLeft(4, "0");
+    var month = (currDate.getMonth()+1).toString().padLeft(2, "0");
+    var day = currDate.getDate().toString().padLeft(2, "0");
+
+	this.calen_from.set_value(year+month+"01");
+    this.calen_to.set_value(year+month+day);
+};
+
+this.btn_applyInquiry_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(this.calen_from.value);
+	trace(this.calen_to.value);
+	this.transaction("findRetirementReceiptlist",
+					 "svcRetirement::findRetirementReceiptlist",
+					 "",
+					 "ds_retPerson=out_retPerson",
+					 "empCode='"+nexa.gds_emp.getColumn(0,"EMP_CODE")+"' startDate='"+this.calen_from.value+"' endDate='"+this.calen_to.value+"'",
+					 "fn_callback");
+};
+
+this.btn_issueRetRece_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("report",
+					 "svcRetirement::report",
+					 "",
+					 "",
+					 "empCode='"+nexa.gds_emp.getColumn(0,"EMP_CODE")+"'",
+					 "fn_callback");
+};
+
+this.fn_callback = function(svcID, errCD, errMsg){
+	if(svcID == "report"){
+		if(errCD < 0){
+			alert("오류 발생");
+		}else{
+			alert("저장 성공");
+		}
+	}
+}]]></Script>
+    <Objects>
+      <Dataset id="ds_retPerson">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="RETIREMENT_DATE" type="STRING" size="256"/>
+          <Column id="WORKPLACE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

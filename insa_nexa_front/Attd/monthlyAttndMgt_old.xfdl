@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="monthlyAttndMgt" width="1150" height="620" titletext="New Form" onload="monthlyAttndMgt_onload">
+    <Layouts>
+      <Layout height="620" width="1150">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="30" width="1105" height="560" background="#D9E5FF">
+          <Layouts>
+            <Layout>
+              <Static id="title" taborder="2" text="◼월근태관리" left="8" top="0" width="214" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Static id="inquiry" taborder="0" text="조회월" left="288" top="45" width="114" height="45" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Button id="deadlineBtn" taborder="3" text="전체마감하기" left="377" top="100" width="170" height="45" onclick="Div00_00_deadlineBtn_onclick"/>
+              <Button id="deadlineCancellationBtn" taborder="4" text="전체마감취소" left="562" top="100" width="170" height="45" onclick="Div00_00_deadlineCancellationBtn_onclick"/>
+              <Button id="inquiryBtn" taborder="5" text="조회하기" left="647" top="45" width="170" height="45" onclick="Div00_00_inquiryBtn_onclick"/>
+              <Grid id="Grid00" taborder="6" left="23" top="160" width="1062" height="370" binddataset="ds_monthAttenMng">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="65"/>
+                      <Column size="50"/>
+                      <Column size="76"/>
+                      <Column size="80"/>
+                      <Column size="81"/>
+                      <Column size="81"/>
+                      <Column size="83"/>
+                      <Column size="78"/>
+                      <Column size="80"/>
+                      <Column size="81"/>
+                      <Column size="64"/>
+                      <Column size="58"/>
+                      <Column size="63"/>
+                      <Column size="63"/>
+                      <Column size="55"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="34" band="head"/>
+                      <Row size="34"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="사원코드" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="사원명" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="적용연월" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="3" text="기준근무일수" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="4" text="평일근무일수" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="5" text="기준근무시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="6" text="실제근무시간" font="12px/normal &quot;나눔고딕&quot;" displaytype="normal"/>
+                      <Cell col="7" text="연장근무시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="8" text="심야근무시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="9" text="휴일근무일수" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="10" text="지각일수" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="11" text="결근일수" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="12" text="반차일수" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="13" text="휴가일수" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="14" text="마감여부" font="12px/normal &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:EMP_CODE" textAlign="center"/>
+                      <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                      <Cell col="2" text="bind:APPLY_YEAR_MONTH" textAlign="center"/>
+                      <Cell col="3" text="bind:BASIC_WORK_DAYS" textAlign="center"/>
+                      <Cell col="4" text="bind:WEEKDAY_WORK_DAYS" textAlign="center"/>
+                      <Cell col="5" text="bind:BASIC_WORK_HOUR" textAlign="center" displaytype="mask" maskeditmaskchar="##:##" maskeditlimitbymask="decimal" maskeditformat="##:##" edittype="mask"/>
+                      <Cell col="6" text="bind:WORK_HOUR" textAlign="center"/>
+                      <Cell col="7" text="bind:OVER_WORK_HOUR" textAlign="center"/>
+                      <Cell col="8" text="bind:NIGHT_WORK_HOUR" textAlign="center"/>
+                      <Cell col="9" text="bind:HOLIDAY_WORK_DAYS" textAlign="center"/>
+                      <Cell col="10" text="bind:LATE_DAYS" textAlign="center"/>
+                      <Cell col="11" text="bind:ABSENT_DAYS" textAlign="center"/>
+                      <Cell col="12" text="bind:HALF_HOLIDAYS" textAlign="center"/>
+                      <Cell col="13" text="bind:HOLIDAYS" textAlign="center"/>
+                      <Cell col="14" text="bind:FINALIZE_STATUS" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Combo id="Combo00" taborder="1" text="" left="425" top="45" width="195" height="45" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" codecolumn="codecolumn" datacolumn="datacolumn" index="0" readonly="false" innerdataset="innerdataset" value="00">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">2022-1</Col>
+                      <Col id="datacolumn">2022년 1월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-2</Col>
+                      <Col id="datacolumn">2022년 2월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-3</Col>
+                      <Col id="datacolumn">2022년 3월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-4</Col>
+                      <Col id="datacolumn">2022년 4월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-5</Col>
+                      <Col id="datacolumn">2022년 5월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-6</Col>
+                      <Col id="datacolumn">2022년 6월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-7</Col>
+                      <Col id="datacolumn">2022년 7월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-8</Col>
+                      <Col id="datacolumn">2022년 8월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-9</Col>
+                      <Col id="datacolumn">2022년 9월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-10</Col>
+                      <Col id="datacolumn">2022년 10월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-11</Col>
+                      <Col id="datacolumn">2022년 11월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022-12</Col>
+                      <Col id="datacolumn">2022년 12월</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include"Lib::commDate.xjs";
+include"Lib::commString.xjs";
+
+// 조회하기
+this.Div00_00_inquiryBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(this.Div00_00.form.Combo00.value)
+
+	this.transaction("monthSearchID",
+					"svcAttdappvl::month-attnd",
+					"",
+					"ds_monthAttenMng=ds_monthAttenMng",
+					"applyYearMonth='"+this.Div00_00.form.Combo00.value+"'",
+					"fn_callback");
+};
+
+//전체마감
+this.Div00_00_deadlineBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_monthAttenMng.rowcount;
+	for(var i=0; i<count; i++){
+		this.ds_monthAttenMng.setColumn(i,"FINALIZE_STATUS", "Y");
+	}
+	
+	this.transaction("finalizeID",
+					"svcAttdappvl::month-attndPut",
+					"ds_monthAttenMng=ds_monthAttenMng",
+					"",
+					"",
+					"fn_callback");
+};
+
+//마감취소
+
+this.Div00_00_deadlineCancellationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_monthAttenMng.rowcount;
+	for(var i=0; i<count; i++){
+		this.ds_monthAttenMng.setColumn(i,"FINALIZE_STATUS", "N");
+	}
+	
+	this.transaction("finalizeID",
+					 "svcAttdappvl::month-attndPut",
+					 "ds_monthAttenMng=ds_monthAttenMng",
+					 "",
+					 "",
+					 "fn_callback");
+};
+
+this.Div00_00_Calendar00_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_monthAttenMng">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="APPLY_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="WEEKDAY_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="LATE_DAYS" type="STRING" size="256"/>
+          <Column id="ABSENT_DAYS" type="STRING" size="256"/>
+          <Column id="EARLY_LEAVE_DAYS" type="STRING" size="256"/>
+          <Column id="HALF_HOLIDAYS" type="STRING" size="256"/>
+          <Column id="HOLIDAYS" type="STRING" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,1079 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script version="1.0" type="xscript5.1"><![CDATA[/***************************************************************************
+ * Program ID    : commGrid.xjs
+ * Program Name  : Grid 관련함수
+ * Author        : shji
+ * Created Date  : 2019.01.14
+ *
+ * =========================================================================
+ * 수정일자     수정자    내    용
+ * =========================================================================
+ * 2019.01.14   shji      최초작성
+ **************************************************************************/
+
+/***************************************************************************
+ * this.gfn_getCellColId      : 그리드에 해당하는 cell의 bind되어 있는 colid를 리턴
+ * this.gfn_getColumnCellIdx  : 그리드에서 바인드된 컬럼명으로 컬럼 index를 리턴
+ * this.gfn_gridSort          : 그리드의 Sort를 처리한다.
+ * this.gfn_setGridCheckAll   : 그리드 헤드 클릭시 전체체크
+ * this.gfn_exportExcel       : Grid의 내용을 Excel로 Export 한다.
+ * this.gfn_exportExcelMulti  : 여러개의 Grid 내용을 Excel의 하나의 시트에 Export 한다.
+ * this.gfn_setGridCheckAllDs : 그리드 헤드 클릭시 전체체크
+ * this.gfn_clearSortMark     : 그리드의 Sort Mark를 없앤다.
+ * this.gfn_excelFileDialog   : 시스템 기본 FileDialog를 호출한다.
+ * this.gfn_importExcel       : Excel 내용을 Dataset에 Import 한다.
+ * this.gfn_isExcelInstall    : Excel 설치 여부를 확인 한다.
+ * this.gfn_gridCopy          : 그리드에 Data 복사
+ * this.gfn_gridPaste         : 그리드에 Data 붙여넣기
+ * this.gfn_grdSetState       : 그리드의 상태를 보여준다.
+ * this.gfn_dsSetDeleteState  : Dataset의 상태를 삭제로 변경한다.
+ * this.gfn_gridStateDel      : 그리드의 del state를 처리한다.
+ **************************************************************************/
+
+/**
+ * @class 그리드에 해당하는 cell의 bind되어 있는 colid를 리턴
+ * @param obj - Grid Object
+ * @param nCellIdx - 그리드 해당cell index
+ * @return String - cell의 bind되어 있는 colid
+ */
+this.gfn_getCellColId = function(obj:Grid, nCellIdx, sBand)
+{	
+	if (gfn_isNull(sBand)) sBand = "Body";
+	if (gfn_isNull(obj.getCellProperty(sBand, nCellIdx, "text"))) return "";	
+	if (obj.getCellProperty(sBand, nCellIdx, "text").indexOf("bind:") == -1 ) return "";	
+
+    return gfn_trim(gfn_trim(gfn_replace(obj.getCellProperty(sBand, nCellIdx, "text"),"bind:","")));
+}
+
+/**
+ * @class 그리드에서 바인드된 컬럼명으로 컬럼 index를 리턴
+ * @param obj - Grid Object
+ * @param strColID - Column ID
+ * @param sBand - Band 위치
+ * @return Integer - Column Index, 없으면 -1
+ */
+this.gfn_getColumnCellIdx = function(obj:Grid, sCol, sBand) 
+{
+	if (gfn_isNull(sBand)) sBand = "Body";
+	var nCnt = obj.getCellCount(sBand);
+
+	for ( var i = 0; i < nCnt; i++ )
+	{
+		if (sCol == gfn_getCellColId(obj, i, sBand))
+			return i ;
+	}
+	return -1;	
+}
+
+/**
+ * @class 그리드의 Sort를 처리한다.
+ * @param obj - Grid Object
+ * @param e   - GridClickEventInfo
+ * @return 없음
+ */
+var CONST_ASC_MARK  = "▲";
+var CONST_DESC_MARK = "▼";
+
+this.gfn_gridSort = function(obj:Grid, e:GridClickEventInfo)
+{
+	//trace("gfn_gridSort : " + obj.name);
+	// 그리드 멀티소트 초기화
+	obj.dsMultiSort = "";
+
+    var bindDs = eval(obj.binddataset);
+    if (bindDs.rowcount == 0) return false;
+
+    var CONST_SORT_MARK = "";
+
+    var strHeadText  = obj.getCellProperty("body", e.col, "text");
+    strHeadText = gfn_nvl(strHeadText);
+
+    var BodyColId = (strHeadText).toString().split(":");    // e.col : 바인드된 컬럼.
+    if (BodyColId[0] != "bind")
+    {
+        return false;
+    }
+
+    // 체크박스일때 check All
+    var strEditType = obj.getCellProperty("head", e.col, "displaytype");
+    var nCell = e.cell;
+    var nSubCnt = obj.getSubCellCount("head", nCell);
+    //trace("e.col >>> " + e.col + " :: " + strEditType + " ... " + nSubCnt);
+    if (strEditType == "checkbox")
+    {
+		gfn_setGridCheckAll(obj, e);
+		//항상 첫번째 행을 선택하도록 한다.
+		bindDs.selectRow(0);
+		return;
+    }
+
+    for (var i = 0; i < obj.getCellCount("head"); i++)
+    {
+        if (obj.getCellText(-1, i) == "undefined") continue;
+
+        var strHeadText = obj.getCellText(-1, i);
+
+        if (i == e.cell)
+        {
+            if (strHeadText.substr(strHeadText.length - 1) == CONST_ASC_MARK) {
+                obj.setCellProperty( "head", i, "text", strHeadText.substr(0, strHeadText.length - 2) + " " + CONST_DESC_MARK);
+                bindDs.keystring = "S:-" + BodyColId[1];
+            } else if (strHeadText.substr(strHeadText.length - 1) == CONST_DESC_MARK) {
+                obj.setCellProperty( "head", i, "text", strHeadText.substr(0, strHeadText.length - 2));
+                bindDs.keystring = bindDs.keystring.default;
+            } else {
+                obj.setCellProperty( "head", i, "text", strHeadText + " " + CONST_ASC_MARK);
+                bindDs.keystring = "S:+" + BodyColId[1];
+            }
+        } else {    // 정렬표시 삭제
+            if (strHeadText.substr(strHeadText.length - 1) == CONST_ASC_MARK || strHeadText.substr(strHeadText.length - 1) == CONST_DESC_MARK) {
+                obj.setCellProperty( "head", i, "text", strHeadText.substr(0, strHeadText.length - 2));
+            }
+        }
+    }
+
+	//항상 첫번째 행을 선택하도록 한다.
+    bindDs.selectRow(0);
+}
+
+
+/**
+ * @class 그리드 헤드 클릭시 전체체크
+ *            그리드 헤드 예) <Cell displaytype="checkbox" edittype="checkbox" text="expr:0"/> 로 해야함.
+ *            스크립트 예)  gfn_setGridCheckAll(obj,e);
+ * @param obj - Grid Object
+ * @param e   - GridClickEventInfo
+ * @return 없음
+ */
+this.gfn_setGridCheckAll = function(obj:Grid, e:GridClickEventInfo, excludeExpr)
+{
+    if (obj.readonly == true) return;
+
+    var strType;
+    var vl_chk;
+    var strChkVal;
+    var objDS = eval(obj.binddataset);
+    var nCell = e.cell;
+
+    var strVal;
+
+    var nSubCnt = obj.getSubCellCount("head", nCell);
+    // Merge한 셀이 있는 경우
+    if (nSubCnt > 0)
+    {
+        var nChkIdx = -1;
+        for ( var i = 0; i < nSubCnt; i++)
+        {
+            strType = obj.getSubCellProperty("head", e.cell, i, "displaytype");
+
+            if (strType == "checkbox")
+            {
+                nChkIdx =  i;
+                break;
+            }
+        }
+        if (nChkIdx == -1) return;
+
+        // Head셋팅
+        strVal = obj.getSubCellProperty("head", e.cell, nChkIdx, "text");
+        if (gfn_isNull(strVal)) strVal = "0";
+
+        if (strVal == "0")
+        {
+            obj.setSubCellProperty("head", nCell, nChkIdx, "text", '1');
+            vl_chk="1";
+        }
+        else {
+            obj.setSubCellProperty("head", nCell, nChkIdx, "text", '0');
+            vl_chk="0";
+        }
+    }
+    // Merge한 셀이 없는 경우
+    else
+    {
+        strType = obj.getCellProperty("head", nCell, "displaytype");
+        if (strType != "checkbox") return;
+
+        // Head셋팅
+        strVal = obj.getCellProperty("head", e.cell, "text");
+        if (gfn_isNull(strVal)) strVal = "0";
+
+        if (strVal == "0")
+        {
+            obj.setCellProperty("head", nCell, "text", '1');
+            vl_chk = "1";
+        }
+        else {
+            obj.setCellProperty("head", nCell, "text", '0');
+            vl_chk = "0";
+        }
+    }
+
+    strChkVal = gfn_transNullToEmpty(obj.getCellProperty("body", nCell, "text"));
+    strChkVal = strChkVal.replace("bind:", "");
+    // Body셋팅
+    if (strChkVal == "delchk")
+	{
+		objDS.updatecontrol = false;
+ 		for(var i=0 ; i<objDS.getRowCount(); i++)
+ 		{
+ 			// 상태 체크가 해제 되었을 경우 Normal로 변경하여 이미지를 초기화한다.
+ 			objDS.setColumn(i, strChkVal, vl_chk);
+ 			if (vl_chk == 0)
+ 			{
+ 				objDS.setRowType(i, Dataset.ROWTYPE_NORMAL);
+ 			}
+ 		}
+ 		objDS.updatecontrol = true;
+    }
+    else
+    {
+		// 제외조건 체크 ex) menuId:0
+		if (gfn_isNull(excludeExpr))
+		{
+			for(var i=0 ; i<objDS.rowcount; i++)
+			{
+				objDS.setColumn(i, strChkVal, vl_chk);
+			}
+		}
+		else
+		{
+			var arrExcludeExpr = excludeExpr.split(":");
+			//trace(strChkVal + " >>> " + arrExcludeExpr[0] + " ::: " + arrExcludeExpr[1]);
+			for(var i=0 ; i<objDS.rowcount; i++)
+			{
+				// 제외 조건은 제외하고 값을 세팅한다.
+				if (objDS.getColumn(i, arrExcludeExpr[0]) != arrExcludeExpr[1])
+				{
+					objDS.setColumn(i, strChkVal, vl_chk);
+				}
+			}
+		}
+	}
+}
+
+
+/**
+ * @class Grid의 내용을 Excel로 Export 한다.
+ * @param objGrid      - 출력 대상 그리드 오브젝트
+ * @param strSheetName - Sheet 명
+ * @param strFileName  - 파일명 (경로 포함)
+ * @param strColName   - 엑셀 Export시 제외할 칼럼명 목록( ,로 구분)
+ * @param bDirectSave  - 폴더선택여부
+ * @param strExportHead  - ExportItemType이 Grid인 경우 Head, Summay를 출력할지 여부
+ * @return 없음
+ */
+this.gfn_exportExcel = function(objGrid, strSheetName, strFileName, strColName, bDirectSave, strExportHead)
+{
+	if (!gfn_isExcelInstall())
+	{
+		if (!gfn_confirm("컴퓨터에 Excel이 설치된 경우에는 [확인]버튼을 클릭해 주세요.")) return;
+	}
+	
+	// delchk는 기본적으로 엑셀 Export에서 제외
+	if (gfn_isNull(strColName)) strColName = "delchk";
+	else strColName = "delchk," + strColName;
+
+	// 엑셀 File명을 지정하여 저장할지 여부는 true
+	if (gfn_isNull(bDirectSave)) bDirectSave = true;
+
+	if (gfn_isNull(strFileName)) strFileName = gfn_replace(gfn_getFormName(),"/","");
+	if (gfn_isNull(strSheetName)) strSheetName = gfn_replace(gfn_getFormName(),"/","");
+
+    // 엑셀 다운로드시 objGrid에 Dataset등 다른 컴포넌트때문에 오류 발생시 리턴.
+    if (objGrid.toString() != '[object Grid]')
+    {
+        return application.alert('Grid Component가 없습니다.');
+    }
+
+	var nRowTotal = objGrid.rowcount;
+	if (nRowTotal == 0)
+	{
+        gfn_alert("msg.err.grid.nodata");	// 데이타가 없습니다.
+        return;
+	}
+
+	// FileDialog 후 파일명 입력
+	if (!bDirectSave)
+    {
+		var fd = new FileDialog();
+		fd.defaultextention = true;
+		fd.filter = "Excel 통합문서 (*.xlsx)|*.xlsx|Excel 97 - 2003 통합문서 (*.xls)|*.xls";
+
+		var vFile = fd.open("Excel Save", FileDialog.SAVE, "%MyDocument%", strFileName);
+		if (gfn_isNull(vFile))
+		{
+			strFileName = "";
+			return;
+		}
+		else
+		{
+			strFileName = vFile.fullpath;
+		}
+		vFile.close();
+    }
+
+    this.setWaitCursor(true, true);
+
+	// cell,area,multiarea,treecell 등 엑셀 export시 내용 삭제되어 추가
+	var orgSelecttype  = objGrid.selecttype;
+	objGrid.selecttype = "row";
+
+    var objExport = new ExportObject();
+    objExport.exporttype     = ExportTypes.EXCEL;
+    objExport.activepagename = strSheetName;
+    objExport.exportfilename = strFileName;
+
+	// 엑셀 열기
+	if (bDirectSave)
+	{
+		objExport.exportopenmode  = "existopen";    	// 엑셀 다운로드 기능시 파일을 생성하지 않고 띄움
+
+		//제외칼럼이 있을 경우 엑셀 export시 칼럼을 제외시킴
+		if (!gfn_isNull(strColName))	//nIndex_check > -1 ||
+		{
+			//1. 탬프그리드 생성.
+			var objGridTemp = new Grid("grd_temp", 0, 0, 1, 1);
+			this.addChild("grd_temp", objGridTemp);
+
+			//2. 원본 그리드 포맷 카피.
+			objGridTemp.formats 	= objGrid.getFormatString();
+			objGridTemp.formatid    = objGrid.formatid;
+			//trace("objGridTemp.formats0 : " + objGridTemp.formats);
+
+			var sBand;
+			var nIndex;
+			var nCol;
+
+            // displaytype이 normal인 경우 00001 형식의 Data는 0이 삭제되기 때문에 text로 변경한다.
+            var nCnt = objGridTemp.getCellCount("body");
+			for (var j = 0; j < nCnt; j++)
+			{
+				if (gfn_isNull(objGridTemp.getCellProperty("body", j, "displaytype")) ||
+				    objGridTemp.getCellProperty("body", j, "displaytype") == "normal")
+				{
+					//trace("displaytype >>> " + objGridTemp.getCellProperty("head", j, "displaytype"));
+				    objGridTemp.setCellProperty("body", j, "displaytype", "text");
+				}
+			}
+			// text 복사
+			for (var j = 0, iLen = objGrid.getCellCount("head"); j < iLen; j++)
+			{
+				objGridTemp.setCellProperty("head", j, "text", objGrid.getCellProperty("head", j, "text"));
+			}
+			
+			//3-1. 특정 칼럼 제거 : delchk는 기본으로 제거한다.
+			var nIndex_check = -1;
+			if (!gfn_isNull(strColName))
+			{
+				var arrCol = gfn_split(strColName, ",");
+				for(x in arrCol)
+				{
+					// delchk 없는 grid는 제거필드에서 제외
+					nIndex_check = gfn_getColumnCellIdx(objGridTemp, "delchk");
+					//trace("nIndex_check >>> " + nIndex_check);
+					if (nIndex_check == -1 && arrCol[x] == "delchk") continue;
+					
+					//trace("arrCol " + x + " : " + arrCol[x]);
+					nIndex = gfn_getColumnCellIdx(objGridTemp, arrCol[x]);
+					sBand = objGridTemp.getFormatColProperty(nIndex, "band");
+					nCol = objGridTemp.deleteContentsCol(sBand, nIndex, false);
+					//trace(arrCol[x] + " - nIndex : " + nIndex + " - sBand : " + sBand + " - nCol : " + nCol);
+				}
+			}
+
+			//4. Dataset동적 바인딩.
+			objGridTemp.binddataset = objGrid.binddataset;
+			//trace("objGridTemp.formats2 : " + objGridTemp.formats);
+
+			//5. 그리드 visible: false, show()
+			objGridTemp.visible = false;
+			objGridTemp.show();
+			objExport.addExportItem(ExportItemTypes.GRID, objGridTemp, strSheetName + "!A1", strExportHead);
+
+			objExport.export();
+			objExport = null;
+
+			//6. temp그리드 삭제.
+			this.removeChild("grd_temp");
+			objGridTemp.destroy();
+			objGridTemp = null;
+		}
+		// Grid원본 export
+		else
+		{
+			//1. 탬프그리드 생성.
+			var objGridTemp = new Grid("grd_temp", 0, 0, 1, 1);
+			this.addChild("grd_temp", objGridTemp);
+
+			//2. 원본 그리드 포맷 카피.
+			objGridTemp.formats 	= objGrid.getFormatString();
+			objGridTemp.formatid    = objGrid.formatid;
+			
+			// displaytype이 normal인 경우 00001 형식의 Data는 0이 삭제되기 때문에 text로 변경한다.
+			var nCnt = objGridTemp.getCellCount("body");
+			for (var j = 0; j < nCnt; j++)
+			{
+				if (gfn_isNull(objGridTemp.getCellProperty("body", j, "displaytype")) ||
+				    objGridTemp.getCellProperty("body", j, "displaytype") == "normal")
+				{
+					//trace("displaytype >>> " + objGridTemp.getCellProperty("head", j, "displaytype"));
+				    objGridTemp.setCellProperty("body", j, "displaytype", "text");
+				}
+			}
+			// text 복사
+			for (var j = 0, iLen = objGrid.getCellCount("head"); j < iLen; j++)
+			{
+				objGridTemp.setCellProperty("head", j, "text", objGrid.getCellProperty("head", j, "text"));
+			}
+			
+			objGridTemp.binddataset = objGrid.binddataset;
+			objGridTemp.visible = false;
+			objGridTemp.show();
+			
+			objExport.addExportItem(ExportItemTypes.GRID, objGridTemp, strSheetName + "!A1", strExportHead);
+			objExport.export();
+			objExport = null;
+			
+			//3. temp그리드 삭제.
+			this.removeChild("grd_temp");
+			objGridTemp.destroy();
+			objGridTemp = null;
+		}
+
+		// 원래 selecttype으로 변경
+		objGrid.selecttype = orgSelecttype;
+
+		this.setWaitCursor(false, true);
+    }
+    // 엑셀 File 생성
+    else
+    {
+		//1. 탬프그리드 생성.
+		var objGridTemp = new Grid("grd_temp", 0, 0, 1, 1);
+		this.addChild("grd_temp", objGridTemp);
+
+		//2. 원본 그리드 포맷 카피.
+		objGridTemp.formats 	= objGrid.getFormatString();
+		objGridTemp.formatid    = objGrid.formatid;
+		
+		// displaytype이 normal인 경우 00001 형식의 Data는 0이 삭제되기 때문에 text로 변경한다.
+		var nCnt = objGridTemp.getCellCount("body");
+		for (var j = 0; j < nCnt; j++)
+		{
+			if (gfn_isNull(objGridTemp.getCellProperty("body", j, "displaytype")) ||
+				objGridTemp.getCellProperty("body", j, "displaytype") == "normal")
+			{
+				objGridTemp.setCellProperty("body", j, "displaytype", "text");
+			}
+		}
+		// text 복사
+		for (var j = 0, iLen = objGrid.getCellCount("head"); j < iLen; j++)
+		{
+			objGridTemp.setCellProperty("head", j, "text", objGrid.getCellProperty("head", j, "text"));
+		}
+		
+		//3. delchk는 기본으로 제거한다.
+		var nIndex_check = -1;
+		// delchk 없는 grid는 제거필드에서 제외
+		nIndex_check = gfn_getColumnCellIdx(objGridTemp, "delchk");
+		//trace("nIndex_check >>> " + nIndex_check);
+		if (nIndex_check != -1)
+		{
+			//trace("arrCol " + x + " : " + arrCol[x]);
+			nIndex = gfn_getColumnCellIdx(objGridTemp, "delchk");
+			sBand = objGridTemp.getFormatColProperty(nIndex, "band");
+			nCol = objGridTemp.deleteContentsCol(sBand, nIndex, false);
+			//trace(arrCol[x] + " - nIndex : " + nIndex + " - sBand : " + sBand + " - nCol : " + nCol);
+		}
+		
+		objGridTemp.binddataset = objGrid.binddataset;
+		objGridTemp.visible = false;
+		objGridTemp.show();
+		
+		objExport.exportactivemode 	= "noactive";		// 엑셀 익스포트 후 엑셀을 띄울지
+		objExport.exportopenmode    = "overwrite";   	// File이 존재여부에 따른 구분
+		objExport.exportsavemode    = "save";			// Export시 지정된 File로 Save 할지 여부, exportopenmode를 'overwirte'로 지정해야함.
+
+		objExport.addExportItem(ExportItemTypes.GRID, objGridTemp, strSheetName + "!A1", strExportHead);
+		objExport.export();
+
+		// 원래 selecttype으로 변경
+		objGrid.selecttype = orgSelecttype;
+
+		this.setWaitCursor(false, true);
+		objExport = null;
+		
+		//3. temp그리드 삭제.
+		this.removeChild("grd_temp");
+		objGridTemp.destroy();
+		objGridTemp = null;
+
+		gfn_alert("msg.filesave.success", strFileName);	// $1 파일로 저장되었습니다.
+    }
+}
+
+
+/**
+ * @class 여러개의 Grid 내용을 Excel의 하나의 시트에 Export 한다.
+ * @param arrGridList  - 출력 대상 그리드 오브젝트 Array
+ * @param strFileName  - 파일명 (경로 포함)
+ * @param arrSheetName - Sheet 명 오브젝트 Array
+ * @return 없음
+ */
+var lv_VirtualFile  = new VirtualFile();    // 엑셀 파일 저장시 삭제용 VirtualFile Object
+this.gfn_exportExcelMulti = function(arrGridList, strFileName, arrSheetName) 
+{
+	if (!gfn_isExcelInstall())
+	{
+		if (!gfn_confirm("컴퓨터에 Excel이 설치된 경우에는 [확인]버튼을 클릭해 주세요.")) return;
+	}
+	
+	if (arrGridList.length <> arrSheetName.length)
+	{
+		gfn_alert("그리드와 Sheet명의 갯수가 상이 합니다.");
+		return false;
+	}
+	
+	if (gfn_isNull(strFileName)) strFileName = gfn_getFormName();
+	
+    if (lv_VirtualFile != null) 
+    {
+        // 기 존재하는 파일 삭제
+        if (lv_VirtualFile.open(VirtualFile.openRead)) 
+        {
+            VirtualFile.delete(lv_VirtualFile);
+            lv_VirtualFile.close();
+            lv_VirtualFile = null;
+        }
+    }
+    
+    this.setWaitCursor(true, true);
+    
+    // Excel File명에 시간정보를 추가하여 중복되지 않게 한다.
+    var to_day = new Date();
+    strFileName = strFileName + "_" + to_day.getTime();
+    
+    var objExport = new ExportObject();
+    objExport.exporttype = ExportTypes.EXCEL;
+   
+    objExport.exportopenmode = "overwrite";    // 엑셀 다운로드 기능시 파일을 생성하지 않고 띄움
+    objExport.exportfilename = strFileName;
+    
+    var i, j;
+    var objGrid;
+    var objGridTemp = new Array();
+    var objGridTempName = new Array();
+    
+    for(var i = 0; i < arrGridList.length; i++) 
+    {
+		objGridTempName[i] = "grd_temp" + i;
+    }
+    
+    // 여러개의 그리드를 하나씩 addExportItem 한다.
+    for(var i = 0; i < arrGridList.length; i++) 
+    {
+        // 엑셀 다운로드시 objGrid에 Dataset등 다른 컴포넌트때문에 오류 발생시 리턴.
+        if (arrGridList[i].toString() != '[object Grid]')
+        {
+            return gfn_alert('Grid Component가 없습니다.');
+        }
+        
+        objGrid = arrGridList[i];
+        
+		//1. 탬프그리드 생성.
+		objGridTemp[i] = new Grid(objGridTempName[i], 0, 0, 1, 1);
+		this.addChild(objGridTempName[i], objGridTemp[i]);
+
+		//2. 원본 그리드 포맷 카피.
+		objGridTemp[i].formats 	= objGrid.getFormatString();
+		objGridTemp[i].formatid = objGrid.formatid;
+		// displaytype이 normal인 경우 00001 형식의 Data는 0이 삭제되기 때문에 text로 변경한다.
+		var nCnt = objGridTemp[i].getCellCount("body");
+		for (var j = 0; j < nCnt; j++)
+		{
+			if (gfn_isNull(objGridTemp[i].getCellProperty("body", j, "displaytype")) ||
+				objGridTemp[i].getCellProperty("body", j, "displaytype") == "normal")
+			{
+				objGridTemp[i].setCellProperty("body", j, "displaytype", "text");
+			}
+		}
+		// text 복사
+		for (var j = 0, iLen = objGrid.getCellCount("head"); j < iLen; j++)
+		{
+			objGridTemp[i].setCellProperty("head", j, "text", objGrid.getCellProperty("head", j, "text"));
+		}
+		
+		//3. delchk는 기본으로 제거한다.
+		var nIndex_check = -1;
+		// delchk 없는 grid는 제거필드에서 제외
+		nIndex_check = gfn_getColumnCellIdx(objGridTemp[i], "delchk");
+		//trace("nIndex_check >>> " + nIndex_check);
+		if (nIndex_check != -1)
+		{
+			//trace("arrCol " + x + " : " + arrCol[x]);
+			nIndex = gfn_getColumnCellIdx(objGridTemp[i], "delchk");
+			sBand = objGridTemp[i].getFormatColProperty(nIndex, "band");
+			nCol = objGridTemp[i].deleteContentsCol(sBand, nIndex, false);
+			//trace(arrCol[x] + " - nIndex : " + nIndex + " - sBand : " + sBand + " - nCol : " + nCol);
+		}
+		
+		objGridTemp[i].binddataset = objGrid.binddataset;
+		objGridTemp[i].visible = false;
+		objGridTemp[i].show();
+		
+        objExport.activepagename = arrSheetName[i];
+        objExport.addExportItem(ExportItemTypes.GRID, objGridTemp[i], arrSheetName[i] + "!A", "allband");
+    }
+    
+    objExport.export();
+    objExport = null;
+    
+    //3. temp그리드 삭제.
+    for(var i = 0; i < arrGridList.length; i++) 
+    {
+		this.removeChild(objGridTempName[i]);
+ 		objGridTemp[i].destroy();
+ 		objGridTemp[i] = null;
+	}
+	
+	this.setWaitCursor(false, true);
+}
+
+
+/**
+ * @class 그리드 헤드 클릭시 전체체크
+ * @param obj - Grid Object
+ * @param objDS - checkbox에 바인드데이터셋
+ * @param strChkCol - check column id
+ * @param e - GridClickEventInfo
+ * @return 없음
+ *
+ * 예  : 그리드 헤드 예) <Cell displaytype="checkbox" edittype="checkbox" text="expr:0"/> 로 해야함.
+ *           스크립트 예) grdf_SetGridCheckAll(obj,e);
+ */
+this.gfn_setGridCheckAllDs = function(obj:Grid, objDS, strChkCol, e:GridClickEventInfo)
+{
+	if (obj.readonly == true) return;
+
+	var strType;
+	var vl_chk;
+	var strVal;
+	var objDS;
+	var nCell  = e.cell;
+
+	strType = obj.getCellProperty("head", e.cell, "displaytype");
+	if (strType != "checkbox") {
+		return;
+	}
+
+	// Head셋팅
+	strVal = obj.getCellProperty("head", nCell, "text");
+	if (gfn_isNull(strVal)) strVal = "0";
+
+	if (strVal == "0") {
+		obj.setCellProperty("head", nCell, "text", '1');
+		vl_chk="1";
+	} else {
+		obj.setCellProperty("head", nCell, "text", '0');
+		vl_chk="0";
+	}
+
+	// Body셋팅
+	for(var i=0 ; i< objDS.rowcount ; i++){
+		objDS.setColumn(i, strChkCol, vl_chk);
+	}
+}
+
+
+/**
+ * @class 그리드의 Sort Mark를 없앤다.
+ * @param obj - Grid Object
+ * @return 없음
+ */
+this.gfn_clearSortMark = function(obj:Grid)
+{
+    var bindDs = eval(obj.binddataset);
+    bindDs.keystring = "";
+
+    for (var i = 0; i < obj.getCellCount("head"); i++) {
+        if (obj.getCellText(-1, i) == "undefined") continue;
+
+        var strHeadText = obj.getCellText(-1, i);
+
+        if (strHeadText.substr(strHeadText.length - 1) == CONST_ASC_MARK || strHeadText.substr(strHeadText.length - 1) == CONST_DESC_MARK) {
+            obj.setCellProperty("head", i, "text", strHeadText.substr(0, strHeadText.length - 2));
+        }
+    }
+}
+
+/**
+ * @class 시스템 기본 FileDialog를 호출한다.
+ * @param strOpenMode   - Dialog 종류  : LOAD, SAVE, MULTILOAD
+ * @param strFilterFlag - 파일형식필터 : EXCEL, IMAGE
+ * @return String 파일 전체 경로
+ */
+this.gfn_excelFileDialog = function(strOpenMode, strFilterFlag)
+{
+	if (!gfn_isExcelInstall())
+	{
+		if (!gfn_confirm("컴퓨터에 Excel이 설치된 경우에는 [확인]버튼을 클릭해 주세요.")) return;
+	}
+    // 엑셀 다운로드 기능시 파일을 생성하지 않고 띄움
+    if (strOpenMode == "SAVE" && strFilterFlag == "EXCEL")
+    {
+        return "SAVE_EXCEL";
+    }
+
+    lv_VirtualFile = null;
+
+    var v_Title = "";
+    var v_ConstMode = null;
+
+    if (strOpenMode == "SAVE")
+    {
+        v_Title = "Save";
+        v_ConstMode = FileDialog.SAVE;
+    }
+    else if (strOpenMode == "LOAD")
+    {
+        v_Title = "Open";
+        v_ConstMode = FileDialog.LOAD;
+    }
+    else if (strOpenMode == "MULTILOAD")
+    {
+        v_Title = "Open";
+        v_ConstMode = FileDialog.MULTILOAD;
+    }
+
+    var v_Filter = "";
+    if (strFilterFlag == "EXCEL")
+    {
+        v_Filter = "Excel 통합문서 (*.xlsx)|*.xlsx|Excel 97 - 2003 통합문서 (*.xls)|*.xls";
+    }
+    else if (strFilterFlag == "IMAGE")
+    {
+        v_Filter = "image files (*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
+    }
+    else
+    {
+        v_Filter = "All (*.*)|*.*";
+    }
+
+    var fd = new FileDialog();
+
+    fd.defaultextention = true;
+    fd.filter = v_Filter;
+
+    var vFile = fd.open(v_Title, v_ConstMode, "%MyDocument%");
+    var filePath = "";
+
+    if (vFile == undefined || vFile == null)
+    {
+        filePath = "";
+    }
+    else
+    {
+        filePath = vFile.fullpath;
+        vFile.close();
+    }
+
+    if (strOpenMode == "SAVE" && strFilterFlag == "EXCEL")
+    {
+        lv_VirtualFile = vFile;
+    }
+
+    fd = null;
+
+    return filePath;
+}
+
+/**
+ * @class Excel 내용을 Dataset에 Import 한다.
+ * @param strFileName  - 파일명 (경로 포함)
+ * @param strDsName    - Import 대상 Dataset Name
+ * @param nStartRow    - Import 시작 행(사용된 Range 기준, 1 base)
+ * @param bKeepColInfo - Dataset의 컬럼 정보를 유지할지 여부
+ * @return boolean 성공여부
+ */
+this.gfn_importExcel = function(strFileName, strDsName, nStartRow, bKeepColInfo)
+{
+    if (gfn_isNull(strFileName))
+    {
+		strFileName = gfn_excelFileDialog("LOAD", "EXCEL");
+    }
+
+    var objDsImport = eval(strDsName);
+    if (objDsImport == null || objDsImport == undefined) return false;
+    if (nStartRow == null || nStartRow == 0) nStartRow = 1;
+    if (bKeepColInfo == null || bKeepColInfo == undefined) bKeepColInfo = 1;
+
+    var objExt = new ExtCommon();
+    var v_Ret = objExt.excelImportByIndex(strFileName, 0, strDsName, bKeepColInfo, 1, 0, nStartRow);
+    objExt = null;
+
+    return v_Ret;
+}
+
+/**
+ * @class Excel 설치 여부를 확인 한다.
+ */
+this.gfn_isExcelInstall = function()
+{
+	var objExt = new ExtCommon();
+	var strRegValue = objExt.regGetValue("HKEY_CLASSES_ROOT", 'Excel.Application\\CurVer', "", "S");
+
+	if (strRegValue == 0)
+	{
+		gfn_alert("Excel이 설치되지 않습니다.");
+		return false;
+	}
+
+	return true;
+}
+
+
+/**
+ * @class 그리드에 Data 복사
+ * @param obj  - Grid Object
+ * @param e    - KeyEventInfo
+ * @return 없음
+ */
+this.gfn_gridCopy = function(obj, e)
+{
+    //Grid Binddataset
+    var strGrdDsNm = obj.binddataset;
+    var v_clip = "";
+    var strSeperate = "	";
+    for (var i = obj.selectstartrow; i <= obj.selectendrow; i++)
+    {
+        for (var j = obj.selectstartcol; j <= obj.selectendcol; j++)
+        {
+            if (j < obj.selectendcol)
+            {
+                v_clip += obj.getCellValue(i, j) + strSeperate;
+            }
+            else
+            {
+                v_clip += obj.getCellValue(i, j);
+            }
+        }
+        if (i < obj.selectendrow)
+        {
+            v_clip += "\r\n";
+        }
+    }
+    v_clip += "\r\n";
+
+    system.clearClipboard();
+    system.setClipboard("CF_TEXT", v_clip);
+}
+
+
+/**
+ * @class 그리드에 Data 붙여넣기
+ * @param obj  - Grid Object
+ * @param e    - KeyEventInfo
+ * @return 없음
+ */
+this.gfn_gridPaste = function(obj, e)
+{
+	//obj.showEditor(true);
+
+    var bAddrow = true;
+    if (!gfn_isNull(gfn_gridPaste.arguments[2]))
+    {
+        bAddrow = gfn_gridPaste.arguments[2];
+    }
+
+    //Grid Binddataset
+    var strGrdDsNm = obj.binddataset;
+    //cell count
+    var nGrdCellCnt = obj.getCellCount("body");
+    //cell position
+    var nGrdCellPos = obj.getCellPos();
+    //row position
+    var nRowPos = eval(strGrdDsNm).rowposition;
+    //arrText2 index
+    var k = 0;
+    //Dataset rowcount
+    var nDsRowCnt = eval(strGrdDsNm).getRowCount();
+
+    var t_clip = system.getClipboard("CF_UNICODETEXT");
+    var strText = new String(t_clip);
+    var arrText = new Array();
+    var arrText2 = new Array();
+    arrText = strText.split("\r\n");
+    if (nDsRowCnt < (arrText.length + nRowPos -1))
+    {
+        if (bAddrow) {
+        } else {
+			setWaitCursor(false, true);
+            return false;
+        }
+    }
+
+    //복사한 Row만큼
+    for (var i = 0; i < arrText.length; i++)
+    {
+        if (gfn_isNull(arrText[i])) return;
+
+        arrText2 = arrText[i].split("	");
+
+        //기존 dataset갯수보다 많은 경우
+        if (nDsRowCnt <= nRowPos)
+        {
+            var nAddrow = eval(strGrdDsNm).addRow();
+        }
+
+        var nLoopCnt = (nGrdCellPos + arrText2.length);
+        if (nLoopCnt > nGrdCellCnt)
+        {
+            nLoopCnt = nGrdCellCnt;
+        }
+
+        //Dataset setcolumn
+        for(var j = nGrdCellPos; j < nLoopCnt; j++)
+        {
+            obj.setCellPos(j);
+            //obj.showEditor(true);
+            obj.setEditText(arrText2[k]);
+            k++;
+            //obj.showEditor(false);
+
+            //var strColId = gfn_getCellBind(obj, j, "body");
+            //eval(strGrdDsNm).setColumn(nRowPos, strColId, arrText2[k]);
+            //k++;
+        }
+        nRowPos++;
+        eval(strGrdDsNm).rowposition = nRowPos;
+        k = 0;
+    }
+    obj.showEditor(false);
+
+    return true;
+}
+
+
+/**
+ * @class 그리드의 상태를 보여준다.
+ */
+this.gfn_grdSetState = function(nRow)
+{
+	if (getRowType(nRow) == 2) 	// 추가
+	{
+		return "img::ico_insert.png";
+	}
+	else if (getRowType(nRow) == 4) // 수정
+	{
+		return "img::ico_update.png";
+	}
+	else if (getRowType(nRow) == 8) // 삭제
+	{
+		return "img::ico_delete.png";
+	}
+}
+
+/**
+ * @class Dataset의 상태를 삭제로 변경한다.
+ */
+this.gfn_dsSetDeleteState = function(objDS, nRow)
+{
+	var nDsRow = 0;
+	if (gfn_isNull(nRow)) nDsRow = objDS.rowposition;
+	else nDsRow = nRow;
+
+	// delchk 컬럼이 있으면 체크 시킨다.
+	if (!gfn_isNull(objDS.getColumnInfo("delchk")))
+		objDS.setColumn(nDsRow, "delchk", "1");
+		
+	objDS.updatecontrol = false;
+	// 추가한것은 바로 삭제
+	if (objDS.getRowType(nDsRow) == Dataset.ROWTYPE_INSERT)
+	{
+		objDS.deleteRow(nDsRow);
+	}
+	else
+	{
+		objDS.setRowType(nDsRow, Dataset.ROWTYPE_DELETE);
+	}
+	objDS.updatecontrol = true;
+}
+
+/**
+ * @class 그리드의 멀티처리 체크박스 클릭 del state를 처리한다.
+ * @param obj - Grid Object
+ * @param e   - GridClickEventInfo
+ * @return 없음
+ */
+this.gfn_gridStateDel = function(obj:Grid, e:GridClickEventInfo)
+{
+	var bindDs = eval(obj.binddataset);
+    if (bindDs.rowcount == 0) return false;
+
+	var strChkVal = gfn_transNullToEmpty(obj.getCellProperty("body", e.cell, "text"));
+    strChkVal = strChkVal.replace("bind:", "");
+
+    // delchk가 아닌 필드는 return
+    if (strChkVal != "delchk") return;
+
+    if (bindDs.getColumn(bindDs.rowposition, "delchk") == "0")
+    {
+		bindDs.updatecontrol = false;
+		if (bindDs.getRowType(bindDs.rowposition) != Dataset.ROWTYPE_NORMAL)
+		{
+			bindDs.setRowType(bindDs.rowposition, Dataset.ROWTYPE_NORMAL);
+		}
+		bindDs.updatecontrol = true;
+	}
+}
+
+/**
+ * @class 그리드 데이터가 Cell 길이를 초과할 경우 툴팁 처리한다.
+ * @param obj - Grid Object
+ * @param e   - GridMouseEventInfo
+ * @return 없음
+ */
+this.gfn_gridCellTooltip = function(obj:Grid, e:GridMouseEventInfo)
+{
+	if (e.row < 0) {
+		obj.tooltiptext = ""; // tooltiptext 초기화
+		return;
+	}
+	if (e.cell == undefined) {
+		obj.tooltiptext = ""; // tooltiptext 초기화
+		return;
+	}
+	if (e.cell == -1) {
+		obj.tooltiptext = ""; // tooltiptext 초기화
+		return;
+	}
+	if (obj.getCellCount("Body") < e.cell) {
+		obj.tooltiptext = ""; // tooltiptext 초기화
+		return;
+	}
+	if (obj.getCellProperty("body", e.cell, "displaytype") == "checkbox" ||
+		obj.getCellProperty("body", e.cell, "displaytype") == "radio" ||
+		obj.getCellProperty("body", e.cell, "displaytype") == "button" ||
+		obj.getCellProperty("body", e.cell, "displaytype") == "bar" ||
+		obj.getCellProperty("body", e.cell, "displaytype") == "exponent" ||
+		obj.getCellProperty("body", e.cell, "displaytype") == "image") {
+		// new String(obj.getCellProperty("body", e.cell, "text")).toUpperCase().indexOf("EXPR") == -1) {
+		return;
+	}
+	var fontObj = gfn_getObjFont("9", "Arial");
+	try {
+		var sCellTextLen = gfn_getTextSize(obj.getCellText(e.row, e.cell), fontObj);
+		if (sCellTextLen.cx > obj.getRealColSize(e.cell))
+		{
+			obj.tooltiptext = obj.getCellText(e.row, e.cell); // cell의 width 보다 클 경우만 tooltiptext 셋팅.
+		}
+		else
+		{
+			obj.tooltiptext = ""; // tooltiptext 초기화
+		}
+	} catch (e) {
+		obj.tooltiptext = ""; // tooltiptext 초기화
+	}
+}
+]]></Script>

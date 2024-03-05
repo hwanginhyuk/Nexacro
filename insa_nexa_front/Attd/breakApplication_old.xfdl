@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="breakApplication" width="1060" height="620" titletext="New Form" onload="breakApplication_onload">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="30" width="1010" height="560" background="#D9E5FF">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="◼연차신청" left="8" top="0" width="214" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Tab id="Tab00" taborder="1" tabindex="0" left="42" top="85" width="976" height="495">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="연차신청">
+              <Layouts>
+                <Layout>
+                  <Static id="Static00" taborder="0" text="신청자" left="90" top="131" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="empName" taborder="1" left="210" top="128" width="259" height="40" font="18px/normal &quot;나눔고딕&quot;" enable="false"/>
+                  <Static id="Static00_00" taborder="2" text="사유" left="95" top="321" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00" taborder="3" left="211" top="318" width="655" height="40" font="18px/normal &quot;나눔고딕&quot;" onchanged="Tab00_Tabpage1_Edit00_00_onchanged"/>
+                  <Static id="Static00_01" taborder="4" text="부서" left="90" top="179" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00" taborder="5" text="직급" left="490" top="225" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="empPos" taborder="6" left="606" top="223" width="259" height="40" font="18px/normal &quot;나눔고딕&quot;" enable="false"/>
+                  <Static id="Static00_01_00" taborder="7" text="일수" left="90" top="227" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="day" taborder="8" left="210" top="224" width="259" height="40" font="18px/normal &quot;나눔고딕&quot;" enable="false"/>
+                  <Static id="Static00_02" taborder="9" text="연차 구분" left="331" top="44" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="type" taborder="10" left="451" top="41" width="259" height="40" font="18px/normal &quot;나눔고딕&quot;" oneditclick="leaveType_oneditclick"/>
+                  <Static id="Static00_01_01" taborder="11" text="시작일" left="92" top="275" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="sDate" taborder="12" left="212" top="272" width="259" height="40" onchanged="Tab00_Tabpage1_sDate_onchanged"/>
+                  <Static id="Static00_01_01_00" taborder="13" text="종료일" left="489" top="271" width="109" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="eDate" taborder="14" left="606" top="269" width="259" height="40" onchanged="Tab00_Tabpage1_eDate_onchanged"/>
+                  <Edit id="empDept" taborder="15" left="210" top="176" width="259" height="40" font="18px/normal &quot;나눔고딕&quot;" enable="false"/>
+                  <Button id="request" taborder="16" text="신청 " left="356" top="396" width="120" height="49" font="18px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage1_request_onclick"/>
+                  <Button id="cancle" taborder="17" text="취소" left="486" top="396" width="120" height="49" font="18px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage1_cancle_onclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="연차조회">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="132" top="173" width="712" height="283" binddataset="ds_restAttdList" oncellclick="Tab00.Tabpage2.form.Grid00_oncellclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="102"/>
+                          <Column size="102"/>
+                          <Column size="102"/>
+                          <Column size="102"/>
+                          <Column size="102"/>
+                          <Column size="102"/>
+                          <Column size="102"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="연차구분명"/>
+                          <Cell col="1" text="신청일자"/>
+                          <Cell col="2" text="시작일"/>
+                          <Cell col="3" text="종료일"/>
+                          <Cell col="4" text="사유"/>
+                          <Cell col="5" text="승인여부"/>
+                          <Cell col="6" text="반려사유"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:REST_TYPE_NAME"/>
+                          <Cell col="1" text="bind:REQUEST_DATE"/>
+                          <Cell col="2" text="bind:START_DATE"/>
+                          <Cell col="3" text="bind:END_DATE"/>
+                          <Cell col="4" text="bind:CAUSE"/>
+                          <Cell col="5" text="bind:APPLOVAL_STATUS"/>
+                          <Cell col="6" text="bind:REJECT_CAUSE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static00" taborder="1" text="조회범위 선택" left="27" top="48" width="205" height="40" textAlign="center" font="16pt/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="ssDate" taborder="2" left="233" top="46" width="259" height="40" font="16pt/normal &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00" taborder="3" text="부터" left="502" top="48" width="48" height="40" textAlign="center" font="16pt/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="seDate" taborder="4" left="560" top="46" width="259" height="40" font="16pt/normal &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00" taborder="5" text="까지" left="829" top="47" width="48" height="40" textAlign="center" font="16pt/normal &quot;나눔고딕&quot;"/>
+                  <Button id="search" taborder="6" text="조회하기" left="223" top="111" width="120" height="40" font="16pt/normal &quot;나눔고딕&quot;" onclick="Tab00.Tabpage2.form.search_onclick"/>
+                  <Button id="del" taborder="7" text="삭제하기" left="353" top="111" width="120" height="40" font="16pt/normal &quot;나눔고딕&quot;" onclick="delBtn"/>
+                  <Static id="Static00_01" taborder="8" text="구분" left="483" top="111" width="48" height="40" textAlign="center" font="16pt/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="type" taborder="9" left="541" top="113" width="206" height="40" font="16pt/normal &quot;나눔고딕&quot;" oneditclick="leaveType_oneditclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_restAttd">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="REST_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="END_TIME" type="STRING" size="256"/>
+          <Column id="NUMBER_OF_DAYS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_restAttdList">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="REST_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="END_TIME" type="STRING" size="256"/>
+          <Column id="NUMBER_OF_DAYS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_delrestAttd">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="REST_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="END_TIME" type="STRING" size="256"/>
+          <Column id="NUMBER_OF_DAYS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="day" compid="Tab00.Tabpage1.form.day" propid="value" datasetid="ds_restAttd" columnid="NUMBER_OF_DAYS"/>
+      <BindItem id="sdate" compid="Tab00.Tabpage1.form.sDate" propid="value" datasetid="ds_restAttd" columnid="START_DATE"/>
+      <BindItem id="edate" compid="Tab00.Tabpage1.form.eDate" propid="value" datasetid="ds_restAttd" columnid="END_DATE"/>
+      <BindItem id="cause" compid="Tab00.Tabpage1.form.Edit00_00" propid="value" datasetid="ds_restAttd" columnid="CAUSE"/>
+      <BindItem id="type" compid="Tab00.Tabpage1.form.type" propid="value" datasetid="ds_restAttd" columnid="REST_TYPE_NAME"/>
+    </Bind>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs";
+
+var row
+var nexa=nexacro.getApplication();
+
+this.breakApplication_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.Tab00.Tabpage1.form.empName.set_value(nexa.g_empName);
+	this.Tab00.Tabpage1.form.empDept.set_value(nexa.g_deptName);
+	this.Tab00.Tabpage1.form.empPos.set_value(nexa.g_position);
+	
+};
+
+this.leaveType_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+   updateEdit = obj;
+   this.gfnOpen("연차구분", "Base::Modal.xfdl", "callback", {code:"CO-10"});
+}
+
+this.callback = function(codename, code)
+{  
+	this.ds_restAttd.setColumn(0,"REST_TYPE_CODE",code.split(" ")[1]); //근태코드set
+	this.ds_restAttd.setColumn(0,"REST_TYPE_NAME",code.split(" ")[0]); //근태코드set
+	this.ds_restAttd.setColumn(0,"EMP_CODE",nexa.g_empCode);
+    updateEdit.set_value(code.split(" ")[0]);
+}
+
+this.countDay = function(){
+if(this.Tab00.Tabpage1.form.sDate.value<=this.Tab00.Tabpage1.form.eDate.value){
+	var fromDate = new Date();
+    var toDate = new Date();
+    var calDate;
+    var day = 1000*60*60*24;
+    
+    fromDate.setFullYear(this.Tab00.Tabpage1.form.sDate.getYear());
+    fromDate.setMonth(this.Tab00.Tabpage1.form.sDate.getMonth()-1);
+    fromDate.setDate(this.Tab00.Tabpage1.form.sDate.getDay());
+    
+    toDate.setFullYear(this.Tab00.Tabpage1.form.eDate.getYear());
+    toDate.setMonth(this.Tab00.Tabpage1.form.eDate.getMonth()-1);
+    toDate.setDate(this.Tab00.Tabpage1.form.eDate.getDay());
+    
+    calDate = fromDate.getTime() - toDate.getTime();
+    
+    this.Tab00.Tabpage1.form.day.set_value(Math.abs(calDate/day)+1);
+	}else{
+	this.Tab00.Tabpage1.form.day.set_value(null);
+	}
+}
+
+
+this.Tab00_Tabpage1_sDate_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	this.countDay();
+};
+
+this.Tab00_Tabpage1_eDate_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	this.countDay();
+};
+
+this.Tab00_Tabpage1_request_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var time = new nexacro.Date();
+		   var nowTime = time.toString();
+		   this.ds_restAttd.setColumn(0,"REQUEST_DATE",nowTime.substring(0,8));
+		   this.ds_restAttd.setColumn(0,"APPLOVAL_STATUS","승인대기");
+		   this.transaction(
+               "registleave"
+               ,"svcAttdmgmt::excused-attnd-create"
+               ,"gds_restAttd=ds_restAttd"
+               ,""
+               ,""
+               ,"fn_callback"
+	)
+};
+
+this.fn_callback = function (trID, errorCode, errorMsg)
+{
+		if(trID == "delAttn"){
+		if(errorCode < 0){
+			return this.alert("삭제 실패 : "+ errorMsg );
+		}
+		this.alert("삭제완료!");
+		this.searchAttnd();
+		row=null;
+	}
+		if(trID == "registleave"){
+		if(errorCode < 0){
+			return this.alert("등록 실패 : "+ errorMsg );
+		}
+		this.alert("등록완료!");
+	}
+}
+
+this.Tab00.Tabpage2.form.search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.Tab00.Tabpage2.form.ssDate.value==null || this.Tab00.Tabpage2.form.seDate.value==null){
+		this.alert("일자를 입력해주세요.");
+		return
+	}
+	if(this.Tab00.Tabpage2.form.type.value==null){
+		this.alert("근태구분을 입력해주세요.");
+		return
+	}
+	row=null;
+	this.searchAttnd();
+};
+
+this.searchAttnd = function(){
+		this.transaction(
+               "searchAttn"
+               ,"svcAttdmgmt::excused-attnd2"
+               ,""
+               ,"ds_restAttdList=gds_restAttd"
+               ,"empCode="+this.ds_restAttd.getColumn(0,"EMP_CODE")+
+				" startDate="+this.Tab00.Tabpage2.form.ssDate.value+
+				" endDate="+this.Tab00.Tabpage2.form.seDate.value+
+				" code="+this.ds_restAttd.getColumn(0,"REST_TYPE_CODE")
+               ,"fn_callback"
+		)
+}
+
+this.delBtn = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	   if(row==null){
+			this.alert("삭제할 항목을 선택해주세요.")
+			return
+	   }
+	   var rRow = this.Tab00.Tabpage2.form.Grid00.getDatasetRow(row)
+	   trace(rRow)
+	   var nColIdx = 0
+	   while(nColIdx<14){
+		this.ds_delrestAttd.setColumn(0,this.ds_restAttdList.getColID(nColIdx),this.ds_restAttdList.getColumn(rRow,nColIdx));
+		nColIdx++
+		}
+		
+	this.transaction(
+               "delAttn"
+               ,"svcAttdmgmt::excused-attnd-elimination"
+               ,"gds_restAttd=ds_delrestAttd"
+               ,""
+               ,""
+               ,"fn_callback"
+		)
+};
+
+this.Tab00.Tabpage2.form.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	row = e.row
+};
+
+this.fn_callback = function (trID, errorCode, errorMsg)
+{
+		if(trID == "delAttn"){
+		if(errorCode < 0){
+			return this.alert("삭제 실패 : "+ errorMsg );
+		}
+		this.alert("삭제완료!");
+		this.searchAttnd();
+		row=null;
+	}
+		if(trID == "registleave"){
+		if(errorCode < 0){
+			return this.alert("등록 실패 : "+ errorMsg );
+		}
+		this.alert("연차 등록 성공!");
+		this.Tab00.Tabpage1.form.sDate.set_value(null)
+		this.Tab00.Tabpage1.form.eDate.set_value(null)
+		this.Tab00.Tabpage1.form.Edit00_00.set_value(null)
+		this.Tab00.Tabpage1.form.type.set_value(null)
+	}
+}
+
+this.Tab00_Tabpage1_cancle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Tab00.Tabpage1.form.type.set_value(null);
+	this.Tab00.Tabpage1.form.sDate.set_value(null);
+	this.Tab00.Tabpage1.form.eDate.set_value(null);
+	this.Tab00.Tabpage1.form.Edit00_00.set_value(null);
+	this.Tab00.Tabpage1.form.day.set_value(null);
+};
+]]></Script>
+  </Form>
+</FDL>

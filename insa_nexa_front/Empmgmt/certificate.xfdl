@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="certificate" width="1060" height="620" titletext="New Form" onload="employment_onload">
+    <Layouts>
+      <Layout height="620" width="1060" stepcount="2">
+        <Div id="Div00_00" taborder="0" text="" left="0" top="1" width="1060" height="610">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="   ◼ 재직증명서 신청/조회" left="10" top="10" width="290" height="65" textAlign="left" font="bold 18px/normal &quot;나눔고딕&quot;"/>
+              <Tab id="Tab00" taborder="0" tabindex="0" left="55" top="95" width="945" height="490">
+                <Tabpages>
+                  <Tabpage id="Tabpage1" text="재직증명서신청">
+                    <Layouts>
+                      <Layout>
+                        <Static id="empName" taborder="0" text="사원명" left="-20" top="41" width="105" height="14" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                        <Edit id="empNameEdit" taborder="1" left="70" top="34" width="214" height="30" textAlign="center" readonly="true"/>
+                        <Static id="dept" taborder="2" text="부  서" left="313" top="45" width="105" height="14" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                        <Edit id="deptEdit" taborder="3" left="403" top="36" width="214" height="30" textAlign="center" readonly="true"/>
+                        <Static id="applicationDate" taborder="4" text="신청일" left="-20" top="87" width="105" height="14" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                        <Static id="useDate" taborder="5" text="사용일" left="313" top="78" width="105" height="30" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                        <Static id="purpose" taborder="6" text="용   도" left="-20" top="133" width="105" height="14" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                        <Edit id="purposeEdit" taborder="7" left="70" top="122" width="214" height="30" oneditclick="Div00_00_Tab00_Tabpage1_purposeEdit_oneditclick" textAlign="center" value="-- 선택하세요 -- " text="-- 선택하세요 -- "/>
+                        <Static id="etc" taborder="8" text="비   고" left="313" top="128" width="105" height="14" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+                        <Edit id="etcEdit" taborder="9" left="403" top="122" width="214" height="30" onclick="Common_onclick"/>
+                        <Calendar id="applicationDateCal" taborder="10" left="70" top="78" width="214" height="30" readonly="true"/>
+                        <Button id="applicationBtn" taborder="11" text="재직증명서 신청" left="278" top="204" width="134" height="40" onclick="Div00_00_Tab00_Tabpage1_applicationBtn_onclick"/>
+                        <Calendar id="useDateCal" taborder="12" left="403" top="78" width="214" height="30" onchanged="Div00_00_Tab00_Tabpage1_useDateCal_onchanged"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="Tabpage2" text="재직증명서조회">
+                    <Layouts>
+                      <Layout>
+                        <Calendar id="fromApplicationCal" taborder="9" left="91" top="25" width="134" height="29" onchanged="Div00_00_Tab00_Tabpage2_fromApplicationCal_onchanged"/>
+                        <Static id="applicationDate" taborder="0" text="신청일자" left="4" top="19" height="36" textAlign="center" font="15px/normal &quot;나눔고딕&quot;" width="72"/>
+                        <Calendar id="afterApplicationCal" taborder="1" left="263" top="25" width="134" height="29"/>
+                        <Static id="fromApplication" taborder="2" text="~" left="225" top="21" height="28" textAlign="center" font="24px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage2_fromApplication_onclick" right="680"/>
+                        <Button id="applicationInquiry" taborder="3" text="조회" left="410" top="25" width="62" height="31" onclick="Div00_00_Tab00_Tabpage2_applicationInquiry_onclick"/>
+                        <Button id="applicationCancellation" taborder="4" text="신청 취소" left="695" top="70" width="90" height="32" onclick="Div00_00_Tab00_Tabpage2_applicationCancellation_onclick"/>
+                        <Button id="issuance" taborder="5" text="재직증명서 발급" left="805" top="70" width="140" height="33" onclick="Div00_00_Tab00_Tabpage2_issuance_onclick"/>
+                        <Edit id="emailTransmissionEdit" taborder="6" left="91" top="71" width="304" height="29"/>
+                        <Button id="emailTransmissionBtn" taborder="7" text="전송" left="410" top="70" width="62" height="30" onclick="Div00_00_Tab00_Tabpage2_emailTransmissionBtn_onclick"/>
+                        <Grid id="Grid00" taborder="8" left="5" top="125" width="940" height="326" autofittype="col" binddataset="ds_employmentList" oncellclick="Div00_00_Tab00_Tabpage2_Grid00_oncellclick">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="37" band="head"/>
+                                <Row size="37"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell/>
+                                <Cell col="1" text="신청일" font="12px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="2" text="사용일" font="12px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="3" text="승인여부" font="12px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="4" text="반려사유" font="12px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="5" text="비고" font="12px/normal &quot;나눔고딕&quot;"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell displaytype="checkboxcontrol" text="bind:STATUS" edittype="checkbox"/>
+                                <Cell col="1" text="bind:REQUEST_DATE" textAlign="center"/>
+                                <Cell col="2" text="bind:USE_DATE" textAlign="center"/>
+                                <Cell col="3" text="bind:APPROVAL_STATUS" textAlign="center"/>
+                                <Cell col="4" text="bind:REJECT_CAUSE" textAlign="center"/>
+                                <Cell col="5" text="bind:ETC" textAlign="center"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Static id="applicationDate00" taborder="10" text="메일전송" left="4" top="65" height="36" textAlign="center" font="15px/normal &quot;나눔고딕&quot;" width="72" onclick="Div00_00_Tab00_Tabpage2_applicationDate00_onclick"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div00_00_00" taborder="1" text="" left="10" top="1" width="1060" height="610" positionstep="1">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="   ◼ 재직증명서 신청/조회" left="10" top="10" width="290" height="65" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Tab id="Tab00" taborder="0" tabindex="0" left="55" top="95" width="945" height="490">
+                <Tabpages>
+                  <Tabpage id="Tabpage1" text="재직증명서신청">
+                    <Layouts>
+                      <Layout>
+                        <Static id="empName" taborder="0" text="사원명" left="40" top="111" width="109" height="51" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                        <Edit id="empNameEdit" taborder="1" left="160" top="108" width="259" height="53" font="18px/normal &quot;나눔고딕&quot;" textAlign="center" readonly="true"/>
+                        <Static id="dept" taborder="2" text="부서" left="440" top="110" width="109" height="51" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                        <Edit id="deptEdit" taborder="3" left="556" top="108" width="259" height="53" font="18px/normal &quot;나눔고딕&quot;" textAlign="center" readonly="true"/>
+                        <Static id="applicationDate" taborder="4" text="신청일" left="40" top="177" width="109" height="51" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                        <Static id="useDate" taborder="5" text="사용일" left="440" top="176" width="109" height="51" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                        <Static id="purpose" taborder="6" text="용도" left="40" top="243" width="109" height="51" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                        <Edit id="purposeEdit" taborder="7" left="160" top="244" width="259" height="53" font="18px/normal &quot;나눔고딕&quot;" oneditclick="Div00_00_Tab00_Tabpage1_purposeEdit_oneditclick" textAlign="center"/>
+                        <Static id="etc" taborder="8" text="비고" left="440" top="242" width="109" height="51" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+                        <Edit id="etcEdit" taborder="9" left="556" top="244" width="259" height="53" font="18px/normal &quot;나눔고딕&quot;" onclick="Common_onclick"/>
+                        <Calendar id="applicationDateCal" taborder="10" left="160" top="176" width="259" height="53" readonly="true"/>
+                        <Button id="applicationBtn" taborder="11" text="재직증명서 신청" left="324" top="341" width="296" height="60" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage1_applicationBtn_onclick"/>
+                        <Calendar id="useDateCal" taborder="12" left="556" top="176" width="259" height="53" onchanged="Div00_00_Tab00_Tabpage1_useDateCal_onchanged"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="Tabpage2" text="재직증명서조회">
+                    <Layouts>
+                      <Layout>
+                        <Calendar id="fromApplicationCal" taborder="9" left="91" top="25" width="134" height="29" onchanged="Div00_00_Tab00_Tabpage2_fromApplicationCal_onchanged"/>
+                        <Static id="applicationDate" taborder="0" text="신청일자" left="4" top="19" height="36" textAlign="center" font="15px/normal &quot;나눔고딕&quot;" width="72"/>
+                        <Calendar id="afterApplicationCal" taborder="1" left="263" top="25" width="134" height="29"/>
+                        <Static id="fromApplication" taborder="2" text="~" left="225" top="21" height="28" textAlign="center" font="24px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage2_fromApplication_onclick" right="680"/>
+                        <Button id="applicationInquiry" taborder="3" text="조회" left="410" top="25" width="62" height="31" onclick="Div00_00_Tab00_Tabpage2_applicationInquiry_onclick"/>
+                        <Button id="applicationCancellation" taborder="4" text="신청 취소" left="695" top="70" width="90" height="32" onclick="Div00_00_Tab00_Tabpage2_applicationCancellation_onclick"/>
+                        <Button id="issuance" taborder="5" text="재직증명서 발급" left="805" top="70" width="140" height="33" onclick="Div00_00_Tab00_Tabpage2_issuance_onclick"/>
+                        <Edit id="emailTransmissionEdit" taborder="6" left="91" top="71" width="304" height="29"/>
+                        <Button id="emailTransmissionBtn" taborder="7" text="전송" left="410" top="70" width="62" height="30" onclick="Div00_00_Tab00_Tabpage2_emailTransmissionBtn_onclick"/>
+                        <Grid id="Grid00" taborder="8" left="5" top="125" width="940" height="326" autofittype="col" binddataset="ds_employmentList" oncellclick="Div00_00_Tab00_Tabpage2_Grid00_oncellclick">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                                <Column size="141"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="37" band="head"/>
+                                <Row size="37"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell/>
+                                <Cell col="1" text="신청일" font="12px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="2" text="사용일" font="12px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="3" text="승인여부" font="12px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="4" text="반려사유" font="12px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="5" text="비고" font="12px/normal &quot;나눔고딕&quot;"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell displaytype="checkboxcontrol" text="bind:STATUS" edittype="checkbox"/>
+                                <Cell col="1" text="bind:REQUEST_DATE" textAlign="center"/>
+                                <Cell col="2" text="bind:USE_DATE" textAlign="center"/>
+                                <Cell col="3" text="bind:APPROVAL_STATUS" textAlign="center"/>
+                                <Cell col="4" text="bind:REJECT_CAUSE" textAlign="center"/>
+                                <Cell col="5" text="bind:ETC" textAlign="center"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Static id="applicationDate00" taborder="10" text="메일전송" left="4" top="65" height="36" textAlign="center" font="15px/normal &quot;나눔고딕&quot;" width="72" onclick="Div00_00_Tab00_Tabpage2_applicationDate00_onclick"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commDate.xjs";
+include "Lib::commonOpen.xjs";
+include "Lib::commString.xjs";
+
+var nexa = nexacro.getApplication();
+var updateEdit;
+//로딩시 
+this.employment_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var firstDay=this.gfn_todayFirst();
+	var today=this.gfn_today(); 
+	this.Div00_00.form.Tab00.Tabpage1.form.empNameEdit.set_value(nexa.g_empName); //사원명
+	this.Div00_00.form.Tab00.Tabpage1.form.deptEdit.set_value(nexa.g_deptName); //부서
+	this.ds_employment.setColumn(0,"EMP_CODE",nexa.g_empCode);
+	
+	this.Div00_00.form.Tab00.Tabpage1.form.applicationDateCal.set_value(today); //신청일 
+	
+	this.Tab.page2.form.search_startDate.set_value(firstDay); //신청일자
+	this.Tab.page2.form.search_endDate.set_value(today); //신청일자
+};
+
+//사용일
+this.Div00_00_Tab00_Tabpage1_useDateCal_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	var useData=this.Div00_00.form.Tab00.Tabpage1.form.useDateCal.value;
+	/*this.Div00_00.form.Tab00.Tabpage1.form.applicationDateCal.set_value(useData); //신청일 */
+};
+
+//용도
+this.Div00_00_Tab00_Tabpage1_purposeEdit_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("purpose", "Base::Modal.xfdl", "callback", {code:"CO-16"});	
+}
+
+//용도 콜백
+this.callback = function(codename, code)
+{
+	var codeName = code.split(":")[0];
+	var codeNumber = code.split(":")[1];
+	updateEdit.set_value(codeName);
+	this.ds_employment.setColumn(0,"USAGE_CODE",codeNumber); //근태코드set
+}
+
+//신청버튼
+this.Div00_00_Tab00_Tabpage1_applicationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_employment.setColumn(0,"APPROVAL_STATUS","승인대기"); // 승인여부
+	this.ds_employment.setColumn(0,"REJECT_CAUSE"," "); // 반려사유
+	/*this.ds_employment.setColumn(0,"STATUS","normal");*/
+	var useDate=this.Div00_00.form.Tab00.Tabpage1.form.useDateCal.value;
+	var purpose=this.Div00_00.form.Tab00.Tabpage1.form.purposeEdit.value;
+	var etc = this.Div00_00.form.Tab00.Tabpage1.form.etcEdit.value;
+	
+	if(useDate==undefined){
+		alert("사용일을 정확히 입력해 주세요.");
+		return;
+	}if(purpose==undefined){
+		alert("용도를 선택하여주세요.");
+		return;
+	}else{
+		this.transaction("employmentID",
+						 "svcDocumentmgmt::certificate",
+						 "ds_CertificateBean=ds_employment",
+						 "",
+						 "",
+						 "fn_callback");
+		
+		}	
+};
+
+this.fn_callback = function(trID, ErrorCode, ErrorMsg)
+{
+	if(trID=="employmentID"){
+		if(ErrorCode!=0){
+			alert("재직증명서 신청 실패 : "+ErrorMsg);
+		}else{ //성공시
+			alert(" 재직증명서 신청 완료 ");
+			this.reload(); //현재의 FDL 화면을 다시 로딩하는 메소드method
+		}
+	}
+	
+	if(trID=="deleteID"){
+		if(ErrorCode!=0){
+			alert("삭제실패 : "+ErrorMsg);
+		}else{ //성공시
+			alert(" 삭제완료 ");
+			this.reload(); //현재의 FDL 화면을 다시 로딩하는 메소드method
+		}
+	}
+}
+//==========================================================  tab2  ==============================================================
+
+//신청조회
+this.Div00_00_Tab00_Tabpage2_applicationInquiry_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("searchID",
+					 "svcDocumentmgmt::certificatecheck",
+					 "",
+					 "ds_employmentList=ds_CertificateBean",
+					 "empCode='"+nexa.g_empCode+"' startDate='"+this.Div00_00.form.Tab00.Tabpage2.form.fromApplicationCal.value+"' endDate='"+this.Div00_00.form.Tab00.Tabpage2.form.afterApplicationCal.value+"'",
+					 "");
+}
+
+//그리드 클릭
+this.Div00_00_Tab00_Tabpage2_Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.ds_employmentList.addColumn("STATUS","STRING");
+	
+	for(var i=0; i<this.ds_employmentList.rowcount; i++){
+		this.ds_employmentList.setColumn(i,"STATUS",undefined);
+	}
+	
+	this.ds_employmentList.setColumn(this.ds_employmentList.rowposition,"STATUS","Choice");
+}
+
+//삭제하기
+this.Div00_00_Tab00_Tabpage2_applicationCancellation_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(confirm(" 삭제 하시겠습니까? ")){
+		this.transaction("deleteID",
+						 "svcDocumentmgmt::applicationcancellation",
+						 "ds_CertificateBean=ds_employmentList:u",
+						 "",
+						 "",
+						 "fn_callback");
+	}
+};
+
+//승인된 재직증명서 발급
+this.Div00_00_Tab00_Tabpage2_issuance_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var approvalStatus = this.ds_employmentList.getColumn(this.ds_employmentList.rowposition,"APPROVAL_STATUS");
+	var empCode = this.ds_employmentList.getColumn(this.ds_employmentList.rowposition,"EMP_CODE");
+	var usageName = this.ds_employmentList.getColumn(this.ds_employmentList.rowposition,"USAGE_NAME");
+	var requestDate = this.ds_employmentList.getColumn(this.ds_employmentList.rowposition,"REQUEST_DATE");
+	var useDate = this.ds_employmentList.getColumn(this.ds_employmentList.rowposition,"USE_DATE");
+	
+	
+	
+	if(confirm(" 발급하시겠습니까? ")){
+		if(approvalStatus=="승인"){
+			this.gfnOpen("issuance", "Comm::certificateForm.xfdl", "callback", {empCode:empCode, usage:usageName,requestDay:requestDate,useDay:useDate});
+		}else{
+			confirm("승인된 증명서가 아닙니다.");
+		}
+	}
+}
+this.Div00_00_Tab00_Tabpage2_fromApplicationCal_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	
+};
+
+this.Div00_00_Tab00_Tabpage2_applicationDate00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div00_00_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00_00.form.Tab00.Tabpage1.form.applicationDateCal" propid="value" datasetid="ds_employment" columnid="REQUEST_DATE"/>
+      <BindItem id="item2" compid="Div00_00.form.Tab00.Tabpage1.form.useDateCal" propid="value" datasetid="ds_employment" columnid="USE_DATE"/>
+      <BindItem id="item3" compid="Div00_00.form.Tab00.Tabpage1.form.etcEdit" propid="value" datasetid="ds_employment" columnid="ETC"/>
+      <BindItem id="item1" compid="Div00_00_00.form.Tab00.Tabpage1.form.applicationDateCal" propid="value" datasetid="ds_employment" columnid="REQUEST_DATE"/>
+      <BindItem id="item4" compid="Div00_00_00.form.Tab00.Tabpage1.form.useDateCal" propid="value" datasetid="ds_employment" columnid="USE_DATE"/>
+      <BindItem id="item5" compid="Div00_00_00.form.Tab00.Tabpage1.form.etcEdit" propid="value" datasetid="ds_employment" columnid="ETC"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_employmentList">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="USE_DATE" type="STRING" size="256"/>
+          <Column id="USAGE_CODE" type="STRING" size="256"/>
+          <Column id="USAGE_NAME" type="STRING" size="256"/>
+          <Column id="ETC" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_employment">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="USE_DATE" type="STRING" size="256"/>
+          <Column id="USAGE_CODE" type="STRING" size="256"/>
+          <Column id="ETC" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

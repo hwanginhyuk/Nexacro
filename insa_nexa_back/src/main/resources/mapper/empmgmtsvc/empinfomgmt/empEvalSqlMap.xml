@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.insa.empmgmtsvc.empinfomgmt.mapper.EmpEvalMapper">
+
+  
+  <resultMap type="kr.co.seoulit.insa.empmgmtsvc.empinfomgmt.to.EmpEvalTO" id="empEvalResult">
+    <result property="empCode" column="EMP_CODE" />
+    <result property="empName" column="EMP_NAME" />
+    <result property="applyDay" column="APPLY_DAY" />
+    <result property="deptCode" column="DEPT_CODE" />
+    <result property="positionCode" column="POSITION_CODE" />
+    <result property="achievement" column="ACHIEVEMENT" />
+    <result property="ability" column="ABILITY" />
+    <result property="attitude" column="ATTITUDE" />
+    <result property="approvalStatus" column="APPROVAL_STATUS" />
+    <result property="grade" column="GRADE" />
+  </resultMap>
+
+  <resultMap type="kr.co.seoulit.insa.empmgmtsvc.empinfomgmt.to.EmpEvalTO" id="empEvalDeptResult">
+    <result property="empCode" column="EMP_CODE" />
+    <result property="empName" column="EMP_NAME" />
+    <result property="applyDay" column="APPLY_DAY" />
+    <result property="deptCode" column="DEPT_CODE" />
+    <result property="positionCode" column="POSITION_CODE" />
+    <result property="achievement" column="ACHIEVEMENT" />
+    <result property="ability" column="ABILITY" />
+    <result property="attitude" column="ATTITUDE" />
+    <result property="approvalStatus" column="APPROVAL_STATUS" />
+    <result property="grade" column="GRADE" />
+  </resultMap>
+
+    <select id="selectEmpEval6" resultType="java.lang.String">
+        select EMP_CODE from EMP_EVAL
+    </select>
+
+    <select id="selectEmpEval4" resultMap="empEvalResult">
+        select *from EMP_EVAL
+        WHERE APPLY_DAY = #{applyDay}
+    </select>
+  
+  <select id="selectEmpEval" resultMap="empEvalResult">
+  	select * from EMP_EVAL
+    WHERE DEPT_CODE  = #{deptCode}
+  </select>
+
+    <select id="selectEmpEval7" resultMap="empEvalResult">
+        select * from EMP_EVAL
+        WHERE DEPT_CODE  = #{deptCode}
+    </select>
+
+
+
+    <select id="selectEmpEval2" resultMap="empEvalResult">
+        select * from EMP_EVAL
+    </select>
+
+  
+  <select id="selectEmpEvalDept" parameterType="map" resultMap="empEvalDeptResult">
+  		SELECT *FROM EMP_EVAL
+  		WHERE DEPT_CODE = #{deptCode}
+  		AND APPLY_DAY = #{applyDay}
+  </select>
+
+
+  	 <update id="updateEval" parameterType="kr.co.seoulit.insa.empmgmtsvc.empinfomgmt.to.EmpEvalTO">
+    	UPDATE EMP_EVAL SET
+    	    APPROVAL_STATUS = #{approvalStatus, jdbcType=VARCHAR},
+            GRADE = #{grade, jdbcType=VARCHAR},
+            ACHIEVEMENT = #{achievement, jdbcType=VARCHAR},
+            ABILITY = #{ability, jdbcType=VARCHAR},
+            ATTITUDE = #{attitude, jdbcType=VARCHAR}
+    	WHERE EMP_CODE = #{empCode, jdbcType=VARCHAR}
+    	AND APPLY_DAY = #{applyDay, jdbcType=VARCHAR}
+  	</update>
+  
+  
+  	<insert id="insertEmpEval" parameterType="kr.co.seoulit.insa.empmgmtsvc.empinfomgmt.to.EmpEvalTO">
+		INSERT INTO EMP_EVAL VALUES(
+		#{empCode},
+		#{empName},
+		TO_CHAR(SYSDATE, 'YYYY'),
+		#{deptCode},
+		#{positionCode},
+		#{achievement},
+		#{ability},
+		#{attitude},
+		#{approvalStatus, jdbcType=VARCHAR}
+        )
+    </insert>
+
+
+
+
+    <update id="registEmpEval" parameterType="kr.co.seoulit.insa.empmgmtsvc.empinfomgmt.to.EmpEvalTO">
+        UPDATE EMP_EVAL SET
+        DEPT_CODE = #{deptCode, jdbcType=VARCHAR}, POSITION_CODE = #{positionCode, jdbcType=VARCHAR},
+        ACHIEVEMENT = #{achievement,jdbcType=INTEGER}, ABILITY = #{ability,jdbcType=INTEGER},
+        ATTITUDE = #{attitude,jdbcType=INTEGER}, APPROVAL_STATUS = #{approvalStatus, jdbcType=VARCHAR}, GRADE = #{grade, jdbcType=VARCHAR}
+        WHERE EMP_CODE = #{empCode, jdbcType=VARCHAR}
+    </update>
+
+    <insert id="insertEval" parameterType="kr.co.seoulit.insa.empmgmtsvc.empinfomgmt.to.EmpEvalTO">
+        INSERT INTO EMP_EVAL VALUES(
+                                       #{empCode, jdbcType=VARCHAR},
+                                       #{empName, jdbcType=VARCHAR},
+                                       TO_CHAR(SYSDATE, 'YYYY'),
+                                       #{deptCode, jdbcType=VARCHAR},
+                                       #{positionCode, jdbcType=VARCHAR},
+                                       #{achievement,jdbcType=INTEGER},
+                                       #{ability,jdbcType=INTEGER},
+                                       #{attitude,jdbcType=INTEGER},
+                                       #{approvalStatus, jdbcType=VARCHAR},
+                                       #{grade, jdbcType=VARCHAR}
+                                   )
+    </insert>
+
+    <!--재사용-->
+    <update id="registEmpEval2" parameterType="kr.co.seoulit.insa.empmgmtsvc.empinfomgmt.to.EmpEvalTO">
+        UPDATE EMP_EVAL SET
+        EMP_CODE = #{empCode, jdbcType=VARCHAR}, EMP_NAME = #{empName, jdbcType=VARCHAR},
+        DEPT_CODE = #{deptCode, jdbcType=VARCHAR}, POSITION_CODE = #{postionCode, jdbcType=VARCHAR}
+        WHERE EMP_CODE = #{empCode, jdbcType=VARCHAR}
+    </update>
+
+
+	
+	<delete id="deleteEmpEval" parameterType="map">
+		DELETE FROM EMP_EVAL 
+		WHERE EMP_CODE = #{empCode, jdbcType=VARCHAR}
+		AND APPLY_DAY = #{applyDay, jdbcType=VARCHAR}
+	</delete>
+  
+</mapper>

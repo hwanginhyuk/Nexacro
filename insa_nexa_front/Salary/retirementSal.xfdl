@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="retirementSal" width="1060" height="610" titletext="New Form">
+    <Layouts>
+      <Layout height="610" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="35" width="1010" height="560" background="#D9E5FF">
+          <Layouts>
+            <Layout>
+              <Tab id="Tab00" taborder="0" tabindex="0" left="30" top="56" width="410" height="459" onchanged="Div00_00_Tab00_onchanged" border="0px none">
+                <Tabpages>
+                  <Tabpage id="Tabpage1" text="부서명검색" border="0px groove" font="16px/normal &quot;맑은 고딕&quot;">
+                    <Layouts>
+                      <Layout>
+                        <Button id="Button00" taborder="0" text="검색" left="275" top="26" width="105" height="40" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage1_Button00_onclick"/>
+                        <Grid id="Grid00" taborder="1" left="16" top="78" width="364" height="343" oncelldblclick="Div00_00_Tab00_Tabpage1_Grid00_oncelldblclick" binddataset="ds_empList" autofittype="col">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="사번"/>
+                                <Cell col="1" text="이름"/>
+                                <Cell col="2" text="부서"/>
+                                <Cell col="3" text="직급"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:EMP_CODE" textAlign="center"/>
+                                <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                                <Cell col="2" text="bind:DEPT_NAME" textAlign="center"/>
+                                <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Edit id="Edit00" taborder="2" left="18" top="26" width="237" height="40" oneditclick="Div00_00_Tab00_Tabpage1_Edit00_oneditclick"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="Tabpage2" text="사원명검색" border="0px groove">
+                    <Layouts>
+                      <Layout>
+                        <Button id="Button00" taborder="0" text="검색" left="216" top="26" width="77" height="40" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage2_Button00_onclick"/>
+                        <Button id="Button00_00" taborder="1" text="삭제" left="303" top="26" width="77" height="40" font="20px/normal &quot;나눔고딕&quot;"/>
+                        <Grid id="Grid00" taborder="2" left="16" top="78" width="364" height="343" binddataset="ds_emp" oncelldblclick="Div00_00_Tab00_Tabpage2_Grid00_oncelldblclick">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="사번"/>
+                                <Cell col="1" text="이름"/>
+                                <Cell col="2" text="부서"/>
+                                <Cell col="3" text="직급"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:EMP_CODE" textAlign="center"/>
+                                <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                                <Cell col="2" text="bind:DEPT_NAME" textAlign="center"/>
+                                <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Edit id="Edit00" taborder="3" left="18" top="26" width="192" height="40"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+              <Tab id="Tab00_00" taborder="1" tabindex="0" left="458" top="55" width="580" height="500" onchanged="Div00_00_Tab00_onchanged" border="0px none">
+                <Tabpages>
+                  <Tabpage id="Tabpage4" text="퇴직급여">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="Grid00_00" taborder="0" left="33" top="24" width="507" height="397" binddataset="ds_retirement_salary" autofittype="col" autosizingtype="col">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="72"/>
+                                <Column size="72"/>
+                                <Column size="72"/>
+                                <Column size="72"/>
+                                <Column size="72"/>
+                                <Column size="72"/>
+                                <Column size="72"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="직급"/>
+                                <Cell col="1" text="이름"/>
+                                <Cell col="2" text="사번"/>
+                                <Cell col="3" text="입사일"/>
+                                <Cell col="4" text="정산일"/>
+                                <Cell col="5" text="재직일자"/>
+                                <Cell col="6" text="퇴직금"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:POSITION" textAlign="center"/>
+                                <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                                <Cell col="2" text="bind:EMP_CODE" textAlign="center"/>
+                                <Cell col="3" text="bind:HIREDATE" textAlign="center"/>
+                                <Cell col="4" text="bind:CALCULATE_DATE" calendardisplaynulltype="default" displaytype="text" textAlign="center"/>
+                                <Cell col="5" text="expr:WORKING_DATE + &quot;일&quot;" calendardisplaynulltype="nulltext" textAlign="center"/>
+                                <Cell col="6" text="bind:RETIREMENT_SALARY" textAlign="center" displaytype="currency"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+              <Static id="Static00" taborder="2" text="◼퇴직금조회" left="8" top="0" width="188" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_empList">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_retirement_salary">
+        <ColumnInfo>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="HIREDATE" type="STRING" size="256"/>
+          <Column id="CALCULATE_DATE" type="STRING" size="256"/>
+          <Column id="WORKING_DATE" type="STRING" size="256"/>
+          <Column id="RETIREMENT_SALARY" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs";
+include "Lib::commDate.xjs";
+
+nexa=nexacro.getApplication();
+
+
+//CodeDialog를 통한 부서 선택(Edit 컴포넌트 선택)
+this.Div00_00_Tab00_Tabpage1_Edit00_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("searchDeptCode", "Base::Modal.xfdl", "callback", {code:"CO-07"});
+};
+this.callback = function(codename, code)
+{
+	updateEdit.set_value(code.split(" ")[0]);
+};
+
+//CodeDialog에서 선택된 부서를 통한 직원 조회(버튼)
+this.Div00_00_Tab00_Tabpage1_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+   trace(nexa.g_detailCodeName+" 소속 직원 조회");
+
+   var id = "callEmpList";
+   var url = "svcEmpinfomgmt::emplist";
+   var reqDs = "";
+   var respDs = "ds_empList=gds_emp";
+   var args = "value="+this.Div00_00.form.Tab00.Tabpage1.form.Edit00.value;
+   var callback = "gotEmpList";
+
+    this.transaction(id, url, reqDs, respDs, args, callback);
+};
+this.gotEmpList = function(id, code, message)
+{   
+     if (code == 0) {
+          //this.alert(this.ds_empList.rowcount + " numbers of data have been found.");
+          trace(this.ds_empList.rowcount + " numbers of data have been found.");
+     } else {
+          this.alert("Error["+code+"]:"+message);
+          trace("Error["+code+"]:"+message);
+     }
+}
+
+//부서별로 조회된 사원 목록에서 사원 선택하여 퇴직금 조회
+this.Div00_00_Tab00_Tabpage1_Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+   var empCode = this.ds_empList.getColumn(e.row,"EMP_CODE");
+   
+   trace("퇴직금 조회할 사원 코드 : " + empCode);
+   var id = "callEmpRetirementSalary";
+   var url = "svcSalaryinfomgmt::retirement";
+   var reqDs = "";
+   var respDs = "ds_retirement_salary=retirement_salary";
+   var args = "empCode="+empCode;
+   var callback = "gotRetirementSalary";
+    
+   this.transaction(id, url, reqDs, respDs, args, callback);
+};
+this.gotRetirementSalary = function(id, code, message)
+{   
+     if (code == 0) {
+          //this.alert(this.ds_retirement_salary.rowcount + " numbers of data have been found.");
+          trace(this.ds_retirement_salary.rowcount + " numbers of data have been found.");
+     } else {
+          this.alert("Error["+code+"]:"+message);
+          trace("Error["+code+"]:"+message);
+     }
+}
+
+//사원명 조회 탭에서 사원명을 가지고 사원 검색
+this.Div00_00_Tab00_Tabpage2_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+   var value = this.Div00_00.form.Tab00.Tabpage2.form.Edit00.text;
+   
+   trace("조회할 사원명 : " + value);
+   
+   this.ds_emp.deleteAll();
+   
+   var id = "callEmpByName";
+     var url = "svcEmpinfomgmt::emplist";
+     var reqDs = "";
+     var respDs = "ds_emp=gds_emp";
+     var args = "value="+value;
+     var callback = "gotEmpByName";
+    
+    this.transaction(id, url, reqDs, respDs, args, callback);    
+};
+this.gotEmpByName = function(id, code, message)
+{   
+     if (code == 0) {
+          //this.alert(this.ds_emp.rowcount + " numbers of data have been found.");
+          trace(this.ds_emp.rowcount + " numbers of data have been found.");
+     } else {
+          this.alert("Error["+code+"]:"+message);
+          trace("Error["+code+"]:"+message);
+     }
+}
+
+//사원명 조회 탭에서 그리드에 있는 사원 정보를 가지고 퇴직금 검색
+this.Div00_00_Tab00_Tabpage2_Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+   var empCode = this.ds_emp.getColumn(e.row,"EMP_CODE");
+   
+   trace("퇴직금 조회할 사원 코드 : " + empCode);
+   var id = "callEmpBonusByName";
+   var url = "svcSalaryinfomgmt::retirement";
+   var reqDs = "";
+   var respDs = "ds_retirement_salary=retirement_salary";
+   var args = "empCode="+empCode;
+   var callback = "gotRetirementSalaryByName";
+    
+   this.transaction(id, url, reqDs, respDs, args, callback);
+};
+this.gotRetirementSalaryByName = function(id, code, message)
+{   
+     if (code == 0) {
+          //this.alert(this.ds_retirement_salary.rowcount + " numbers of data have been found.");
+          trace(this.ds_retirement_salary.rowcount + " numbers of data have been found.");
+        if (this.ds_retirement_salary.getColumn(0, "SETTLEMENT_DATE") == null)
+         this.ds_retirement_salary.setColumn(0, "SETTLEMENT_DATE", this.gfn_today());
+         trace("퇴직금 정산일 금일로 설정");
+     } else {
+          this.alert("Error["+code+"]:"+message);
+          trace("Error["+code+"]:"+message);
+     }
+}]]></Script>
+  </Form>
+</FDL>

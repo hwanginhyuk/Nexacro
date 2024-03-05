@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="positionList" width="1060" height="620" titletext="New Form" onload="positionList_onload">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="25" width="1010" height="560">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="   ◼ 직급정보관리" left="-15" top="-14" width="214" height="49" textAlign="left" font="bold 18px/normal &quot;나눔고딕&quot;"/>
+              <Grid id="Grid00" taborder="0" left="45" top="115" width="930" height="410" binddataset="ds_positionList">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="179"/>
+                      <Column size="176"/>
+                      <Column size="189"/>
+                      <Column size="187"/>
+                      <Column size="197"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="31" band="head"/>
+                      <Row size="32"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="직급코드"/>
+                      <Cell col="1" text="직급명"/>
+                      <Cell col="2" text="기본급"/>
+                      <Cell col="3" text="호봉급여인상율"/>
+                      <Cell col="4" text="상여금"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:POSITION_CODE" displaytype="text" edittype="text"/>
+                      <Cell col="1" text="bind:POSITION" displaytype="text" edittype="text"/>
+                      <Cell col="2" text="bind:BASE_SALARY" displaytype="number" edittype="mask" maskeditformat="#,###" textAlign="center"/>
+                      <Cell col="3" text="bind:HOBONG_RATIO" displaytype="text" edittype="text"/>
+                      <Cell col="4" text="bind:ALLOWANCE" displaytype="number" edittype="mask" maskeditformat="#,###" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btn_del" taborder="2" text="삭제" left="795" top="65" width="80" height="35" onclick="Div00_00_btn_del_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+              <Button id="btn_save" taborder="3" text="저장" left="890" top="65" width="80" height="35" onclick="Div00_00_btn_save_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+              <Button id="btn_add" taborder="4" text="추가" left="700" top="65" width="80" height="35" onclick="Div00_00_btn_add_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_positionList">
+        <ColumnInfo>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="BASE_SALARY" type="INT" size="256"/>
+          <Column id="HOBONG_RATIO" type="STRING" size="256"/>
+          <Column id="ALLOWANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//로딩시
+this.positionList_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+this.transaction(
+				"PositionListID",  // 서비스id
+				 "svcFoudinfomgmt::positionlist",  //호출할url
+				 "",
+				 "ds_positionList=ds_positionList",  //조회 변수=저장할값
+			   	 "",
+				 "fn_callback");
+		
+};
+
+//추가
+this.Div00_00_btn_add_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	this.ds_positionList.addRow();
+	this.ds_positionList.setColumn(this.ds_positionList.rowposition,"POSITION_CODE","POS___");
+	this.ds_positionList.setColumn(this.ds_positionList.rowposition,"STATUS","insert");
+
+};
+
+
+//삭제
+this.Div00_00_btn_del_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var index = this.ds_positionList.rowposition;
+	this.ds_positionList.deleteRow(index);
+};
+
+
+//저장
+this.Div00_00_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count=this.ds_positionList.rowcount;
+	
+	for(var i=0;i<count;i++){
+		var positioncode=this.ds_positionList.getColumn(i,"POSITION_CODE");
+		var position=this.ds_positionList.getColumn(i,"POSITION");
+		var basesalary=this.ds_positionList.getColumn(i,"BASE_SALARY");
+		var hobong=this.ds_positionList.getColumn(i,"HOBONG_RATIO");
+
+		
+	if (positioncode==null){
+		this.alert("직급코드를 입력해주세요."); return;	
+	}if (position==null){
+		this.alert("직급를 입력해주세요"); return;
+       }
+	   if (basesalary==null){
+		this.alert("기본급을 입력해주세요."); return;
+       }
+	   if (hobong==null){
+		this.alert("호봉인상율을 입력해주세요."); return;
+       }
+	}if(confirm(" 저장하시겠습니까 ? ")){
+	this.transaction(
+					"updateID",
+					 "svcFoudinfomgmt::positionlist2",
+					 "ds_positionList=ds_positionList:u",
+					 "",
+					 "",
+					 "fn_callback");	
+	}
+};
+
+this.fn_callback = function (trID , ErrorCode , ErrorMsg)
+{
+	if(trID=="positionListID"){
+		if (ErrorCode!=0){
+			alert("조회실패 : "+ErrorMsg);	
+		}else{
+		
+			var count=this.ds_positionList.rowcount;
+			
+			for(var i=0;i<count;i++){
+				var statusList=this.ds_positionList.setColumn(i,"STATUS","");
+			}
+		}
+	}
+	if(trID=="updateID"){
+		if (ErrorCode!=0){
+			alert("저장실패 : "+ErrorMsg+ErrorCode);	
+		}else{
+			alert("저장완료 ");	
+		}this.reload();
+	}
+};]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="salaryAwards" width="1060" height="610" titletext="New Form">
+    <Layouts>
+      <Layout height="610" width="1060" stepcount="0">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="25" width="1010" height="560">
+          <Layouts>
+            <Layout>
+              <Tab id="Tab00" taborder="0" tabindex="0" left="30" top="60" width="410" height="504" onchanged="Div00_00_Tab00_onchanged" border="0px none" font="12px/normal &quot;나눔고딕&quot;">
+                <Tabpages>
+                  <Tabpage id="Tabpage1" text="부서명검색" border="0px groove" font="16px/normal &quot;맑은 고딕&quot;">
+                    <Layouts>
+                      <Layout>
+                        <Button id="Button00" taborder="0" text="검색" left="235" top="16" width="125" height="40" font="bold 20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage1_Button00_onclick" background="#d0e3ed" borderRadius="5px"/>
+                        <Grid id="Grid00" taborder="1" left="0" top="65" width="364" height="353" binddataset="ds_empList" oncelldblclick="Div00_00_Tab00_Tabpage1_Grid00_oncelldblclick">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="90"/>
+                                <Column size="90"/>
+                                <Column size="90"/>
+                                <Column size="90"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="사번" background="#6092ff" color="white"/>
+                                <Cell col="1" text="이름" background="#6092ff" color="white"/>
+                                <Cell col="2" text="부서" background="#6092ff" color="white"/>
+                                <Cell col="3" text="직급" background="#6092ff" color="white"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:EMP_CODE" textAlign="center"/>
+                                <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                                <Cell col="2" text="bind:DEPT_NAME" textAlign="center"/>
+                                <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Edit id="Edit00" taborder="2" left="0" top="16" width="219" height="40" oneditclick="Div00_00_Tab00_Tabpage1_Edit00_oneditclick" onchanged="Div00_00_Tab00_Tabpage1_Edit00_onchanged"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="Tabpage2" text="사원명검색" border="0px groove">
+                    <Layouts>
+                      <Layout>
+                        <Button id="Button00" taborder="0" text="검색" left="202" top="16" width="77" height="40" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage2_Button00_onclick"/>
+                        <Button id="Button00_00" taborder="1" text="삭제" left="289" top="16" width="77" height="40" font="20px/normal &quot;나눔고딕&quot;"/>
+                        <Grid id="Grid00" taborder="2" left="0" top="68" width="364" height="353" binddataset="ds_emp" oncelldblclick="Div00_00_Tab00_Tabpage2_Grid00_oncelldblclick">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="90"/>
+                                <Column size="90"/>
+                                <Column size="90"/>
+                                <Column size="90"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="사번"/>
+                                <Cell col="1" text="사원명"/>
+                                <Cell col="2" text="부서"/>
+                                <Cell col="3" text="직급"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:EMP_CODE" textAlign="center"/>
+                                <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                                <Cell col="2" text="bind:DEPT_NAME" textAlign="center"/>
+                                <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Edit id="Edit00" taborder="3" left="0" top="16" width="192" height="40"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+              <Tab id="Tab00_00" taborder="1" tabindex="0" left="430" top="60" width="560" height="485" onchanged="Div00_00_Tab00_onchanged" border="0px none" font="12px/normal &quot;나눔고딕&quot;">
+                <Tabpages>
+                  <Tabpage id="Tabpage3" text="상여금정보">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="Grid00_00" taborder="0" left="0" top="15" width="492" height="405" binddataset="ds_empBonus">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="98"/>
+                                <Column size="98"/>
+                                <Column size="98"/>
+                                <Column size="98"/>
+                                <Column size="98"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="사번" background="#6092ff" color="white"/>
+                                <Cell col="1" text="사원명" background="#6092ff" color="white"/>
+                                <Cell col="2" text="부서명" background="#6092ff" color="white"/>
+                                <Cell col="3" text="직급" background="#6092ff" color="white"/>
+                                <Cell col="4" text="상여금" background="#6092ff" color="white"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:EMP_CODE" textAlign="center"/>
+                                <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                                <Cell col="2" text="bind:DEPT_CODE" textAlign="center"/>
+                                <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                                <Cell col="4" text="bind:AWARDS_SALARY" displaytype="currency" textAlign="right"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="Tabpage4" text="성과급정보">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="Grid00_00" taborder="0" left="0" top="15" width="492" height="400" binddataset="ds_empPerform">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="98"/>
+                                <Column size="98"/>
+                                <Column size="98"/>
+                                <Column size="98"/>
+                                <Column size="98"/>
+                                <Column size="0"/>
+                                <Column size="0"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="사번"/>
+                                <Cell col="1" text="사원명"/>
+                                <Cell col="2" text="부서"/>
+                                <Cell col="3" text="직급"/>
+                                <Cell col="4" text="성과급"/>
+                                <Cell col="5" text="GRADE" displaytype="none"/>
+                                <Cell col="6" text="BASE_SALARY" displaytype="none"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:EMP_CODE" textAlign="center"/>
+                                <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                                <Cell col="2" text="bind:DEPT_CODE" textAlign="center"/>
+                                <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                                <Cell col="4" text="expr:dataset.parent.fn_calPerformPay(GRADE, BASE_SALARY)" textAlign="right" displaytype="currency"/>
+                                <Cell col="5" text="bind:GRADE"/>
+                                <Cell col="6" text="bind:BASE_SALARY"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div00" taborder="1" text="Div00" left="32" top="2" width="1248" height="48" border="0px none, 0px none, 2px solid black">
+          <Layouts>
+            <Layout>
+              <Button id="Button01" taborder="0" text="수정완료" left="72.52%" top="10" width="6.17%" height="60.87%" background="#d0e3ed" onclick="Div00_Button01_onclick" font="bold 12px/normal &quot;나눔고딕&quot;" borderRadius="5px"/>
+              <Static id="Static00" taborder="1" text="상여 및 성과금 조회" left="11" top="10" width="170" height="31" onclick="Div00_Static00_onclick" font="bold 18px/normal &quot;Gulim&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_empList">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_empBonus">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="AWARDS_SALARY" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_empPerform">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="GRADE" type="STRING" size="256"/>
+          <Column id="PERFORM_PAY" type="STRING" size="256"/>
+          <Column id="BASE_SALARY" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs";
+
+var nexa=nexacro.getApplication();
+var updateEdit;
+
+//CodeDialog를 통한 부서 선택(Edit 컴포넌트 선택)
+this.Div00_00_Tab00_Tabpage1_Edit00_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("searchDeptCode", "Base::Modal.xfdl", "callback", {code:"CO-07"});
+};
+this.callback = function(codename, code)
+{
+   updateEdit.set_value(code.split(" ")[0]);
+};
+
+//CodeDialog에서 선택된 부서를 통한 직원 조회(버튼)
+this.Div00_00_Tab00_Tabpage1_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+   this.ds_empList.deleteAll();
+
+   var id = "callEmpList";
+   var url = "svcEmpinfomgmt::emplist";
+   var reqDs = "";
+   var respDs = "ds_empList=gds_emp";
+   var args = "value="+this.Div00_00.form.Tab00.Tabpage1.form.Edit00.value;
+   var callback = "gotEmpList";
+
+    this.transaction(id, url, reqDs, respDs, args, callback);
+};
+this.gotEmpList = function(id, code, message)
+{   
+     if (code == 0) {
+          //this.alert(this.ds_empList.rowcount + " numbers of data have been found.");
+          trace(this.ds_empList.rowcount + " numbers of data have been found.");
+     } else {
+          this.alert("Error["+code+"]:"+message);
+          trace("Error["+code+"]:"+message);
+     }
+}
+
+//부서별로 조회된 사원 목록에서 사원 선택하여 상여금 및 성과급 조회
+this.Div00_00_Tab00_Tabpage1_Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+   var empCode = this.ds_empList.getColumn(e.row,"EMP_CODE");
+   
+   this.ds_empBonus.deleteAll();
+   this.ds_empPerform.deleteAll();
+   
+   trace("상여금을 조회할 사원 코드 : " + empCode);
+   var id = "callEmpBonusByName";
+   var url = "svcSalaryinfomgmt::awards";
+   var reqDs = "";
+   var respDs = "ds_empBonus=salary_bonus ds_empPerform=salary_bonus";
+   var args = "empCode="+empCode;
+   var callback = "gotEmpBonus";
+    
+   this.transaction(id, url, reqDs, respDs, args, callback);
+};
+this.gotEmpBonus = function(id, code, message)
+{   
+     if (code == 0) {
+          //this.alert(this.ds_empBonus.rowcount + " numbers of data have been found.");
+          trace(this.ds_empBonus.rowcount + " numbers of data have been found.");
+     } else {
+          this.alert("Error["+code+"]:"+message);
+          trace("Error["+code+"]:"+message);
+     }
+}
+
+//사원명 조회 탭에서 사원명을 가지고 사원 검색
+this.Div00_00_Tab00_Tabpage2_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+   var value = this.Div00_00.form.Tab00.Tabpage2.form.Edit00.text;
+   
+   trace("조회할 사원명 : " + value);
+   
+   this.ds_emp.deleteAll();
+   
+   var id = "callEmpByName";
+     var url = "svcEmpinfomgmt::emplist";
+     var reqDs = "";
+     var respDs = "ds_emp=gds_emp";
+     var args = "value="+value;
+     var callback = "gotEmpByName";
+    
+    this.transaction(id, url, reqDs, respDs, args, callback);    
+};
+this.gotEmpByName = function(id, code, message)
+{   
+     if (code == 0) {
+          //this.alert(this.ds_emp.rowcount + " numbers of data have been found.");
+          trace(this.ds_emp.rowcount + " numbers of data have been found.");
+     } else {
+          this.alert("Error["+code+"]:"+message);
+          trace("Error["+code+"]:"+message);
+     }
+}
+
+//사원명 조회 탭에서 그리드에 있는 사원 정보를 가지고 상여금과 성과급 검색
+this.Div00_00_Tab00_Tabpage2_Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+   var empCode = this.ds_emp.getColumn(e.row,"EMP_CODE");
+   
+   this.ds_empBonus.deleteAll();
+   this.ds_empPerform.deleteAll();
+   
+   trace("상여금을 조회할 사원 코드 : " + empCode);
+   var id = "callEmpBonusByName";
+   var url = "svcSalaryinfomgmt::awards";
+   var reqDs = "";
+   var respDs = "ds_empBonus=salary_bonus ds_empPerform=salary_bonus";
+   var args = "empCode="+empCode;
+   var callback = "gotEmpBonusByName";
+    
+   this.transaction(id, url, reqDs, respDs, args, callback);
+};
+this.gotEmpBonusByName = function(id, code, message)
+{   
+     if (code == 0) {
+          //this.alert(this.ds_empBonus.rowcount + " numbers of data have been found.");
+          trace(this.ds_empBonus.rowcount + " numbers of data have been found.");
+     } else {
+          this.alert("Error["+code+"]:"+message);
+          trace("Error["+code+"]:"+message);
+     }
+}
+
+//고과 등급별 성과급 계산해주는 함수
+this.fn_calPerformPay = function(GRADE, BASE_SALARY){
+   var PerformPay = BASE_SALARY;
+   switch(GRADE) {
+   case "A":
+      PerformPay= PerformPay*2;
+      break;
+   case "B":
+      PerformPay= PerformPay*1.5;
+      break;
+   case "C":
+      PerformPay= PerformPay*1;
+      break;      
+   case "D":
+      PerformPay= PerformPay*0.75;
+      break;
+   default:
+      break;
+      }
+   //trace("해당 사원의 성과급은 " + PerformPay + "입니다.");
+   return PerformPay;
+}
+
+]]></Script>
+  </Form>
+</FDL>

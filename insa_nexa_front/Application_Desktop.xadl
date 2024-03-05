@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="2.0">
+  <Application id="Application_Desktop" screenid="Desktop_screen" onload="Application_onload">
+    <Layout>
+      <MainFrame id="mainframe" showtitlebar="true" showstatusbar="true" left="0" top="0" width="1500" height="1000" titletext="TopLeftFrame">
+        <VFrameSet id="VFrameSet00" separatesize="70,*" width="1500" height="1000">
+          <Frames>
+            <ChildFrame id="TopFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Top.xfdl" width="1500" height="70"/>
+            <HFrameSet id="HFrameSet00" separatesize="230,*">
+              <Frames>
+                <ChildFrame id="LeftFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Left.xfdl" width="230" height="930" top="70"/>
+                <ChildFrame id="WorkFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Work.xfdl" width="1270" height="930" top="70" background="#b4e2f2"/>
+              </Frames>
+            </HFrameSet>
+          </Frames>
+        </VFrameSet>
+      </MainFrame>
+    </Layout>
+  </Application>
+  <Script type="xscript5.1"><![CDATA[nexa=nexacro.getApplication();
+
+this.Application_onload = function(obj:nexacro.Application,e:nexacro.LoadEventInfo)
+{
+		this.mainframe.set_visible(false);
+		nexacro.open("loginForm",
+			"Base::loginForm.xfdl",
+			this.mainframe, 
+			null, 
+			"showtitlebar=true", 
+			500, 200,0,0,
+			this.mainframe);
+};]]></Script>
+</ADL>

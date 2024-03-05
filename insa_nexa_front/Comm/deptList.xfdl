@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="deptList" width="1060" height="620" titletext="New Form" onload="deptList_onload">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="25" width="1010" height="560">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="   ◼ 부서관리목록" left="-15" top="-15" width="214" height="49" textAlign="left" font="bold 18px/normal &quot;나눔고딕&quot;"/>
+              <Grid id="Grid00" taborder="0" left="40" top="125" width="610" height="390" binddataset="ds_deptList">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="200"/>
+                      <Column size="200"/>
+                      <Column size="208"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="32"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="부서코드"/>
+                      <Cell col="1" text="부서명"/>
+                      <Cell col="2" text="부서전화번호"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:DEPT_CODE" textAlign="center" edittype="text"/>
+                      <Cell col="1" text="bind:DEPT_NAME" textAlign="center" edittype="text"/>
+                      <Cell col="2" text="bind:DEPT_TEL" textAlign="center" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="delBtn" taborder="2" text="삭제" left="475" top="75" width="80" height="35" onclick="Div00_00_delBtn_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+              <Button id="saveBtn" taborder="3" text="저장" left="570" top="75" width="80" height="35" onclick="Div00_00_saveBtn_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+              <Button id="addBtn" taborder="4" text="추가" left="380" top="75" width="80" height="35" onclick="Div00_00_addBtn_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_deptList">
+        <ColumnInfo>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_TEL" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//로드
+this.deptList_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction("deptListID",
+					 "svcFoudinfomgmt::deptlist",
+					 "",
+					 "ds_deptList=ds_deptList",
+					 "",
+					 "");
+}
+
+//추가
+this.Div00_00_addBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+// 	var count = this.ds_deptList.rowcount;
+// 	this.ds_deptList.addRow();
+// 	this.ds_deptList.setColumn(count,"DEPT_CODE","DEP00");
+// 	this.ds_deptList.setColumn(count,"DEPT_NAME","deptName");
+// 	this.ds_deptList.setColumn(count,"DEPT_TEL","0000");
+	
+	this.ds_deptList.addRow();
+	this.ds_deptList.setColumn(this.ds_deptList.rowposition,"DEPT_CODE","DEP00");
+	this.ds_deptList.setColumn(this.ds_deptList.rowposition,"DEPT_NAME","deptName");
+};
+
+//삭제
+this.Div00_00_delBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var index = this.ds_deptList.rowposition;
+	this.ds_deptList.deleteRow(index);
+};
+
+//저장
+this.Div00_00_saveBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_deptList.rowcount;
+	for(var i=0; i<count; i++){
+		var deptcode = this.ds_deptList.getColumn(i,"DEPT_CODE");
+		var deptname = this.ds_deptList.getColumn(i,"DEPT_NAME");
+		var depttel = this.ds_deptList.getColumn(i,"DEPT_TEL");
+		
+		//trace('부서코드 : '+ deptcode);
+		
+		if(deptcode == null){
+			this.alert("부서코드를 입력해주세요."); return;
+		}if(deptname == null){
+			this.alert("부서명을 입력해주세요."); return;
+		}if(depttel == null){
+			this.alert("부서전화번호를 입력해주세요."); return;
+		}
+	}if(confirm("저장하시겠습니까?")){
+		this.transaction(
+						"deptListUpdateID",
+						"svcFoudinfomgmt::deptList-create",
+						"ds_deptList=ds_deptList:u",
+						"",
+						
+						"",
+						"fn_callback");
+	}
+};
+
+this.fn_callback = function (trID , ErrorCode , ErrorMsg){
+	if(trID == "deptListUpdateID")
+	{
+		if (ErrorCode!=0){
+			alert("저장실패 : "+ErrorMsg+ErrorCode);	
+		}else{
+			alert("저장완료");	
+		}this.reload();
+
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

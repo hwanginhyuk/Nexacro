@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="overworkMgt" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Div id="Div00" taborder="0" text="Div00" left="6" top="10" width="990" height="459" font="bold 14px/normal &quot;나눔고딕&quot;">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="초과근무 관리" left="16" top="17" width="123" height="35" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+              <Calendar id="Calendar00" taborder="1" left="149" top="67" width="120" height="35" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+              <Static id="Static01" taborder="2" text="조회일자" left="77" top="65" width="120" height="35" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+              <Button id="Button00" taborder="3" text="조회하기" left="284" top="67" width="120" height="35" onclick="Div00_Button00_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+              <Button id="Button01" taborder="4" text="승인" left="464" top="69" width="120" height="35" onclick="Div00_Button01_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+              <Button id="Button02" taborder="5" text="반려" left="594" top="69" width="120" height="35" onclick="Div00_Button02_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+              <Button id="Button03" taborder="6" text="저장" left="734" top="67" width="120" height="35" onclick="Div00_Button03_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+              <Grid id="Grid00" taborder="7" left="34" top="120" width="844" height="284" binddataset="ds_overworkList" oncellclick="Div00_Grid00_oncellclick" font="bold 14px/normal &quot;나눔고딕&quot;">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="일련번호" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="사원" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="사번" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="3" text="근무유형" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="4" text="신청일" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="5" text="사유" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="6" text="승인상태" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="7" text="반려사유" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="8" text="시작시간" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="9" text="종료시간" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:REST_ATTD_CODE"/>
+                      <Cell col="1" text="bind:EMP_NAME"/>
+                      <Cell col="2" text="bind:EMP_CODE"/>
+                      <Cell col="3" text="bind:REST_TYPE_NAME"/>
+                      <Cell col="4" text="bind:REQUEST_DATE"/>
+                      <Cell col="5" text="bind:CAUSE"/>
+                      <Cell col="6" text="bind:APPLOVAL_STATUS"/>
+                      <Cell col="7" text="bind:REJECT_CAUSE"/>
+                      <Cell col="8" text="bind:START_TIME"/>
+                      <Cell col="9" text="bind:END_TIME"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_overworkList">
+        <ColumnInfo>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="REST_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="END_TIME" type="STRING" size="256"/>
+          <Column id="NUMBER_OF_DAYS" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+//[조회하기]
+this.Div00_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var requestDate = this.Div00.form.Calendar00.value;
+	var restTypeCode = 'ASC008';
+
+	this.transaction(
+		"overtimeMgt",
+		"svcAttdappvl::overtimeApploval",
+		"",
+		"ds_overworkList=gds_restAttd",
+		"requestDate="+ requestDate +
+		" restTypeCode="+ restTypeCode,
+		"fn_callback"
+	)
+};
+
+this.Div00_Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	row=e.row
+};
+
+//[승인]
+this.Div00_Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(row)
+	this.ds_overworkList.setColumn(row, "APPLOVAL_STATUS", "승인")
+	//단순히 칼럼의 값만 바꿔주는 로직
+};
+
+//[반려]
+this.Div00_Button02_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_overworkList.setColumn(row, "APPLOVAL_STATUS", "반려")
+	//단순히 칼럼의 값만 바꿔주는 로직
+	
+	//반려사유 모달띄우는 로직
+	var oChildFrame = new ChildFrame("초과근무반려 사유", 0, 0, 536, 376, null, null, "Base::rejectModal.xfdl");
+	oChildFrame.set_openalign("center middle");
+ 	oChildFrame.set_titletext("반려 사유");
+	
+	oChildFrame.showModal(this.getOwnerFrame(), null, this, "fn_rejectCallback");
+	
+};
+
+this.fn_rejectCallback = function(modalID, modalParam)
+{
+	//trace(modalParam)
+	var row = this.ds_overworkList.rowposition
+	//trace(row)
+	this.ds_overworkList.setColumn(row,"REJECT_CAUSE", modalParam)
+};
+
+
+//[저장]
+this.Div00_Button03_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"overtimeMgtSave",
+		"svcAttdappvl::overtimeApplovalSave",
+		"gds_restAttd=ds_overworkList:u", //저장시, 왠만하면 u쓰기
+		"",
+		"",
+		"fn_callback"
+	)
+};
+]]></Script>
+  </Form>
+</FDL>

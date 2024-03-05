@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dailyAttndMgt" width="1250" height="620" titletext="New Form" onload="dayAttendanceManage_onload">
+    <Layouts>
+      <Layout height="620" width="1250">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="30" width="1210" height="560" background="#D9E5FF">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="◼일근태관리" left="8" top="0" width="214" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Static id="inquiry" taborder="0" text="조회일자" left="185" top="50" width="114" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Button id="deadlineBtn" taborder="2" text="전체마감하기" left="392" top="110" width="170" height="40" onclick="Div00_00_deadlineBtn_onclick"/>
+              <Button id="deadlineCancellationBtn" taborder="3" text="전체마감취소" left="577" top="110" width="170" height="40" onclick="Div00_00_deadlineCancellationBtn_onclick"/>
+              <Button id="inquiryBtn" taborder="4" text="조회하기" left="672" top="55" width="170" height="40" onclick="Div00_00_inquiryBtn_onclick"/>
+              <Calendar id="inquiryCal" taborder="5" left="295" top="50" width="230" height="40"/>
+              <Grid id="Grid00" taborder="6" left="15" top="160" width="1185" height="370" binddataset="ds_dayAttenMng">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="61"/>
+                      <Column size="53"/>
+                      <Column size="87"/>
+                      <Column size="93"/>
+                      <Column size="83"/>
+                      <Column size="70"/>
+                      <Column size="70"/>
+                      <Column size="70"/>
+                      <Column size="70"/>
+                      <Column size="70"/>
+                      <Column size="70"/>
+                      <Column size="70"/>
+                      <Column size="79"/>
+                      <Column size="83"/>
+                      <Column size="82"/>
+                      <Column size="70"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="34" band="head"/>
+                      <Row size="34"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="사원코드" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="사원명" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="적용일" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="3" text="일근태구분코드" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="4" text="일근태구분명" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="5" text="출근시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="6" text="퇴근시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="7" text="지각여부" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="8" text="지각시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="9" text="총외출시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="10" text="공외출시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="11" text="사외출시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="12" text="정상근무시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="13" text="연장근무시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="14" text="심야근무시간" font="12px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="15" text="마감여부" font="12px/normal &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:EMP_CODE" textAlign="center"/>
+                      <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                      <Cell col="2" text="bind:APPLY_DAYS" textAlign="center"/>
+                      <Cell col="3" text="bind:DAY_ATTD_CODE" textAlign="center"/>
+                      <Cell col="4" text="bind:DAY_ATTD_NAME" textAlign="center"/>
+                      <Cell col="5" text="bind:ATTEND_TIME" textAlign="center" displaytype="mask" maskeditmaskchar="##:##" maskeditlimitbymask="decimal" maskeditformat="##:##" edittype="mask"/>
+                      <Cell col="6" text="bind:QUIT_TIME" textAlign="center"/>
+                      <Cell col="7" text="bind:LATE_WHETHER" textAlign="center"/>
+                      <Cell col="8" text="bind:LATE_HOUR" textAlign="center"/>
+                      <Cell col="9" text="bind:LEAVE_HOUR" textAlign="center"/>
+                      <Cell col="10" text="bind:PUBLIC_LEAVE_HOUR" textAlign="center"/>
+                      <Cell col="11" text="bind:PRIVATE_LEAVE_HOUR" textAlign="center"/>
+                      <Cell col="12" text="bind:WORK_HOUR" textAlign="center"/>
+                      <Cell col="13" text="bind:OVER_WORK_HOUR" textAlign="center"/>
+                      <Cell col="14" text="bind:NIGHT_WORK_HOUR" textAlign="center"/>
+                      <Cell col="15" text="bind:FINALIZE_STATUS" textAlign="center" color="#703737" font="bold 12px/normal &quot;Gulim&quot;"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include"Lib::commDate.xjs";
+include"Lib::commString.xjs";
+
+nexa = nexacro.getApplication();
+
+//로딩
+this.dayAttendanceManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var today=this.gfn_today();
+	this.Div00_00.form.inquiryCal.set_value(today);
+};
+
+//조회하기
+this.Div00_00_inquiryBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var workplaceCode = nexa.g_workplaceCode
+	trace(workplaceCode)
+	
+	this.transaction("daySearchID",
+					"svcAttdappvl::day-attnd",
+					"",
+					"ds_dayAttenMng=ds_dayAttenMng",
+					"applyDay="+ this.Div00_00.form.inquiryCal.value +
+					" workplaceCode="+ workplaceCode,
+					"fn_callback");
+};
+
+//조회콜백
+this.fn_callback = function(trID ,ErrorCode ,ErrorMsg)
+{
+	var count = this.ds_dayAttenMng.rowcount;
+	for(var i=0; i<count; i++){
+		var lateTime = (this.ds_dayAttenMng.getColumn(i,"ATTEND_TIME") - 900).toString();
+		if(lateTime>0){
+			this.ds_dayAttenMng.addColumn("LATE_HOUR","String");
+			var lateTimeString = lateTime.substring(0,1) + "시간" + lateTime.substring(1) + "분"
+			this.ds_dayAttenMng.setColumn(i,"LATE_HOUR", lateTimeString);
+		}
+	}
+	
+	for(var i=0; i<count; i++){
+		var workHour = this.ds_dayAttenMng.getColumn(i,"WORK_HOUR");
+		if(workHour>0){
+			var workHourString = workHour.substring(0,1) + "시간" + workHour.substring(1) + "분"
+			this.ds_dayAttenMng.setColumn(i,"WORK_HOUR", workHourString);
+		}
+	}
+}
+
+//마감
+this.Div00_00_deadlineBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_dayAttenMng.rowcount;
+	for(var i=0; i<count; i++){
+		this.ds_dayAttenMng.setColumn(i,"FINALIZE_STATUS", "Y");
+	}
+	
+	this.transaction("finalizeID",
+					 "svcAttdappvl::day-attndPut",
+					 "ds_dayAttenMng=ds_dayAttenMng",
+					 "",
+					 "",
+					 "fn_callback");
+};
+
+//마감취소
+this.Div00_00_deadlineCancellationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_dayAttenMng.rowcount;
+	for(var i=0; i<count; i++){
+		this.ds_dayAttenMng.setColumn(i,"FINALIZE_STATUS", "N");
+	}
+	
+	this.transaction("finalizeID",
+					 "svcAttdappvl::day-attndPut",
+					 "ds_dayAttenMng=ds_dayAttenMng",
+					 "",
+					 "",
+					 "fn_callback");
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_dayAttenMng">
+        <ColumnInfo>
+          <Column id="DAY_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_NAME" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="HALF_HOLIDAY_STATUS" type="STRING" size="256"/>
+          <Column id="ATTEND_TIME" type="STRING" size="256"/>
+          <Column id="QUIT_TIME" type="STRING" size="256"/>
+          <Column id="LATE_WHETHER" type="STRING" size="256"/>
+          <Column id="LATE_HOUR" type="STRING" size="256"/>
+          <Column id="LEAVE_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+          <Column id="APPLY_DAYS" type="STRING" size="256"/>
+          <Column id="EARLY_LEAVE_HOUR" type="STRING" size="256"/>
+          <Column id="PRIVATE_LEAVE_HOUR" type="STRING" size="256"/>
+          <Column id="PUBLIC_LEAVE_HOUR" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

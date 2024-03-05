@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="resume_InsertModal" width="400" height="550" titletext="New Form">
+    <Layouts>
+      <Layout height="550" mobileorientation="landscape" width="400">
+        <Edit id="p_code" taborder="1" left="120" top="70" width="215" height="30"/>
+        <Static id="Static00" taborder="0" text="이력서 등록" left="150" top="20" width="104" height="33" onclick="Static00_onclick" font="bold 18px/normal &quot;나눔스퀘어&quot;" textAlign="center"/>
+        <Static id="Static01" taborder="11" text="임시코드" left="40" top="70" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Edit id="p_name" taborder="2" left="120" top="114" width="215" height="30"/>
+        <Edit id="p_age" taborder="3" left="120" top="158" width="215" height="30"/>
+        <Edit id="p_gender" taborder="4" left="120" top="202" width="215" height="30" onchanged="p_code02_onchanged"/>
+        <Edit id="p_address" taborder="5" left="120" top="246" width="215" height="30"/>
+        <Edit id="p_tel" taborder="6" left="120" top="290" width="215" height="30"/>
+        <Edit id="p_email" taborder="7" left="120" top="334" width="215" height="30"/>
+        <Edit id="p_dept" taborder="8" left="120" top="378" width="215" height="30"/>
+        <Edit id="p_last_school" taborder="9" left="120" top="422" width="215" height="30"/>
+        <Edit id="p_career" taborder="10" left="120" top="466" width="215" height="30"/>
+        <Static id="Static01_00" taborder="12" text="이름" left="40" top="114" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Static id="Static01_01" taborder="13" text="나이" left="40" top="158" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Static id="Static01_02" taborder="14" text="전화번호" left="40" top="290" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Static id="Static01_03" taborder="15" text="성별" left="40" top="202" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Static id="Static01_04" taborder="16" text="주소" left="40" top="246" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Static id="Static01_05" taborder="17" text="이메일" left="40" top="334" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Static id="Static01_06" taborder="18" text="희망부서" left="40" top="378" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Static id="Static01_07" taborder="19" text="학력" left="40" top="422" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Static id="Static01_08" taborder="20" text="경력" left="40" top="466" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Button id="Button00" taborder="21" text="저장" left="77" top="510" width="93" height="26" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Button00_onclick"/>
+        <Button id="Button00_00" taborder="22" text="취소" left="207" top="510" width="93" height="26" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="p_code" propid="value" datasetid="gds_resume" columnid="P_CODE"/>
+      <BindItem id="item1" compid="p_name" propid="value" datasetid="gds_resume" columnid="P_NAME"/>
+      <BindItem id="item2" compid="p_age" propid="value" datasetid="gds_resume" columnid="P_AGE"/>
+      <BindItem id="item3" compid="p_gender" propid="value" datasetid="gds_resume" columnid="P_GENDER"/>
+      <BindItem id="item4" compid="p_address" propid="value" datasetid="gds_resume" columnid="P_ADDRESS"/>
+      <BindItem id="item5" compid="p_tel" propid="value" datasetid="gds_resume" columnid="P_TEL"/>
+      <BindItem id="item6" compid="p_email" propid="value" datasetid="gds_resume" columnid="P_EMAIL"/>
+      <BindItem id="item7" compid="p_dept" propid="value" datasetid="gds_resume" columnid="P_DEPT"/>
+      <BindItem id="item8" compid="p_last_school" propid="value" datasetid="gds_resume" columnid="P_LAST_SCHOOL"/>
+      <BindItem id="item9" compid="p_career" propid="value" datasetid="gds_resume" columnid="P_CAREER"/>
+    </Bind>
+    <Script type="xscript5.1"><![CDATA[this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var age = parseInt(this.p_age.value);
+	this.ds_resume.setColumn(0,"P_CODE",this.p_code.value);
+	this.ds_resume.setColumn(0,"P_NAME",this.p_name.value);
+	this.ds_resume.setColumn(0,"P_AGE",age);
+	this.ds_resume.setColumn(0,"P_GENDER",this.p_gender.value);
+	this.ds_resume.setColumn(0,"P_ADDRESS",this.p_address.value);
+	this.ds_resume.setColumn(0,"P_TEL",this.p_tel.value);
+	this.ds_resume.setColumn(0,"P_EMAIL",this.p_email.value);
+	this.ds_resume.setColumn(0,"P_DEPT",this.p_dept.value);
+	this.ds_resume.setColumn(0,"P_LAST_SCHOOL",this.p_last_school.value);
+	this.ds_resume.setColumn(0,"P_CAREER",this.p_career.value);
+	
+ 	this.transaction("InsertResume",
+ 					"svcNewemp::insertResume",
+ 					"ds_resume=ds_resume",
+ 					"",
+ 					"",
+ 					"fn_callback");
+	this.close();
+};
+
+
+this.fn_callback = function (trID , ErrorCode , ErrorMsg)
+{
+	
+	if(trID=="InsertResume"){ //콜백 하나 적고 파라미터로 svcid 넘겨주어 구분자로 사용하는 방식
+		if (ErrorCode!=0){ //성공한 것 0
+			alert(" 등록 실패 : "+ErrorMsg);	
+		}else{
+			nexacro.getApplication().trace("등록 성공");
+		}
+	}	
+}]]></Script>
+    <Objects>
+      <Dataset id="ds_resume">
+        <ColumnInfo>
+          <Column id="P_CODE" type="STRING" size="256"/>
+          <Column id="P_NAME" type="STRING" size="256"/>
+          <Column id="P_AGE" type="INT" size="256"/>
+          <Column id="P_GENDER" type="STRING" size="256"/>
+          <Column id="P_ADDRESS" type="STRING" size="256"/>
+          <Column id="P_TEL" type="STRING" size="256"/>
+          <Column id="P_EMAIL" type="STRING" size="256"/>
+          <Column id="P_DEPT" type="STRING" size="256"/>
+          <Column id="P_LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="P_CAREER" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script version="1.0" type="xscript5.1"><![CDATA[include "Lib::commFrame.xjs";
+include "Lib::commForm.xjs";
+include "Lib::commTrans.xjs";
+include "Lib::commDataset.xjs";
+include "Lib::commGrid.xjs";
+include "Lib::commString.xjs";
+include "Lib::commDate.xjs";
+include "Lib::commUtility.xjs";
+include "Lib::commFile.xjs";
+include "Lib::popupModal.xjs";
+include "Lib::commonOpen.xjs";]]></Script>

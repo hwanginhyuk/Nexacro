@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="empmanage" width="1270" height="930" titletext="New Form" onload="dailyLaborEmpManage_onload">
+    <Layouts>
+      <Layout height="930" width="1270" stepcount="0" stepindex="1">
+        <Static id="Static00" taborder="0" text="일용근로 급여등록" left="53" top="20" width="150" height="35" font="18px &quot;나눔고딕&quot;" onclick="Static00_onclick"/>
+        <Grid id="grd_dailyEmpList00" taborder="1" left="53.00" top="84" width="1167" height="226" autofittype="col" binddataset="ds_dailyLaborEmp" oncellposchanged="grd_dailyEmpList_oncellposchanged">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="35" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원코드" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="1" text="사원명" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="2" text="내/외국인"/>
+                <Cell col="3" text="프로젝트"/>
+                <Cell col="4" text="부서"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMPLOYEE_ID" edittype="text" textAlign="center" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="1" text="bind:EMPLOYEE_NAME" edittype="text" textAlign="center" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="2" text="bind:NATIONALITY"/>
+                <Cell col="3" text="bind:PROJECT"/>
+                <Cell col="4" text="bind:DEPARTMENT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_dailyLaborEmp">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_ID" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENTIAL_NUMBER" type="STRING" size="256"/>
+          <Column id="NATIONALITY" type="STRING" size="256"/>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+          <Column id="PROJECT" type="STRING" size="256"/>
+          <Column id="WORK_START_DATE" type="STRING" size="256"/>
+          <Column id="WORK_END_DATE" type="STRING" size="256"/>
+          <Column id="EMPLOYMENT_INSURANCE_ELIGIBILITY" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY_TYPE" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY" type="INT" size="256"/>
+          <Column id="OVERTIME_PAY_RATE" type="INT" size="256"/>
+          <Column id="NIGHT_PAY_RATE" type="INT" size="256"/>
+          <Column id="BANK_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NUMBER" type="STRING" size="256"/>
+          <Column id="ACCOUNT_HOLDER" type="STRING" size="256"/>
+          <Column id="PHONE_NUMBER" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyLaborEmpReg">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_ID" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENTIAL_NUMBER" type="STRING" size="256"/>
+          <Column id="NATIONALITY" type="STRING" size="256"/>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+          <Column id="PROJECT" type="STRING" size="256"/>
+          <Column id="WORK_START_DATE" type="STRING" size="256"/>
+          <Column id="WORK_END_DATE" type="STRING" size="256"/>
+          <Column id="EMPLOYMENT_INSURANCE_ELIGIBILITY" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY_TYPE" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY" type="INT" size="256"/>
+          <Column id="OVERTIME_PAY_RATE" type="INT" size="256"/>
+          <Column id="NIGHT_PAY_RATE" type="INT" size="256"/>
+          <Column id="BANK_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NUMBER" type="STRING" size="256"/>
+          <Column id="ACCOUNT_HOLDER" type="STRING" size="256"/>
+          <Column id="PHONE_NUMBER" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs"; // 모달창 라이브러리
+
+var ds_dailyLaborEmpReg = new Dataset;
+
+this.dailyLaborEmpManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction("getDailyLaborEmpList",
+					 "svcDailyLaboremp::emp",
+					 "",
+					 "ds_dailyLaborEmp=gds_dailylaboremp",
+					 "",
+					 "fn_callback");
+};
+
+this.btn_saveEmpList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_dailyLaborEmpReg.setColumn(0,"EMPLOYEE_ID",this.Div00.form.edt_employeeId.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"EMPLOYEE_NAME",this.Div00.form.edt_employeeName.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"RESIDENTIAL_NUMBER",this.Div00.form.medt_residentialNumber.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"NATIONALITY",this.Div00.form.cmb_nationality.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"DEPARTMENT",this.Div00.form.cmb_departMent.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"PROJECT",this.Div00.form.cmb_project.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"WORK_START_DATE",this.Div00.form.calen_workStartDate.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"WORK_END_DATE",this.Div00.form.calen_workEndDate.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"EMPLOYMENT_INSURANCE_ELIGIBILITY",this.Div00.form.cmb_insuranceEligibility.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"NORMAL_PAY_TYPE",this.Div00.form.cmb_normalPayType.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"NORMAL_PAY",this.Div00.form.edt_normalPay.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"OVERTIME_PAY_RATE",this.Div00.form.edt_overtimePayRate.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"NIGHT_PAY_RATE",this.Div00.form.edt_nightPayRate.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"BANK_NAME",this.Div00.form.cmb_bankName.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"ACCOUNT_NUMBER",this.Div00.form.edt_accountNumber.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"ACCOUNT_HOLDER",this.Div00.form.edt_accountHolder.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"PHONE_NUMBER",this.Div00.form.medt_phoneNumber.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"EMAIL",this.Div00.form.edt_email.value);
+	this.ds_dailyLaborEmpReg.setColumn(0,"STATUS","N");
+	trace("ds_dailyLaborEmpReg =", ds_dailyLaborEmpReg);
+};
+]]></Script>
+  </Form>
+</FDL>

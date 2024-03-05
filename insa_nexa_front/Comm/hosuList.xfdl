@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="codeList" width="400" height="230" titletext="New Form" onload="codeList_onload">
+    <Layouts>
+      <Layout height="230" mobileorientation="landscape" width="400">
+        <Grid id="Grid1" taborder="0" left="0" top="0" width="400" height="230" binddataset="ds_hosuList" autosizingtype="none" autofittype="col" oncellclick="Grid1_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="136"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="호수"/>
+                <Cell col="1" text="제목"/>
+                <Cell col="2" text="발령상세"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:HOSU"/>
+                <Cell col="1" text="bind:TITLE"/>
+                <Cell col="2" text="bind:APPOINTMENT_DETAIL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_hosuList">
+        <ColumnInfo>
+          <Column id="HOSU" type="STRING" size="256"/>
+          <Column id="TITLE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_TYPE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DETAIL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[var nexa=nexacro.getApplication();
+
+this.codeList_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction("getAppointmentInfolist",
+					 "svcEmpinfomgmt::appointment5",
+					 "",
+					 "ds_hosuList=gds_appointmentinfo",
+					 "searchType=승인대기",
+					 "fn_callback");	
+}
+this.Grid1_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.opener.Div00_00.form.Tab00_00.Tabpage3.form.hosu.set_value(this.Grid1.getCellText(e.row,0));
+    this.close();
+};]]></Script>
+  </Form>
+</FDL>

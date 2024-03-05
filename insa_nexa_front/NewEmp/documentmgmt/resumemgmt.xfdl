@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="resumemgmt" width="1280" height="720" titletext="New Form" onload="resumemgmt_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Combo id="year" taborder="0" text="" left="44" top="110" width="186" height="31" font="15px/normal &quot;나눔스퀘어&quot;" innerdataset="Dataset00" datacolumn="content" value="" index="-1" displaynulltext="년도를 선택 해주세요."/>
+        <Combo id="half" taborder="1" left="290" top="110" width="180" height="29" font="15px/normal &quot;나눔스퀘어&quot;" innerdataset="Dataset01" datacolumn="content" text="" value="" index="-1" displaynulltext="분기를 선택 해주세요."/>
+        <Grid id="Grid00" taborder="2" left="41" top="165" width="799" height="405" binddataset="gds_resume" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="임시코드"/>
+                <Cell col="1" text="이름"/>
+                <Cell col="2" text="나이"/>
+                <Cell col="3" text="성별"/>
+                <Cell col="4" text="주소"/>
+                <Cell col="5" text="전화번호"/>
+                <Cell col="6" text="이메일"/>
+                <Cell col="7" text="부서"/>
+                <Cell col="8" text="학력"/>
+                <Cell col="9" text="경력"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:P_CODE"/>
+                <Cell col="1" text="bind:P_NAME"/>
+                <Cell col="2" text="bind:P_AGE" textAlign="left"/>
+                <Cell col="3" text="bind:P_GENDER"/>
+                <Cell col="4" text="bind:P_ADDRESS"/>
+                <Cell col="5" text="bind:P_TEL"/>
+                <Cell col="6" text="bind:P_EMAIL"/>
+                <Cell col="7" text="bind:P_DEPT"/>
+                <Cell col="8" text="bind:P_LAST_SCHOOL"/>
+                <Cell col="9" text="bind:P_CAREER"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="3" text=" 채용 이력서" left="41" top="40" width="219" height="60" onclick="Static00_onclick" font="bold 25px/normal &quot;나눔스퀘어&quot;"/>
+        <Button id="Button00" taborder="4" text="조회" left="480" top="110" width="66" height="30" font="15px/normal &quot;나눔스퀘어&quot;" onclick="Button00_onclick"/>
+        <Static id="Static01" taborder="5" text="년도" left="237" top="110" width="43" height="30" font="15px/normal &quot;나눔스퀘어&quot;" onclick="Static01_onclick"/>
+        <Button id="Button00_00" taborder="6" text="등록" left="556" top="110" width="66" height="30" font="15px/normal &quot;나눔스퀘어&quot;" onclick="Button00_00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs"
+
+this.resumemgmt_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	//this.year.set_index(0);
+	//this.half.set_index(0);
+	//콤보박스에  displaynulltext로 설정
+}
+
+//조회버튼
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("resume",
+					"svcNewemp::resumemgmt",
+					"",
+					"gds_resume=ds_resume",
+					"sendyear='"+this.year.value+"' half='"+this.half.value+"' workplaceCode=COM000",
+					"fn_callback");
+};
+
+this.fn_callback =function(trID ,ErrorCode ,ErrorMsg)
+{
+	 if(ErrorCode!=0){
+         alert("조회 실패 : "+ErrorMsg);
+      }else{ 
+         alert(" 조회 성공 ");
+      }
+}
+
+//이력서 수정 창 띄우기	
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.gfnOpen("modify", "Base::resumModal.xfdl", "", "");
+};
+
+
+this.Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	
+	this.gfnOpen("InsertResume", "Base::resume_InsertModal.xfdl", "", "");
+};
+]]></Script>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="content" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="content">2020</Col>
+          </Row>
+          <Row>
+            <Col id="content">2021</Col>
+          </Row>
+          <Row>
+            <Col id="content">2022</Col>
+          </Row>
+          <Row>
+            <Col id="content">2023</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="content" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="content">상반기</Col>
+          </Row>
+          <Row>
+            <Col id="content">하반기</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="gds_resume">
+        <ColumnInfo>
+          <Column id="P_CODE" type="STRING" size="256"/>
+          <Column id="P_NAME" type="STRING" size="256"/>
+          <Column id="P_AGE" type="STRING" size="256"/>
+          <Column id="P_GENDER" type="STRING" size="256"/>
+          <Column id="P_ADDRESS" type="STRING" size="256"/>
+          <Column id="P_TEL" type="STRING" size="256"/>
+          <Column id="P_EMAIL" type="STRING" size="256"/>
+          <Column id="P_DEPT" type="STRING" size="256"/>
+          <Column id="P_LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="P_CAREER" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <VirtualFile id="VirtualFile00"/>
+    </Objects>
+  </Form>
+</FDL>

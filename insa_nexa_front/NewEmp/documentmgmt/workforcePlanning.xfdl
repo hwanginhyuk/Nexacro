@@ -1,0 +1,542 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="workforcePlanning" width="1060" height="900" titletext="New Form" onload="workforcePlanning_onload">
+    <Layouts>
+      <Layout height="900" width="1060" mobileorientation="landscape">
+        <Div id="Div" taborder="0" left="0" top="0" width="1060" height="900" text="">
+          <Layouts>
+            <Layout>
+              <Button id="conditionFormButton" taborder="0" text="전송" left="250" top="570" width="50" height="30" onclick="Div_conditionFormButton_onclick" font="18px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+              <Button id="resetButton" taborder="1" text="취소" left="305" top="570" width="50" height="30" onclick="Div_resetButton_onclick" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Static id="Static00" taborder="2" text="■오시는 길" left="40" top="0" width="105" height="50" textAlign="center" font="18px/normal &quot;나눔고딕&quot;" onclick="Div_Static00_onclick"/>
+              <Static id="Static01" taborder="3" text="■기초 조건 양식" left="40" top="370" width="150" height="50" textAlign="center" font="18px/normal &quot;나눔고딕&quot;" onclick="Div_Static01_onclick"/>
+              <Static id="Static02" taborder="4" text="■년도별 인적 사항 조건" left="40" top="615" width="200" height="50" textAlign="center" font="18px/normal &quot;나눔고딕&quot;" onclick="Div_Static02_onclick"/>
+              <Static id="Static03" taborder="5" text="최소 나이" left="60" top="430" width="90" height="30" font="18px/normal &quot;나눔고딕&quot;" textAlign="center" background="#d3d3d3" onclick="Div_Static03_onclick"/>
+              <Static id="Static04" taborder="6" text="채용 년도" left="60" top="465" width="90" height="30" font="18px/normal &quot;나눔고딕&quot;" textAlign="center" background="#d3d3d3" onclick="Div_Static04_onclick"/>
+              <Static id="Static05" taborder="7" text="경력" left="60" top="500" width="90" height="30" font="18px/normal &quot;나눔고딕&quot;" textAlign="center" background="#d3d3d3" onclick="Div_Static05_onclick"/>
+              <Static id="Static06" taborder="8" text="학력" left="60" top="535" width="90" height="30" font="18px/normal &quot;나눔고딕&quot;" textAlign="center" onclick="Div_Static06_onclick" background="#d3d3d3"/>
+              <Static id="Static07" taborder="9" text="최대 나이" left="310" top="430" width="90" height="30" font="18px/normal &quot;나눔고딕&quot;" textAlign="center" background="#d3d3d3" onclick="Div_Static07_onclick"/>
+              <Static id="Static08" taborder="10" text="반기" left="310" top="465" width="90" height="30" font="18px/normal &quot;나눔고딕&quot;" onclick="Div_Static08_onclick" textAlign="center" background="#d3d3d3"/>
+              <Static id="Static09" taborder="11" text="모집 부문" left="310" top="500" width="90" height="30" font="18px/normal &quot;나눔고딕&quot;" textAlign="center" background="#d3d3d3" onclick="Div_Static09_onclick"/>
+              <Static id="Static10" taborder="12" text="채용 양식" left="310" top="535" width="90" height="30" font="18px/normal &quot;나눔고딕&quot;" textAlign="center" background="#d3d3d3" onclick="Div_Static10_onclick"/>
+              <Spin id="Spin00" taborder="13" left="160" top="430" width="130" height="30" onchanged="Div_Spin00_onchanged" min="19" max="100" value="20" font="18px/normal &quot;나눔고딕&quot;" readonly="false"/>
+              <Spin id="Spin00_00" left="410" top="430" width="130" height="30" taborder="14" onchanged="Div_Spin00_00_onchanged" min="19" max="100" value="30" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Spin id="Spin00_01" left="160" top="465" width="130" height="30" taborder="15" onchanged="Div_Spin00_01_onchanged" value="2022" min="2000" max="2100" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Edit id="Edit00" taborder="16" left="160" top="500" width="130" height="30" font="18px/normal &quot;나눔고딕&quot;" onchanged="Div_Edit00_onchanged"/>
+              <FileUpload id="FileUpload" taborder="17" left="410" top="535" width="210" height="36" onitemchanged="Div_FileUpload_onitemchanged" itemheight="30" buttontext="파일 선택" buttonsize="80" font="14px/normal &quot;나눔고딕&quot;"/>
+              <GoogleMap id="GoogleMap" taborder="18" left="312" top="25" width="500" height="350" onclick="Div_GoogleMap_onclick"/>
+              <Button id="ShowMapButton" taborder="19" text="Show Map" left="190" top="30" width="112" height="42" onclick="Div_ShowMapButton_onclick"/>
+              <Grid id="TermsListGrid" taborder="20" left="60" top="675" width="768" height="195" binddataset="ds_termsList" autoenter="none" font="12px/normal &quot;나눔고딕&quot;">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="190"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="채용년도"/>
+                      <Cell col="1" text="반기"/>
+                      <Cell col="2" text="최소나이"/>
+                      <Cell col="3" text="최대나이"/>
+                      <Cell col="4" text="모집부문"/>
+                      <Cell col="5" text="경력"/>
+                      <Cell col="6" text="학력"/>
+                      <Cell col="7" text="채용양식"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:YEAR" textAlign="left" edittype="none" displaytype="text"/>
+                      <Cell col="1" text="bind:HALF"/>
+                      <Cell col="2" text="bind:MIN_AGE" textAlign="left"/>
+                      <Cell col="3" text="bind:MAX_AGE" textAlign="left"/>
+                      <Cell col="4" text="bind:DEPT"/>
+                      <Cell col="5" text="bind:CAREER"/>
+                      <Cell col="6" text="bind:LAST_SCHOOL"/>
+                      <Cell col="7" text="bind:HWP_FILE"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Combo id="Combo00" taborder="21" left="160" top="535" width="130" height="30" index="2" onitemchanged="Div_Combo00_onitemchanged" displayrowcount="5" value="고졸" text="고졸" font="18px/normal &quot;나눔고딕&quot;" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">초졸</Col>
+                      <Col id="datacolumn">초졸</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">중졸</Col>
+                      <Col id="datacolumn">중졸</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">고졸</Col>
+                      <Col id="datacolumn">고졸</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2년제대학</Col>
+                      <Col id="datacolumn">2년제대학</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">4년제대학</Col>
+                      <Col id="datacolumn">4년제대학</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Combo id="Combo01" taborder="22" left="410" top="465" width="130" height="30" value="상반기(1~6월)" text="상반기(1~6월)" index="0" font="13.5px/normal &quot;나눔고딕&quot;" cursor="none" onitemchanged="Div_Combo01_onitemchanged" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">상반기</Col>
+                      <Col id="datacolumn">상반기</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">하반기</Col>
+                      <Col id="datacolumn">하반기</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Combo id="Combo02" taborder="23" left="410" top="500" width="130" height="30" value="06" text="무관" index="5" font="18px/normal &quot;나눔고딕&quot;" onitemchanged="Div_Combo02_onitemchanged" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">인사팀</Col>
+                      <Col id="datacolumn">인사팀</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">회계팀</Col>
+                      <Col id="datacolumn">회계팀</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">전산팀</Col>
+                      <Col id="datacolumn">전산팀</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">보안팀</Col>
+                      <Col id="datacolumn">보안팀</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">개발팀</Col>
+                      <Col id="datacolumn">개발팀</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">무관</Col>
+                      <Col id="datacolumn">무관</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Button id="Button01" taborder="24" text="삭제" left="760" top="635" width="50" height="30" onclick="Div_Button01_onclick" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Button id="Button00" taborder="25" text="Add Maker" left="190" top="82" width="112" height="42" onclick="Div_Button00_onclick"/>
+              <Button id="Button03" taborder="26" text="Del Maker" left="190" top="134" width="112" height="42" onclick="Div_Button03_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/*■오시는 길*/
+this.Div_Static00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+this.Div_GoogleMap_onclick = function(obj:nexacro.GoogleMap,e:nexacro.GoogleMapClickEventInfo) //폼에 GoogleMap과 Button 컴포넌트 생성
+{
+};
+/*NRE에서 지원X 크롬 작동O*/
+this.Div_ShowMapButton_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Div.form.GoogleMap.set_apikey( "AIzaSyAsYvZBMu0P0w3WR2BU3l7i3phXfJGNZO8" ); //APIKey설정하는 속성, load() 최초 실행 시 한번 적용
+	
+	this.Div.form.GoogleMap.set_showzoom(true); //지도상에 줌 버튼을 표시
+	this.Div.form.GoogleMap.set_apikey(nexacro.getApplication().googleMapAPIKey); 
+	this.Div.form.GoogleMap.load(false, 35.159755, 128.1062387, 0, 18); //구글 지도를 화면에 로딩
+	//사용자 gps 사용 여부, 북위 좌표, 동경 좌표, 지도 모드, 줌 레벨
+};
+/*Add Maker*/
+this.Div_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo) //지도에 마커 추가(지도의 특정 좌표에 마커를 표시)
+{
+	var objGoogleMapMaker = new nexacro.GoogleMapMarker();
+	
+	objGoogleMapMaker.set_latitude(35.159755);
+	objGoogleMapMaker.set_longitude(128.1062387);
+	objGoogleMapMaker.set_text("Default Marker");
+	objGoogleMapMaker.set_draggable(true);
+	objGoogleMapMaker.set_visible(true);
+	
+	this.Div.form.GoogleMap.addItem("MapMarker", objGoogleMapMaker);
+	
+	this.Div.form.Button00.set_enable(false);
+	this.Div.form.Button03.set_enable(true);
+};
+/*Del Marker*/
+this.Div_Button03_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo) //지도에 마커 삭제
+{
+	this.Div.form.GoogleMap.removeItem("MapMarker");
+
+	this.Div.form.Button00.set_enable(true);
+	this.Div.form.Button03.set_enable(false);
+};
+
+/*■기초조건양식*/
+this.Div_Static01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+/*최소나이*/
+this.Div_Static03_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div_Spin00_onchanged = function(obj:nexacro.Spin,e:nexacro.ChangeEventInfo)
+{
+	
+};
+/*최대나이*/
+this.Div_Static07_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div_Spin00_00_onchanged = function(obj:nexacro.Spin,e:nexacro.ChangeEventInfo)
+{
+	
+};
+/*채용 년도*/
+this.Div_Static04_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div_Spin00_01_onchanged = function(obj:nexacro.Spin,e:nexacro.ChangeEventInfo)
+{
+	
+};
+/*반기*/
+this.Div_Static08_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div_Combo01_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+};
+/*경력*/
+this.Div_Static05_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div_Edit00_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+/*모집 부문*/
+this.Div_Static09_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div_Combo02_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+};
+/*학력*/
+this.Div_Static06_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div_Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+};
+/*채용 양식*/
+this.Div_Static10_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div_FileUpload_onitemchanged = function(obj:nexacro.FileUpload,e:nexacro.FileUploadItemChangeEventInfo)
+{
+	
+};
+
+/*전송 버튼*/
+this.Div_conditionFormButton_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.Div.form.Edit00.value==null){alert("경력을 입력해주세요."); return;
+	}if(this.Div.form.FileUpload.value==null){alert("파일을 선택해주세요."); return;
+}else{
+	this.ds_condition.setColumn(0,"MIN_AGE",this.Div.form.Spin00.value); //setColumn : 값을 설정 / this.데이터셋명.setColumn(열 숫자, 컬럼명, 바꿀 값);
+	this.ds_condition.setColumn(0,"MAX_AGE",this.Div.form.Spin00_00.value);
+	this.ds_condition.setColumn(0,"YEAR",this.Div.form.Spin00_01.value);
+	this.ds_condition.setColumn(0,"HALF",this.Div.form.Combo01.value);
+	this.ds_condition.setColumn(0,"CAREER",this.Div.form.Edit00.value);
+	this.ds_condition.setColumn(0,"DEPT",this.Div.form.Combo02.value);
+	this.ds_condition.setColumn(0,"LAST_SCHOOL",this.Div.form.Combo00.value);
+	this.ds_condition.setColumn(0,"HWP_FILE",this.Div.form.FileUpload.value);
+	var workplaceCode = nexacro.getApplication().gds_emp.getColumn(0,"WORKPLACE_CODE"); //getColumn : 값을 가져옴 / this.데이터셋명.getColumn(열 숫자, 컬럼명);
+	this.ds_condition.setColumn(0,"WORKPLACE_CODE",workplaceCode);
+	
+	this.transaction("conditionID", //svc id - transaction을 구분하기 위한
+					 "svcDocumentmgmt::condition", //svc url - prefix id 사용한 것(defalt URL 정보 등록되어 있음, 직접 경로를 작성한 효과) //http://localhost:9090/documentmgmt/condition
+					 "gds_condition=ds_condition",//서<-클(저장) - client에서 받을 dataset명, server에서 보내는 dataset명 *TO에 @Dataset(name="gds_condition")
+					 "", //클<-서(조회)
+					 "", //조회 조건 파라미터
+					 "fn_callback"); //문장의 끝 function
+	}
+};
+
+/*취소 버튼*/
+this.Div_resetButton_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Div.form.Spin00.set_value("20"); //set_value : value에 원하는 값 넣을 수 있음
+	this.Div.form.Spin00_00.set_value("30");
+	this.Div.form.Spin00_01.set_value("2022");
+	
+	this.Div.form.Edit00.set_value("");
+	
+	this.Div.form.Combo01.set_value("");
+	this.Div.form.Combo02.set_value("");
+	this.Div.form.Combo00.set_value("");
+	
+	//this.Div.form.FileUpload.set_value("");
+	
+};
+
+/*■년도별 인적사항 조건*/
+this.Div_Static02_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+/*조회*/
+this.workforcePlanning_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+		"termslistID", //svc id
+		"svcDocumentmgmt::termslist", //svc url
+		"", //서<-클(저장)
+		"ds_termsList=gds_condition", //클<-서(조회) *TO에 @Dataset(name="gds_condition")
+		"workplaceCode="+nexacro.getApplication().gds_emp.getColumn(0,"WORKPLACE_CODE"), //조회 조건 파라미터
+		"fn_callback");
+};
+
+
+/*콜백 - 3개 파라미터가 넘어옴, svcid는 트랜잭션에서 넘겨주는 첫번째 인자. ecd, emsg는 서버 jsp단에서 넘겨주는 것*/
+this.fn_callback = function (trID , ErrorCode , ErrorMsg)
+{
+	
+	if(trID=="termslistID"){ //콜백 하나 적고 파라미터로 svcid 넘겨주어 구분자로 사용하는 방식
+		if (ErrorCode!=0){ //성공한 것 0
+			alert("조회 실패 : "+ErrorMsg);	
+		}else{
+			nexacro.getApplication().trace("조회 성공");
+		}
+	}
+	
+	if(trID=="conditionID"){
+		if (ErrorCode!=0){
+			alert("동일한 채용 정보가 존재합니다.");	
+		}else{
+			alert("신입사원 채용 정보를 저장하였습니다.");	
+		}this.reload();
+	}
+	
+	if(trID == "termsdeleteID"){
+		if(ErrorCode!=0){
+			return this.alert("삭제 실패 : "+ ErrorMsg );
+		}
+		this.alert("신입사원 채용 정보를 삭제하였습니다.");
+		this.reload();
+	}
+};
+
+this.Div_Edit01_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+
+
+/*삭제 버튼*/
+this.Div_Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var termsRow = this.Div.form.TermsListGrid.getSelectedDatasetRows();
+	var workplaceCode = nexacro.getApplication().gds_emp.getColumn(0,"WORKPLACE_CODE");
+	var year = this.ds_termsList.getColumn(this.ds_termsList.rowposition,"YEAR"); //getColumn : 구해온 row의 인덱스 값의 칼럼 값 반환; getColumn(ROW, IDX)
+	var half = this.ds_termsList.getColumn(this.ds_termsList.rowposition,"HALF");
+	var dept = this.ds_termsList.getColumn(this.ds_termsList.rowposition,"DEPT");
+	this.confirm("삭제 하시겠습니까?"); //confirm으로 사용자의 선택을 통해 진행
+	trace(year+"년 " +dept+" " +half+" 삭제 성공");
+	this.ds_termsList.deleteMultiRows(termsRow);   
+	
+	var id = "termsdeleteID"; //svc id
+	var url = "svcDocumentmgmt::deleteterms"; //svc url
+	var resData = "";
+	var reqData = "";
+	var args = "workplaceCode='"+workplaceCode+"' dept='"+dept+"' year='"+year+"' half='"+half+"'";
+	var callback = "fn_callback";
+	this.transaction(id, url, resData, reqData, args, callback);
+};
+
+/*/취소 버튼/*/
+this.Div_resetButton_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Div.form.Spin00.set_value("20"); //set_value : value에 원하는 값 넣을 수 있음
+	this.Div.form.Spin00_00.set_value("30");
+	this.Div.form.Spin00_01.set_value("2022");
+	
+	this.Div.form.Edit00.set_value("");
+	
+	this.Div.form.Combo01.set_value("");
+	this.Div.form.Combo02.set_value("");
+	this.Div.form.Combo00.set_value("");
+	
+	this.Div.form.FileUpload.deleteItem(0); //FileUpload 에서 인수로 전달된 인덱스의 아이템을 삭제
+	this.reload();
+};]]></Script>
+    <Objects>
+      <Dataset id="LAST_SCHOOL">
+        <ColumnInfo>
+          <Column id="LS_CODE" type="STRING" size="256"/>
+          <Column id="LS_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="LS_CODE">01</Col>
+            <Col id="LS_NAME">초졸</Col>
+          </Row>
+          <Row>
+            <Col id="LS_CODE">02</Col>
+            <Col id="LS_NAME">중졸</Col>
+          </Row>
+          <Row>
+            <Col id="LS_CODE">03</Col>
+            <Col id="LS_NAME">고졸</Col>
+          </Row>
+          <Row>
+            <Col id="LS_CODE">04</Col>
+            <Col id="LS_NAME">2년제 대학</Col>
+          </Row>
+          <Row>
+            <Col id="LS_CODE">05</Col>
+            <Col id="LS_NAME">4년제 대학</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="HALF">
+        <ColumnInfo>
+          <Column id="HALF_CD" type="STRING" size="256"/>
+          <Column id="HALF_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="HALF_CD">01</Col>
+            <Col id="HALF_NAME">상반기(1~6월)</Col>
+          </Row>
+          <Row>
+            <Col id="HALF_CD">02</Col>
+            <Col id="HALF_NAME">하반기(7~12월)</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="DEPT">
+        <ColumnInfo>
+          <Column id="DEPT_CD" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DEPT_CD">01</Col>
+            <Col id="DEPT_NAME">인사팀</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">02</Col>
+            <Col id="DEPT_NAME">회계팀</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">03</Col>
+            <Col id="DEPT_NAME">전산팀</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">04</Col>
+            <Col id="DEPT_NAME">보안팀</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">05</Col>
+            <Col id="DEPT_NAME">개발팀</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">06</Col>
+            <Col id="DEPT_NAME">무관</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_termsList">
+        <ColumnInfo>
+          <Column id="YEAR" type="INT" size="256"/>
+          <Column id="HALF" type="STRING" size="256"/>
+          <Column id="MIN_AGE" type="INT" size="256"/>
+          <Column id="MAX_AGE" type="INT" size="256"/>
+          <Column id="DEPT" type="STRING" size="256"/>
+          <Column id="CAREER" type="STRING" size="256"/>
+          <Column id="LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="HWP_FILE" type="STRING" size="256"/>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_condition">
+        <ColumnInfo>
+          <Column id="MIN_AGE" type="INT" size="256"/>
+          <Column id="MAX_AGE" type="INT" size="256"/>
+          <Column id="YEAR" type="INT" size="256"/>
+          <Column id="HALF" type="STRING" size="256"/>
+          <Column id="CAREER" type="STRING" size="256"/>
+          <Column id="DEPT" type="STRING" size="256"/>
+          <Column id="LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="HWP_FILE" type="STRING" size="256"/>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div.form.Spin00" propid="accessibilityaction" datasetid="ds_condition" columnid="MIN_AGE"/>
+      <BindItem id="item1" compid="Div.form.Spin00_00" propid="accessibilityaction" datasetid="ds_condition" columnid="MAX_AGE"/>
+      <BindItem id="item2" compid="Div.form.Spin00_01" propid="accessibilityaction" datasetid="ds_condition" columnid="YEAR"/>
+      <BindItem id="item3" compid="Div.form.Combo01" propid="acceptvaluetype" datasetid="ds_condition" columnid="HALF"/>
+      <BindItem id="item4" compid="Div.form.Edit00" propid="accessibilityaction" datasetid="ds_condition" columnid="CAREER"/>
+      <BindItem id="item5" compid="Div.form.Combo02" propid="acceptvaluetype" datasetid="ds_condition" columnid="DEPT"/>
+      <BindItem id="item6" compid="Div.form.Combo00" propid="acceptvaluetype" datasetid="ds_condition" columnid="LAST_SCHOOL"/>
+      <BindItem id="item7" compid="Div.form.FileUpload" propid="accessibilityaction" datasetid="ds_condition" columnid="HWP_FILE"/>
+    </Bind>
+  </Form>
+</FDL>

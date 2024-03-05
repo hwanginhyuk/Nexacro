@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="excusedAttnd" width="980" height="540" titletext="New Form" onload="excusedAttnd_onload">
+    <Layouts>
+      <Layout height="540" width="980">
+        <Div id="Div00_00" taborder="0" text="" left="20" top="30" width="1080" height="550" font="bold 14px/normal &quot;나눔고딕&quot;">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text=" ◼출장 및 교육 신청/조회" left="8" top="0" width="214" height="49" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+              <Tab id="Tab00" taborder="1" tabindex="0" left="25" top="80" width="945" height="420" onchanged="Div00_00_Tab00_onchanged" font="bold 14px/normal &quot;나눔고딕&quot;">
+                <Tabpages>
+                  <Tabpage id="Tabpage1" text="출장/교육 신청">
+                    <Layouts>
+                      <Layout>
+                        <Div id="Div00" taborder="0" text="Div00" left="-20" top="21" width="925" height="360" font="bold 14px/normal &quot;나눔고딕&quot;">
+                          <Layouts>
+                            <Layout>
+                              <Static id="Static00" taborder="0" text="  근태 구분" left="20" top="16" width="100" height="22" onclick="Div00_Static00_onclick" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                              <Static id="Static01" taborder="1" text="시작 시간" left="240" top="85" width="70" height="26" onclick="Div00_Static01_onclick" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                              <Calendar id="Calendar00" taborder="2" left="315" top="83" height="35" dateformat="hh:mm" editformat="hh:mm" headformat="yyyy.MM" onchanged="Div00_00_Tab00_Tabpage1_Div00_Calendar00_onchanged" font="bold 14px/normal &quot;나눔고딕&quot;" width="120"/>
+                              <Static id="Static02" taborder="3" text="종료 시간" left="470" top="86" width="105" height="29" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                              <Calendar id="Calendar01" taborder="4" left="550" top="83" height="35" dateformat="hh:mm" editformat="hh:mm" font="bold 14px/normal &quot;나눔고딕&quot;" width="120"/>
+                              <Combo id="Combo00" taborder="5" text="Combo00" left="105" top="10" height="35" innerdataset="ds_restType" codecolumn="DETAIL_CODE_NAME" datacolumn="DETAIL_CODE_NAME" onitemchanged="Div00_00_Tab00_Tabpage1_Div00_Combo00_onitemchanged" font="bold 14px/normal &quot;나눔고딕&quot;" width="120"/>
+                              <Static id="Static03" taborder="6" text="사유" left="33" top="151" width="35" height="38" onclick="Div00_Static03_onclick" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                              <Edit id="Edit00" taborder="7" left="100" top="140" width="775" height="95" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                              <Button id="Button00" taborder="8" text="신청하기" left="749" top="241" height="35" onclick="Div00_Button00_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" width="120" background="#6092ff" color="white"/>
+                              <Calendar id="Calendar01_00" taborder="9" left="550" top="10" height="35" onchanged="day_onchanged" font="bold 14px/normal &quot;나눔고딕&quot;" width="120"/>
+                              <Static id="Static01_00" taborder="10" text="종료일" left="470" top="16" width="66" height="29" onclick="Div00_00_Tab00_Tabpage1_Static01_onclick" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                              <Calendar id="Calendar00_00" taborder="11" left="315" top="10" height="35" onchanged="day_onchanged" innerdataset="ds_restAttd" font="bold 14px/normal &quot;나눔고딕&quot;" width="120"/>
+                              <Static id="Static00_00" taborder="12" text="시작일" left="240" top="10" width="70" height="28" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                              <Static id="Static04" taborder="13" text="기간" left="33" top="83" width="50" height="26" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                              <Edit id="Edit02" taborder="14" left="103" top="83" height="35" enable="false" font="bold 14px/normal &quot;나눔고딕&quot;" width="120"/>
+                            </Layout>
+                          </Layouts>
+                        </Div>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="Tabpage2" text="출장/신청 신청 조회">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="Grid00" taborder="4" left="5" top="95" width="900" height="248" binddataset="ds_restAttdlist" oncellclick="Div00_00_Tab00_Tabpage2_Grid00_oncellclick" font="bold 14px/normal &quot;나눔고딕&quot;">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="90"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="근태일련번호" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="1" text="근태 구분" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="2" text="신청일" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="3" text="시작일" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="4" text="종료일" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="5" text="사유" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="6" text="승인상태" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="7" text="반려사유" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="8" text="시작시간" calendardateformat="bind:START_TIME" calendareditformat="bind:START_TIME" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="9" text="종료시간" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                                <Cell col="10" text="일수" background="#6092ff" color="white" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:REST_ATTD_CODE"/>
+                                <Cell col="1" text="bind:REST_TYPE_NAME"/>
+                                <Cell col="2" text="bind:REQUEST_DATE"/>
+                                <Cell col="3" text="bind:START_DATE"/>
+                                <Cell col="4" text="bind:END_DATE"/>
+                                <Cell col="5" text="bind:CAUSE"/>
+                                <Cell col="6" text="bind:APPLOVAL_STATUS"/>
+                                <Cell col="7" text="bind:REJECT_CAUSE"/>
+                                <Cell col="8" text="bind:START_TIME" calendareditformat="bind:START_TIME" calendardateformat="bind:START_DATE"/>
+                                <Cell col="9" text="bind:END_TIME" calendardateformat="bind:END_TIME" calendareditformat="bind:END_TIME"/>
+                                <Cell col="10" text="bind:NUMBER_OF_DAYS"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Static id="Static01" taborder="1" text="조회일자" left="70" top="28" width="60" height="38" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                        <Calendar id="Calendar00" taborder="2" left="185" top="28" width="120" height="35" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                        <Calendar id="Calendar01" taborder="3" left="352" top="28" width="120" height="35" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                        <Button id="Button00" taborder="4" text="조회" left="609" top="29" width="120" height="35" onclick="Div00_00_Tab00_Tabpage2_Button00_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                        <Static id="Static00" taborder="5" text="~" left="325" top="28" width="21" height="33" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                        <Button id="Button01" taborder="6" text="삭제" left="765" top="29" width="120" height="35" onclick="Div00_00_Tab00_Tabpage2_Button01_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_restAttd">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="REST_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="END_TIME" type="STRING" size="256"/>
+          <Column id="NUMBER_OF_DAYS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_restAttdlist">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="REST_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="START_TIME" type="TIME" size="256"/>
+          <Column id="END_TIME" type="TIME" size="256"/>
+          <Column id="NUMBER_OF_DAYS" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_restType">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE_NUMBER" type="STRING" size="256"/>
+          <Column id="CODE_NUMBER" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DETAIL_CODE_NAME">출장</Col>
+            <Col id="CODE_NUMBER">CO-08</Col>
+            <Col id="DETAIL_CODE_NUMBER">ASC002</Col>
+          </Row>
+          <Row>
+            <Col id="DETAIL_CODE_NAME">교육</Col>
+            <Col id="CODE_NUMBER">CO-08</Col>
+            <Col id="DETAIL_CODE_NUMBER">ASC003</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_delrestAttd">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="REST_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="END_TIME" type="STRING" size="256"/>
+          <Column id="NUMBER_OF_DAYS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[var nexa=nexacro.getApplication();
+
+this.excusedAttnd_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.ds_restAttd.setColumn(0,"EMP_CODE",nexa.g_empCode);
+};//ds_restAttd 데이터셋의 첫 번째 열 중 "EMP_CODE" 열에 nexa.g_empCode 값을 설정
+
+this.Div00_00_Tab00_Tabpage1_Div00_Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	var rName = obj.value
+	var rindex = this.ds_restType.findRow("DETAIL_CODE_NAME",rName)
+	var rCode = this.ds_restType.getColumn(rindex,"DETAIL_CODE_NUMBER")
+
+	this.ds_restAttd.setColumn(0,"REST_TYPE_CODE",rCode)
+};
+
+this.day_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	this.countDay();
+};
+
+
+this.countDay = function(){
+if(this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar00_00.value<=this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar01_00.value){
+	var fromDate = new Date();
+    var toDate = new Date();
+    var calDate;
+    var day = 1000*60*60*24;
+    
+    fromDate.setFullYear(this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar00_00.getYear());
+    fromDate.setMonth(this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar00_00.getMonth()-1);
+    fromDate.setDate(this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar00_00.getDay());
+    
+    toDate.setFullYear(this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar01_00.getYear());
+    toDate.setMonth(this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar01_00.getMonth()-1);
+    toDate.setDate(this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar01_00.getDay());
+    
+    calDate = fromDate.getTime() - toDate.getTime();
+    
+    this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Edit02.set_value(Math.abs(calDate/day)+1);
+	}else{
+	this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Edit02.set_value(null);
+	}
+};
+
+
+//근태외 신청 - [신청하기]
+this.Div00_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objDate = new nexacro.Date();
+	var mm = (objDate.getMonth()+1).toString().padLeft(2,"0");
+	var dd = objDate.getDate().toString().padLeft(2,"0");
+	var today = objDate.getYear() + mm + dd;
+	
+
+	//dataset의 칼럼값을 새롭게 세팅해주는 부분
+	
+	this.ds_restAttd.setColumn(0,"APPLOVAL_STATUS","승인대기")
+	this.ds_restAttd.setColumn(0,"REQUEST_DATE",today); //요청날짜 : 오늘날짜로 등록됨
+	if(this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar00.value != null && this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar01.value != null)
+	{//두 달력이 둘다 비어있지 않으면,
+	this.ds_restAttd.setColumn(0,"START_TIME",this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar00.value.substr(0,4))
+	this.ds_restAttd.setColumn(0,"END_TIME",this.Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar01.value.substr(0,4))
+	}//시작일과 종료일을 새롭게 세팅
+
+	this.transaction(
+               "chulzangID"
+               ,"svcAttdmgmt::chulzang" 
+               ,"gds_restAttd=ds_restAttd" //저장시 어떤 dataset을쓸지 설정
+               ,""
+               ,""
+               ,"fn_callback"
+   );
+	
+}
+
+this.fn_callback = function(trID, errorCode, errorMsg)
+{
+	if( trID == "chulzangID")
+	{
+		if(errorCode < 0)
+		{
+			return this.alert("근태 등록 실패 : "+ errorMsg)
+		} else {
+		
+			this.alert("근태 등록 성공")
+			
+			return this.reload();
+		}
+	} else if( trID == "findExAttnd")
+	{
+		if(errorCode < 0)
+		{
+			if(this.Div00_00.form.Tab00.Tabpage2.form.Calendar00.value == null || this.Div00_00.form.Tab00.Tabpage2.form.Calendar00.value == null)
+			{
+				this.alert("조회 날짜를 입력하세요")
+			} else{
+				this.alert("근태 조회 실패 : "+ errorMsg)
+			}
+		}
+	} else if(trID == "delAttn")
+	{
+		if(errorCode < 0){
+			return this.alert("삭제 실패 : "+ errorMsg );
+		}
+		this.alert("삭제완료!");
+		this.searchAttnd();
+		row=null;
+	}
+	
+	
+}
+
+
+// Tabpage2
+
+//근태외신청 - [조회]
+this.Div00_00_Tab00_Tabpage2_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.searchAttnd();
+};
+
+this.searchAttnd = function(){
+	var empCode = nexa.g_empCode //페이지가 로드될때, empCode값을 세팅해놨음
+	var code = this.ds_restType.getColumn(0,"DETAIL_CODE_NUMBER")
+	//ds_restType라는 내부 데이터셋의 첫번째칼럼값 (ASC001,2,3,4가 넘어가는거임- 출장,교육,경조사,,예비군만)
+	var startDate = this.Div00_00.form.Tab00.Tabpage2.form.Calendar00.value //첫번째 달력에 입력된값
+	var endDate = this.Div00_00.form.Tab00.Tabpage2.form.Calendar01.value //두번째 달력에 입력된값
+	
+	this.transaction(
+               "findExAttnd"
+               ,"svcAttdmgmt::excused-attnd2"
+               ,""
+               ,"ds_restAttdlist=gds_restAttd"
+               ,"empCode="+ empCode +		//POST방식의 파라미터들
+			    " code="+ code +
+			    " startDate="+ startDate +
+				" endDate="+ endDate
+               ,"fn_callback"
+   );
+ }
+ 
+ 
+
+this.Div00_00_Tab00_Tabpage2_Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	row = e.row
+};
+
+//삭제버튼
+
+this.Div00_00_Tab00_Tabpage2_Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	   if(row==null){
+			this.alert("삭제할 항목을 선택해주세요.")
+			return
+	   }
+
+ 	if(this.ds_restAttdlist.getColumn(row,"APPLOVAL_STATUS") == "승인대기")
+ 	{
+		var rRow = this.Div00_00.form.Tab00.Tabpage2.form.Grid00.getDatasetRow(row)		
+		trace(rRow)
+
+  		for(var index = 0; index < this.ds_delrestAttd.getColCount(); index++)
+ 		{
+ 			this.ds_delrestAttd.setColumn(0,this.ds_restAttdlist.getColID(index),this.ds_restAttdlist.getColumn(rRow,index))
+ 		}
+
+			this.transaction(
+               "delAttn"
+               ,"svcAttdmgmt::excused-attnd-elimination"
+               ,"gds_restAttd=ds_delrestAttd"
+               ,""
+               ,""
+               ,"fn_callback"
+		)
+	} else {
+		this.alert("승인된 연차는 삭제할 수 없습니다.")
+	}
+}
+
+
+this.Div00_Static00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00_00.form.Tab00.Tabpage1.form.Div00.form.Combo00" propid="value" datasetid="ds_restAttd" columnid="REST_TYPE_NAME"/>
+      <BindItem id="item1" compid="Div00_00.form.Tab00.Tabpage1.form.Div00.form.Edit02" propid="value" datasetid="ds_restAttd" columnid="NUMBER_OF_DAYS"/>
+      <BindItem id="item4" compid="Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar00_00" propid="value" datasetid="ds_restAttd" columnid="START_DATE"/>
+      <BindItem id="item5" compid="Div00_00.form.Tab00.Tabpage1.form.Div00.form.Calendar01_00" propid="value" datasetid="ds_restAttd" columnid="END_DATE"/>
+      <BindItem id="item6" compid="Div00_00.form.Tab00.Tabpage1.form.Div00.form.Edit00" propid="value" datasetid="ds_restAttd" columnid="CAUSE"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="empmanage" width="1270" height="930" titletext="New Form" onload="dailyLaborEmpManage_onload">
+    <Layouts>
+      <Layout height="930" width="1270" stepcount="0" stepindex="1">
+        <Static id="Static00" taborder="0" text="일용직 사원관리" left="53" top="20" width="150" height="35" font="18px &quot;나눔고딕&quot;" onclick="Static00_onclick"/>
+        <Div id="div_searchCondition" taborder="1" text="Div00" left="53.00" top="70" width="1170" height="60" border="1px solid #6092ff" borderRadius="5px">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="부서" left="19" top="8" width="100" height="35" font="14px &quot;나눔고딕&quot;" onclick="div_searchCondition_Static00_onclick"/>
+              <Static id="Static01" taborder="1" text="프로젝트" left="357" top="8" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static02" taborder="2" text="급여유형" left="711" top="8" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Combo id="cmb_project" taborder="3" left="428" top="8" width="200" height="35" text=""/>
+              <Button id="btn_searchDept" taborder="4" left="288" top="8" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" text="" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+              <Button id="btn_searchProject" taborder="5" left="635" top="8" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+              <Combo id="cmb_normalpaytype" taborder="6" left="783" top="8" width="200" height="35"/>
+              <Button id="btn_searchNormalPayType" taborder="7" left="990" top="8" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+              <Button id="btn_search" taborder="8" text="조회" left="1056.00" top="8" width="80" height="35" onclick="div_searchCondition_btn_search_onclick" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+              <Combo id="cmb_dept" taborder="9" left="78.00" top="8" width="200" height="35" text="" onitemchanged="div_searchCondition_cmb_dept_onitemchanged"/>
+            </Layout>
+          </Layouts>
+          <InitValue/>
+        </Div>
+        <Grid id="grd_dailyEmpList" taborder="2" left="53.00" top="154" width="479" height="566" autofittype="col" binddataset="ds_dailyLaborEmp" onclick="dailyLaborEmp_row_onclick" border="1px solid #6092ff" autoenter="none" enable="true" enableevent="true" borderRadius="5px">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="41"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="35" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="1" text="사원코드" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="2" text="사원명" edge="14px &quot;나눔고딕&quot;"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1" textAlign="center" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="1" text="bind:EMPLOYEE_ID" edittype="text" textAlign="center" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="2" text="bind:EMPLOYEE_NAME" edittype="text" textAlign="center" edge="14px &quot;나눔고딕&quot;"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="3" text="Div00" left="565.00" top="154" width="658" height="566" border="1px solid #6092ff" borderRadius="5px">
+          <Layouts>
+            <Layout>
+              <Static id="Static000" taborder="0" text="사    원    번    호" left="1.00" top="33" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Div00_Static00_onclick"/>
+              <Static id="Static002" taborder="1" text="내 외 국 인 여 부" left="1.00" top="87" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+              <Static id="Static004" taborder="2" text="주 민 등 록 번 호" left="1.00" top="141" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+              <Static id="Static003" taborder="3" text="부                  서" left="331.00" top="87" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Static_onclick"/>
+              <Static id="Static006" taborder="4" text="근  무  시  작  일" left="1.00" top="195" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+              <Static id="Static016" taborder="5" text="핸  드  폰   번  호" left="1.00" top="465" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+              <Static id="Static013" taborder="6" text="계    좌     번    호" left="331.00" top="357" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Static_onclick"/>
+              <Static id="Static014" taborder="7" text="예       금       주" left="1.00" top="411" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+              <Static id="Static015" taborder="8" text="고 용 보 험 여 부" left="331.00" top="411" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Static_onclick"/>
+              <MaskEdit id="medt_residentialNumber" taborder="9" left="141.00" top="139" width="170" height="25" type="string" format="######-#######" enable="true"/>
+              <Edit id="edt_employeeName" taborder="10" left="471.00" top="31" width="170" height="25"/>
+              <Calendar id="calen_workStartDate" taborder="11" left="141.00" top="193" width="170" height="25" onchanged="calen_retireDate_onchanged"/>
+              <Button id="btn_delEmp" taborder="12" text="마감" left="481.00" top="509" width="75" height="35" onclick="btn_delEmp_onclick" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+              <Button id="btn_saveEmpList" taborder="13" text="저장" left="566.00" top="509" width="75" height="35" onclick="btn_saveEmpList_onclick" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+              <Static id="Static005" taborder="14" text="프    로    젝    트" left="331.00" top="141" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Static_onclick"/>
+              <Static id="Static007" taborder="15" text="근  무  종  료  일" left="331.00" top="195" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Static_onclick"/>
+              <Calendar id="calen_workEndDate" taborder="16" left="471.00" top="193" width="170" height="25" onchanged="calen_retireDate_onchanged"/>
+              <Static id="Static008" taborder="17" text="정 성 급 여 유 형" left="1.00" top="249" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+              <Static id="Static009" taborder="18" text="정    상    급    여" left="331.00" top="249" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Static_onclick"/>
+              <Static id="Static010" taborder="19" text="연    장    급    여" left="1.00" top="303" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Div00_Static04_00_onclick"/>
+              <Static id="Static011" taborder="20" text="야    간    급    여" left="331.00" top="303" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Static_onclick"/>
+              <Static id="Static012" taborder="21" text="은                  행" left="1.00" top="357" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center"/>
+              <Static id="Static001" taborder="22" text="성                  명" left="331.00" top="33" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Static_onclick"/>
+              <Edit id="edt_overtimePayRate" taborder="23" left="141.00" top="301" width="170" height="25"/>
+              <Edit id="edt_accountHolder" taborder="24" left="141.00" top="406" width="170" height="25"/>
+              <Edit id="edt_normalPay" taborder="25" left="471.00" top="247" width="170" height="25"/>
+              <Edit id="edt_nightPayRate" taborder="26" left="471.00" top="301" width="170" height="25"/>
+              <Edit id="edt_accountNumber" taborder="27" left="471.00" top="352" width="170" height="25"/>
+              <Edit id="edt_email" taborder="28" left="471.00" top="460" width="170" height="25"/>
+              <Static id="Static017" taborder="29" text="E  -  M  A  I  L" left="331.00" top="465" width="120" height="14" font="12px &quot;나눔고딕&quot;" textAlign="center" onclick="Static_onclick"/>
+              <MaskEdit id="medt_phoneNumber" taborder="30" left="141.00" top="460" width="170" height="25" type="string" format="###-####-####"/>
+              <Edit id="edt_employeeId" taborder="31" left="141.00" top="31" width="170" height="25" onchanged="Div00_edt_employeeId_onchanged" readonly="false"/>
+              <Edit id="edt_project" taborder="32" left="471.00" top="139" width="170" height="25" readonly="true" oneditclick="Div00_edt_project_oneditclick"/>
+              <Edit id="edt_bankName" taborder="33" left="141.00" top="352" width="170" height="25"/>
+              <Edit id="edt_nomalPayType" taborder="34" left="141.00" top="247" width="170" height="25" readonly="true" oneditclick="Div00_edt_nomalPayType_oneditclick"/>
+              <Edit id="edt_dept" taborder="35" left="471.00" top="85" width="170" height="25" readonly="true" oneditclick="Div00_edt_dept_oneditclick"/>
+              <Combo id="cmb_nationality" taborder="36" left="141.00" top="85" width="170" height="25" innerdataset="ds_nationality" codecolumn="NATIONALITY" datacolumn="NATIONALITY" canitemchange="cmb_isForeign_canitemchange" onitemchanged="cmb_isForeign_onitemchanged"/>
+              <Combo id="cmb_insuranceEligibility" taborder="37" left="471.00" top="406" width="170" height="25" innerdataset="ds_insuranceEligibility" codecolumn="EMPLOYMENT_INSURANCE_ELIGIBILITY" datacolumn="EMPLOYMENT_INSURANCE_ELIGIBILITY_Hangle"/>
+              <Edit id="edt_insuranceEligibility" taborder="38" left="471.00" top="431" width="170" height="25"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_newEmp" taborder="4" text="신규" left="440.00" top="663" width="75" height="35" onclick="btn_addEmp_onclick" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_dailyLaborEmp">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_ID" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENTIAL_NUMBER" type="STRING" size="256"/>
+          <Column id="NATIONALITY" type="STRING" size="256"/>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+          <Column id="PROJECT" type="STRING" size="256"/>
+          <Column id="WORK_START_DATE" type="STRING" size="256"/>
+          <Column id="WORK_END_DATE" type="STRING" size="256"/>
+          <Column id="EMPLOYMENT_INSURANCE_ELIGIBILITY" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY_TYPE" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY" type="STRING" size="256"/>
+          <Column id="OVERTIME_PAY_RATE" type="STRING" size="256"/>
+          <Column id="NIGHT_PAY_RATE" type="STRING" size="256"/>
+          <Column id="BANK_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NUMBER" type="STRING" size="256"/>
+          <Column id="ACCOUNT_HOLDER" type="STRING" size="256"/>
+          <Column id="PHONE_NUMBER" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyLaborEmpReg">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_ID" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENTIAL_NUMBER" type="STRING" size="256"/>
+          <Column id="NATIONALITY" type="STRING" size="256"/>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+          <Column id="PROJECT" type="STRING" size="256"/>
+          <Column id="WORK_START_DATE" type="STRING" size="256"/>
+          <Column id="WORK_END_DATE" type="STRING" size="256"/>
+          <Column id="EMPLOYMENT_INSURANCE_ELIGIBILITY" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY_TYPE" type="STRING" size="256"/>
+          <Column id="NORMAL_PAY" type="STRING" size="256"/>
+          <Column id="OVERTIME_PAY_RATE" type="STRING" size="256"/>
+          <Column id="NIGHT_PAY_RATE" type="STRING" size="256"/>
+          <Column id="BANK_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NUMBER" type="STRING" size="256"/>
+          <Column id="ACCOUNT_HOLDER" type="STRING" size="256"/>
+          <Column id="PHONE_NUMBER" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="EMPLOYEE_ID"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_codeList">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE_NUMBER" type="STRING" size="256"/>
+          <Column id="CODE_NUMBER" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAMEUSING" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_nationality">
+        <ColumnInfo>
+          <Column id="NATIONALITY" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NATIONALITY">내국인</Col>
+          </Row>
+          <Row>
+            <Col id="NATIONALITY">외국인</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_insuranceEligibility">
+        <ColumnInfo>
+          <Column id="EMPLOYMENT_INSURANCE_ELIGIBILITY" type="STRING" size="256"/>
+          <Column id="EMPLOYMENT_INSURANCE_ELIGIBILITY_Hangle" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="EMPLOYMENT_INSURANCE_ELIGIBILITY">Y</Col>
+            <Col id="EMPLOYMENT_INSURANCE_ELIGIBILITY_Hangle">있음</Col>
+          </Row>
+          <Row>
+            <Col id="EMPLOYMENT_INSURANCE_ELIGIBILITY">N</Col>
+            <Col id="EMPLOYMENT_INSURANCE_ELIGIBILITY_Hangle">없음</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs"; // 모달창 라이브러리
+
+var empConunt;
+var originalEmdId = [];
+var updateEdit;
+var codes = {};
+var modalUrl = "Base::Modal.xfdl";
+var modalEventEdt = "fn_popupCallbackEdt";
+
+this.fn_setEmpReg = function() {
+    this.ds_dailyLaborEmpReg.set_enableevent(false);
+
+    this.ds_dailyLaborEmpReg.setColumn(0, "EMPLOYEE_ID", this.Div00.form.edt_employeeId.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "EMPLOYEE_NAME", this.Div00.form.edt_employeeName.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "RESIDENTIAL_NUMBER", this.Div00.form.medt_residentialNumber.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "NATIONALITY", this.Div00.form.cmb_nationality.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "DEPARTMENT", this.Div00.form.edt_dept.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "PROJECT", this.Div00.form.edt_project.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "WORK_START_DATE", this.Div00.form.calen_workStartDate.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "WORK_END_DATE", this.Div00.form.calen_workEndDate.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "EMPLOYMENT_INSURANCE_ELIGIBILITY", this.Div00.form.edt_insuranceEligibility.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "NORMAL_PAY_TYPE", this.Div00.form.edt_nomalPayType.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "NORMAL_PAY", this.Div00.form.edt_normalPay.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "OVERTIME_PAY_RATE", this.Div00.form.edt_overtimePayRate.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "NIGHT_PAY_RATE", this.Div00.form.edt_nightPayRate.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "BANK_NAME", this.Div00.form.edt_bankName.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "ACCOUNT_NUMBER", this.Div00.form.edt_accountNumber.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "ACCOUNT_HOLDER", this.Div00.form.edt_accountHolder.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "PHONE_NUMBER", this.Div00.form.medt_phoneNumber.value);
+    this.ds_dailyLaborEmpReg.setColumn(0, "EMAIL", this.Div00.form.edt_email.value);
+	this.ds_dailyLaborEmpReg.setColumn(0, "STATUS", 'Y');
+    
+    this.ds_dailyLaborEmpReg.set_enableevent(true);
+	
+}
+
+this.fn_Callback = function(trID, ErrorCode, ErrorMsg)
+{
+if(ErrorCode!=0){
+		alert("실패 : "+ErrorMsg);
+	}else{
+		alert(" 성공 ");
+		this.reload();
+	}
+}
+
+this.fn_popupCallback = function(modalId, code)
+{
+	if(code != null){
+		this.codeInfo = code.split(":");
+		
+		switch(modalId){
+			case "dept" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.div_searchCondition.form.cmb_dept
+				);
+				break;
+			case "project" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.div_searchCondition.form.cmb_project
+				);
+				break;
+			case "normalpaytype" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.div_searchCondition.form.cmb_normalpaytype
+				);
+				break;
+		}
+	}
+}
+
+this.fn_createSearchCmbDataset = function(modalId, codeInfo, combo) {
+
+	this.objs = this.objects;
+	for(var i=0; i<this.objs.length; i++){
+		if(this.objs[i].name == "ds_"+modalId){
+			this.removeChild("ds_"+modalId);
+		}
+	}
+	
+	var objDs = new Dataset();
+	
+	objDs.name = "ds_"+modalId;
+	objDs.addColumn("CODE", "string");
+	objDs.addColumn("CODE_NAME", "string");
+	
+	this.addChild("ds_"+modalId, objDs);
+	
+	objDs.addRow();
+	objDs.setColumn(0, "CODE", "all");
+	objDs.setColumn(0, "CODE_NAME", "전체선택");
+	
+	objDs.addRow();
+	
+	objDs.setColumn(1, "CODE", codeInfo[0]); //codeinfo[1]으로 바꾸면 코드입니다.
+	objDs.setColumn(1, "CODE_NAME", codeInfo[0]);
+	combo.setInnerDataset(objDs)
+	combo.set_codecolumn("CODE")
+	combo.set_datacolumn("CODE_NAME")
+	combo.set_text(codeInfo[0]);
+	
+}
+
+this.fn_popupCallbackEdt = function(codename, code)
+{
+	updateEdit.set_value(code.split(":")[0]);
+}
+
+this.fn_getConut = function()
+{
+	empConunt = this.ds_dailyLaborEmp.getCount();
+
+	for(var i=0; i<=empConunt; i++){
+		var empId = this.ds_dailyLaborEmp.getColumn(i, "EMPLOYEE_ID");
+		originalEmdId.push(empId);
+	}
+	trace(originalEmdId.includes("LAB001"))
+}
+
+// onload
+this.dailyLaborEmpManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.ds_dailyLaborEmp.set_enableevent(false);
+
+	this.transaction("getDailyLaborEmpList",
+					 "svcDailyLaboremp::emp",
+					 "",
+					 "ds_dailyLaborEmp=ds_dailylaboremp",
+					 "",
+					 "fn_getConut");
+					 
+	this.ds_dailyLaborEmp.set_enableevent(true);
+	
+};
+
+// 수정
+this.btn_saveEmpList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fn_setEmpReg()
+	
+	if(originalEmdId.includes(this.Div00.form.edt_employeeId.value)){
+		this.transaction("dailyLaborEmpInsert",
+						 "svcDailyLaboremp::emp-update",
+						 "ds_dailylaboremp=ds_dailyLaborEmpReg",
+						 "",
+						 "",
+						 "fn_Callback");
+	}
+	else{
+		this.transaction("dailyLaborEmpInsert",
+						 "svcDailyLaboremp::emp-create",
+						 "ds_dailylaboremp=ds_dailyLaborEmpReg",
+						 "",
+						 "",
+						 "fn_Callback");
+	}
+
+};
+
+// 마감
+this.btn_delEmp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fn_setEmpReg()
+	this.ds_dailyLaborEmpReg.setColumn(0, "STATUS", 'N');
+	
+	this.transaction("dailyLaborEmpDelete",
+					 "svcDailyLaboremp::emp-delete",
+					 "ds_dailylaboremp=ds_dailyLaborEmpReg",
+					 "",
+					 "",
+					 "fn_Callback");
+};
+
+// 신규
+this.btn_addEmp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_dailyLaborEmp.addRow();
+};
+ 
+// 조회
+this.div_searchCondition_btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var searchDept = this.div_searchCondition.form.cmb_dept.value;
+	var searchProject = this.div_searchCondition.form.cmb_project.value;
+	var searchType = this.div_searchCondition.form.cmb_normalpaytype.value;
+	
+	var combinedFilter = "";
+
+	if (searchDept && searchDept !== 'all') {
+		combinedFilter += "DEPARTMENT == '" + searchDept + "'";
+	}
+
+	if (searchProject && searchProject !== 'all') {
+		if (combinedFilter) {
+			combinedFilter += " && ";
+		}
+		combinedFilter += "PROJECT == '" + searchProject + "'";
+	}
+
+	if (searchType && searchType !== 'all') {
+		if (combinedFilter) {
+			combinedFilter += " && ";
+		}
+		combinedFilter += "NORMAL_PAY_TYPE == '" + searchType + "'";
+	}
+
+	this.ds_dailyLaborEmp.filter(combinedFilter);
+};
+
+this.div_searchCondition_btn_searchWith_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.modalId = obj.id.substr(obj.id.indexOf("search")+6).toLowerCase();
+	this.code = null;
+	switch(this.modalId){
+		case "dept" : this.code = "CO-07"; break;
+		case "project" : this.code = "CO-28"; break;
+		case "normalpaytype" : this.code = "CO-29"; break;
+	}
+	
+	var modalEvent = "fn_popupCallback";
+	if(this.code != null){
+		this.gfnOpen(
+			this.modalId,
+			modalUrl, modalEvent,
+			{code:this.code}
+		);
+	}else{alert("테이블에 데이터 없음")}
+};
+
+this.Div00_edt_dept_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("dept", modalUrl, modalEventEdt, {code:"CO-07"});
+};
+
+this.Div00_edt_project_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("project", modalUrl, modalEventEdt, {code:"CO-28"});
+};
+
+this.Div00_edt_nomalPayType_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("normalpaytype", modalUrl, modalEventEdt, {code:"CO-29"});
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.edt_employeeId" propid="value" datasetid="ds_dailyLaborEmp" columnid="EMPLOYEE_ID"/>
+      <BindItem id="item1" compid="Div00.form.edt_employeeName" propid="value" datasetid="ds_dailyLaborEmp" columnid="EMPLOYEE_NAME"/>
+      <BindItem id="item2" compid="Div00.form.cmb_nationality" propid="value" datasetid="ds_dailyLaborEmp" columnid="NATIONALITY"/>
+      <BindItem id="item3" compid="Div00.form.medt_residentialNumber" propid="value" datasetid="ds_dailyLaborEmp" columnid="RESIDENTIAL_NUMBER"/>
+      <BindItem id="item4" compid="Div00.form.cmb_project" propid="value" datasetid="ds_dailyLaborEmp" columnid="PROJECT"/>
+      <BindItem id="item5" compid="Div00.form.calen_workStartDate" propid="value" datasetid="ds_dailyLaborEmp" columnid="WORK_START_DATE"/>
+      <BindItem id="item6" compid="Div00.form.calen_workEndDate" propid="value" datasetid="ds_dailyLaborEmp" columnid="WORK_END_DATE"/>
+      <BindItem id="item8" compid="Div00.form.cmb_normalPayType" propid="value" datasetid="ds_dailyLaborEmp" columnid="NORMAL_PAY_TYPE"/>
+      <BindItem id="item9" compid="Div00.form.edt_normalPay" propid="value" datasetid="ds_dailyLaborEmp" columnid="NORMAL_PAY"/>
+      <BindItem id="item10" compid="Div00.form.edt_overtimePayRate" propid="value" datasetid="ds_dailyLaborEmp" columnid="OVERTIME_PAY_RATE"/>
+      <BindItem id="item11" compid="Div00.form.edt_nightPayRate" propid="value" datasetid="ds_dailyLaborEmp" columnid="NIGHT_PAY_RATE"/>
+      <BindItem id="item12" compid="Div00.form.cmb_bankName" propid="value" datasetid="ds_dailyLaborEmp" columnid="BANK_NAME"/>
+      <BindItem id="item13" compid="Div00.form.edt_accountNumber" propid="value" datasetid="ds_dailyLaborEmp" columnid="ACCOUNT_NUMBER"/>
+      <BindItem id="item14" compid="Div00.form.edt_accountHolder" propid="value" datasetid="ds_dailyLaborEmp" columnid="ACCOUNT_HOLDER"/>
+      <BindItem id="item15" compid="Div00.form.cmb_insuranceEligibility" propid="value" datasetid="ds_dailyLaborEmp" columnid="EMPLOYMENT_INSURANCE_ELIGIBILITY"/>
+      <BindItem id="item16" compid="Div00.form.medt_phoneNumber" propid="value" datasetid="ds_dailyLaborEmp" columnid="PHONE_NUMBER"/>
+      <BindItem id="item17" compid="Div00.form.edt_email" propid="value" datasetid="ds_dailyLaborEmp" columnid="EMAIL"/>
+      <BindItem id="item18" compid="Div00.form.cmb_departMent" propid="value" datasetid="ds_dailyLaborEmp" columnid="DEPARTMENT"/>
+      <BindItem id="item7" compid="Div00.form.cmb_departMent" propid="value" datasetid="ds_dailyLaborEmp" columnid="DEPARTMENT"/>
+      <BindItem id="item19" compid="Div00.form.edt_departMent" propid="value" datasetid="ds_dailyLaborEmp" columnid="NATIONALITY"/>
+      <BindItem id="item20" compid="Div00.form.edt_departMent" propid="value" datasetid="ds_dailyLaborEmp" columnid="EMPLOYEE_NAME"/>
+      <BindItem id="item21" compid="Div00.form.edt_departMent" propid="accessibilityaction" datasetid="ds_dailyLaborEmp" columnid="DEPARTMENT"/>
+      <BindItem id="item22" compid="Div00.form.edt_project" propid="value" datasetid="ds_dailyLaborEmp" columnid="PROJECT"/>
+      <BindItem id="item23" compid="Div00.form.edt_project" propid="accessibilityaction" datasetid="ds_dailyLaborEmp" columnid="DEPARTMENT"/>
+      <BindItem id="item24" compid="Div00.form.edt_nationality" propid="value" datasetid="ds_dailyLaborEmp" columnid="NATIONALITY"/>
+      <BindItem id="item25" compid="Div00.form.edt_nationality" propid="accessibilityaction" datasetid="ds_dailyLaborEmp" columnid="DEPARTMENT"/>
+      <BindItem id="item26" compid="Div00.form.edt_bankName" propid="value" datasetid="ds_dailyLaborEmp" columnid="BANK_NAME"/>
+      <BindItem id="item27" compid="Div00.form.edt_insuranceEligibility" propid="value" datasetid="ds_dailyLaborEmp" columnid="EMPLOYMENT_INSURANCE_ELIGIBILITY"/>
+      <BindItem id="item28" compid="Div00.form.edt_nomalPayType" propid="value" datasetid="ds_dailyLaborEmp" columnid="NORMAL_PAY_TYPE"/>
+      <BindItem id="item29" compid="Div00.form.edt_dept" propid="value" datasetid="ds_dailyLaborEmp" columnid="DEPARTMENT"/>
+      <BindItem id="item30" compid="Div00.form.edt_dept" propid="accessibilityaction" datasetid="ds_dailyLaborEmp" columnid="DEPARTMENT"/>
+      <BindItem id="item31" compid="Div00.form.cmb_insuranceEligibility" propid="value" datasetid="ds_dailyLaborEmp" columnid="NATIONALITY"/>
+      <BindItem id="item32" compid="Div00.form.edt_insuranceEligibility" propid="value" datasetid="ds_dailyLaborEmp" columnid="EMPLOYMENT_INSURANCE_ELIGIBILITY"/>
+    </Bind>
+  </Form>
+</FDL>

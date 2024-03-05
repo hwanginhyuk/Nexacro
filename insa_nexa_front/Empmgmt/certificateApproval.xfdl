@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="certificateApproval" width="1060" height="620" titletext="New Form" onload="certificateApproval_onload">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00" taborder="0" text="" left="0" top="0" width="1060" height="610">
+          <Layouts>
+            <Layout>
+              <Static id="departmentCheck" taborder="0" text="조회부서" left="40" top="85" width="100" height="30" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+              <Static id="checkDate" taborder="1" text="조회기간" left="40" top="130" width="100" height="30" textAlign="center" font="12px/normal &quot;나눔고딕&quot;"/>
+              <Edit id="departmentCheckEdit" taborder="2" left="135" top="85" width="150" height="30" oneditclick="Div00_departmentCheckEdit_oneditclick" onchanged="Div00_departmentCheckEdit_onchanged" value="--선택하세요--" text="--선택하세요--"/>
+              <Button id="inquiryBtn" taborder="3" text="조회" left="480" top="130" width="68" height="30" onclick="Div00_inquiryBtn_onclick"/>
+              <Button id="approvalBtn" taborder="4" text="승인" left="737" top="130" height="30" width="63" onclick="Div00_approvalBtn_onclick"/>
+              <Button id="approvalCancellationBtn" taborder="5" text="승인취소" left="807" top="130" height="30" width="63" onclick="Div00_approvalCancellationBtn_onclick"/>
+              <Button id="companionBtn" taborder="6" text="반려" left="877" top="130" height="30" width="63" onclick="Div00_companionBtn_onclick"/>
+              <Button id="Confirmation" taborder="7" text="확정" left="947" top="130" height="30" width="63" onclick="Div00_Confirmation_onclick"/>
+              <Grid id="Grid00" taborder="8" left="60" top="180" width="950" height="400" binddataset="ds_certificateList" oncellclick="Grid00_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="47"/>
+                      <Column size="97"/>
+                      <Column size="97"/>
+                      <Column size="97"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="90"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="36" band="head"/>
+                      <Row size="36"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell edittype="checkbox"/>
+                      <Cell col="1" text="부서명"/>
+                      <Cell col="2" text="사원번호"/>
+                      <Cell col="3" text="사원이름"/>
+                      <Cell col="4" text="용도"/>
+                      <Cell col="5" text="신청일"/>
+                      <Cell col="6" text="사용일"/>
+                      <Cell col="7" text="승인여부"/>
+                      <Cell col="8" text="반려사유"/>
+                      <Cell col="9" text="비고"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:STATUS" textAlign="center" displaytype="checkboxcontrol" edittype="none"/>
+                      <Cell col="1" text="bind:DEPT_NAME" textAlign="center"/>
+                      <Cell col="2" text="bind:EMP_CODE" textAlign="center"/>
+                      <Cell col="3" text="bind:EMP_NAME" textAlign="center"/>
+                      <Cell col="4" text="bind:DETAIL_CODE_NAME" textAlign="center"/>
+                      <Cell col="5" text="bind:REQUEST_DATE" textAlign="center"/>
+                      <Cell col="6" text="bind:USE_DATE" textAlign="center"/>
+                      <Cell col="7" text="bind:APPROVAL_STATUS" textAlign="center"/>
+                      <Cell col="8" text="bind:REJECT_CAUSE" textAlign="center" displaytype="text" edittype="text"/>
+                      <Cell col="9" text="bind:ETC" textAlign="center" edittype="text" displaytype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static00" taborder="9" text="   ◼ 재직증명서 관리" left="10" top="10" width="1040" height="65" textAlign="left" font="bold 18px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Static00_onclick"/>
+              <Calendar id="checkDateFromCal" taborder="10" left="135" top="130" width="150" height="30" onchanged="Div00_checkDateFromCal_onchanged"/>
+              <Calendar id="checkDateAfterCal" taborder="11" left="315" top="130" width="150" height="30"/>
+              <Static id="Static01" taborder="12" text="~" left="295" top="134" width="40" height="16" font="20px/normal &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commDate.xjs";
+include "Lib::commonOpen.xjs";
+include "Lib::commString.xjs";
+
+var nexa=nexacro.getApplication();
+var updateEdit;
+
+//로딩시 
+this.certificateApproval_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+
+ var firshTodat=this.gfn_todayFirst(); //PC의 첫날
+ this.Div00.form.checkDateFromCal.set_value(firshTodat);
+ var today=this.gfn_today();  //pc 오늘날짜
+ this.Div00.form.checkDateAfterCal.set_value(today);
+};
+
+//조회부서
+this.Div00_departmentCheckEdit_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("dept", "Base::Modal.xfdl", "callback", {code:"CO-07"});
+};
+
+//조회부서 콜백
+this.callback = function(codename, code)
+{
+	updateEdit.set_value(code.split(":")[0]);
+}
+
+//조회하기 
+this.Div00_inquiryBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("findCertificateID",
+					 "svcDocumentmgmt::certificate-approval",
+					 "",//서<클
+					 "ds_certificateList=ds_CertificateBean",//클<서
+					 "deptName='"+this.Div00.form.departmentCheckEdit.value+"' startDate='"+this.Div00.form.checkDateFromCal.value+"' endDate='"+this.Div00.form.checkDateAfterCal.value+"'",
+					 "fn_callback");
+};
+
+//콜백
+this.fn_callback = function(trID ,ErrorCode ,ErrorMsg)
+{
+	if(trID=="findCertificateID"){
+		if(ErrorCode!=0){
+			alert("조회 실패 : "+ErrorMsg);
+		}else{ 		
+		}
+	}
+	
+	if(trID=="updateID"){
+		if(ErrorCode!=0){
+			alert("확정 실패 : "+ErrorMsg);
+		}else{
+			alert("변경되었습니다.");			
+			this.reload();
+		}
+	}
+}
+
+//그리드 셀 선택
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.ds_certificateList.addColumn("STATUS","STRING");
+	
+	for(var i=0; i<this.ds_certificateList.rowcount; i++){
+		this.ds_certificateList.setColumn(i,"STATUS",undefined);
+	}
+	
+	this.ds_certificateList.setColumn(this.ds_certificateList.rowposition,"STATUS","Choice");
+}
+
+//승인
+this.Div00_approvalBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_certificateList.setColumn(this.ds_certificateList.rowposition,"APPROVAL_STATUS","승인");
+};
+
+//승인취소
+this.Div00_approvalCancellationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_certificateList.setColumn(this.ds_certificateList.rowposition,"APPROVAL_STATUS","승인취소");
+};
+
+//반려
+this.Div00_companionBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_certificateList.setColumn(this.ds_certificateList.rowposition,"APPROVAL_STATUS","반려");
+};
+
+//확정 
+this.Div00_Confirmation_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (!this.confirm("변경된 상태를 확정하시겠습니까?")){
+			alert("취소되었습니다.");
+			return;
+		}else{
+			this.transaction("updateID",
+							 "svcDocumentmgmt::certificate-confirmation",
+							 "ds_CertificateBean=ds_certificateList:u", //서<클
+							 "", //클<서
+							 "", 
+							 "fn_callback");
+	
+	var count=this.ds_certificateList.rowcount;
+	
+	for(var i=0;i<count;i++){
+		var statusList=this.ds_certificateList.getColumn(i,"APPROVAL_STATUS");
+		
+		trace("승인상태  : "+statusList);
+
+		}
+		}
+		
+};
+
+this.Div00_Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_certificateList">
+        <ColumnInfo>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="USAGE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="DATE" size="256"/>
+          <Column id="USE_DATE" type="DATE" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="ETC" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+          <Column id="USAGE_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

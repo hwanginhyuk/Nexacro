@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="attndApproval" width="1060" height="620" titletext="New Form">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="30" width="1010" height="560" background="#D9E5FF">
+          <Layouts>
+            <Layout>
+              <Static id="Static00_01_00_00_00" taborder="0" text="조회부서" left="60" top="65" width="100" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Static id="Static00_01_00_00_00_00" taborder="1" text="조회일자" left="325" top="65" width="100" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Edit id="searchDeptName" taborder="2" left="165" top="65" width="150" height="40" font="20px/normal &quot;나눔고딕&quot;" oneditclick="Div00_00_searchDeptName_oneditclick"/>
+              <Button id="btn_search" taborder="3" text="조회하기" left="800" top="65" width="150" height="40" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_search_onclick"/>
+              <Button id="btn_approval" taborder="4" text="승인" left="205" top="120" height="40" width="100" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_approval_onclick"/>
+              <Button id="btn_cancel" taborder="5" text="승인취소" left="375" top="120" height="40" width="100" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_cancel_onclick"/>
+              <Button id="btn_reject" taborder="6" text="반려" left="545" top="120" height="40" width="100" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_reject_onclick"/>
+              <Button id="btn_update" taborder="7" text="확정" left="715" top="120" height="40" width="100" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_update_onclick"/>
+              <Grid id="Grid00" taborder="8" left="58" top="185" width="905" height="345" binddataset="ds_restAttdList" oncellclick="Div00_00_Grid00_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="30"/>
+                      <Column size="60"/>
+                      <Column size="93"/>
+                      <Column size="80"/>
+                      <Column size="70"/>
+                      <Column size="70"/>
+                      <Column size="50"/>
+                      <Column size="60"/>
+                      <Column size="75"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="77"/>
+                      <Column size="77"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="29" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell/>
+                      <Cell col="1" text="사원명" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="근태구분명" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="3" text="신청일자" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="4" text="시작일" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="5" text="종료일" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="6" text="일수" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="7" text="경비" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="8" text="사유" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="9" text="승인여부" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="10" text="반려사유" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="11" text="시작시간" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="12" text="종료시간" font="16px/normal &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="checkboxcontrol" text="bind:STATUS"/>
+                      <Cell col="1" text="bind:EMP_NAME"/>
+                      <Cell col="2" text="bind:REST_TYPE_NAME"/>
+                      <Cell col="3" text="bind:REQUEST_DATE"/>
+                      <Cell col="4" text="bind:START_DATE"/>
+                      <Cell col="5" text="bind:END_DATE"/>
+                      <Cell col="6" text="bind:NUMBER_OF_DAYS"/>
+                      <Cell col="7" text="bind:COST"/>
+                      <Cell col="8" text="bind:CAUSE"/>
+                      <Cell col="9" text="bind:APPLOVAL_STATUS"/>
+                      <Cell col="10" text="bind:REJECT_CAUSE"/>
+                      <Cell col="11" text="bind:START_TIME"/>
+                      <Cell col="12" text="bind:END_TIME"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static00" taborder="9" text="◼근태 외 승인관리" left="8" top="0" width="188" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Calendar id="startDate" taborder="10" left="425" top="65" width="165" height="40" onchanged="Div00_00_startDate_onchanged" font="16px/normal &quot;나눔고딕&quot;"/>
+              <Calendar id="endDate" taborder="11" left="627" top="65" width="163" height="40" font="16px/normal &quot;나눔고딕&quot;"/>
+              <Static id="Static01" taborder="12" text="~" left="600" top="64" width="40" height="40" font="20px/normal &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_restAttdList" oncolumnchanged="ds_restAttdList_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="REST_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="NUMBER_OF_DAYS" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REJECT_CAUSE" type="STRING" size="256"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="END_TIME" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commDate.xjs";
+include "Lib::commString.xjs";
+include "Lib::commonOpen.xjs";
+
+var nexa=nexacro.getApplication();
+
+var updateEdit;
+var deptCode;
+//로딩시
+this.attendanceApploval_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	nexa.g_detailCodeName.clearData;
+	var firstDay=this.gfn_todayFirst();
+	var today=this.gfn_today();
+	this.Div00_00.form.startDate.set_value(firstDay);
+	this.Div00_00.form.endDate.set_value(today);
+	nexa.g_detailCodeNumber.clearData;
+};
+
+
+
+//다이알로그  
+this.Div00_00_searchDeptName_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{	
+	updateEdit = obj;
+	this.gfnOpen("searchDeptCode", "Base::Modal.xfdl", "callback", {code:"CO-07"});
+};
+
+//다이알로그 콜백
+this.callback = function(codename, code)
+{
+	updateEdit.set_value(code.split(" ")[0]);
+	deptCode = code.split(" ")[1];
+};
+
+//조회하기
+this.Div00_00_btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.Div00_00.form.searchDeptName.value==null){
+	   this.Div00_00.form.searchDeptName.set_value("전체부서");
+		}else if(this.Div00_00.form.startDate.value==null || this.Div00_00.form.endDate.value==null){ 
+			this.alert("조회날짜를 입력하여주세요.");
+	}else{
+		
+   this.transaction("searchID",
+					"svcAttdappvl::attnd-approval",
+					"", // 서버<-클라이언트
+					"ds_restAttdList=gds_restAttd", //클라이언트<-서버
+					"deptName='"+deptCode+"' startDate='"+this.Div00_00.form.startDate.value+"' endDate='"+this.Div00_00.form.endDate.value+"'",
+					"fn_callback"
+					);
+	}	
+	trace("조회");
+};
+
+
+//승인
+this.Div00_00_btn_approval_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count=this.ds_restAttdList.rowcount;
+	for(var i=0 ; i<count ; i++){
+			var status=this.ds_restAttdList.getColumn(i,"STATUS");
+			trace(status);
+		if (status=="1"||status=="update"){
+			this.ds_restAttdList.setColumn(i,"APPLOVAL_STATUS","승인");
+			this.ds_restAttdList.setColumn(i,"STATUS","update");
+		}
+	}
+};
+
+
+//승인취소
+this.Div00_00_btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count=this.ds_restAttdList.rowcount;
+	
+	for(var i=0 ; i<count ; i++){
+			var status=this.ds_restAttdList.getColumn(i,"STATUS");
+			trace(status);
+		if (status=="1" ||status=="update"){
+			this.ds_restAttdList.setColumn(i,"APPLOVAL_STATUS","승인취소");
+			this.ds_restAttdList.setColumn(i,"STATUS","update");
+		}
+	}	
+};
+
+
+
+//반려
+this.Div00_00_btn_reject_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count=this.ds_restAttdList.rowcount;
+	for(var i=0 ; i<count ; i++){
+			var status=this.ds_restAttdList.getColumn(i,"STATUS");
+		if (status=="1"||status=="update"){
+			this.ds_restAttdList.setColumn(i,"APPLOVAL_STATUS","반려");
+			this.ds_restAttdList.setColumn(i,"STATUS","update");
+		}
+	}		
+};
+
+//확정
+this.Div00_00_btn_update_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	
+var searchList = this.ds_restAttdList.getColumn(0,"EMP_NAME");
+ 
+if(searchList == undefined){
+	alert(" 조회 해주세요~ "); 
+	return; 
+}if(!confirm("변경된 해당항목을 확정하시겠습니까 ? ")){
+	alert("취소되었습니다.");
+}else{
+	this.transaction(
+					"updateID",
+					"svcAttdappvl::attnd-approval2",
+					"gds_restAttd=ds_restAttdList:u",
+					"",
+					"",
+					"fn_callback"
+					);
+	}
+};
+
+this.fn_callback = function(trID ,ErrorCode ,ErrorMsg)
+{
+if(trID=="searchID"){
+		if(ErrorCode!=0){
+			alert("조회 실패 : "+ErrorMsg);
+		}else{ 
+			//STATUS 상태값 초기화 
+			for (var i = 0; i < this.ds_restAttdList.rowcount; i++){
+				this.ds_restAttdList.setColumn(i,"STATUS","");
+				}
+			
+		}
+	}
+if(trID=="updateID"){
+		if(ErrorCode!=0){
+			alert("확정실패 : "+ErrorMsg);
+		}else{ //성공시
+			alert(" 확정완료 ");
+			this.reload(); //현재의 FDL 화면을 다시 로딩하는 메소드method
+		}
+	}
+}
+
+
+//셀클릭 체크박스 
+this.Div00_00_Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{	
+	this.ds_restAttdList.addColumn("STATUS","STRING");
+	
+	var status=this.ds_restAttdList.getColumn(this.ds_restAttdList.rowposition,"STATUS");
+	
+	if(status==undefined){
+		this.ds_restAttdList.setColumn(this.ds_restAttdList.rowposition,"STATUS","update");
+	}else{
+		this.ds_restAttdList.setColumn(this.ds_restAttdList.rowposition,"STATUS",undefined);
+	}
+};]]></Script>
+  </Form>
+</FDL>

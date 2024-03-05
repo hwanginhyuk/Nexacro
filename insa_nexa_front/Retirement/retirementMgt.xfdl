@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="retirementMgt" width="1280" height="720" titletext="New Form" onload="retirementMgt_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Div id="retireSetDiv" taborder="4" left="30" top="36" width="610" height="380" borderRadius="5px" opacity="1" border="1px solid #b2b2b2">
+          <Layouts>
+            <Layout>
+              <Static id="retPaySet" taborder="0" text="[ 퇴직금 설정 ]" left="65" top="38" width="119" height="30" font="16px/normal &quot;나눔고딕&quot;"/>
+              <Static id="moelStandardOpt" taborder="1" text="고용노동부기준" left="76" top="79" width="120" height="60" font="14px/normal &quot;나눔고딕&quot;"/>
+              <Static id="retDateRangeOpt" taborder="2" text="퇴직범위설정" left="76" top="124" width="120" height="60" font="14px/normal &quot;나눔고딕&quot;"/>
+              <Static id="payCalcWayOpt" taborder="3" text="급여계산방식" left="76" top="169" width="120" height="60" font="14px/normal &quot;나눔고딕&quot;"/>
+              <Static id="retDateIncludeStatusOpt" taborder="4" text="퇴사일포함여부" left="76" top="214" width="120" height="60" font="14px/normal &quot;나눔고딕&quot;"/>
+              <Radio id="moelStandard" taborder="5" left="256" top="94" width="217" height="30" text="안함" index="0" columncount="2" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" onitemchanged="retireSetDiv_radio_onitemchanged" value="CHK001" font="14px/normal &quot;나눔고딕&quot;">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="datacolumn">안함</Col>
+                      <Col id="codecolumn">CHK001</Col>
+                    </Row>
+                    <Row>
+                      <Col id="datacolumn">함</Col>
+                      <Col id="codecolumn">CHK000</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Radio>
+              <Radio id="retDateRange" taborder="6" left="256" top="139" width="320" height="30" columncount="3" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="RAG002" text="전월기준" index="2" onitemchanged="retireSetDiv_radio_onitemchanged" font="14px/normal &quot;나눔고딕&quot;">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="datacolumn">당월기준</Col>
+                      <Col id="codecolumn">RAG000</Col>
+                    </Row>
+                    <Row>
+                      <Col id="datacolumn">일자기준</Col>
+                      <Col id="codecolumn">RAG001</Col>
+                    </Row>
+                    <Row>
+                      <Col id="datacolumn">전월기준</Col>
+                      <Col id="codecolumn">RAG002</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Radio>
+              <Radio id="payCalcWay" taborder="7" left="256" top="184" width="217" height="30" columncount="2" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="MDC000" text="일할계산" index="0" onitemchanged="retireSetDiv_radio_onitemchanged" font="14px/normal &quot;나눔고딕&quot;">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">MDC000</Col>
+                      <Col id="datacolumn">일할계산</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">MDC001</Col>
+                      <Col id="datacolumn">월할계산</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Radio>
+              <Radio id="retDateIncludeStatus" taborder="8" left="256" top="229" width="217" height="30" columncount="2" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="CHK001" text="안함" index="0" onitemchanged="retireSetDiv_radio_onitemchanged" font="14px/normal &quot;나눔고딕&quot;">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">CHK001</Col>
+                      <Col id="datacolumn">안함</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">CHK000</Col>
+                      <Col id="datacolumn">함</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Radio>
+              <Button id="btn_retSetSave" taborder="9" text="저장" left="469" top="274" width="80" height="35" onclick="retireSetDiv_btn_retSetSave_onclick" borderRadius="5px" background="#6092ff" color="white" font="bold 12px/normal &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_retMgtSet" url="svcRetirement::retirementmgmt" preload="true">
+        <ColumnInfo>
+          <Column id="MOEL_CHECK" type="STRING" size="32"/>
+          <Column id="MOEL_CHECK_CODE" type="STRING" size="32"/>
+          <Column id="RETIREMENT_RANGE" type="STRING" size="32"/>
+          <Column id="RETIREMENT_RANGE_CODE" type="STRING" size="32"/>
+          <Column id="MONTH_OR_DAY" type="STRING" size="32"/>
+          <Column id="MONTH_OR_DAY_CODE" type="STRING" size="32"/>
+          <Column id="RETIREDAY_CHECK" type="STRING" size="32"/>
+          <Column id="RETIREDAY_CHECK_CODE" type="STRING" size="32"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[var hh
+var mm
+var ss
+
+
+this.retirementMgt_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction("getRetMgtSet",
+			 "svcRetirement::retirementmgmt",
+			 "",
+			 "ds_retMgtSet=gds_retirementSetMgmt",
+			 "",
+			 "fn_callback");
+	this.clock();
+	this.setTimer(1,1000);
+};
+
+this.retirementMgt_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo) //setTimer() 메소드로 생성한 타이머의 시간 간격마다 발생하는 이벤트입니다.
+{
+	if(e.timerid == 1){
+		this.clock();
+	}
+};
+
+
+this.clock = function() // 시간구하기
+{
+	var objDate = new nexacro.Date();
+	hh = objDate.getHours()>=10?objDate.getHours():'0'+objDate.getHours();
+	mm = objDate.getMinutes()>=10?objDate.getMinutes():'0'+objDate.getMinutes();
+	ss = objDate.getSeconds()>=10?objDate.getSeconds():'0'+objDate.getSeconds();
+	var time = hh+":"+mm+":"+ss;
+	this.retireSetDiv.form.Static00.set_text(time); // id = timer 인 form에 나타내기
+};
+
+
+
+
+
+this.retireSetDiv_btn_retSetSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	this.transaction("setRetMgtSet",
+			 "svcRetirement::modifyRetirementmgmt",
+			 "gds_retirementSetMgmt=ds_retMgtSet",
+			 "",
+			 "",
+			 "fn_callback");
+};
+
+this.fn_callback = function(svcId, errCD, errMsg)
+{
+	trace(svcId);
+	trace(errCD);
+	trace(errMsg);
+	if(svcId == "setRetMgtSet"){
+		if(errCD == 0){
+			alert("설정저장 성공")
+		}else{
+			alert(errCD + " : " + errMsg);
+		}
+	}
+}
+
+this.retireSetDiv_radio_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	obj.updateToDataset();
+	trace(this.retireSetDiv.form.moelStandard.value);
+	if(this.retireSetDiv.form.moelStandard.value == "CHK000"){
+		this.retireSetDiv.form.retDateRange.set_value("RAG000");
+		this.retireSetDiv.form.payCalcWay.set_value("MDC000");
+		this.retireSetDiv.form.retDateIncludeStatus.set_value("CHK001");
+		
+		this.retireSetDiv.form.retDateRange.readonly=true;
+		this.retireSetDiv.form.payCalcWay.readonly=true;
+		this.retireSetDiv.form.retDateIncludeStatus.readonly=true;
+	}else{
+		this.retireSetDiv.form.retDateRange.readonly=false;
+		this.retireSetDiv.form.payCalcWay.readonly=false;
+		this.retireSetDiv.form.retDateIncludeStatus.readonly=false;
+	}
+	trace(obj.value);
+	trace(this.ds_retMgtSet.getColumn(0));
+	trace(this.ds_retMgtSet.lookup("MOEL_CHECK_CODE", "CHK000", "MOEL_CHECK_CODE"));
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="retireSetDiv.form.moelStandard" propid="value" datasetid="ds_retMgtSet" columnid="MOEL_CHECK_CODE"/>
+      <BindItem id="item1" compid="retireSetDiv.form.retDateRange" propid="value" datasetid="ds_retMgtSet" columnid="RETIREMENT_RANGE_CODE"/>
+      <BindItem id="item2" compid="retireSetDiv.form.payCalcWay" propid="value" datasetid="ds_retMgtSet" columnid="MONTH_OR_DAY_CODE"/>
+      <BindItem id="item3" compid="retireSetDiv.form.retDateIncludeStatus" propid="value" datasetid="ds_retMgtSet" columnid="RETIREDAY_CHECK_CODE"/>
+    </Bind>
+  </Form>
+</FDL>

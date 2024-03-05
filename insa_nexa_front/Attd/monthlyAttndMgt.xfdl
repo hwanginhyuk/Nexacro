@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="monthlyAttndMgt" width="1150" height="620" titletext="New Form" onload="monthlyAttndMgt_onload">
+    <Layouts>
+      <Layout height="620" width="1150">
+        <Div id="Div00_00" taborder="0" text="" left="20" top="30" width="1105" height="560" font="bold 14px/normal &quot;나눔고딕&quot;">
+          <Layouts>
+            <Layout>
+              <Static id="title" taborder="1" text="◼월근태관리" left="8" top="0" width="214" height="49" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+              <Static id="inquiry" taborder="0" text="조회월" left="70" top="63" height="35" textAlign="center" font="bold 14px/normal &quot;나눔고딕&quot;" width="120"/>
+              <Button id="deadlineBtn" taborder="2" text="전체마감하기" left="680" top="63" height="35" onclick="Div00_00_deadlineBtn_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" width="120" background="#6092ff" color="white"/>
+              <Button id="deadlineCancellationBtn" taborder="3" text="전체마감취소" left="820" top="63" height="35" onclick="Div00_00_deadlineCancellationBtn_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" width="120" background="#6092ff" color="white"/>
+              <Button id="inquiryBtn" taborder="4" text="조회하기" left="350" top="63" height="35" onclick="Div00_00_inquiryBtn_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" width="120" background="#6092ff" color="white"/>
+              <Grid id="Grid00" taborder="5" left="28" top="125" width="1062" height="370" binddataset="ds_monthAttenMng" font="bold 14px/normal &quot;나눔고딕&quot;">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="65"/>
+                      <Column size="50"/>
+                      <Column size="76"/>
+                      <Column size="80"/>
+                      <Column size="81"/>
+                      <Column size="81"/>
+                      <Column size="83"/>
+                      <Column size="78"/>
+                      <Column size="80"/>
+                      <Column size="81"/>
+                      <Column size="64"/>
+                      <Column size="58"/>
+                      <Column size="63"/>
+                      <Column size="63"/>
+                      <Column size="55"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="34" band="head"/>
+                      <Row size="34"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="사원코드" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="1" text="사원명" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="2" text="적용연월" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="3" text="기준근무일수" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="4" text="평일근무일수" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="5" text="기준근무시간" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="6" text="실제근무시간" font="12px/normal &quot;나눔고딕&quot;" displaytype="normal" background="#6092ff" color="white"/>
+                      <Cell col="7" text="연장근무시간" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="8" text="심야근무시간" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="9" text="휴일근무일수" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="10" text="지각일수" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="11" text="결근일수" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="12" text="반차일수" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="13" text="휴가일수" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                      <Cell col="14" text="마감여부" font="12px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:EMP_CODE" textAlign="center"/>
+                      <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                      <Cell col="2" text="bind:APPLY_YEAR_MONTH" textAlign="center"/>
+                      <Cell col="3" text="bind:BASIC_WORK_DAYS" textAlign="center"/>
+                      <Cell col="4" text="bind:WEEKDAY_WORK_DAYS" textAlign="center"/>
+                      <Cell col="5" text="bind:BASIC_WORK_HOUR" textAlign="center" displaytype="mask" maskeditmaskchar="##:##" maskeditlimitbymask="decimal" maskeditformat="##:##" edittype="mask"/>
+                      <Cell col="6" text="bind:WORK_HOUR" textAlign="center"/>
+                      <Cell col="7" text="bind:OVER_WORK_HOUR" textAlign="center"/>
+                      <Cell col="8" text="bind:NIGHT_WORK_HOUR" textAlign="center"/>
+                      <Cell col="9" text="bind:HOLIDAY_WORK_DAYS" textAlign="center"/>
+                      <Cell col="10" text="bind:LATE_DAYS" textAlign="center"/>
+                      <Cell col="11" text="bind:ABSENT_DAYS" textAlign="center"/>
+                      <Cell col="12" text="bind:HALF_HOLIDAYS" textAlign="center"/>
+                      <Cell col="13" text="bind:HOLIDAYS" textAlign="center"/>
+                      <Cell col="14" text="bind:FINALIZE_STATUS" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Calendar id="Calendar00" taborder="6" left="200" top="63" height="35" editformat="yyyy-MM" dateformat="yyyy-MM" font="bold 14px/normal &quot;나눔고딕&quot;" width="120"/>
+              <Button id="Button00" taborder="7" text="저장" left="960" top="63" height="35" onclick="Div00_00_Button00_onclick" font="bold 14px/normal &quot;나눔고딕&quot;" width="120" background="#6092ff" color="white"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include"Lib::commDate.xjs";
+include"Lib::commString.xjs";
+
+nexa = nexacro.getApplication();
+
+// 조회하기
+this.Div00_00_inquiryBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(this.Div00_00.form.Calendar00.value.substring(0,6))
+	
+	var applyYearMonth = this.Div00_00.form.Calendar00.value.substring(0,6)
+	
+	var workplaceCode = nexa.g_workplaceCode
+	
+
+	this.transaction("monthSearchID",
+					"svcAttdappvl::month-attnd",
+					"",
+					"ds_monthAttenMng=ds_monthAttenMng",
+					"applyYearMonth=" + applyYearMonth +
+					" workplaceCode=" + workplaceCode,
+					"fn_callback");
+					
+};
+
+//전체마감
+this.Div00_00_deadlineBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_monthAttenMng.rowcount;
+	for(var i=0; i<count; i++){
+		this.ds_monthAttenMng.setColumn(i,"FINALIZE_STATUS", "Y");
+	}
+	
+// 	this.transaction("finalizeID",
+// 					"svcAttdappvl::month-attndPut",
+// 					"ds_monthAttenMng=ds_monthAttenMng",
+// 					"",
+// 					"",
+// 					"fn_callback");
+
+};
+
+//마감취소
+
+this.Div00_00_deadlineCancellationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_monthAttenMng.rowcount;
+	for(var i=0; i<count; i++){
+		this.ds_monthAttenMng.setColumn(i,"FINALIZE_STATUS", "N");
+	}
+	
+// 	this.transaction("finalizeID",
+// 					 "svcAttdappvl::month-attndPut",
+// 					 "ds_monthAttenMng=ds_monthAttenMng",
+// 					 "",
+// 					 "",
+// 					 "fn_callback");
+
+};
+
+
+this.Div00_00_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+		this.transaction("finalizeID",
+					 "svcAttdappvl::month-attndPut",
+					 "ds_monthAttenMng=ds_monthAttenMng:u",
+					 "",
+					 "",
+					 "fn_callback");
+					 
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_monthAttenMng">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="APPLY_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="WEEKDAY_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="LATE_DAYS" type="STRING" size="256"/>
+          <Column id="ABSENT_DAYS" type="STRING" size="256"/>
+          <Column id="EARLY_LEAVE_DAYS" type="STRING" size="256"/>
+          <Column id="HALF_HOLIDAYS" type="STRING" size="256"/>
+          <Column id="HOLIDAYS" type="STRING" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

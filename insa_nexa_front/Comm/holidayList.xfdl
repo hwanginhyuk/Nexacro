@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="holidayList" width="1060" height="620" titletext="New Form" onload="holidayList_onload">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="20" top="20" width="1010" height="560">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="   ◼ 휴일정보관리" left="-15" top="-15" width="214" height="49" textAlign="left" font="bold 18px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Static00_onclick"/>
+              <Grid id="Grid" taborder="0" left="35" top="125" width="940" height="400" binddataset="ds_holidayList" autoenter="none" cellcalendarpopuptype="none" selecttype="row" oncelldblclick="Div00_00_Grid_oncelldblclick" onheadclick="Div00_00_Grid_onheadclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="43"/>
+                      <Column size="293"/>
+                      <Column size="297"/>
+                      <Column size="288"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="32"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell displaytype="none" edittype="none"/>
+                      <Cell col="1" text="일자" displaytype="normal"/>
+                      <Cell col="2" text="휴일명"/>
+                      <Cell col="3" text="비고"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="checkboxcontrol" edittype="checkbox" accessibilityrole="checkbox" suppress="0" text="bind:STATUS"/>
+                      <Cell col="1" text="bind:APPLY_DAY" displaytype="normal" edittype="text"/>
+                      <Cell col="2" text="bind:HOLIDAY_NAME" edittype="text"/>
+                      <Cell col="3" text="bind:NOTE" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btn_del" taborder="2" text="삭제" left="795" top="75" width="80" height="35" onclick="Div00_00_btn_del_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+              <Button id="btn_save" taborder="3" text="저장" left="890" top="75" width="80" height="35" onclick="Div00_00_btn_save_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+              <Button id="btn_add" taborder="4" text="추가" left="700" top="75" width="80" height="35" onclick="Div00_00_btn_add_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+            </Layout>
+          </Layouts>
+          <InitValue>
+            <Grid id="Grid" autoenter="none"/>
+          </InitValue>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_holidayList" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="APPLY_DAY" type="DATE" size="256"/>
+          <Column id="HOLIDAY_NAME" type="STRING" size="256"/>
+          <Column id="NOTE" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//로딩시
+this.holidayList_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+
+	this.transaction(
+					"holidayListID",
+					 "svcFoudinfomgmt::holiday",
+					 "",
+					 "ds_holidayList=ds_holiday", //클=서 
+					 "",
+					 "fn_callback");
+};
+
+
+
+//추가
+this.Div00_00_btn_add_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_holidayList.addRow();
+	this.ds_holidayList.setColumn(this.ds_holidayList.rowposition,"STATUS","");
+
+};
+
+
+//삭제
+this.Div00_00_btn_del_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_holidayList.deleteRow(this.ds_holidayList.rowposition);
+
+	//this.ds_holidayList.setColumn(this.ds_holidayList.rowposition,"STATUS","delete");
+};
+
+
+//저장
+this.Div00_00_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count=this.ds_holidayList.rowcount;
+	
+	for(var i=0;i<count;i++){
+		var statusList=this.ds_holidayList.getColumn(i,"STATUS");
+		var holidayList=this.ds_holidayList.getColumn(i,"HOLIDAY_NAME");
+		var applyList=this.ds_holidayList.getColumn(i,"APPLY_DAY");
+		trace("날짜  : "+applyList);
+		trace(applyList.toString().length);
+		
+	if (applyList.toString().length<8){
+		this.alert("일자를 정확하게 입력해주세요. "); return;	
+	}if (holidayList==null){
+		this.alert("휴일명을 입력해주세요."); return;
+       }
+	}if(confirm(" 저장하시겠습니까 ? ")){
+	this.transaction("updateID",
+					 "svcFoudinfomgmt::regitCodeList",
+					 "ds_holiday=ds_holidayList:u", //서버=클라이언트:u
+					 "",
+					 "",
+					 "fn_callback");	
+	}
+};
+
+this.fn_callback = function (trID , ErrorCode , ErrorMsg)
+{
+	if(trID=="holidayListID"){
+		if (ErrorCode!=0){
+			alert("조회실패 : "+ErrorMsg);	
+		}else{
+		
+			var count=this.ds_holidayList.rowcount;
+			
+			for(var i=0;i<count;i++){
+				var statusList=this.ds_holidayList.setColumn(i,"STATUS","");
+			}
+		}
+	}
+	
+	if(trID=="updateID"){
+		if (ErrorCode!=0){
+			alert("저장실패 : "+ErrorMsg+ErrorCode);	
+		}else{
+			alert("저장완료 ");	
+		}this.reload();
+	}
+};
+this.Div00_00_Static00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+
+this.Div00_00_Grid_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(e.cell == 0){
+		var nValue =this.Div00_00.form.Grid.getCellText(-1,0);
+		
+		nValue = (nValue == "1" ? "0" : "1");
+		this.ds_holidayList.set_enableevent(false);
+// 		for(var i=0; i<this.ds_holidayList.rowcount; i++){
+// 			this.ds_holidayList.setColumn(i, "CHK", nValue);
+// 		}
+		this.ds_holidayList.set_enableevent(true);
+		this.Div00_00.form.Grid.setCellProperty("Head", 0, "text", nValue);
+		
+		
+	}
+	
+};
+
+this.Div00_00_Grid_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.ds_holidayList.addColumn("STATUS","STRING");
+	
+	for(var i=0; i<this.ds_holidayList.rowcount; i++){
+		this.ds_holidayList.setColumn(i, "STATUS", undefined);
+	}
+	
+	this.ds_holidayList.setColumn(this.ds_holidayList.rowposition, "STATUS", "Choice");
+};
+
+this.Div00_00_Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00_00.form.Combo00" propid="value" datasetid="ds_holidayList" columnid="APPLY_DAY"/>
+    </Bind>
+  </Form>
+</FDL>

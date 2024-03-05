@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="retirementPay" width="1280" height="720" titletext="New Form" onload="retirementPay_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Tab id="tab_searchEmp" taborder="0" tabindex="0" left="33" top="40" width="637" height="660" background="white" onchanged="tab_searchEmp_onchanged" borderRadius="5px">
+          <Tabpages>
+            <Tabpage id="tab_search_dept" text="부서명 검색">
+              <Layouts>
+                <Layout>
+                  <Combo id="Combo_dept" taborder="0" text="전체부서" left="310" top="20" width="200" height="35" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="0" index="0" onkeyup="tab_searchEmp_tab_search_dept_Combo_dept_onkeyup" borderRadius="5px">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">0</Col>
+                          <Col id="datacolumn">전체부서</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">DEP000</Col>
+                          <Col id="datacolumn">회계팀</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">DEP001</Col>
+                          <Col id="datacolumn">인사팀</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">DEP002</Col>
+                          <Col id="datacolumn">전산팀</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">DEP003</Col>
+                          <Col id="datacolumn">보안팀</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">DEP004</Col>
+                          <Col id="datacolumn">개발팀</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Button id="btn_search" taborder="1" text="검색" left="530" top="20" width="75" height="35" onclick="tab_searchEmp_tab_search_dept_btn_search_onclick" borderRadius="5px"/>
+                  <Grid id="grid_empList_dept" taborder="2" left="15" top="80" width="590" height="510" binddataset="ds_empList" autofittype="col" oncellposchanged="grid_empList_oncellposchanged">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="35" band="head"/>
+                          <Row size="30"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="사원코드" background="#6092ff" color="white"/>
+                          <Cell col="1" text="사원명" background="#6092ff" color="white"/>
+                          <Cell col="2" text="부서" background="#6092ff" color="white"/>
+                          <Cell col="3" text="직급" background="#6092ff" color="white"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" text="bind:EMP_NAME"/>
+                          <Cell col="2" text="bind:DEPT_NAME"/>
+                          <Cell col="3" text="bind:POSITION"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tab_search_empName" text="사원명 검색">
+              <Layouts>
+                <Layout>
+                  <Button id="btn_search" taborder="0" text="검색" left="530" top="20" width="75" height="35" onclick="tab_searchEmp_tab_search_empName_btn_search_onclick" borderRadius="5px" background="#6092ff" color="white" font="normal 10pt/normal &quot;나눔고딕 ExtraBold&quot;"/>
+                  <Grid id="grid_empList_name" taborder="1" left="15" top="80" width="590" height="510" autofittype="col" binddataset="ds_empList" oncellposchanged="grid_empList_oncellposchanged" font="12px/normal &quot;나눔고딕 ExtraBold&quot;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="35" band="head"/>
+                          <Row size="30"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="사원코드" background="#6092ff" color="white" textAlign="center"/>
+                          <Cell col="1" text="사원명" background="#6092ff" color="white" textAlign="center"/>
+                          <Cell col="2" text="부서" background="#6092ff" color="white" textAlign="center"/>
+                          <Cell col="3" text="직급" background="#6092ff" color="white" textAlign="center"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE" textAlign="center"/>
+                          <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                          <Cell col="2" text="bind:DEPT_NAME" textAlign="center"/>
+                          <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Edit id="edit_empName" taborder="2" left="310" top="20" width="200" height="35" onkeyup="tab_searchEmp_tab_search_empName_edit_empName_onkeyup" borderRadius="5px"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Static id="Static01" taborder="1" left="710" top="84" width="470" height="466" border="1px solid #b2b2b2" borderRadius="3px"/>
+        <Static id="Static00" taborder="2" text="사 원 명" left="755" top="115" width="120" height="45" font="normal 10pt/normal &quot;나눔고딕&quot;"/>
+        <Edit id="edt_empName" taborder="3" left="860" top="117" width="275" height="40" readonly="true" onchanged="tab_retPayInfo_tab_calcStatus_edt_empName_onchanged" canchange="tab_retPayInfo_tab_calcStatus_edt_empName_canchange" text="empCode" background="" font="12px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static00_01" taborder="4" text="입 사 일" left="755" top="175" width="120" height="45" font="normal 10pt/normal &quot;나눔고딕&quot;"/>
+        <Edit id="edt_hireDate" taborder="5" left="860" top="177" width="275" height="40" readonly="true" background="" font="12px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static00_04" taborder="6" text="퇴 사 일" left="755" top="235" width="120" height="45" font="normal 10pt/normal &quot;나눔고딕&quot;"/>
+        <Edit id="edt_retDate" taborder="7" left="860" top="237" width="275" height="40" readonly="true" background="" font="12px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static00_03" taborder="8" text="산정기간" left="755" top="295" width="120" height="45" font="normal 10pt/normal &quot;나눔고딕&quot;"/>
+        <Edit id="edt_retRange" taborder="9" left="860" top="297" width="275" height="40" readonly="true" background="" font="12px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+        <Static id="Static00_00" taborder="10" text="퇴 직 금" left="755" top="355" width="120" height="45" font="normal 10pt/normal &quot;나눔고딕&quot;"/>
+        <Edit id="edt_retPay" taborder="11" left="860" top="357" width="275" height="40" readonly="true" background="" font="12px/normal &quot;나눔고딕&quot;" textAlign="right"/>
+        <Static id="Static00_02" taborder="12" text="상 여 금" left="755" top="415" width="120" height="45" onclick="Static00_02_onclick" font="normal 10pt/normal &quot;나눔고딕&quot;"/>
+        <Static id="Static00_05" taborder="13" text="성 과 금" left="755" top="475" width="120" height="45" font="normal 10pt/normal &quot;나눔고딕&quot;"/>
+        <Edit id="edt_bonus" taborder="14" left="860" top="417" width="275" height="40" readonly="true" background="" font="12px/normal &quot;나눔고딕&quot;" textAlign="right"/>
+        <Edit id="edt_awards" taborder="15" left="860" top="477" width="275" height="40" readonly="true" background="" font="12px/normal &quot;나눔고딕&quot;" textAlign="right"/>
+        <Static id="Static02" taborder="16" text="[ 퇴직금 산정현황 ]" left="712" top="24" width="188" height="60" font="normal 15pt/normal &quot;나눔고딕&quot;" onclick="Static02_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.retirementPay_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction("getEmplist",
+					 "svcEmpinfomgmt::emplist",
+					 "",
+					 "ds_empList=gds_emp",
+					 "value='전체부서'",
+					 "fn_callback");
+};
+
+this.grid_empList_oncellposchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+// 	trace(obj.getCellText(obj.getSelectedRows(), 0)); // 그리드 선택된 열의 첫번째 컬럼의 값
+	trace(obj.id);
+	var empCode = obj.getCellText(obj.getSelectedRows(), 0);
+	if(empCode != undefined){
+		this.transaction(
+			"getRetirementPayInfo",
+			 "svcRetirement::retirementpay",
+			 "",
+			 "ds_retirementPay=out_retirementpay",
+			 "empCode='"+empCode+"'",
+			 "fn_callback"
+		);
+	}
+	
+};
+
+this.errorCode = null;
+this.errorMsg = null;
+
+this.fn_callback = function(svcId, ErrorCode ,ErrorMsg)
+{
+	trace(svcId);
+	trace(ErrorCode);
+	trace(ErrorMsg);
+
+	if(ErrorCode < 0){
+		alert(ErrorCode + " : " + ErrorMsg);
+	}else if(this.errorCode < 0){
+		alert(this.errorCode + " : " + this.errorMsg);
+		this.errorCode = null;
+		this.errorMsg = null;
+	}
+}
+
+this.tab_searchEmp_tab_search_dept_btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(this.tab_searchEmp.tab_search_dept.form.Combo_dept.text);
+	this.transaction("getEmplist",
+					 "svcEmpinfomgmt::emplist",
+					 "",
+					 "ds_empList=gds_emp",
+					 "value='"+this.tab_searchEmp.tab_search_dept.form.Combo_dept.text+"'",
+					 "fn_callback");
+};
+
+this.tab_searchEmp_tab_search_empName_btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("getEmplist",
+					 "svcEmpinfomgmt::emplist",
+					 "",
+					 "ds_empList=gds_emp",
+					 "value='"+this.tab_searchEmp.tab_search_empName.form.edit_empName.text+"'",
+					 "fn_callback");
+	this.tab_searchEmp.tab_search_empName.form.edit_empName.set_value("");
+};
+
+this.tab_searchEmp_tab_search_empName_edit_empName_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == "13")
+		this.tab_searchEmp.tab_search_empName.form.btn_search.click();
+};
+
+this.tab_searchEmp_tab_search_dept_Combo_dept_onkeyup = function(obj:nexacro.Combo,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == "13")
+		this.tab_searchEmp.tab_search_dept.form.btn_search.click();
+};
+
+
+]]></Script>
+    <Objects>
+      <Dataset id="ds_empList">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="GENDER" type="STRING" size="256"/>
+          <Column id="MOBILE_NUMBER" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="ADDRESS" type="STRING" size="256"/>
+          <Column id="LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="IMG_EXTEND" type="STRING" size="256"/>
+          <Column id="BIRTHDATE" type="STRING" size="256"/>
+          <Column id="DETAIL_ADDRESS" type="STRING" size="256"/>
+          <Column id="POST_NUMBER" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_retirementPay">
+        <ColumnInfo>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="RETIREMENT_PAY" type="STRING" size="256"/>
+          <Column id="RETIREMENT_RANGE" type="STRING" size="256"/>
+          <Column id="HIREDATE" type="STRING" size="256"/>
+          <Column id="RETIREDATE" type="STRING" size="256"/>
+          <Column id="RETIREMENT_BONUS" type="STRING" size="256"/>
+          <Column id="RETIREMENT_AWARDS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_empName" propid="value" datasetid="ds_retirementPay" columnid="EMP_NAME"/>
+      <BindItem id="item1" compid="edt_hireDate" propid="value" datasetid="ds_retirementPay" columnid="HIREDATE"/>
+      <BindItem id="item2" compid="edt_retDate" propid="value" datasetid="ds_retirementPay" columnid="RETIREDATE"/>
+      <BindItem id="item3" compid="edt_retRange" propid="value" datasetid="ds_retirementPay" columnid="RETIREMENT_RANGE"/>
+      <BindItem id="item4" compid="edt_retPay" propid="value" datasetid="ds_retirementPay" columnid="RETIREMENT_PAY"/>
+      <BindItem id="item5" compid="edt_bonus" propid="value" datasetid="ds_retirementPay" columnid="RETIREMENT_BONUS"/>
+      <BindItem id="item6" compid="edt_awards" propid="value" datasetid="ds_retirementPay" columnid="RETIREMENT_AWARDS"/>
+    </Bind>
+  </Form>
+</FDL>

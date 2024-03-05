@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="success" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Div id="Div00" taborder="0" text="Div00" left="10" top="10" width="1260" height="700" background="#D9e5ff">
+          <Layouts>
+            <Layout>
+              <Div id="Div00" taborder="0" left="0" top="40" width="1260" height="90" background="#EDF0F5" text="">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="년도" left="105" top="10" width="30" height="30" textAlign="left" onclick="Div00_Div00_Static00_onclick"/>
+                    <Combo id="YearCombo" taborder="1" left="20" top="10" width="80" height="30" index="-1" innerdataset="ds_year" codecolumn="NAME" datacolumn="VALUE" text="" displaynulltext="선택" onitemchanged="Div00_Div00_YearCombo_onitemchanged"/>
+                    <Button id="FindBtn" taborder="2" left="285" top="10" width="55" height="30" onclick="Div00_Div00_FindBtn_onclick" text="조회"/>
+                    <Combo id="BangiCombo" taborder="3" text="선택" left="130" top="10" width="150" height="30" value="" index="-1" innerdataset="ds_half" codecolumn="NAME" datacolumn="VALUE" displaynulltext="선택"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Div id="Div01" taborder="1" text="Div01" left="10" top="145" width="1240" height="540" background="#F7F7F9">
+                <Layouts>
+                  <Layout>
+                    <Grid id="Grid00" taborder="0" left="10" top="20" width="1220" height="505" binddataset="ds_succList" autofittype="col" autoenter="none" oncelldblclick="Div00_Div01_Grid00_oncelldblclick">
+                      <Formats>
+                        <Format id="default">
+                          <Columns>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                          </Columns>
+                          <Rows>
+                            <Row size="24" band="head"/>
+                            <Row size="24"/>
+                          </Rows>
+                          <Band id="head">
+                            <Cell text="임시코드"/>
+                            <Cell col="1" text="면접평균"/>
+                            <Cell col="2" text="인성평균"/>
+                            <Cell col="3" text="이름"/>
+                            <Cell col="4" text="나이"/>
+                            <Cell col="5" text="성별"/>
+                            <Cell col="6" text="주소"/>
+                            <Cell col="7" text="전화번호"/>
+                            <Cell col="8" text="이메일"/>
+                            <Cell col="9" text="부서"/>
+                            <Cell col="10" text="학력"/>
+                            <Cell col="11" text="경력"/>
+                          </Band>
+                          <Band id="body">
+                            <Cell text="bind:CODE"/>
+                            <Cell col="1" text="bind:INTERVIEW_AVG"/>
+                            <Cell col="2" text="bind:PERSONALITY_AVG"/>
+                            <Cell col="3" text="bind:NAME"/>
+                            <Cell col="4" text="bind:AGE"/>
+                            <Cell col="5" text="bind:GENDER"/>
+                            <Cell col="6" text="bind:ADDRESS"/>
+                            <Cell col="7" text="bind:TEL"/>
+                            <Cell col="8" text="bind:EMAIL"/>
+                            <Cell col="9" text="bind:DEPT"/>
+                            <Cell col="10" text="bind:LAST_SCHOOL"/>
+                            <Cell col="11" text="bind:CAREER"/>
+                          </Band>
+                        </Format>
+                      </Formats>
+                    </Grid>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00_01" taborder="1" text="◼ 합격자 조회" left="8" top="0" width="214" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;" onclick="Static00_01_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_year">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">2020</Col>
+            <Col id="VALUE">2020</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">2021</Col>
+            <Col id="VALUE">2021</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">2022</Col>
+            <Col id="VALUE">2022</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_half">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">상반기</Col>
+            <Col id="VALUE">상반기(1~6월)</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">하반기</Col>
+            <Col id="VALUE">하반기(7~12월)</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_succList">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="INTERVIEW_AVG" type="INT" size="256"/>
+          <Column id="PERSONALITY_AVG" type="INT" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="AGE" type="INT" size="256"/>
+          <Column id="GENDER" type="STRING" size="256"/>
+          <Column id="ADDRESS" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="DEPT" type="STRING" size="256"/>
+          <Column id="LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="CAREER" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sucClon">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="INTERVIEW_AVG" type="INT" size="256"/>
+          <Column id="PERSONALITY_AVG" type="INT" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="AGE" type="INT" size="256"/>
+          <Column id="GENDER" type="STRING" size="256"/>
+          <Column id="ADDRESS" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="DEPT" type="STRING" size="256"/>
+          <Column id="LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="CAREER" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+//검색 돋보기 버튼
+this.Div00_Div00_FindBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"emplistload",
+		"svcRecruit::newempSuccess",
+		"",
+		"ds_succList=ds_newempSuccess",
+ 		"year='"+
+ 		this.Div00.form.Div00.form.YearCombo.text+"' half='"+
+ 		this.Div00.form.Div00.form.BangiCombo.value+"'",
+		"");
+};
+
+]]></Script>
+  </Form>
+</FDL>

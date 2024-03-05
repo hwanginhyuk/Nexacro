@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Left" titletext="Form_Left" dragscrolltype="none" scrolltype="vertical" width="230" height="820" scrollbartype="none auto" ontimer="Form_Left_ontimer" onrbuttonup="Form_Left_onrbuttonup" oninit="Form_Left_oninit">
+    <Layouts>
+      <Layout width="230" height="820" screenid="Desktop_screen">
+        <Div id="Div00" taborder="0" text="Div00" left="0" top="0" width="220" height="260">
+          <Layouts>
+            <Layout>
+              <Static id="Static00_00" taborder="1" text="사원코드" left="26" top="41" width="54" height="32" font="bold 10pt &quot;나눔고딕&quot;" textAlign="left"/>
+              <Static id="Static00_00_00" taborder="1" text="성 명" left="26" top="7" width="54" height="30" font="bold 10pt &quot;나눔고딕&quot;" textAlign="left"/>
+              <Static id="Static00_00_01" taborder="2" text="직 급" left="26" top="77" width="100" height="30" font="bold 10pt &quot;나눔고딕&quot;" textAlign="left"/>
+              <Edit id="empName" taborder="3" left="99" top="7" width="100" height="30" font="bold 12px/normal &quot;Gulim&quot;,&quot;휴먼엑스포&quot;" textAlign="center" enable="false" onchanged="Div00_empName_onchanged"/>
+              <Edit id="empCode" taborder="4" left="99" top="42" width="100" height="30" font="bold 12px/normal &quot;Gulim&quot;,&quot;휴먼엑스포&quot;" textAlign="center" onchanged="Div00_Edit00_00_onchanged" enable="false"/>
+              <Edit id="empPosition" taborder="5" left="99" top="77" width="100" height="30" font="bold 12px/normal &quot;Gulim&quot;,&quot;휴먼엑스포&quot;" textAlign="center" enable="false"/>
+              <Static id="timer" taborder="6" text="Static00" left="93" top="131" width="100" height="20" textAlign="center" onclick="Div00_timer_onclick"/>
+              <Static id="Static00_01" taborder="7" text="현재시간" left="20" top="131" width="100" height="20" textAlign="left" font=" 10pt &quot;나눔고딕&quot;" onclick="Div00_Static00_01_onclick"/>
+              <Button id="Button00" taborder="8" text="출근" left="18" top="215" width="80" height="30" borderRadius="5px" background="#6092ff" color="white" font="bold 12px/normal &quot;나눔고딕&quot;" onclick="Div00_Button00_onclick"/>
+              <Button id="Button00_00" taborder="9" text="퇴근" left="115" top="215" width="80" height="30" borderRadius="5px" background="#6092ff" color="white" font="bold 12px/normal &quot;나눔고딕&quot;" onclick="Div00_Button00_00_onclick"/>
+              <Static id="Static00_01_00" taborder="10" text="출근시간" left="20" top="158" width="100" height="20" textAlign="left" font=" 10pt &quot;나눔고딕&quot;" onclick="Div00_Static00_01_onclick"/>
+              <Static id="timer00" taborder="11" left="93" top="158" width="100" height="20" textAlign="center" onclick="Div00_Button00_onclick"/>
+              <Static id="Static00_01_01" taborder="12" text="퇴근시간" left="20" top="185" width="100" height="20" textAlign="left" font=" 10pt &quot;나눔고딕&quot;" onclick="Div00_Static00_01_onclick"/>
+              <Static id="timer01" taborder="13" left="93" top="185" width="100" height="20" textAlign="center"/>
+              <Static id="Static00" taborder="14" text="&lt;근태 등록&gt;" left="68" top="113" width="68" height="14" textAlign="center"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="leftMenu" taborder="1" left="0" top="260" width="220" height="1500" binddataset="gds_menu" autosizingtype="both" cellmovingtype="none" treeinitstatus="expand,all" treeusecheckbox="false" oncelldblclick="leftMenu_oncelldblclick" cellcalendarpopuptype="none" cellsizebandtype="body" autofittype="col" scrollpixel="none" scrolldisplaymode="normal" scrolltype="none" scrollbartype="none none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="96"/>
+              </Columns>
+              <Rows>
+                <Row size="30"/>
+              </Rows>
+              <Band id="body">
+                <Cell displaytype="treeitemcontrol" edittype="tree" text="bind:menu_nm" treelevel="bind:menu_lv" treestate="bind:menu_st" controlautosizingtype="both" border="1px solid #BDBDBD"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.empName" propid="value" datasetid="gds_emp" columnid="EMP_NAME"/>
+      <BindItem id="item1" compid="Div00.form.empCode" propid="value" datasetid="gds_emp" columnid="EMP_CODE"/>
+      <BindItem id="item2" compid="Div00.form.empPosition" propid="value" datasetid="gds_emp" columnid="POSITION"/>
+    </Bind>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commDate.xjs";
+include "Lib::commString.xjs";
+include "Lib::commonOpen.xjs";
+
+var updateEdit;
+var hh;
+var mm;
+var ss;
+var today;
+var nexa = nexacro.getApplication();
+
+this.leftMenu_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var sID = nexa.gds_menu.getColumn(e.row, "menu_id");
+	var url = nexa.gds_menu.getColumn(e.row, "menu_url");
+	var title = nexa.gds_menu.getColumn(e.row, "menu_nm");
+	var sIDN=parseInt(sID);
+
+	if( url == null) return;
+
+	this.gfn_Open(url, title);
+	trace("홈화면");
+};
+
+this.gfn_Open = function (url, title)
+ {
+	var dd = nexa.mainframe.VFrameSet00.HFrameSet00.WorkFrame;
+
+        //dd.form.Div00.set_text(title);
+		
+        dd.form.Div00.set_url(url);
+		trace("타임")
+		
+            
+ };
+
+this.Form_Left_oninit = function(obj:nexacro.Form,e:nexacro.EventInfo) // Form 의 초기화가 완료되었을 때 발생하는 이벤트입니다. 
+{
+	this.clock();
+	this.setTimer(1,1000);
+};
+
+this.Form_Left_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo) //setTimer() 메소드로 생성한 타이머의 시간 간격마다 발생하는 이벤트입니다.
+{
+	if(e.timerid == 1){
+		this.clock();
+	}
+};
+
+
+this.clock = function() // 시간구하기
+{
+	var objDate = new nexacro.Date();
+	hh = objDate.getHours()>=10?objDate.getHours():'0'+objDate.getHours();
+	mm = objDate.getMinutes()>=10?objDate.getMinutes():'0'+objDate.getMinutes();
+	ss = objDate.getSeconds()>=10?objDate.getSeconds():'0'+objDate.getSeconds();
+	var time = hh+":"+mm+":"+ss;
+	this.Div00.form.timer.set_text(time); // id = timer 인 form에 나타내기
+};
+
+
+
+//[출근]
+//[출근] 버튼누르면 무조건 데이터교류가 일어남
+this.Div00_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Div00.form.timer00.set_text(hh.toString()+":"+mm.toString()+":"+ss.toString()); 
+	
+	var checkTime = hh.toString()+mm.toString();
+	trace(checkTime);
+	
+	this.ds_dayAttd.setColumn(0,"ATTD_TYPE_CODE","ADC001"); //근태코드set
+	this.ds_dayAttd.setColumn(0,"ATTD_TYPE_NAME","출근"); //근태코드이름set
+	this.ds_dayAttd.setColumn(0,"EMP_CODE",nexa.g_empCode ); // 사원코드 set //nexa.g_empCode => Application Information-Variables-g_empCode
+	this.ds_dayAttd.setColumn(0,"EMP_NAME",nexa.g_empName ); // 사원코드 set //nexa.g_empCode => Application Information-Variables-g_empCode
+	this.ds_dayAttd.setColumn(0,"TIME", checkTime);
+	
+	todays = this.gfn_today();
+	today = todays.substring(0,4) + "/" + todays.substring(4,6) + "/" + todays.substring(6,8)
+	trace(today);
+	trace(nexa.g_empCode);
+	this.ds_dayAttd.setColumn(0,"APPLY_DAY", today);
+			
+	this.transaction("recordAttnd"
+					,"svcAttdmgmt::daily-attnd"
+					,"gds_dayAttd=ds_dayAttd"
+					,""
+					,""
+					,"fn_callback");
+					
+};
+
+
+//[퇴근]
+//[퇴근] 버튼누르면 무조건 데이터교류가 일어남
+this.Div00_Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Div00.form.timer01.set_text(hh.toString()+":"+mm.toString()+":"+ss.toString()); 
+		var checkTime = hh.toString()+mm.toString();
+	trace(checkTime);
+	
+	trace("code:"+this.Div00.form.empCode.value);
+	
+	this.ds_dayAttd.setColumn(0,"ATTD_TYPE_CODE","ADC002"); //근태코드set
+	this.ds_dayAttd.setColumn(0,"ATTD_TYPE_NAME","퇴근"); //근태코드이름set
+	this.ds_dayAttd.setColumn(0,"EMP_CODE",nexa.g_empCode ); // 사원코드 set //nexa.g_empCode => Application Information-Variables-g_empCode
+	this.ds_dayAttd.setColumn(0,"EMP_NAME",nexa.g_empName ); // 사원코드 set //nexa.g_empCode => Application Information-Variables-g_empCode
+	this.ds_dayAttd.setColumn(0,"TIME", checkTime);
+	
+	todays = this.gfn_today();
+	today = todays.substring(0,4) + "/" + todays.substring(4,6) + "/" + todays.substring(6,8)
+	trace(today);
+	trace(nexa.g_empCode);
+	trace(nexa.g_empName);
+	this.ds_dayAttd.setColumn(0,"APPLY_DAY", today);
+	
+	this.transaction("recordAttnd2"
+					,"svcAttdmgmt::daily-attnd"
+					,"gds_dayAttd=ds_dayAttd"
+					,""
+					,""
+					,"fn_callback");
+	
+};
+
+//콜백함수에서 성공시에만, 데이터교류가 일어남 
+//근데 이때는 ds_dayAttdList 데이터셋으로 교류함(EMP_NAME이 추가된) 
+//- 등록성공시에만 직원이름을넘기겠다는뜻인데..
+this.fn_callback = function (trID, errorCode, errorMsg)
+{			   
+		if(trID == "recordAttnd"){
+		if(errorCode < 0){
+		 this.alert("근태등록 실패 : "+ errorMsg );
+			return
+			}
+			this.alert("등록 성공", 	
+						this.transaction("findDayAttdList",
+										"svcAttdmgmt::daily-attnd2",
+										"",
+										"ds_dayAttdList=gds_dayAttd",
+										"applyDay='"+today+"' empCode='"+nexa.g_empCode+"'",
+										"fn_callback" )
+						); 			
+		} else if(trID == "recordAttnd2"){
+			if(errorCode < 0){
+		 this.alert("근태등록 실패 : "+ errorMsg );
+			return
+			}
+			this.alert("등록 성공", 	
+						this.transaction("findDayAttdList",
+										"svcAttdmgmt::daily-attnd2",
+										"",
+										"ds_dayAttdList=gds_dayAttd",
+										"applyDay='"+today+"' empCode='"+nexa.g_empCode+"'",
+										"fn_callback" )
+						); 		
+		}
+
+		if(trID == "deleteAttnd"){
+		if(errorCode < 0){
+			return this.alert("근태삭제 실패 : "+ errorMsg );
+			}
+			this.alert("삭제 성공");
+			
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="ds_dayAttd">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="APPLY_DAY" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="TIME" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_dayAttdList">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="APPLY_DAY" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="TIME" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_delDayAttd">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="APPLY_DAY" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="TIME" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

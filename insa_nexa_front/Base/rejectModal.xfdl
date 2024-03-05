@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="codeList" width="290" height="170" onload="codeList_onload">
+    <Layouts>
+      <Layout height="170" mobileorientation="landscape" width="290">
+        <Div id="Div00" taborder="0" text="Div00" left="3" top="4" width="283" height="163">
+          <Layouts>
+            <Layout>
+              <Edit id="Edit00" taborder="0" left="10" top="46" width="255" height="60" onchanged="Div00_Edit00_onchanged"/>
+              <Static id="Static00" taborder="1" text="반려 사유" left="17" top="6" width="57" height="31"/>
+              <Button id="Button00" taborder="2" text="확인" left="124" top="133" width="73" height="27" onclick="Button00_onclick"/>
+              <Button id="Button01" taborder="3" text="취소" left="204" top="133" width="73" height="27" onclick="Button01_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_codeList">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NUMBER" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_deptlist">
+        <ColumnInfo>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_TEL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emplist">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+
+	var msg = this.Div00.form.Edit00.value
+	
+	this.close(msg)
+};
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	this.close()
+};
+
+
+]]></Script>
+  </Form>
+</FDL>

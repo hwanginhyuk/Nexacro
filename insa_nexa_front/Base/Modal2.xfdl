@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="codeList" width="200" height="320" onload="codeList_onload">
+    <Layouts>
+      <Layout height="320" mobileorientation="landscape" width="200">
+        <Div id="Div00" taborder="0" text="Div00" left="4" top="6" width="196" height="314">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" text="부서명" left="1" top="4" width="76" height="21"/>
+              <Static id="Static01_01" taborder="1" text="사원명" left="2" top="136" width="76" height="21"/>
+              <Combo id="Combo00" taborder="2" text="" left="1" top="37" width="172" height="37" codecolumn="DEPT_NAME" datacolumn="DEPT_NAME" onitemchanged="Div00_Combo00_onitemchanged" innerdataset="ds_deptlist" displaynulltext="부서를 선택해주세요"/>
+              <Combo id="Combo01" taborder="3" text="Combo01" left="2" top="157" width="176" height="39" onitemchanged="Div00_Combo01_onitemchanged" innerdataset="ds_emplist" codecolumn="EMP_NAME" datacolumn="EMP_NAME" displaynulltext="사원을 선택해주세요"/>
+              <Edit id="Edit00" taborder="4" left="3" top="106" width="152" height="31" onchanged="Div00_Edit00_onchanged" enable="false"/>
+              <Static id="Static02" taborder="5" text="부서코드" left="3" top="80" width="151" height="18"/>
+              <Static id="Static00" taborder="6" text="사원코드" left="3" top="198" width="167" height="16" onclick="Div00_Static00_onclick"/>
+              <Edit id="Edit00_00" taborder="7" left="3" top="224" width="154" height="35" enable="false"/>
+              <Button id="Button00" taborder="8" text="Button00" left="117" top="278" width="73" height="31" onclick="Div00_Button00_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_codeList">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NUMBER" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_deptlist">
+        <ColumnInfo>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_TEL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emplist">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[var nexa=nexacro.getApplication();
+
+this.codeList_onload = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+		this.transaction("deptListID",
+					 "svcSystemmgmt::deptlist",
+					 "",
+					 "ds_deptlist=gds_deptlist",
+					 "",
+					 "fn_callback"
+					);
+
+};
+
+this.Div00_Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+	var rowIndex = this.ds_deptlist.findRow('DEPT_NAME',obj.value)
+	var deptcode = this.ds_deptlist.getColumn(rowIndex,"DEPT_CODE")
+
+ 	this.Div00.form.Edit00.set_value(deptcode)
+	
+ 	nexa.gds_empanddept.setColumn(0,"DEPT_NAME",obj.value)
+ 	nexa.gds_empanddept.setColumn(0,"DEPT_CODE",deptcode)
+	
+	var deptName=obj.value
+
+	this.transaction("empListID",
+					 "svcSystemmgmt::emplist",
+					 "",
+					 "ds_emplist=gds_emplist",
+					 "deptName="+deptName,
+					 "fn_callback"
+					);
+
+};
+
+
+this.Div00_Combo01_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+	var rowIndex = this.ds_emplist.findRow('EMP_NAME',obj.value)
+	var empcode = this.ds_emplist.getColumn(rowIndex,"EMP_CODE")
+
+ 	this.Div00.form.Edit00_00.set_value(empcode)
+	
+	var pEmpCode = this.ds_emplist.getColumn(rowIndex, "EMP_CODE")
+	var pEmpName = this.ds_emplist.getColumn(rowIndex, "EMP_NAME")
+	var PDeptCode = this.ds_deptlist.getColumn(rowIndex, "DEPT_CODE")
+	var pDeptName = this.ds_deptlist.getColumn(rowIndex, "DEPT_NAME")
+	
+	this.close(pEmpCode + ":" + pEmpName + ":" + PDeptCode + ":" + pDeptName);
+};
+
+]]></Script>
+  </Form>
+</FDL>

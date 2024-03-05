@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="retirementReceipt" width="1280" height="720" titletext="New Form" onload="retirementReceipt_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Tab id="tab_receipt" taborder="0" tabindex="0" left="30" top="25" width="1200" height="650" background="white">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="퇴직금영수증 신청" url="Retirement::rr_retReceiptApply.xfdl" background="white"/>
+            <Tabpage id="Tabpage2" text="퇴직금영수증 조회" url="Retirement::rr_retReceiptInqury.xfdl" background="white"/>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.retirementReceipt_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

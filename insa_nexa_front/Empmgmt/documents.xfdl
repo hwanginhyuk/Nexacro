@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="documents" width="1270" height="930" titletext="New Form" onload="documents_onload">
+    <Layouts>
+      <Layout height="930" width="1270" stepcount="0">
+        <Div id="Div00_00" taborder="0" text="" left="0" top="0" width="1010" height="560">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="증빙서류 신청/조회 " left="53" top="20" width="380" height="35" textAlign="left" font="bold 18px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Static00_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Tab id="Tab00" taborder="1" tabindex="0" left="53" top="80" width="962" height="490">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="증빙서류신청">
+              <Layouts>
+                <Layout>
+                  <Static id="applicant" taborder="0" text="신 청 자" left="5" top="44" width="109" height="40" textAlign="center" font="14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="applicantEdit" taborder="1" left="123" top="47" width="250" height="35" textAlign="center" readonly="true"/>
+                  <Static id="position" taborder="2" text="직     급" left="5" top="101" width="109" height="40" textAlign="center" font="14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="positionEdit" taborder="3" left="123" top="104" width="250" height="35" readonly="true" textAlign="center"/>
+                  <Static id="dept" taborder="4" text="부     서" left="5" top="158" width="109" height="40" textAlign="center" font="14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="deptEdit" taborder="5" left="123" top="161" width="250" height="35" textAlign="center" readonly="true"/>
+                  <Static id="applicationDate" taborder="6" text="신 청 일" left="454" top="44" width="109" height="40" textAlign="center" font="14px/normal &quot;나눔고딕&quot;"/>
+                  <Static id="reason" taborder="7" text="사     유" left="454" top="158" width="109" height="40" textAlign="center" font="14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="reasonEdit" taborder="8" left="572" top="161" width="250" height="35" textAlign="left"/>
+                  <Calendar id="applicationDateCal" taborder="9" left="572" top="47" width="250" height="35"/>
+                  <Static id="proof" taborder="10" text="증빙구분" left="454" top="101" width="109" height="40" textAlign="center" font="14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="proofEdit" taborder="11" left="572" top="104" width="250" height="35" textAlign="left" oneditclick="proofEdit_oneditclick" value="--선택하세요--" text="--선택하세요--" onchanged="Tab00_Tabpage1_proofEdit_onchanged"/>
+                  <Button id="applicationBtn" taborder="12" text="신청" left="372" top="271" width="80" height="35" onclick="Tab00_Tabpage1_applicationBtn_onclick" font="12px/normal &quot;나눔고딕 ExtraBold&quot;" background="#6092ff" borderRadius="5px" color="white"/>
+                  <Button id="cancellationBtn" taborder="13" text="취소" left="472" top="271" width="80" height="35" onclick="Tab00_Tabpage1_cancellationBtn_onclick" font="12px/normal &quot;나눔고딕 ExtraBold&quot;" background="#6092ff" borderRadius="5px" color="white"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="증빙서류조회">
+              <Layouts>
+                <Layout>
+                  <Static id="Static00" taborder="0" text="조회기간" left="1" top="34" width="68" height="17" textAlign="center" font="14px/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="inquiryAfterCal" taborder="1" left="276" top="26" width="163" height="35"/>
+                  <Static id="inquiryForm" taborder="2" text="~" left="247" top="22" width="25" height="39" textAlign="center" font="14pt/normal &quot;나눔고딕&quot;"/>
+                  <Button id="inquiryBtn" taborder="3" text="조회" left="767" top="27" width="80" height="35" onclick="inquiryBtn_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+                  <Button id="eliminationBtn" taborder="4" text="삭제" left="857" top="27" width="80" height="35" onclick="cancellationBtn_onclick" background="#6092ff" borderRadius="5px" color="white" font="12px/normal &quot;나눔고딕 ExtraBold&quot;"/>
+                  <Grid id="Grid00" taborder="5" left="5" top="81" width="940" height="380" binddataset="ds_documents_list" oncellclick="Grid00_oncellclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="42"/>
+                          <Column size="128"/>
+                          <Column size="128"/>
+                          <Column size="128"/>
+                          <Column size="128"/>
+                          <Column size="128"/>
+                          <Column size="128"/>
+                          <Column size="128"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="37" band="head"/>
+                          <Row size="37"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell/>
+                          <Cell col="1" text="사원명"/>
+                          <Cell col="2" text="증빙구분"/>
+                          <Cell col="3" text="직급"/>
+                          <Cell col="4" text="부서"/>
+                          <Cell col="5" text="신청일"/>
+                          <Cell col="6" text="사유"/>
+                          <Cell col="7" text="승인상태"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="checkboxcontrol" edittype="checkbox" text="bind:STATUS"/>
+                          <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                          <Cell col="2" text="bind:PROOF_TYPE_NAME" textAlign="center"/>
+                          <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                          <Cell col="4" text="bind:DEPT" textAlign="center"/>
+                          <Cell col="5" text="bind:START_DATE" textAlign="center"/>
+                          <Cell col="6" text="bind:CAUSE" textAlign="center"/>
+                          <Cell col="7" text="bind:APPLOVAL_STATUS" textAlign="center"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Calendar id="inquiryFormCal" taborder="6" left="78" top="26" width="163" height="35"/>
+                  <Static id="proof" taborder="7" text="구    분" left="473" top="34" width="62" height="17" textAlign="center" font="14px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage2_proof_onclick"/>
+                  <Edit id="proofEdit" taborder="8" left="549" top="27" width="193" height="35" oneditclick="proofEdit2_oneditclick" value=" --선택하세요--" text=" --선택하세요--"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs";
+include "Lib::commDate.xjs";
+include "Lib::commString.xjs";
+
+var nexa = nexacro.getApplication();
+
+//로딩
+this.documents_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.Tab00.Tabpage1.form.applicantEdit.set_value(nexa.g_empName);
+	this.Tab00.Tabpage1.form.positionEdit.set_value(nexa.g_position);
+	this.Tab00.Tabpage1.form.deptEdit.set_value(nexa.g_deptName);
+	
+	var firshTodat=this.gfn_todayFirst(); //PC의 첫날
+	this.Tab00.Tabpage2.form.inquiryFormCal.set_value(firshTodat);
+	var today=this.gfn_today();  //pc 오늘날짜
+	this.Tab00.Tabpage2.form.inquiryAfterCal.set_value(today);
+};
+
+//증빙구분
+var updateEdit;
+var proofTypeCode;
+
+this.proofEdit_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("proof", "Base::Modal.xfdl", "fn_popupCallback", {code:"CO-27"});
+};
+
+this.fn_popupCallback = function(codename, code)
+{
+	var codeName = code.split(":")[0];
+	if(codeName=="재직증명서"){ proofTypeCode = "DOC001";
+	}if(codeName=="경력증명서"){ proofTypeCode = "DOC002";
+	}if(codeName=="퇴직증명서"){ proofTypeCode = "DOC003";
+	}
+	
+	updateEdit.set_value(codeName);
+}
+
+
+//이미지
+var vFile;
+var empFilename;
+
+//파일다이얼로그 꺼질때 이벤트
+// this.Tab00_Tabpage1_ReceiptBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+// {
+// 	this.FileDialog.open( "FileOpen", FileDialog.LOAD );
+// };
+// 
+// //파일다이얼로그 꺼질때 이벤트
+// this.FileDialog_onclose = function(obj:nexacro.FileDialog,e:nexacro.FileDialogEventInfo)
+// {
+// 		vFile = e.virtualfiles[0];
+// 
+// 		vFile.addEventHandler("onsuccess", this.FileList_onsuccess, this);
+// 		vFile.addEventHandler("onerror", this.FileList_onerror, this);
+// 		vFile.open(vFile.fullpath, VirtualFile.openBinary);
+// 
+// 		empFileName = vFile.filename;
+// 		
+// 		var realPath = system.convertRealPath(vFile.fullpath);
+// 		this.Tab00.Tabpage1.form.ImageViewer00.set_image("file://"+realPath);
+// 		this.Tab00.Tabpage1.form.ImageViewer00.set_stretch("fit");
+// };
+
+//신청
+this.Tab00_Tabpage1_applicationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.Tab00.Tabpage1.form.applicationDateCal.value==null){alert("신청일을 입력해주세요."); return;
+	}if(this.Tab00.Tabpage1.form.proofEdit.value==null){alert("증빙구분을 등록해주세요."); return;
+	}if(this.Tab00.Tabpage1.form.reasonEdit.value==null){alert("사유를 입력해주세요."); return;
+	}else{
+		this.ds_documents.setColumn(0,"EMP_CODE",nexa.g_empCode);
+		this.ds_documents.setColumn(0,"PROOF_TYPE_CODE",proofTypeCode);
+		this.ds_documents.setColumn(0,"PROOF_TYPE_NAME",this.Tab00.Tabpage1.form.proofEdit.value);
+		this.ds_documents.setColumn(0,"START_DATE",this.Tab00.Tabpage1.form.applicationDateCal.value.substring(0,4)+"/"+
+												this.Tab00.Tabpage1.form.applicationDateCal.value.substring(4,6)+"/"+
+												this.Tab00.Tabpage1.form.applicationDateCal.value.substring(6,8));
+		this.ds_documents.setColumn(0,"POSITION",this.Tab00.Tabpage1.form.positionEdit.value);
+		this.ds_documents.setColumn(0,"DEPT",this.Tab00.Tabpage1.form.deptEdit.value);
+		this.ds_documents.setColumn(0,"CAUSE",this.Tab00.Tabpage1.form.reasonEdit.value);
+		//this.ds_receipt.setColumn(0,"RECEIPT","jpg");
+		this.ds_documents.setColumn(0,"APPLOVAL_STATUS",'승인대기');
+		
+		this.transaction("documentsInsertID",
+					 "svcDocumentmgmt::documents",
+					 "ds_documents=ds_documents",
+					 "",
+					 "",
+					 "fn_TrCallback");
+	}
+};
+//저장시 저장파라미터를 넘기지 않고 dataset자체를 넘길수도 있는것같음. 
+
+
+//신청콜백
+this.fn_TrCallback =function(trID ,ErrorCode ,ErrorMsg)
+{
+	if(ErrorCode!=0){
+        /* alert("신청실패 : "+ErrorMsg);*/
+		 alert("이미 같은날짜에 신청하셨습니다.");
+      }else{ //성공시
+         alert("    신청완료.     ");
+         this.reload();
+      }
+}
+
+//취소
+this.Tab00_Tabpage1_cancellationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.reload();
+};
+
+//===================================Tabpage2=========================================
+
+var proofTypeCode2;
+
+//증빙구분
+this.proofEdit2_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("proof", "Base::Modal.xfdl", "fn_popupCallback2", {code:"CO-27"});
+};
+
+this.fn_popupCallback2 = function(codename, code)
+{
+	updateEdit.set_value(code.split(":")[0]);
+	proofTypeCode2 = code.split(":")[1];
+}
+
+//조회하기
+this.inquiryBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("daySearchID",
+					"svcDocumentmgmt::documents-inquiry",
+					"",
+					"ds_documents_list=ds_documents",
+					"empCode="+nexa.g_empCode.toString()+" startDate='"+this.Tab00.Tabpage2.form.inquiryFormCal.value+"'"+
+					 " endDate='"+this.Tab00.Tabpage2.form.inquiryAfterCal.value+"'"+" code='"+proofTypeCode2+"'",
+					"");
+};
+
+//그리드 클릭
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.ds_documents_list.addColumn("STATUS","STRING");
+	
+	for(var i=0; i<this.ds_documents_list.rowcount; i++){
+		this.ds_documents_list.setColumn(i,"STATUS",undefined);
+	}
+	
+	this.ds_document_list.setColumn(this.ds_document_list.rowposition,"STATUS","Choice");
+}
+
+//삭제하기
+this.cancellationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+
+	if(confirm(" 삭제 하시겠습니까? ")){
+		this.transaction("deleteID",
+						 "svcDocumentmgmt::document-elimination",
+						 "ds_documents=ds_documents_list:u",
+						 "",
+						 "",
+						 "fn_callback");
+						 
+						 
+	}
+};
+
+
+
+this.fn_callback = function(trID, ErrorCode, ErrorMsg)
+{
+	if(ErrorCode!=0){
+			alert("삭제실패 : "+ErrorMsg);
+		}else{ //성공시
+			alert(" 삭제되었습니다 ");
+			this.reload(); //현재의 FDL 화면을 다시 로딩하는 메소드method
+		}
+}
+]]></Script>
+    <Objects>
+      <FileDialog id="FileDialog" onclose="FileDialog_onclose"/>
+      <Dataset id="ds_documents">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="PROOF_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="PROOF_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="DEPT" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_documents_list">
+        <ColumnInfo>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PROOF_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="DEPT" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

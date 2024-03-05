@@ -1,0 +1,662 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="fullTimeSal" width="1060" height="610" titletext="New Form">
+    <Layouts>
+      <Layout height="610" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="25" width="1010" height="560">
+          <Layouts>
+            <Layout>
+              <Tab id="Tab00" taborder="0" tabindex="0" left="30" top="56" width="410" height="459" onchanged="Div00_00_Tab00_onchanged" border="0px none" font="12px/normal &quot;나눔고딕&quot;">
+                <Tabpages>
+                  <Tabpage id="Tabpage1" text="부서명검색" border="0px groove" font="16px/normal &quot;맑은 고딕&quot;">
+                    <Layouts>
+                      <Layout>
+                        <Button id="Button00" taborder="0" text="사원 조회" left="170" top="21" width="80" height="35" font="normal 16px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage1_Button00_onclick" background="#d0e3ed" borderRadius="5px"/>
+                        <Grid id="Grid00" taborder="1" left="0" top="79" width="364" height="343" oncelldblclick="Div00_00_Tab00_Tabpage1_Grid00_oncelldblclick" binddataset="ds_empList" onselectchanged="Div00_00_Tab00_Tabpage1_Grid00_onselectchanged" autofittype="col">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="사번" background="#6092ff" color="white"/>
+                                <Cell col="1" text="이름" background="#6092ff" color="white"/>
+                                <Cell col="2" text="부서" background="#6092ff" color="white"/>
+                                <Cell col="3" text="직급" background="#6092ff" color="white"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:EMP_CODE"/>
+                                <Cell col="1" text="bind:EMP_NAME"/>
+                                <Cell col="2" text="bind:DEPT_NAME"/>
+                                <Cell col="3" text="bind:POSITION"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Edit id="Edit00" taborder="2" left="0" top="21" width="147" height="40" oneditclick="Div00_00_Tab00_Tabpage1_Edit00_oneditclick" onchanged="Div00_00_Tab00_Tabpage1_Edit00_onchanged" displaynulltext="클릭하여 부서 선택"/>
+                        <Button id="Button01" taborder="3" text="급여 조회" left="270" top="21" width="91" height="40" font="normal 16px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage1_Button01_onclick" background="#d0e3ed"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="Tabpage2" text="사원명검색" border="0px groove">
+                    <Layouts>
+                      <Layout>
+                        <Button id="Button00" taborder="0" text="사원 조회" left="180" top="26" width="90" height="40" font="normal 15px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage2_Button00_onclick"/>
+                        <Grid id="Grid00" taborder="1" left="16" top="78" width="364" height="343" oncelldblclick="Div00_00_Tab00_Tabpage2_Grid00_oncelldblclick" binddataset="ds_emp">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                                <Column size="91"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="사번"/>
+                                <Cell col="1" text="이름"/>
+                                <Cell col="2" text="부서"/>
+                                <Cell col="3" text="직급"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:EMP_CODE"/>
+                                <Cell col="1" text="bind:EMP_NAME"/>
+                                <Cell col="2" text="bind:DEPT_NAME"/>
+                                <Cell col="3" text="bind:POSITION"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Edit id="Edit00" taborder="2" left="18" top="26" width="147" height="40"/>
+                        <Button id="Button01" taborder="3" text="급여 조회" left="285" top="26" width="90" height="40" font="normal 15px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage2_Button01_onclick"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+              <Tab id="Tab00_00" taborder="1" tabindex="0" left="425" top="55" width="580" height="500" onchanged="Div00_00_Tab00_onchanged" border="0px none" font="12px/normal &quot;나눔고딕&quot;">
+                <Tabpages>
+                  <Tabpage id="Tabpage4" text="급여조회">
+                    <Layouts>
+                      <Layout>
+                        <Grid id="Grid00_00" taborder="0" left="0" top="79" width="560" height="252" autofittype="col" autosizingtype="row" binddataset="ds_fullTimeSal" autosizebandtype="body">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="100" band="left"/>
+                                <Column size="80"/>
+                                <Column size="80"/>
+                                <Column size="100" band="right"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                                <Row size="24"/>
+                                <Row size="24"/>
+                                <Row size="24"/>
+                                <Row size="24"/>
+                                <Row size="24"/>
+                                <Row size="24"/>
+                                <Row size="26"/>
+                                <Row size="40" band="summ"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="지급항목" background="#6092ff" color="white"/>
+                                <Cell col="1" text="지급액" background="#6092ff" color="white"/>
+                                <Cell col="2" text="공제액" background="#6092ff" color="white"/>
+                                <Cell col="3" text="공제항목" background="#6092ff" color="white"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="기본급" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center" verticalAlign="middle"/>
+                                <Cell col="1" text="BIND:BASIC_SALARY" displaytype="currency"/>
+                                <Cell col="2" text="bind:NATIONAL_PENSION" displaytype="currency"/>
+                                <Cell col="3" text="국민연금" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center"/>
+                                <Cell row="1" text="직책수당" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center" verticalAlign="middle"/>
+                                <Cell row="1" col="1" text="BIND:POSITION_SALARY" displaytype="currency"/>
+                                <Cell row="1" col="2" text="bind:HEALTH_INSURANCE" displaytype="currency"/>
+                                <Cell row="1" col="3" text="건강보험" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center"/>
+                                <Cell row="2" text="가족수당" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center" verticalAlign="middle"/>
+                                <Cell row="2" col="1" text="BIND:FAMILY_SALARY" displaytype="currency"/>
+                                <Cell row="2" col="2" text="bind:LONG_TERM_INSURANCE" displaytype="currency"/>
+                                <Cell row="2" col="3" text="장기요양보험료" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center"/>
+                                <Cell row="3" text="식대" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center" verticalAlign="middle"/>
+                                <Cell row="3" col="1" text="BIND:FOOD_SALARY" displaytype="currency"/>
+                                <Cell row="3" col="2" text="bind:EMPLOYMENT_INSURANCE" displaytype="currency"/>
+                                <Cell row="3" col="3" text="고용보험" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center"/>
+                                <Cell row="4" text="초과근무수당" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center" verticalAlign="middle"/>
+                                <Cell row="4" col="1" text="BIND:OVER_WORK_SALARY" displaytype="currency"/>
+                                <Cell row="4" col="2" text="bind:RELIGION_DONATION" displaytype="currency"/>
+                                <Cell row="4" col="3" text="기부금" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center"/>
+                                <Cell row="5" color="white" displaytype="none"/>
+                                <Cell row="5" col="1" displaytype="none" color="white"/>
+                                <Cell row="5" col="2" text="bind:INCOME_TAX" displaytype="currency"/>
+                                <Cell row="5" col="3" text="소득세" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center"/>
+                                <Cell row="6" color="white" displaytype="none"/>
+                                <Cell row="6" col="1" displaytype="none"/>
+                                <Cell row="6" col="2" text="bind:RESIDENT_TAX" displaytype="currency"/>
+                                <Cell row="6" col="3" text="주민세" background="#6092ff" border="1px solid #cacaca" color="white" font="normal 700 12px/normal &quot;Gulim&quot;" textAlign="center"/>
+                                <Cell row="7" text="과세총액" background="#6092ff" border="1px solid #cacaca" color="white" font="normal bold 13px/normal &quot;Arial&quot;" textAlign="center"/>
+                                <Cell row="7" col="1" text="expr:dataset.parent.fn_getTaxedIncome()" displaytype="currency" font="normal bold 13px/normal &quot;Arial&quot;"/>
+                                <Cell row="7" col="2" displaytype="currency" text="expr:dataset.parent.fn_getDeduction()" font="normal bold 13px/normal &quot;Arial&quot;"/>
+                                <Cell row="7" col="3" text="공제총액" background="#6092ff" border="1px solid #cacaca" color="white" font="normal bold 13px/normal &quot;Arial&quot;" textAlign="center"/>
+                              </Band>
+                              <Band id="summary">
+                                <Cell text="차인지급액" font="normal 700 14px/normal &quot;Gulim&quot;"/>
+                                <Cell col="1" colspan="2" text="expr:dataset.parent.fn_getTaxedIncome() -dataset.parent.fn_getDeduction()" displaytype="currency" font="normal 700 14px/normal &quot;Gulim&quot;"/>
+                                <Cell col="3" displaytype="none"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Grid id="Grid00" taborder="1" left="0" top="16" width="560" height="50" binddataset="ds_emp_info" autofittype="col" autosizebandtype="body" autosizingtype="row">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="92"/>
+                                <Column size="92"/>
+                                <Column size="92"/>
+                                <Column size="92"/>
+                                <Column size="92"/>
+                                <Column size="92"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="24" band="head"/>
+                                <Row size="24"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="사번" color="white" background="#6092ff"/>
+                                <Cell col="1" text="이름" background="#6092ff" color="white"/>
+                                <Cell col="2" text="적용년월" background="#6092ff" color="white"/>
+                                <Cell col="3" text="직급" background="#6092ff" color="white"/>
+                                <Cell col="4" text="이전 기본급" background="#6092ff" color="white"/>
+                                <Cell col="5" text="마감 여부" background="#6092ff" color="white"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="bind:EMP_CODE" textAlign="center"/>
+                                <Cell col="1" text="bind:EMP_NAME" textAlign="center"/>
+                                <Cell col="2" text="bind:APPLY_YEAR_MONTH" textAlign="center"/>
+                                <Cell col="3" text="bind:POSITION" textAlign="center"/>
+                                <Cell col="4" text="bind:BASIC_SAL_BEFORE" textAlign="center" displaytype="currency"/>
+                                <Cell col="5" text="bind:FINALIZE_STATUS" textAlign="center"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Grid id="Grid01" taborder="2" left="10" top="351" width="318" height="60" binddataset="ds_fullTimeSal" autofittype="col" autosizingtype="col" autosizebandtype="allband">
+                          <Formats>
+                            <Format id="default">
+                              <Columns>
+                                <Column size="160"/>
+                                <Column size="80"/>
+                              </Columns>
+                              <Rows>
+                                <Row size="30" band="head"/>
+                                <Row size="30"/>
+                              </Rows>
+                              <Band id="head">
+                                <Cell text="회사부당금 항목" color="white" background="#6092ff"/>
+                                <Cell col="1" text="금액" background="#6092ff" color="white"/>
+                              </Band>
+                              <Band id="body">
+                                <Cell text="사회보험 사업자 부담금" textAlign="center" displaytype="text"/>
+                                <Cell col="1" text="expr:dataset.parent.fn_getComBurden()" displaytype="currency" textAlign="right"/>
+                              </Band>
+                            </Format>
+                          </Formats>
+                        </Grid>
+                        <Button id="Button00" taborder="3" text="마감" left="345" top="361" width="90" height="40" font="bold 16px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_00_Tabpage4_Button00_onclick" background="#d0e3ed" borderRadius="5px"/>
+                        <Button id="Button01" taborder="4" text="마감 취소" left="455" top="361" width="90" height="40" font="bold 16px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_00_Tabpage4_Button01_onclick" background="#d0e3ed" borderRadius="5px"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+              <Static id="Static00" taborder="2" text="급여 조회" left="31" top="1" width="188" height="49" textAlign="left" font="bold 18px/normal &quot;Gulim&quot;"/>
+              <Calendar id="Calendar00" taborder="3" left="205" top="56" width="182" height="36" onchanged="Div00_00_Calendar00_onchanged" dateformat="yyyy-MM" editformat="yyyy-MM" displaynulltext="YYYY-MM"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_empList">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_fullTimeSal">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="APPLY_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="BASIC_SALARY" type="STRING" size="256"/>
+          <Column id="POSITION_SALARY" type="STRING" size="256"/>
+          <Column id="FAMILY_SALARY" type="STRING" size="256"/>
+          <Column id="FOOD_SALARY" type="STRING" size="256"/>
+          <Column id="OVER_WORK_SALARY" type="STRING" size="256"/>
+          <Column id="NATIONAL_PENSION" type="STRING" size="256"/>
+          <Column id="HEALTH_INSURANCE" type="STRING" size="256"/>
+          <Column id="LONG_TERM_INSURANCE" type="STRING" size="256"/>
+          <Column id="EMPLOYMENT_INSURANCE" type="STRING" size="256"/>
+          <Column id="RELIGION_DONATION" type="STRING" size="256"/>
+          <Column id="INCOME_TAX" type="STRING" size="256"/>
+          <Column id="RESIDENT_TAX" type="STRING" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+          <Column id="BASIC_SAL_BEFORE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emp_info">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="APPLY_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="BASIC_SAL_BEFORE" type="STRING" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[// include 문은 해당 기능이 다른 파일에서 가져와 사용된다는 것을 의미
+include "Lib::commonOpen.xjs";
+include "Lib::commDate.xjs";
+include "Lib::commString.xjs";
+
+var nexa=nexacro.getApplication();
+var updateEdit;
+
+//CodeDialog를 통한 부서 선택(Edit 컴포넌트 선택)
+// 부서 선택(Edit 컴포넌트 선택) 이벤트 핸들러
+
+// sID: 생성될 모달 프레임의 ID.
+// sURL: 모달 프레임에 로드할 화면의 경로(URL).
+// callbackFunc: 모달 프레임이 종료된 후 호출될 콜백 함수.
+// param: 모달 프레임으로 전달할 파라미터.
+
+this.Div00_00_Tab00_Tabpage1_Edit00_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("searchDeptCode", "Base::Modal.xfdl", "callback", {code:"CO-07"});
+};
+
+this.callback = function(codename, code){
+	//2023.08.20.ha 안에 (부서명):(부서코드)라는 결과 값을 부모 창으로 전달
+	updateEdit.set_value(code.split(" ")[0]);
+}
+
+
+//CodeDialog에서 선택된 부서를 통한 직원 조회(버튼)
+// 직원 조회 버튼 클릭 이벤트 핸들러
+
+this.Div00_00_Tab00_Tabpage1_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+	if (this.Div00_00.form.Tab00.Tabpage1.form.Edit00.value==null){
+		alert("부서를 선택해 주십시오");
+		return;
+	}
+	
+	this.ds_empList.deleteAll();
+	
+	var id = "callEmpList";
+	var url = "svcEmpinfomgmt::emplist";
+	var reqDs = "";
+	var respDs = "ds_empList=gds_emp";
+	var args = "value="+this.Div00_00.form.Tab00.Tabpage1.form.Edit00.value;
+	var callback = "gotEmpList";
+	
+    this.transaction(id, url, reqDs, respDs, args, callback);
+};
+this.gotEmpList = function(id, code, message)
+{   
+	if (code == 0) {
+		//this.alert(this.ds_empList.rowcount + " numbers of data have been found.");
+        trace(this.ds_empList.rowcount + "행 데이터를 찾았습니다.");
+        this.ds_empList.set_rowposition(0);
+	} else {
+		this.alert("Error["+code+"]:"+message);
+		trace("Error["+code+"]:"+message);
+	}
+}
+
+
+//부서별로 조회된 사원 목록에서 사원 더블클릭하여 선택하여 월급여 조회
+this.Div00_00_Tab00_Tabpage1_Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	
+	if(this.Div00_00.form.Calendar00.getYear() == "1970"){
+		alert("급여를 조회할 연월을 입력해 주십시오.");
+		return;
+	}
+	var empCode = this.ds_empList.getColumn(e.row,"EMP_CODE");
+	var year = this.Div00_00.form.Calendar00.getYear();
+	var month = this.Div00_00.form.Calendar00.getMonth();
+	var apply_year_month = year+ "-" + month;   
+	var id = "callEmpFullSal";
+	var callback = "gotEmpFullSal";
+	
+	trace("월급여를 조회할 사원 코드 : " + empCode);
+	trace("적용일 : " + apply_year_month);   
+	
+	this.fn_defaultTransaction(id, empCode, apply_year_month, callback);
+};
+
+//사원명 조회 탭에서 사원명을 가지고 사원 검색
+this.Div00_00_Tab00_Tabpage2_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var value = this.Div00_00.form.Tab00.Tabpage2.form.Edit00.text;
+	
+	trace("조회할 사원명 : " + value);
+	
+	var id = "callEmpByName";
+	var url = "svcEmpinfomgmt::emplist";
+	var reqDs = "";
+	var respDs = "ds_emp=gds_emp";
+	var args = "value="+value;
+	var callback = "gotEmpByName";
+    
+    this.transaction(id, url, reqDs, respDs, args, callback);    
+};
+this.gotEmpByName = function(id, code, message)
+{   
+	if (code == 0) {
+		//this.alert(this.ds_emp.rowcount + " numbers of data have been found.");
+		trace(this.ds_emp.rowcount + " numbers of data have been found.");
+	} else {
+		this.alert("Error["+code+"]:"+message);
+		trace("Error["+code+"]:"+message);
+	}
+}
+
+
+// 사원명으로 월급여 검색
+this.Div00_00_Tab00_Tabpage2_Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(this.Div00_00.form.Calendar00.getYear() == "1970"){
+		alert("급여를 조회할 연월을 입력해 주십시오.");
+		return;
+	}
+	
+	var empCode = this.ds_empList.getColumn(e.row,"EMP_CODE");
+	var year = this.Div00_00.form.Calendar00.getYear();
+	var month = this.Div00_00.form.Calendar00.getMonth();
+	var apply_year_month = year+ "-" + month;   
+	
+	trace("월급여를 조회할 사원 코드 : " + empCode);
+	trace("적용일 : " + apply_year_month);
+	
+	var id = "callEmpFullSalByName";
+	var callback = "gotEmpFullSal";
+    
+	this.fn_defaultTransaction(id, empCode, apply_year_month, callback);
+};
+this.gotEmpFullSalByName = function(id, code, message)
+{   
+	if (code == 0) {
+		//this.alert(this.ds_fullTimeSal.rowcount + " numbers of data have been found.");
+		trace(this.ds_fullTimeSal.rowcount + " numbers of data have been found.");
+	} else {
+		this.alert("Error["+code+"]:"+message);
+		trace("Error["+code+"]:"+message);
+	}
+}
+
+
+//급여조회 버튼 눌러서 조회(탭1)
+//날짜 조회+부서 조회+사원명 클릭+급여 조회 순서
+this.Div00_00_Tab00_Tabpage1_Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.Div00_00.form.Calendar00.getYear() == "1970"){
+		alert("급여를 조회할 연월을 입력해 주십시오.");
+		return;
+	}
+    //✔️ 23.08.14.ha 부서 선택 alert창 추가
+	if (this.Div00_00.form.Tab00.Tabpage1.form.Edit00.value == null){
+		alert("부서를 선택해 주십시오");
+		return;
+	}
+	
+	if(this.ds_empList.rowposition == null){
+		alert("급여를 조회할 사원을 선택해 주십시오.");
+		return;
+	} 
+	// ✔️ rowposition -> DataSet 에서 현재 선택된 데이터의 Row 인덱스 반환하는 속성
+	// ✔️ getColumn -> 지정한 Row 와 Column 의 현재값을 반환하는 메소드입니다.
+	// var empCode -> 현재 선택된 사원 코드의 Row 인덱슬를 매개변수로 받아서 ds_empList 데이터셋에서 해당 값을 반환하여 변수에 저장
+	var empCode = this.ds_empList.getColumn(this.ds_empList.rowposition,"EMP_CODE");
+	var year = this.Div00_00.form.Calendar00.getYear();
+	var month = this.Div00_00.form.Calendar00.getMonth();
+	var apply_year_month = year+ "-" + month;   
+	
+	trace("월급여를 조회할 사원 코드 : " + empCode);
+	trace("적용일 : " + apply_year_month);
+	
+	var id = "callEmpFullSalByBtn0";
+	var callback = "gotEmpFullSal";
+    
+	this.fn_defaultTransaction(id, empCode, apply_year_month, callback);
+	
+};
+
+//과세총액
+this.fn_getTaxedIncome = function(){
+	
+	if(this.ds_fullTimeSal.getRowCount()==0)
+	return 0;
+	
+	var BASIC_SALARY = parseInt(this.ds_fullTimeSal.getColumn(0, "BASIC_SALARY"));
+	var POSITION_SALARY = parseInt(this.ds_fullTimeSal.getColumn(0, "POSITION_SALARY"));
+	var FAMILY_SALARY = parseInt(this.ds_fullTimeSal.getColumn(0, "FAMILY_SALARY"));
+	var FOOD_SALARY = parseInt(this.ds_fullTimeSal.getColumn(0, "FOOD_SALARY"));
+	var OVER_WORK_SALARY = parseInt(this.ds_fullTimeSal.getColumn(0, "OVER_WORK_SALARY"));
+	
+	var taxedSum = BASIC_SALARY + POSITION_SALARY + FAMILY_SALARY + FOOD_SALARY + OVER_WORK_SALARY;   
+	
+	return taxedSum;
+}
+
+//공제총액
+this.fn_getDeduction = function(){
+	
+	if(this.ds_fullTimeSal.getRowCount()==0)
+	return 0;
+	
+	var NATIONAL_PENSION = parseInt(this.ds_fullTimeSal.getColumn(0, "NATIONAL_PENSION"));
+	var HEALTH_INSURANCE = parseInt(this.ds_fullTimeSal.getColumn(0, "HEALTH_INSURANCE"));
+	var LONG_TERM_INSURANCE = parseInt(this.ds_fullTimeSal.getColumn(0, "LONG_TERM_INSURANCE"));
+	var EMPLOYMENT_INSURANCE = parseInt(this.ds_fullTimeSal.getColumn(0, "EMPLOYMENT_INSURANCE"));
+	var RELIGION_DONATION = parseInt(this.ds_fullTimeSal.getColumn(0, "RELIGION_DONATION"));
+	var INCOME_TAX = parseInt(this.ds_fullTimeSal.getColumn(0, "INCOME_TAX"));
+	var RESIDENT_TAX = parseInt(this.ds_fullTimeSal.getColumn(0, "RESIDENT_TAX"));
+	
+	trace(NATIONAL_PENSION);
+	trace(HEALTH_INSURANCE);
+	trace(LONG_TERM_INSURANCE);
+	trace(EMPLOYMENT_INSURANCE);
+	trace(RELIGION_DONATION);
+	trace(INCOME_TAX);
+	trace(RESIDENT_TAX);
+	
+	var deductionSum = (NATIONAL_PENSION ? NATIONAL_PENSION : 0) + 
+	(HEALTH_INSURANCE ? HEALTH_INSURANCE : 0) + 
+	(LONG_TERM_INSURANCE ? LONG_TERM_INSURANCE : 0) +
+	(EMPLOYMENT_INSURANCE ? EMPLOYMENT_INSURANCE : 0) +
+	(RELIGION_DONATION ? RELIGION_DONATION : 0) +
+	(INCOME_TAX ? INCOME_TAX : 0) +
+	(RESIDENT_TAX ? RESIDENT_TAX : 0);   
+	
+	trace(deductionSum);
+	return deductionSum;
+}
+
+// ✔️ 급여조회 버튼 클릭 시 동작하는 트랜잭션
+this.fn_defaultTransaction = function(idI, empCodeI, apply_year_monthI, callbackI){
+	var id = idI;
+	var empCode = empCodeI;
+	var apply_year_month = apply_year_monthI;
+	var callback = callbackI;
+	
+	var url = "svcSalaryinfomgmt::salary/empcode";
+	var reqDs = "";
+	var respDs = "ds_fullTimeSal=fulltime_employee_salary";
+	// args -> empCode=A490072 apply_year_month=2022-7
+	var args = "empCode="+empCode+" apply_year_month="+apply_year_month;
+		
+	this.ds_emp_info.setColumn(0, "APPLY_YEAR_MONTH", apply_year_month);
+	
+	this.transaction(id, url, reqDs, respDs, args, callback);
+}
+
+// ✔️ 급여조회 탭 직원정보 세팅용
+// ✔ ds_fullTimeSal 여기 값 세팅이 안됨
+this.gotEmpFullSal = function(id, code, message)
+{   
+	trace("id: "+id); trace("code: "+code); trace("message: "+message);
+	
+	if (code == 0) {		
+		var year = this.Div00_00.form.Calendar00.getYear();
+		var month = this.Div00_00.form.Calendar00.getMonth();
+		var apply_year_month = year+ "-" + month;
+		var emp_code = this.ds_empList.getColumn(this.ds_empList.rowposition, "EMP_CODE");
+		var emp_name = this.ds_empList.getColumn(this.ds_empList.rowposition, "EMP_NAME");
+		var position = this.ds_empList.getColumn(this.ds_empList.rowposition, "POSITION");
+		var basic_sal_before = this.ds_fullTimeSal.getColumn(0, "BASIC_SAL_BEFORE");
+		var finalize_status = this.ds_fullTimeSal.getColumn(0, "FINALIZE_STATUS");
+		
+		var test = this.ds_emp_info.setColumn(0, "EMP_CODE", emp_code);
+		this.ds_emp_info.setColumn(0, "EMP_NAME", emp_name);
+		this.ds_emp_info.setColumn(0, "APPLY_YEAR_MONTH", apply_year_month);
+		this.ds_emp_info.setColumn(0, "POSITION", position);
+		this.ds_emp_info.setColumn(0, "BASIC_SAL_BEFORE", basic_sal_before);
+		this.ds_emp_info.setColumn(0, "FINALIZE_STATUS", finalize_status);   
+		
+		if( test == true){
+			trace("ds_emp_info 변경 성공!");
+		}else{
+			trace("ds_emp_info 변경 실패!");
+		}      
+		
+	} else {
+		this.alert("Error["+code+"]:"+message);
+		trace("여기다 빙시자슥아 -> gotEmpFullSal ")
+		trace("Error["+code+"]:"+message);
+		
+	}
+}
+this.Div00_00_Tab00_Tabpage1_Grid00_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	this.ds_empList.set_rowposition(e.row);
+};
+
+//회사부담금 총액(업무 차원에서 구현 제대로 안 되어 있음 ㅠㅠ)
+this.fn_getComBurden = function(){
+	
+	if(this.ds_fullTimeSal.getRowCount()==0)
+	return 0;
+	
+	var HEALTH_INSURANCE = parseInt(this.ds_fullTimeSal.getColumn(0, "HEALTH_INSURANCE"));
+	var LONG_TERM_INSURANCE = parseInt(this.ds_fullTimeSal.getColumn(0, "LONG_TERM_INSURANCE"));
+	var EMPLOYMENT_INSURANCE = parseInt(this.ds_fullTimeSal.getColumn(0, "EMPLOYMENT_INSURANCE"));      
+	
+	var comBurden = (HEALTH_INSURANCE ? HEALTH_INSURANCE : 0) + 
+	(LONG_TERM_INSURANCE ? LONG_TERM_INSURANCE : 0) +
+	(EMPLOYMENT_INSURANCE ? EMPLOYMENT_INSURANCE : 0);   
+	
+	return comBurden;
+}
+
+//마감버튼
+this.Div00_00_Tab00_00_Tabpage4_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (this.ds_fullTimeSal.getColumn(0, "FINALIZE_STATUS")=="Y"){
+		alert("해당 급여는 마감된 상태입니다.");
+		return;
+	} else {
+		var rtn = this.confirm("정말로 마감하시겠습니까?", "마감 여부 확인");
+		if (rtn){
+			this.ds_fullTimeSal.setColumn(0,"FINALIZE_STATUS", "Y");
+		}
+		else{
+			return;
+		}
+	}   
+	
+	var id = "finalize_sal";
+	var url = "svcSalaryinfomgmt::salary";
+	var reqDs = "fulltime_employee_salary=ds_fullTimeSal";
+	var respDs = "";
+	var args = "";
+	var callback = "sal_finalized";
+	
+	this.transaction(id, url, reqDs, respDs, args, callback);   
+};
+this.sal_finalized = function(id, code, message)
+{   
+	if (code == 0) {
+		alert("해당 급여가 마감되었습니다.");
+        this.ds_emp_info.setColumn(0, "FINALIZE_STATUS", "Y");
+	} else {
+		this.alert("Error["+code+"]:"+message);
+		trace("Error["+code+"]:"+message);
+	}
+}
+
+//마감취소 버튼
+this.Div00_00_Tab00_00_Tabpage4_Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (this.ds_fullTimeSal.getColumn(0, "FINALIZE_STATUS")=="N"){
+		alert("해당 급여는 마감되지 않은 상태입니다.");
+		return;
+	} else {
+		var rtn = this.confirm("정말로 마감을 취소하시겠습니까?", "마감 여부 확인");
+		if (rtn){
+			this.ds_fullTimeSal.setColumn(0,"FINALIZE_STATUS", "N");
+		}
+		else{
+			return;
+		}
+	}   
+	
+	var id = "finalize_sal";
+	var url = "svcSalaryinfomgmt::salary";
+	var reqDs = "fulltime_employee_salary=ds_fullTimeSal";
+	var respDs = "";
+	var args = "";
+	var callback = "sal_cancle_finalized";
+	
+	this.transaction(id, url, reqDs, respDs, args, callback);   
+};
+this.sal_cancle_finalized = function(id, code, message)
+{   
+	if (code == 0) {
+		alert("해당 급여가 마감 취소되었습니다.");
+        this.ds_emp_info.setColumn(0, "FINALIZE_STATUS", "N");
+	} else {
+		this.alert("Error["+code+"]:"+message);
+		trace("Error["+code+"]:"+message);
+	}
+}]]></Script>
+  </Form>
+</FDL>

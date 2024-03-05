@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="final" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Div id="Div00" taborder="0" text="Div00" left="10" top="10" width="1260" height="700" background="#D9e5ff">
+          <Layouts>
+            <Layout>
+              <Div id="Div00" taborder="0" left="0" top="40" width="1260" height="90" background="#EDF0F5" text="">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="년도" left="105" top="10" width="30" height="30" textAlign="left" onclick="Div00_Div00_Static00_onclick"/>
+                    <Combo id="YearCombo" taborder="1" left="20" top="10" width="80" height="30" index="-1" innerdataset="ds_year" codecolumn="name" datacolumn="value" text="" displaynulltext="선택"/>
+                    <Button id="FindBtn" taborder="2" left="285" top="9" width="75" height="32" onclick="Div00_Div00_FindBtn_onclick" text="조회"/>
+                    <Combo id="BangiCombo" taborder="3" text="선택" left="130" top="10" width="150" height="30" value="" index="-1" innerdataset="ds_half" codecolumn="name" datacolumn="value" displaynulltext="선택"/>
+                    <Button id="ApprovalBtn" taborder="4" text="승인" top="38" height="40" onclick="approvalBtn" width="130" right="450"/>
+                    <Button id="CancelBtn" taborder="5" text="승인취소" top="38" height="40" onclick="cancelBtn" width="130" right="310"/>
+                    <Button id="ConfirmBtn" taborder="6" text="확정" top="38" height="40" onclick="confirmBtn" width="130" right="26"/>
+                    <Button id="returnBtn" taborder="7" text="반려" top="38" height="40" onclick="returnBtn" width="130" right="170"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Div id="Div01" taborder="1" text="Div01" left="10" top="145" width="1240" height="540" background="#F7F7F9">
+                <Layouts>
+                  <Layout>
+                    <Grid id="Grid00" taborder="0" left="10" top="20" width="1220" height="505" binddataset="ds_list" autofittype="col" autoenter="none" oncellclick="grid_oncellclick" onheadclick="grid_onheadclick">
+                      <Formats>
+                        <Format id="default">
+                          <Columns>
+                            <Column size="80"/>
+                            <Column size="64"/>
+                            <Column size="66"/>
+                            <Column size="64"/>
+                            <Column size="72"/>
+                            <Column size="219"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                            <Column size="80"/>
+                          </Columns>
+                          <Rows>
+                            <Row size="24" band="head"/>
+                            <Row size="24"/>
+                          </Rows>
+                          <Band id="head">
+                            <Cell displaytype="checkboxcontrol" edittype="checkbox"/>
+                            <Cell col="1" text="PCODE"/>
+                            <Cell col="2" text="PNAME"/>
+                            <Cell col="3" text="GENDER"/>
+                            <Cell col="4" text="TEL"/>
+                            <Cell col="5" text="ADDRESS"/>
+                            <Cell col="6" text="P_AVG"/>
+                            <Cell col="7" text="I_AVG"/>
+                            <Cell col="8" text="AGE"/>
+                            <Cell col="9" text="APPROVAL_STATUS"/>
+                          </Band>
+                          <Band id="body">
+                            <Cell text="bind:CHK" displaytype="checkboxcontrol" edittype="none"/>
+                            <Cell col="1" text="bind:PCODE"/>
+                            <Cell col="2" text="bind:PNAME"/>
+                            <Cell col="3" text="bind:GENDER"/>
+                            <Cell col="4" text="bind:TEL"/>
+                            <Cell col="5" text="bind:ADDRESS" autosizecol="default"/>
+                            <Cell col="6" text="bind:P_AVG"/>
+                            <Cell col="7" text="bind:I_AVG"/>
+                            <Cell col="8" text="bind:AGE"/>
+                            <Cell col="9" text="bind:APPROVAL_STATUS"/>
+                          </Band>
+                        </Format>
+                      </Formats>
+                    </Grid>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00_01" taborder="1" text="◼ 신규사원 채용관리" left="8" top="0" width="214" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;" onclick="Static00_01_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[//검색 돋보기 버튼
+this.Div00_Div00_FindBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"emplistload",
+		"svcRecruit::newemprecruit",
+		"",
+		"ds_list=ds_newempRecruit",
+		"year='"+
+		this.Div00.form.Div00.form.YearCombo.text+"' half='"+
+		this.Div00.form.Div00.form.BangiCombo.value+"'",
+		//	workplaceCode='"+nexacro.getApplication().Div00.form.Div00.form.Edit00.value+"'",
+		"");
+};
+// 승인
+this.approvalBtn = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_list.getCount();
+	trace("승인" + count);	
+	for(i = 0; i < count; i++){
+			if(this.ds_list.getColumn(i,"CHK")=="1"){
+				this.ds_list.setColumn(i,"APPROVAL_STATUS","승인");
+			}
+		}
+	if(this.fn_isCkd()){this.alert("항목 선택하세요");return;}//경고창 리턴	
+	
+	for(i=0;i<count;i++){
+		if(this.ds_list.getColumn(i,"CHK") == 1){
+				if(this.ds_list.getColumn(i,"APPROVAL_STATUS")=="승인"){
+				this.alert("기존 승인항목"); return;
+				}else{
+				this.ds_list.setColumn(i,"APPROVAL_STATUS","승인")
+				}
+			}
+		}	
+	
+};
+//체크여부 확인 
+this.fn_isCkd=function(){
+	var count = this.ds_list.getCount();	
+	var isCkd = true;
+	for(i=0;i<count;i++){
+		if(this.ds_list.getColumn(i,"CHK")==1){isCkd=false;}
+	}
+	return isCkd;
+}
+//승인취소
+this.cancelBtn = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var count = this.ds_list.getCount();	
+	trace("취소" + count)	
+	//변수만들고 ischecked = True;
+	// 리스트 돌려서 체크된게 있으면 변수를 False로 바꾸고
+	//반복문 끝
+	
+	var isCkd = true;
+	for(i=0;i<count;i++){
+		if(this.ds_list.getColumn(i,"CHK")==1){isCkd=false;}
+	}
+	//this.get컬럼(인덱스,컬럼영)=="unddfined"||this.get컬럼(인덱스,컬럼영)=="0")
+	
+	// 조건절 if에 변수 
+	if(this.fn_isCkd()){this.alert("항목 선택하세요");return;}//경고창 리턴
+	for(i=0;i<count;i++){
+		if(this.ds_list.getColumn(i,"CHK")==1){
+			if(!this.ds_list.getColumn(i,"APPROVAL_STATUS")=="승인"){
+				this.alert("승인항목만 취소가능");return;
+			}
+			this.ds_list.setColumn(i,"APPROVAL_STATUS","승인취소")
+		}
+	}	
+};
+//반려
+this.returnBtn = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.fn_isCkd()){this.alert("항목 선택하세요");return;}//경고창 리턴
+	var count = this.ds_list.getCount();
+		for(i=0; i<count; i++){				
+		if(this.ds_list.getColumn(i,"CHK") == 1){
+			if(this.ds_list.getColumn(i,"APPROVAL_STATUS")=="승인"){
+				this.alert("승인은 반려불가"); return;
+			}else{
+				this.ds_list.setColumn(i,"APPROVAL_STATUS","반려")
+			}
+		}
+	}
+};
+//확정 
+this.confirmBtn = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (!this.confirm("변경된 상태를 확정하시겠습니까?")){
+		alert("취소되었습니다.");
+		return;
+	}else{
+		this.transaction("updateID",
+			"svcRecruit::certificateConfirmation",
+			"ds_newempRecruit=ds_list:u", //서<클
+			"", //클<서
+			"", 
+			"fn_callback");
+	}
+};
+/******************************************************************/
+// gridHead 이벤트
+this.grid_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var size = this.ds_list.getRowCount();//Row 의 전체 갯수를 반환합니다. size=(데이터의 전체 행)
+	var num = null;
+	var headCheck = obj.getCellProperty('Head',0,'text');
+	//(속성값을 반환합니다,인덱스,값을 가져올 속성명을 문자열로 설정합니다)
+	if(e.col==0){
+		if(headCheck=='0'||headCheck==null){
+			num = '1';//현재headCheck 0 이니깐 1로 변경되어서 체크박스에 체그가 다 되게만들고 
+		}else{
+			num = '0';//headCheck가 1라면 0으로 만든다
+		}
+		for(var i=0; i<size; i++){
+			this.ds_list.setColumn(i,"CHK",num);
+			//데이터 행의 갯수만큼 반복되고, i번째 행의 CHECKED칼럼의 값을 num으로 바꾼다
+			//(즉 모든 row의 CHECKED칼럼값을 num으로 바꾼다)
+		}
+		obj.setCellProperty('Head',0,'text',num);
+	}
+};
+// gridcell 이벤트
+this.grid_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var rowNO = this.ds_list.rowposition;//rowposition사용하면 선택한 행의 위치를 반환
+	trace("rowNO : " + rowNO);
+	// 체크박스 체크; 하나씩 체크해서 전부 체크하면 head부분도 체크;
+	var yn    = this.ds_list.getColumn(rowNO,"CHK");
+	trace(yn);
+	
+	if(yn==null || yn=="0"){
+		this.ds_list.setColumn(rowNO,"CHK","1");
+	}else{
+		this.ds_list.setColumn(rowNO,"CHK","0");
+		//yn이null,0일때 rowNO(선택한 행) CHECKED로 바인딩된 것을 1로 변경 아닐때는 0으로변경  
+	}
+	
+	var gdsRowCount = this.ds_list.getRowCount();//Row 의 전체 갯수를 반환합니다. 
+	if(this.ds_list.getCaseCount("CHK == '1'") == gdsRowCount){
+		//getCaseCount는 검색조건을 설정합니다.  체크박스에 체크가 전부다 되면 Head부분도 체크가되게하는문장입니다
+		obj.setCellProperty('Head',0,'text',"1");
+	}else{
+		obj.setCellProperty('Head',0,'text',"0");
+	}
+};
+//엑셀저장
+this.excelBtn = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.exportObj = new ExcelExportObject("Export00", this);//객체생성	
+	this.exportObj.set_exportfilename("ExcelExportFile");//저장할 엑셀파일 이름
+	this.exportObj.set_exporttype(nexacro.ExportTypes.EXCEL2007); // 엑셀 버전설정
+	this.exportObj.set_exporturl("http://localhost:9090/XExportImport"); //익스포트수행하는서비스 URL	
+	// 내보낼 컴포넌트 추가 : 타입, 보낼내용그리드, 출력시트
+	this.exportObj.addExportItem(nexacro.ExportItemTypes.GRID, this.Div00.form.Div01.form.Grid00,"Sheet1!A1" );
+	//필요시 사용할 핸들러 등록
+	this.addEventHandler("onsuccess", this.Export00_onsuccess, this);
+	this.addEventHandler("onerror", this.Export00_onerror, this);
+	//익스포트 수행
+	this.exportObj.exportData();
+	
+	var intExportedItem = this.exportObj.exportData();
+	trace("Number of Exported Item: " + intExportedItem);
+};
+this.Export00_onsuccess = function(obj:ExcelExportObject, e:nexacro.ExcelExportEventInfo)
+{    trace("Export00_onsuccess");    }
+this.Export00_onerror = function(obj:ExcelExportObject, e:nexacro.ExcelExportEventInfo)
+{    trace("Export00_onerror");		}
+]]></Script>
+    <Objects>
+      <Dataset id="ds_year">
+        <ColumnInfo>
+          <Column id="name" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="name">2020</Col>
+            <Col id="value">2020</Col>
+          </Row>
+          <Row>
+            <Col id="name">2021</Col>
+            <Col id="value">2021</Col>
+          </Row>
+          <Row>
+            <Col id="name">2022</Col>
+            <Col id="value">2022</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_half">
+        <ColumnInfo>
+          <Column id="name" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="name">상반기</Col>
+            <Col id="value">상반기(1~6월)</Col>
+          </Row>
+          <Row>
+            <Col id="name">하반기</Col>
+            <Col id="value">하반기(7~12월)</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_list">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="PCODE" type="STRING" size="256"/>
+          <Column id="PNAME" type="STRING" size="256"/>
+          <Column id="GENDER" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="ADDRESS" type="STRING" size="256"/>
+          <Column id="P_AVG" type="INT" size="256"/>
+          <Column id="I_AVG" type="INT" size="256"/>
+          <Column id="AGE" type="INT" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

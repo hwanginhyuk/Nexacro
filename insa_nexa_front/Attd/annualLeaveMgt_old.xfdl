@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="anuualLeaveMgt" width="1060" height="620" titletext="New Form">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="30" width="1010" height="560" background="#D9E5FF">
+          <Layouts>
+            <Layout>
+              <Static id="Static00_01_00_00_00_00" taborder="0" text="조회연월" left="210" top="55" width="100" height="40" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Button id="btn_search" taborder="1" text="조회하기" left="640" top="55" width="150" height="40" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_search_onclick"/>
+              <Button id="btn_finalize" taborder="2" text="마감처리" left="365" top="120" height="40" width="100" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_finalize_onclick"/>
+              <Button id="btn_cancel" taborder="3" text="마감취소" left="535" top="120" height="40" width="100" font="20px/normal &quot;나눔고딕&quot;" onclick="Div00_00_btn_cancel_onclick"/>
+              <Grid id="Grid00" taborder="4" left="125" top="185" width="761" height="345" binddataset="ds_vacation">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="106"/>
+                      <Column size="105"/>
+                      <Column size="110"/>
+                      <Column size="109"/>
+                      <Column size="109"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="34" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="사원코드" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="직원이름" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="적용년월" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="3" text="반차사용개수" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="4" text="연차사용개수" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="5" text="남은연차" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="6" text="마감여부" font="16px/normal &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:EMP_CODE"/>
+                      <Cell col="1" text="bind:EMP_NAME"/>
+                      <Cell col="2" text="bind:APPLY_YEAR_MONTH"/>
+                      <Cell col="3" text="bind:AFTERNOON_OFF"/>
+                      <Cell col="4" text="bind:MONTHLY_LEAVE"/>
+                      <Cell col="5" text="bind:REMAINING_HOLIDAY"/>
+                      <Cell col="6" text="bind:FINALIZE_STATUS"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static00" taborder="5" text="◼연차관리" left="8" top="0" width="188" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Combo id="searchYear" taborder="6" text="Combo00" left="320" top="55" width="150" height="40" font="16px/normal &quot;나눔고딕&quot;" onitemchanged="Div00_00_searchYear_onitemchanged" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">2020</Col>
+                      <Col id="datacolumn">2020</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2021</Col>
+                      <Col id="datacolumn">2021</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022</Col>
+                      <Col id="datacolumn">2022</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Combo id="searchMonth" taborder="7" text="Combo01" left="480" top="55" width="150" height="40" font="16px/normal &quot;나눔고딕&quot;" onitemchanged="Div00_00_searchMonth_onitemchanged" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">01</Col>
+                      <Col id="datacolumn">01</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">02</Col>
+                      <Col id="datacolumn">02</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">03</Col>
+                      <Col id="datacolumn">03</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">04</Col>
+                      <Col id="datacolumn">04</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">05</Col>
+                      <Col id="datacolumn">05</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">06</Col>
+                      <Col id="datacolumn">06</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">07</Col>
+                      <Col id="datacolumn">07</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">08</Col>
+                      <Col id="datacolumn">08</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">09</Col>
+                      <Col id="datacolumn">09</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">10</Col>
+                      <Col id="datacolumn">10</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">11</Col>
+                      <Col id="datacolumn">11</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">12</Col>
+                      <Col id="datacolumn">12</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_vacation">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="APPLY_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="AFTERNOON_OFF" type="STRING" size="256"/>
+          <Column id="MONTHLY_LEAVE" type="STRING" size="256"/>
+          <Column id="REMAINING_HOLIDAY" type="STRING" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+nexa = nexacro.getApplication();
+
+//조회하기
+this.Div00_00_btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var year=this.Div00_00.form.searchYear.text;
+	var month=this.Div00_00.form.searchMonth.text;
+	var date=year+month;
+	trace(date);
+	
+	var workplaceCode = nexa.g_workplaceCode
+	
+	this.transaction(
+					"searchAnnual",
+					"svcAttdappvl::annual-leaveMgt",
+					"", 
+					"ds_vacation=ds_vacation", 
+					"applyYearMonth="+ date +
+					" workplaceCode=" + workplaceCode,
+					"fn_callback"
+					);
+
+};
+
+//마감하기
+this.Div00_00_btn_finalize_onclick= function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace("마감하기");
+	var size=this.ds_vacation.rowcount;
+	for(var i=0;i<size;i++){
+		this.ds_vacation.setColumn(i,"FINALIZE_STATUS","Y");
+	}
+	
+	this.annualLeaveUpdate();
+};
+
+//마감취소
+this.Div00_00_btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace("마감취소");
+	var size=this.ds_vacation.rowcount;
+	for(var i=0;i<size;i++){
+		this.ds_vacation.setColumn(i,"FINALIZE_STATUS","N");
+	}
+	
+	this.annualLeaveUpdate();
+};
+
+//Y,N 
+this.fn_callback = function(trID,ErrorCode,ErrorMsg){
+	if(trID=="UpdateID"){
+		if(ErrorCode!=0){
+			alert("실패 :"+ErrorMsg);
+	 }else{
+		alert("처리되었습니다.");
+	}
+  }
+}
+
+this.annualLeaveUpdate = function()
+{
+	this.transaction(
+					"searchAnnual",
+					"svcAttdappvl::annual-leaveMgt/1",
+					"ds_vacation=ds_vacation", 
+					"", 
+					"",
+					""
+					);
+}]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="empAuth" width="1060" height="620" titletext="New Form" onload="empAuth_onload">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="25" width="1010" height="560" background="#D9E5FF">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="◼사원권한관리" left="8" top="0" width="214" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Grid id="Grid00" taborder="0" left="40" top="60" width="455" height="385" binddataset="ds_emp" oncellclick="Div00_00_Grid00_oncellclick" autoenter="select">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="113"/>
+                      <Column size="113"/>
+                      <Column size="113"/>
+                      <Column size="113"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="29" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="사원코드" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="사원명" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="직급" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="3" text="부서" font="16px/normal &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:EMP_CODE"/>
+                      <Cell col="1" text="bind:EMP_NAME"/>
+                      <Cell col="2" text="bind:DEPT_NAME"/>
+                      <Cell col="3" text="bind:POSITION"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="Button00" taborder="2" text="권한저장" left="430" top="475" width="150" height="60" font="24px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Button00_onclick"/>
+              <Grid id="Grid00_00" taborder="3" left="517" top="58" width="455" height="385" binddataset="ds_admin" autoenter="select" oncellclick="Div00_00_Grid00_00_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="151"/>
+                      <Column size="150"/>
+                      <Column size="150"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="31" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="권한그룹코드" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="권한그룹명" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="권한여부" font="16px/normal &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:ADMIN_CODE"/>
+                      <Cell col="1" text="bind:ADMIN_AUTHORITY"/>
+                      <Cell col="2" text="bind:AUTHORITY" expr="AUTHORITY=='0'?'❌':'✔'"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="BIRTHDAY" type="STRING" size="256"/>
+          <Column id="GENDER" type="STRING" size="256"/>
+          <Column id="MOBILE_NUMBER" type="STRING" size="256"/>
+          <Column id="ADDRESS" type="STRING" size="256"/>
+          <Column id="DETAIL_ADDRESS" type="STRING" size="256"/>
+          <Column id="POST_NUMBER" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="IMG_EXTEND" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="AUTHORITY" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_admin">
+        <ColumnInfo>
+          <Column id="ADMIN_CODE" type="STRING" size="256"/>
+          <Column id="ADMIN_AUTHORITY" type="STRING" size="256"/>
+          <Column id="AUTHORITY" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//로딩시 
+this.empAuth_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+
+   this.transaction(
+               "empAuth"
+               ,"svcEmpinfomgmt::emplist"
+               ,""
+               ,"ds_emp=gds_emp"
+               ,"value=전체부서"
+               ,"fn_callback"
+   );
+};
+
+this.Div00_00_Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var click=this.ds_emp.getColumn(this.ds_emp.rowposition,"EMP_CODE");
+	trace(click);
+	this.transaction(
+				"searchAuthGroup",
+				 "svcSystemmgmt::authcode",
+				 "",
+				 "ds_admin=ds_admin",
+				 "empCode='"+this.ds_emp.getColumn(this.ds_emp.rowposition,"EMP_CODE")+"'",
+				 "delayFunc");
+				 
+				 
+};
+
+this.Div00_00_Grid00_00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var click1=this.ds_admin.getColumn(this.ds_admin.rowposition,"AUTHORITY");
+
+    if(click1==0){
+		this.ds_admin.setColumn(this.ds_admin.rowposition,"AUTHORITY",1); 
+	}else{
+		this.ds_admin.setColumn(this.ds_admin.rowposition,"AUTHORITY",0);
+	}
+				 
+};
+
+this.Div00_00_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	for( let i =0; i<this.ds_admin.rowcount; i++){
+	 let v = this.ds_admin.getColumn(i,"ADMIN_CODE");
+	 this.ds_admin.setColumn(i,"ADMIN_CODE",v);
+	}
+	
+	
+	var rtn = this.confirm("변경사항을 저장하시겠습니까?","권한");
+	if(rtn){
+		this.transaction(
+			"modifyAuth",
+			"svcSystemmgmt::modifyauthcode",
+			"ds_admin=ds_admin:u gds_emp=ds_emp",
+			"",
+			"",
+			"delayFunc"
+		);
+	}
+	
+};]]></Script>
+  </Form>
+</FDL>

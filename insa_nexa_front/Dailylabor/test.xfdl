@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dailyEmpPayCalc" width="1270" height="930" titletext="New Form" onload="dailyEmpPayCalc_onload">
+    <Layouts>
+      <Layout height="930" width="1270" stepcount="0">
+        <Div id="div_searchCondition" taborder="0" text="Div00" left="30" top="15" width="1200" height="70" border="1px solid #6092ff" borderRadius="5px">
+          <Layouts>
+            <Layout>
+              <Button id="btn_search" taborder="1" text="조회" left="1086" top="17" width="75" height="35" onclick="div_searchCondition_btn_search_onclick" font="14px &quot;나눔고딕&quot;" background=" #6092ff" borderRadius="5px" color="white"/>
+              <Static id="Static00" taborder="0" text="귀속연월" left="27" top="17" width="70" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Calendar id="calen_date" taborder="2" left="99" top="17" width="173" height="35" background="#FFFFC5" dateformat="yyyy-MM" editformat="yyyy-MM" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static01" taborder="3" text="지급일" left="311" top="17" width="50" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Edit id="edit_paycode" taborder="4" left="362" top="17" width="41" height="35" background="#FFFFC5" onchanged="div_searchCondition_edit_paycode_onchanged" font="14px &quot;나눔고딕&quot;"/>
+              <Calendar id="calen_paydate" taborder="5" left="405" top="17" width="130" height="35" readonly="true" editformat="yyyy-MM-dd ddd" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static02" taborder="6" text="출결기간" left="573" top="17" width="70" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Calendar id="calen_startdate" taborder="7" left="645" top="17" width="130" height="35" readonly="true" editformat="yyyy-MM-dd ddd" font="14px &quot;나눔고딕&quot;"/>
+              <Calendar id="calen_enddate" taborder="8" left="800" top="17" width="130" height="35" readonly="true" editformat="yyyy-MM-dd ddd" font="14px &quot;나눔고딕&quot;"/>
+              <Edit id="edt_paytype" taborder="9" left="934" top="17" width="116" height="35" readonly="true" onchanged="div_searchCondition_edt_paytype_onchanged" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static06" taborder="10" text="~" left="784" top="17" width="24" height="35" font="14px &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div00" taborder="1" text="Div00" left="29" top="98" width="370" height="410">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="1" top="5" width="352" height="401" binddataset="ds_dayCalcTarget" oncelldblclick="Div00_Grid00_oncelldblclick" scrolltype="none">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="50"/>
+                      <Column size="150"/>
+                      <Column size="150"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="NO" font="14px &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="사원코드" font="14px &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="사원명" font="14px &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow + 1" textAlign="center"/>
+                      <Cell col="1" text="bind:DEMP_CODE" textAlign="center"/>
+                      <Cell col="2" text="bind:DEMP_NAME" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div00_00" taborder="2" text="Div00" left="455" top="98" width="805" height="410">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="8" top="5" width="775" height="401" binddataset="ds_dayCalcDetail" onkeyup="Div00_00_Grid00_onkeyup" ontouchend="Div00_00_Grid00_ontouchend" onenterdown="Div00_00_Grid00_onenterdown">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="90"/>
+                      <Column size="54"/>
+                      <Column size="76"/>
+                      <Column size="112"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                      <Row size="24" band="summ"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="날짜" font="14px &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="요일" font="14px &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="근무시간" font="14px &quot;나눔고딕&quot;"/>
+                      <Cell col="3" text="과세" font="14px &quot;나눔고딕&quot;"/>
+                      <Cell col="4" text="과세추가지급액" font="14px &quot;나눔고딕&quot;"/>
+                      <Cell col="5" text="연장비과세" font="14px &quot;나눔고딕&quot;"/>
+                      <Cell col="6" text="비과세(신고제외)" font="14px &quot;나눔고딕&quot;"/>
+                      <Cell col="7" text="기타공제액" font="14px &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:CALC_DATE" displaytype="date" calendardateformat="yyyy-MM-dd" textAlign="center"/>
+                      <Cell col="1" text="bind:CALC_DAY" textAlign="center" displaytype="date" calendardateformat="ddd"/>
+                      <Cell col="2" text="bind:CALC_TIME" textAlign="center" calendardateformat="HH:mm" displaytype="text"/>
+                      <Cell col="3" text="bind:CALC_TAX" displaytype="number" edittype="none" textAlign="center"/>
+                      <Cell col="4" text="bind:CALC_TAX_ADD" displaytype="number" edittype="text" textAlign="center"/>
+                      <Cell col="5" text="bind:CALC_TAX_EXT" displaytype="number" edittype="text" textAlign="center"/>
+                      <Cell col="6" text="bind:CALC_TAX_FREE" displaytype="number" edittype="text" textAlign="center"/>
+                      <Cell col="7" text="bind:CALC_TAX_OTH" displaytype="number" edittype="text" textAlign="center"/>
+                    </Band>
+                    <Band id="summary">
+                      <Cell/>
+                      <Cell col="1"/>
+                      <Cell col="2"/>
+                      <Cell col="3" text="expr:dataset.getSum(&quot;CALC_TAX&quot;)" displaytype="number"/>
+                      <Cell col="4" displaytype="number" text="expr:dataset.getSum(&quot;CALC_TAX_ADD&quot;)"/>
+                      <Cell col="5" displaytype="number" text="expr:dataset.getSum(&quot;CALC_TAX_EXT&quot;)"/>
+                      <Cell col="6" displaytype="number" text="expr:dataset.getSum(&quot;CALC_TAX_FREE&quot;)"/>
+                      <Cell col="7" displaytype="number" text="expr:dataset.getSum(&quot;CALC_TAX_OTH&quot;)"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Tab id="Tab00" taborder="3" tabindex="0" left="38" top="530" width="1198" height="177" onchanged="Tab00_onchanged">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="급여총액">
+              <Layouts>
+                <Layout>
+                  <Edit id="Edit00" taborder="0" left="150" top="22" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00" taborder="1" text="과세총액" left="30" top="26" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00" taborder="2" text="회사부담금" left="356" top="26" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00" taborder="3" left="445" top="22" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00" taborder="4" text="고용보험" left="646" top="26" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00" taborder="5" left="742" top="22" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_00" taborder="6" text="소득세" left="938" top="26" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00_00" taborder="7" left="1027" top="22" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_01" taborder="8" text="비과세신고분" left="30" top="66" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_01" taborder="9" text="기타공제액" left="356" top="66" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_01" taborder="10" left="445" top="62" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_01" taborder="11" text="국민연금" left="646" top="66" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00_01" taborder="12" left="742" top="62" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_00_00" taborder="13" text="지방소득세" left="938" top="66" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00_00_00" taborder="14" left="1027" top="62" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_01" taborder="15" left="150" top="62" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_01_00" taborder="16" text="비과세신고제외분" left="30" top="106" width="110" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_01_00" taborder="17" text="건강보험" left="356" top="106" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_01_00" taborder="18" left="445" top="102" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_01_00" taborder="19" text="장기요양보험" left="646" top="106" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00_01_00" taborder="20" left="742" top="102" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_00_00_00" taborder="21" text="차인지급액" left="938" top="106" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00_00_00_00" taborder="22" left="1027" top="102" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_01_00" taborder="23" left="150" top="102" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="개인정보">
+              <Layouts>
+                <Layout>
+                  <Static id="Static00" taborder="0" text="사업장" left="30" top="26" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00" taborder="1" left="110" top="22" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00" taborder="2" text="이름" left="327" top="26" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00" taborder="3" left="406" top="22" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00" taborder="4" text="프로젝트" left="627" top="26" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00" taborder="5" left="730" top="22" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_00" taborder="6" text="전화번호" left="938" top="26" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00_00_00" taborder="7" left="1007" top="63" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_00_00" taborder="8" text="직책" left="938" top="67" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_00_00_00" taborder="9" text="직무" left="938" top="106" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00_00_00_00" taborder="10" left="1007" top="102" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00_01_00" taborder="11" left="730" top="102" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_01_00" taborder="12" text="계좌이체은행" left="627" top="106" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_00_01" taborder="13" text="예금주" left="627" top="67" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_00_00_01" taborder="14" left="730" top="63" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_01" taborder="15" text="입사일자" left="327" top="67" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_00_01_00" taborder="16" text="퇴사일자" left="327" top="106" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_01_00" taborder="17" left="110" top="102" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_01_00" taborder="18" text="급여형태" left="30" top="106" width="110" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Static id="Static00_01" taborder="19" text="부서" left="30" top="67" width="89" height="25" textAlign="left" font="14px &quot;나눔고딕&quot;"/>
+                  <Edit id="Edit00_01" taborder="20" left="110" top="63" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Calendar id="Calendar00" taborder="21" left="406" top="63" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <Calendar id="Calendar00_00" taborder="22" left="406" top="102" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                  <MaskEdit id="MaskEdit00" taborder="23" left="1007" top="22" width="159" height="32" font="14px &quot;나눔고딕&quot;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs"; // 모달창 라이브러리
+var updateEdit;
+var codes = {};
+var modalUrl = "Base::dailyEmpPayDateModal.xfdl";
+var modalEvent = "fn_popupCallback";
+var page = this.div_searchCondition.form;
+
+
+this.dailyEmpPayCalc_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+		"selectTargetList",
+		"svcDailyCalc::calclist",
+		"",
+		"ds_dayCalcTarget=in_out_dailyEmp",
+		"",
+		"fn_callback"	
+	);
+};
+
+
+
+this.Static00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Tab00_Tabpage3_Static00_00_01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Tab00_Tabpage2_Static00_00_00_00_01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+function fn_calcDate(join, retire){
+	
+	this.fYear = join.substr(0, 4);
+	this.fMonth = join.substr(4, 2);
+	this.fDay = join.substr(6, 2);
+	
+	this.tYear = retire.substr(0, 4);
+	this.tMonth = retire.substr(4, 2);
+	this.tDay = retire.substr(6, 2);
+	
+	this.from = new Date(this.fYear, this.fMonth-1, this.fDay);
+	this.to = new Date(this.tYear, this.tMonth-1, this.tDay);
+		
+	return (this.to - this.from) / (1000*60*60*24);
+	
+	/*trace("qwer")*/
+	
+}
+
+this.Div00_Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.ds_dayCalcDetail.clearData();
+	
+	this.ds_dayCalcTotal.clearData();
+	
+	var dempcode = this.ds_dayCalcTarget.getColumn(e.row, "DEMP_CODE")
+	var paystatcode = this.ds_dayCalcTarget.getColumn(e.row, "PAY_STAT_CODE")
+
+	trace(dempcode);
+	trace(paystatcode);
+
+	
+	var startdate = nexacro.replaceAll(this.ds_dayCalcTarget.getColumn(e.row, "PAY_STARTDATE"), "-", "");
+	var enddate = nexacro.replaceAll(this.ds_dayCalcTarget.getColumn(e.row, "PAY_ENDDATE"), "-", "");
+	
+	this.fYear = startdate.substr(0, 4);
+	this.fMonth = startdate.substr(4, 2);
+	this.fDay = startdate.substr(6, 2);
+	
+	this.tYear = enddate.substr(0, 4);
+	this.tMonth = enddate.substr(4, 2);
+	this.tDay = enddate.substr(6, 2);
+	
+	this.from = new Date(this.fYear, this.fMonth-1, this.fDay);
+	this.to = new Date(this.tYear, this.tMonth-1, this.tDay);
+	
+	var diffdate = ((this.to - this.from) / (1000*60*60*24));
+	trace(this.from);
+	
+	/////////////////////////////////////////////////////
+	
+	
+	var dateCal = parseInt(this.fDay) + 1;
+	this.from.setDate(dateCal);
+	trace("달라진날짜값");
+	trace(this.from);
+	var datelist  = new Array();  
+	
+	///////////////////////////////
+	
+	for(var date = 0; date<diffdate+1; date++){
+		var dateCal = parseInt(this.fDay) + date;
+		this.from.setDate(dateCal);
+		var ydate = this.from.getYear();
+		var mdate = this.from.getMonth()+1;
+		var ddate = this.from.getDate();
+		var wdate = (ydate.toString() + mdate.toString().padLeft(2, "0") + ddate.toString().padLeft(2, "0"))
+		datelist.push(wdate);
+		
+		//////////////////////
+		
+		this.ds_dayCalcDetail.addRow(date);
+		this.ds_dayCalcDetail.setColumn(date, "DEMP_CODE", dempcode);
+		this.ds_dayCalcDetail.setColumn(date, "PAY_STAT_CODE", paystatcode);
+		
+		this.ds_dayCalcDetail.setColumn(date, "IS_TAXFREE", this.ds_dayCalcTarget.getColumn(e.row, "IS_TAXFREE"));
+		this.ds_dayCalcDetail.setColumn(date, "IS_EMPINSURANCE", this.ds_dayCalcTarget.getColumn(e.row, "IS_EMPINSURANCE"));
+		this.ds_dayCalcDetail.setColumn(date, "IS_NATIONALANNUITY", this.ds_dayCalcTarget.getColumn(e.row, "IS_NATIONALANNUITY"));
+		this.ds_dayCalcDetail.setColumn(date, "IS_HEALTHINSURANCE", this.ds_dayCalcTarget.getColumn(e.row, "IS_HEALTHINSURANCE"));
+		
+		this.ds_dayCalcDetail.setColumn(date, "CALC_DATE", datelist[date]);
+		this.ds_dayCalcDetail.setColumn(date, "CALC_DAY", datelist[date]);
+		this.ds_dayCalcDetail.setColumn(date, "CALC_TIME", "08:00");
+		if(this.ds_dayCalcTarget.getColumn(e.row, "PAY_STAT_CODE")=="MDC000"){
+			this.ds_dayCalcDetail.setColumn(date, "CALC_TAX", this.ds_dayCalcTarget.getColumn(e.row, "SALARY"));
+		}else{
+			this.ds_dayCalcDetail.setColumn(0, "CALC_TAX", this.ds_dayCalcTarget.getColumn(e.row, "SALARY"));
+		};
+	}	
+};
+
+this.div_searchCondition_btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	 	this.transaction(
+	 		"searchlist",
+	 		"svcDailyEmpCalc::searchlist",
+	 		"",
+	 		"ds_dayCalcTarget=in_out_dailyEmp",
+			"date="+page.edit_paycode.value,
+			"fn_callback"	
+	 	);
+};
+
+this.fn_callback =function(trID ,ErrorCode ,ErrorMsg){
+	if(trID=="selectTargetList"){
+		if(ErrorCode!=0){
+			alert("일용직사원리스트 조회 실패 : "+ErrorMsg);
+		}
+	};
+	if (trID=="callCalcProcedure")
+	{
+		//this.reload();
+	}
+	if (trID=="saveDailyPayDateTarget")
+	{	
+		//this.reload();
+	}
+};
+
+
+this.Div00_00_Grid00_onenterdown = function(obj:nexacro.Grid,e:nexacro.GridEditEventInfo)
+{
+
+
+	var dempCode = this.ds_dayCalcDetail.getColumn(e.row, "DEMP_CODE");
+	var payStatCode = this.ds_dayCalcDetail.getColumn(e.row, "PAY_STAT_CODE");
+	
+	var isTaxfree = this.ds_dayCalcDetail.getColumn(e.row, "IS_TAXFREE");
+	var isEmpinsurance = this.ds_dayCalcDetail.getColumn(e.row, "IS_EMPINSURANCE");
+	var isNationalannuity = this.ds_dayCalcDetail.getColumn(e.row, "IS_NATIONALANNUITY");
+	var isHealthinsurance = this.ds_dayCalcDetail.getColumn(e.row, "IS_HEALTHINSURANCE");
+	
+	var sumTax = this.ds_dayCalcDetail.getSum("CALC_TAX");
+	var sumTaxAdd = this.ds_dayCalcDetail.getSum("CALC_TAX_ADD");
+	var sumTaxExt = this.ds_dayCalcDetail.getSum("CALC_TAX_EXT");
+	var sumTaxFree = this.ds_dayCalcDetail.getSum("CALC_TAX_FREE");
+	var sumTaxOth = this.ds_dayCalcDetail.getSum("CALC_TAX_OTH");
+	
+	
+	this.transaction(
+		"callCalcProcedure",
+		"svcDailyCalc::dailycalc",
+		"",
+		"ds_dayCalcTotal=ds_dayCalcTotal",
+		"dempCode="+dempCode
+		+" paystatcode="+payStatCode
+		+" isTaxfree="+isTaxfree
+		+" isEmpinsurance="+isEmpinsurance
+		+" isNationalannuity="+isNationalannuity
+		+" isHealthinsurance="+isHealthinsurance
+		+" sumTax="+sumTax
+		+" sumTaxAdd="+sumTaxAdd
+		+" sumTaxExt="+sumTaxExt
+		+" sumTaxFree="+sumTaxFree
+		+" sumTaxOth="+sumTaxOth,
+		"fn_callback"
+	);
+	
+};
+
+this.Tab00_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
+{
+	
+};
+
+this.div_searchCondition_Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+};
+
+this.div_searchCondition_edit_paycode_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+
+this.div_searchCondition_edt_paytype_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+    <Objects>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="마감" type="STRING" size="256"/>
+          <Column id="날짜" type="STRING" size="256"/>
+          <Column id="요일" type="STRING" size="256"/>
+          <Column id="출결" type="STRING" size="256"/>
+          <Column id="정상" type="STRING" size="256"/>
+          <Column id="연장" type="STRING" size="256"/>
+          <Column id="야간" type="STRING" size="256"/>
+          <Column id="휴일" type="STRING" size="256"/>
+          <Column id="기타" type="STRING" size="256"/>
+          <Column id="과세" type="STRING" size="256"/>
+          <Column id="과세추가지" type="STRING" size="256"/>
+          <Column id="연장비과세" type="STRING" size="256"/>
+          <Column id="비과세" type="STRING" size="256"/>
+          <Column id="기타공제액" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dayCalcTarget">
+        <ColumnInfo>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+          <Column id="DEMP_CODE" type="STRING" size="256"/>
+          <Column id="DEMP_NAME" type="STRING" size="256"/>
+          <Column id="JOIN_DATE" type="STRING" size="256"/>
+          <Column id="IS_FOREIGN" type="STRING" size="256"/>
+          <Column id="JUMIN_NO" type="STRING" size="256"/>
+          <Column id="FOREIGN_NO" type="STRING" size="256"/>
+          <Column id="ZIP_CODE" type="STRING" size="256"/>
+          <Column id="ADDR" type="STRING" size="256"/>
+          <Column id="ADDR_DETAIL" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="PHONE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="PJT_CODE" type="STRING" size="256"/>
+          <Column id="POS_CODE" type="STRING" size="256"/>
+          <Column id="EMP_STAT_CODE" type="STRING" size="256"/>
+          <Column id="JOB_CODE" type="STRING" size="256"/>
+          <Column id="PAY_STAT_CODE" type="STRING" size="256"/>
+          <Column id="TRANS_AC_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NO" type="STRING" size="256"/>
+          <Column id="DEPOSITOR" type="STRING" size="256"/>
+          <Column id="SALARY" type="STRING" size="256"/>
+          <Column id="HOUR_PRICE" type="STRING" size="256"/>
+          <Column id="RETIRE_DATE" type="STRING" size="256"/>
+          <Column id="IS_TAXFREE" type="STRING" size="256"/>
+          <Column id="IS_EMPINSURANCE" type="STRING" size="256"/>
+          <Column id="IS_NATIONALANNUITY" type="STRING" size="256"/>
+          <Column id="IS_HEALTHINSURANCE" type="STRING" size="256"/>
+          <Column id="NATIONALLITY_CODE" type="STRING" size="256"/>
+          <Column id="STAY_STAT" type="STRING" size="256"/>
+          <Column id="EMPINSURANCE_STAT_CODE" type="STRING" size="256"/>
+          <Column id="CH_JOB_CODE" type="STRING" size="256"/>
+          <Column id="MEMO" type="STRING" size="256"/>
+          <Column id="INS_IMPOSE" type="STRING" size="256"/>
+          <Column id="INS_IMPOSE_REASON" type="STRING" size="256"/>
+          <Column id="IS_STABLE_FUND" type="STRING" size="256"/>
+          <Column id="CHECKED" type="STRING" size="256"/>
+          <Column id="PAY_CODE" type="STRING" size="256"/>
+          <Column id="PAY_DATE" type="STRING" size="256"/>
+          <Column id="PAY_STARTDATE" type="STRING" size="256"/>
+          <Column id="PAY_ENDDATE" type="STRING" size="256"/>
+          <Column id="PAY_TYPE" type="STRING" size="256"/>
+          <Column id="PAY_DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dayCalcDetail" oncolumnchanged="ds_dayCalcDetail_oncolumnchanged" onvaluechanged="ds_dayCalcDetail_onvaluechanged">
+        <ColumnInfo>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+          <Column id="DEMP_CODE" type="STRING" size="256"/>
+          <Column id="DEMP_NAME" type="STRING" size="256"/>
+          <Column id="JOIN_DATE" type="STRING" size="256"/>
+          <Column id="IS_FOREIGN" type="STRING" size="256"/>
+          <Column id="JUMIN_NO" type="STRING" size="256"/>
+          <Column id="FOREIGN_NO" type="STRING" size="256"/>
+          <Column id="ZIP_CODE" type="STRING" size="256"/>
+          <Column id="ADDR" type="STRING" size="256"/>
+          <Column id="ADDR_DETAIL" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="PHONE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="PJT_CODE" type="STRING" size="256"/>
+          <Column id="POS_CODE" type="STRING" size="256"/>
+          <Column id="EMP_STAT_CODE" type="STRING" size="256"/>
+          <Column id="JOB_CODE" type="STRING" size="256"/>
+          <Column id="PAY_STAT_CODE" type="STRING" size="256"/>
+          <Column id="TRANS_AC_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NO" type="STRING" size="256"/>
+          <Column id="DEPOSITOR" type="STRING" size="256"/>
+          <Column id="SALARY" type="STRING" size="256"/>
+          <Column id="HOUR_PRICE" type="STRING" size="256"/>
+          <Column id="RETIRE_DATE" type="STRING" size="256"/>
+          <Column id="IS_TAXFREE" type="STRING" size="256"/>
+          <Column id="IS_EMPINSURANCE" type="STRING" size="256"/>
+          <Column id="IS_NATIONALANNUITY" type="STRING" size="256"/>
+          <Column id="IS_HEALTHINSURANCE" type="STRING" size="256"/>
+          <Column id="NATIONALLITY_CODE" type="STRING" size="256"/>
+          <Column id="STAY_STAT" type="STRING" size="256"/>
+          <Column id="EMPINSURANCE_STAT_CODE" type="STRING" size="256"/>
+          <Column id="CH_JOB_CODE" type="STRING" size="256"/>
+          <Column id="MEMO" type="STRING" size="256"/>
+          <Column id="INS_IMPOSE" type="STRING" size="256"/>
+          <Column id="INS_IMPOSE_REASON" type="STRING" size="256"/>
+          <Column id="IS_STABLE_FUND" type="STRING" size="256"/>
+          <Column id="CHECKED" type="STRING" size="256"/>
+          <Column id="PAY_CODE" type="STRING" size="256"/>
+          <Column id="PAY_DATE" type="STRING" size="256"/>
+          <Column id="PAY_STARTDATE" type="STRING" size="256"/>
+          <Column id="PAY_ENDDATE" type="STRING" size="256"/>
+          <Column id="PAY_TYPE" type="STRING" size="256"/>
+          <Column id="PAY_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="CALC_DATE" type="STRING" size="256"/>
+          <Column id="CALC_DAY" type="STRING" size="256"/>
+          <Column id="CALC_TIME" type="STRING" size="256"/>
+          <Column id="CALC_TAX" type="INT" size="256"/>
+          <Column id="CALC_TAX_ADD" type="INT" size="256"/>
+          <Column id="CALC_TAX_EXT" type="INT" size="256"/>
+          <Column id="CALC_TAX_FREE" type="INT" size="256"/>
+          <Column id="CALC_TAX_OTH" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dayCalcTotal">
+        <ColumnInfo>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+          <Column id="DEMP_CODE" type="STRING" size="256"/>
+          <Column id="DEMP_NAME" type="STRING" size="256"/>
+          <Column id="JOIN_DATE" type="STRING" size="256"/>
+          <Column id="IS_FOREIGN" type="STRING" size="256"/>
+          <Column id="JUMIN_NO" type="STRING" size="256"/>
+          <Column id="FOREIGN_NO" type="STRING" size="256"/>
+          <Column id="ZIP_CODE" type="STRING" size="256"/>
+          <Column id="ADDR" type="STRING" size="256"/>
+          <Column id="ADDR_DETAIL" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="PHONE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="PJT_CODE" type="STRING" size="256"/>
+          <Column id="POS_CODE" type="STRING" size="256"/>
+          <Column id="EMP_STAT_CODE" type="STRING" size="256"/>
+          <Column id="JOB_CODE" type="STRING" size="256"/>
+          <Column id="PAY_STAT_CODE" type="STRING" size="256"/>
+          <Column id="TRANS_AC_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NO" type="STRING" size="256"/>
+          <Column id="DEPOSITOR" type="STRING" size="256"/>
+          <Column id="SALARY" type="STRING" size="256"/>
+          <Column id="HOUR_PRICE" type="STRING" size="256"/>
+          <Column id="RETIRE_DATE" type="STRING" size="256"/>
+          <Column id="IS_TAXFREE" type="STRING" size="256"/>
+          <Column id="IS_EMPINSURANCE" type="STRING" size="256"/>
+          <Column id="IS_NATIONALANNUITY" type="STRING" size="256"/>
+          <Column id="IS_HEALTHINSURANCE" type="STRING" size="256"/>
+          <Column id="NATIONALLITY_CODE" type="STRING" size="256"/>
+          <Column id="STAY_STAT" type="STRING" size="256"/>
+          <Column id="EMPINSURANCE_STAT_CODE" type="STRING" size="256"/>
+          <Column id="CH_JOB_CODE" type="STRING" size="256"/>
+          <Column id="MEMO" type="STRING" size="256"/>
+          <Column id="INS_IMPOSE" type="STRING" size="256"/>
+          <Column id="INS_IMPOSE_REASON" type="STRING" size="256"/>
+          <Column id="IS_STABLE_FUND" type="STRING" size="256"/>
+          <Column id="CHECKED" type="STRING" size="256"/>
+          <Column id="PAY_CODE" type="STRING" size="256"/>
+          <Column id="PAY_DATE" type="STRING" size="256"/>
+          <Column id="PAY_STARTDATE" type="STRING" size="256"/>
+          <Column id="PAY_ENDDATE" type="STRING" size="256"/>
+          <Column id="PAY_TYPE" type="STRING" size="256"/>
+          <Column id="PAY_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="CALC_TAX" type="STRING" size="256"/>
+          <Column id="CALC_TAX_EXT" type="STRING" size="256"/>
+          <Column id="CALC_TAX_FREE" type="STRING" size="256"/>
+          <Column id="CALC_TAX_OTH" type="STRING" size="256"/>
+          <Column id="CALC_COM" type="STRING" size="256"/>
+          <Column id="CALC_HI" type="STRING" size="256"/>
+          <Column id="CALC_EI" type="STRING" size="256"/>
+          <Column id="CALC_NP" type="STRING" size="256"/>
+          <Column id="CALC_LTI" type="STRING" size="256"/>
+          <Column id="CALC_IN_TAX" type="STRING" size="256"/>
+          <Column id="CALC_LOCAL_TAX" type="STRING" size="256"/>
+          <Column id="CALC_TOTAL_PAY" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Tab00.Tabpage1.form.Edit00" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_TAX"/>
+      <BindItem id="item1" compid="Tab00.Tabpage1.form.Edit00_01" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_TAX_EXT"/>
+      <BindItem id="item2" compid="Tab00.Tabpage1.form.Edit00_01_00" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_TAX_FREE"/>
+      <BindItem id="item3" compid="Tab00.Tabpage1.form.Edit00_00_01" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_TAX_OTH"/>
+      <BindItem id="item4" compid="Tab00.Tabpage1.form.Edit00_00" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_COM"/>
+      <BindItem id="item5" compid="Tab00.Tabpage1.form.Edit00_00_01_00" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_HI"/>
+      <BindItem id="item6" compid="Tab00.Tabpage1.form.Edit00_00_00" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_EI"/>
+      <BindItem id="item7" compid="Tab00.Tabpage1.form.Edit00_00_00_01" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_NP"/>
+      <BindItem id="item8" compid="Tab00.Tabpage1.form.Edit00_00_00_01_00" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_LTI"/>
+      <BindItem id="item9" compid="Tab00.Tabpage1.form.Edit00_00_00_00" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_IN_TAX"/>
+      <BindItem id="item10" compid="Tab00.Tabpage1.form.Edit00_00_00_00_00" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_LOCAL_TAX"/>
+      <BindItem id="item11" compid="Tab00.Tabpage1.form.Edit00_00_00_00_00_00" propid="value" datasetid="ds_dayCalcTotal" columnid="CALC_TOTAL_PAY"/>
+      <BindItem id="item12" compid="Tab00.Tabpage2.form.Edit00" propid="value" datasetid="ds_dayCalcTotal" columnid="WORKPLACE_CODE"/>
+      <BindItem id="item13" compid="Tab00.Tabpage2.form.Edit00_00" propid="value" datasetid="ds_dayCalcTotal" columnid="DEMP_NAME"/>
+      <BindItem id="item14" compid="Tab00.Tabpage2.form.Edit00_00_00" propid="value" datasetid="ds_dayCalcTotal" columnid="PJT_CODE"/>
+      <BindItem id="item15" compid="Tab00.Tabpage2.form.MaskEdit00" propid="value" datasetid="ds_dayCalcTotal" columnid="PHONE"/>
+      <BindItem id="item16" compid="Tab00.Tabpage2.form.Edit00_01" propid="value" datasetid="ds_dayCalcTotal" columnid="DEPT_CODE"/>
+      <BindItem id="item17" compid="Tab00.Tabpage2.form.Calendar00" propid="value" datasetid="ds_dayCalcTotal" columnid="JOIN_DATE"/>
+      <BindItem id="item18" compid="Tab00.Tabpage2.form.Edit00_00_00_01" propid="value" datasetid="ds_dayCalcTotal" columnid="DEPOSITOR"/>
+      <BindItem id="item19" compid="Tab00.Tabpage2.form.Edit00_00_00_01_00" propid="value" datasetid="ds_dayCalcTotal" columnid="TRANS_AC_CODE"/>
+      <BindItem id="item20" compid="Tab00.Tabpage2.form.Edit00_00_00_00_00" propid="value" datasetid="ds_dayCalcTotal" columnid="POS_CODE"/>
+      <BindItem id="item21" compid="Tab00.Tabpage2.form.Edit00_00_00_00_00_00" propid="value" datasetid="ds_dayCalcTotal" columnid="JOB_CODE"/>
+    </Bind>
+  </Form>
+</FDL>

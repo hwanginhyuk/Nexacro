@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="loginForm" width="400" height="500">
+    <Layouts>
+      <Layout height="500" mobileorientation="landscape" width="400">
+        <Div id="Div" taborder="0" text="Div00" left="0" top="0" background="white" width="400" height="500">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" left="55" top="130" width="290" height="190" border="1px solid #d6d6d6" borderRadius="5px"/>
+              <Edit id="empName" taborder="3" left="85" top="150" width="230" height="35" textAlign="left" borderRadius="5px 5px 0px 0px" text="아이디" visible="true" onchanged="Div_empName_onchanged" displaynulltext="아이디"/>
+              <Edit id="empCode" taborder="4" left="85" top="184" width="230" height="35" textAlign="left" borderRadius="0px 0px 5px 5px" password="true" imemode="none" displaynulltext="비밀번호"/>
+              <Static id="TITLE" taborder="1" text="INSA_78_ERP" left="72" top="34" width="256" height="120" font="normal 900 30pt/normal &quot;Arial ExtraBold&quot;" textAlign="center" color="#6092ff" onclick="Div_TITLE_onclick"/>
+              <Button id="loginBtn" taborder="5" text="로그인" left="85" top="270" width="230" height="32" font="normal 12pt/normal &quot;나눔고딕 ExtraBold&quot;" boxShadow="0" borderRadius="5px" onclick="Div_loginBtn_onclick" background="#6092ff" color="white"/>
+              <CheckBox id="CheckBox00" taborder="2" text="로그인 상태 유지" left="85" top="222" width="150" height="20" onclick="Div_CheckBox00_onclick" font="6pt/normal &quot;나눔고딕&quot;" color="#a3a3a3"/>
+              <Static id="TITLE00" taborder="6" text="INSA76" left="80" top="465" width="60" height="15" font="normal 10pt/normal &quot;나눔고딕&quot;" textAlign="left" color="#6092ff" letterSpacing="-1px"/>
+              <Static id="Static01" taborder="7" text="Copyright ⓒ INSA Corp. All Rights Reserved." left="130" top="462" width="200" height="20" onclick="Div_Static01_onclick" font="normal normal 7pt/normal &quot;Arial&quot;" color="#a3a3a3"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[nexa = nexacro.getApplication();
+
+this.Div_loginBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+ 	var empName = this.Div.form.empName.text;
+ 	var empCode = this.Div.form.empCode.text;
+// 	var empName = "이송욱";
+// 	var empCode = "A490091";
+	this.transaction(
+					"empLogin"
+					,"svcSystemmgmt::login"
+					,"" // 저장 server ds = client ds
+					,"gds_emp=gds_emp" // 조회 client ds = server ds
+					,"empName="+empName+" empCode="+empCode // 전달값
+					,"login_callback"
+	);	
+};
+
+
+this.login_callback = function (trID, errorCode, errorMsg)
+{
+	trace("@@@@"+trID);
+	
+	if(errorCode < 0){
+		return this.alert("로그인 실패 : "+ errorMsg );
+	}
+	
+		trace("@@@@"+nexacro.getApplication().mainframe);
+		
+		//alert("오프너"+this.opener);
+		nexa.g_empName	= nexa.gds_emp.getColumn(0,"EMP_NAME"); //사원명
+ 		nexa.g_empCode	= nexa.gds_emp.getColumn(0,"EMP_CODE"); //사원코드
+		nexa.g_deptName	= nexa.gds_emp.getColumn(0,"DEPT_NAME");  //부서
+		nexa.g_position	= nexa.gds_emp.getColumn(0,"POSITION"); //직급
+		nexa.g_workplaceCode = nexa.gds_emp.getColumn(0,"WORKPLACE_CODE"); //사업장
+		
+		
+		nexa.mainframe.set_visible(true);
+		
+		this.close();
+};
+
+
+this.Div_TITLE_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+    <Objects>
+      <Dataset id="loginForm">
+        <ColumnInfo>
+          <Column id="MENU_ID" type="STRING" size="256"/>
+          <Column id="MENU_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

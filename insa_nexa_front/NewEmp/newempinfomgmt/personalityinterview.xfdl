@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="personalityinterview" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Div id="div_container" taborder="0" text="Div00" left="15" top="34" width="1250" height="675" background="#D9E5FF">
+          <Layouts>
+            <Layout>
+              <Grid id="grd_resumelist" taborder="0" left="10" top="46" width="310" height="619" binddataset="ds_personalityInterview" autofittype="col" oncellposchanged="div_container_grd_resumelist_oncellposchanged">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="임시코드"/>
+                      <Cell col="1" text="이름"/>
+                      <Cell col="2" text="나이"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:P_CODE" textAlign="center"/>
+                      <Cell col="1" text="bind:P_NAME" textAlign="center"/>
+                      <Cell col="2" text="bind:P_AGE" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Div id="div_graph" taborder="4" text="Div00" left="338" top="10" width="900" height="400" background="white">
+                <Layouts>
+                  <Layout>
+                    <RadarChart id="radar_personality" taborder="0" left="25" top="18" width="410" height="350" binddataset="ds_personality" categorycolumn="bind:category" radartype="polygon" enableanimation="true">
+                      <Contents><![CDATA[{
+	"title": {
+		"id": "title",
+		"text": "Personality",
+		"textfont": "20pt/normal '맑은 고딕'",
+		"padding": "0px 0px 5px"
+	},
+	"legend": {
+		"id": "legend",
+		"padding": "3px 10px 3px 10px",
+		"itemtextfont": "9pt '맑은 고딕'",
+		"itemtextcolor": "#4c4c4c",
+		"visible": false
+	},
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px none",
+		"textcolor": "#ffffff",
+		"textfont": "10pt/normal '맑은 고딕'",
+		"padding": "5px"
+	},
+	"board": {
+		"id": "board"
+	},
+	"categoryaxis": {
+		"id": "categoryaxis",
+		"labeltextcolor": "#6f6f6f",
+		"labeltextfont": "10pt '맑은 고딕'",
+		"axislinestyle": "1px solid #d0d0d0",
+		"boardlinestyle": "1px solid #d0d0d0"
+	},
+	"valueaxes": [
+		{
+			"id": "valueaxis0",
+			"labeltextcolor": "#6f6f6f",
+			"labeltextfont": "10pt '맑은 고딕'",
+			"axislinestyle": "1px solid #d0d0d0",
+			"boardlinestyle": "1px solid #d0d0d0",
+			"tickmax": "5",
+			"tickmin": "0"
+		}
+	],
+	"seriesset": [
+		{
+			"id": "series0",
+			"titletext": "series",
+			"linevisible": true,
+			"itemtextvisible": true,
+			"itemtextcolor": "#a22f2f",
+			"itemtextfont": "bold 6pt '맑은 고딕'",
+			"valuecolumn": "bind:value",
+			"lineareavisible": "true",
+			"pointvisible": "true",
+			"linestyle": "3px solid #8f1d1d",
+			"pointfillstyle": "#8f1d1d",
+			"pointsize": "5",
+			"pointlinestyle": "5px solid #a22f2f",
+			"lineareafillstyle": "#a22f2f"
+		}
+	]
+}]]></Contents>
+                    </RadarChart>
+                    <RadarChart id="radar_interview" taborder="1" left="469" top="18" width="410" height="350" binddataset="ds_interview" categorycolumn="bind:category" enableanimation="true">
+                      <Contents><![CDATA[{
+	"title": {
+		"id": "title",
+		"text": "Interview",
+		"textfont": "20pt/normal '맑은 고딕'",
+		"padding": "0px 0px 5px"
+	},
+	"legend": {
+		"id": "legend",
+		"padding": "3px 10px 3px 10px",
+		"itemtextfont": "9pt '맑은 고딕'",
+		"itemtextcolor": "#4c4c4c",
+		"visible": false
+	},
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px none",
+		"textcolor": "#ffffff",
+		"textfont": "10pt/normal '맑은 고딕'",
+		"padding": "5px"
+	},
+	"board": {
+		"id": "board"
+	},
+	"categoryaxis": {
+		"id": "categoryaxis",
+		"labeltextcolor": "#6f6f6f",
+		"labeltextfont": "10pt '맑은 고딕'",
+		"axislinestyle": "1px solid #d0d0d0",
+		"boardlinestyle": "1px solid #d0d0d0"
+	},
+	"valueaxes": [
+		{
+			"id": "valueaxis0",
+			"labeltextcolor": "#6f6f6f",
+			"labeltextfont": "10pt '맑은 고딕'",
+			"axislinestyle": "1px solid #d0d0d0",
+			"boardlinestyle": "1px solid #d0d0d0",
+			"tickmin": "0",
+			"tickmax": "5"
+		}
+	],
+	"seriesset": [
+		{
+			"id": "series0",
+			"titletext": "series",
+			"linevisible": true,
+			"itemtextvisible": true,
+			"itemtextcolor": "#003860",
+			"itemtextfont": "bold 6pt '맑은 고딕'",
+			"valuecolumn": "bind:value",
+			"lineareavisible": "true",
+			"pointvisible": "true",
+			"pointsize": "5",
+			"linestyle": "3px solid #1f77b4",
+			"pointlinestyle": "5px solid #1f77b4"
+		}
+	]
+}]]></Contents>
+                    </RadarChart>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Div id="div_info" taborder="5" text="Div01" left="338" top="425" width="900" height="240" background="white">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="인성" left="217" top="21" width="24" height="14" textAlign="center"/>
+                    <Static id="Static00_00" taborder="1" text="면접" left="666" top="21" width="24" height="14" textAlign="center"/>
+                    <Static id="Static01" taborder="2" text="도전 : " left="104" top="62" width="36" height="14"/>
+                    <Static id="Static01_00" taborder="3" text="창의 : " left="104" top="91" width="36" height="14"/>
+                    <Static id="Static01_01" taborder="4" text="열정 : " left="104" top="120" width="36" height="14"/>
+                    <Static id="Static01_02" taborder="5" text="협력 : " left="104" top="149" width="36" height="14"/>
+                    <Static id="Static02" taborder="6" text="글로벌마인드 : " left="56" top="178" width="84" height="14"/>
+                    <Static id="Static03" taborder="7" text="인성 평균 : " left="76" top="207" width="64" height="14"/>
+                    <Static id="Static04" taborder="8" text="태도 : " left="562" top="62" width="36" height="14"/>
+                    <Static id="Static04_00" taborder="9" text="주도성 : " left="550" top="91" width="48" height="14"/>
+                    <Static id="Static04_01" taborder="10" text="신뢰성 : " left="550" top="120" width="48" height="14"/>
+                    <Static id="Static04_02" taborder="11" text="창의성 : " left="550" top="149" width="48" height="14"/>
+                    <Static id="Static04_03" taborder="12" text="적극성 : " left="550" top="178" width="48" height="14"/>
+                    <Static id="Static04_04" taborder="13" text="면접 평균 : " left="534" top="207" width="64" height="14"/>
+                    <Edit id="edt_Pchallenge" taborder="14" left="160" top="59" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_Pcreativity" taborder="15" left="160" top="88" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_Ppassion" taborder="16" left="160" top="117" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_Pcooperation" taborder="17" left="160" top="146" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_Pglobalmind" taborder="18" left="160" top="175" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_psnAvg" taborder="19" left="160" top="204" width="160" height="20" readonly="true" value="0" text="0"/>
+                    <Edit id="edt_Iattitude" taborder="20" left="599" top="59" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_Iscrupulosity" taborder="21" left="599" top="88" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_Ireliability" taborder="22" left="599" top="117" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_Icreativity" taborder="23" left="599" top="146" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_Ipositiveness" taborder="24" left="599" top="175" width="160" height="20" readonly="true"/>
+                    <Edit id="edt_itvAvg" taborder="25" left="599" top="204" width="160" height="20" readonly="true" value="0" text="0"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Combo id="cmb_year" taborder="1" text="2020" left="10" top="9" width="80" height="30" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="2020" index="0">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">2020</Col>
+                      <Col id="datacolumn">2020</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2021</Col>
+                      <Col id="datacolumn">2021</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2022</Col>
+                      <Col id="datacolumn">2022</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Combo id="cmb_half" taborder="2" text="상반기" left="125" top="9" width="135" height="30" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="상반기" index="0">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">상반기</Col>
+                      <Col id="datacolumn">상반기(1~6월)</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">하반기</Col>
+                      <Col id="datacolumn">하반기(7~12월)</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Button id="btn_search" taborder="3" text="조회" left="270" top="9" width="50" height="30" onclick="div_container.form.btn_search_onclick"/>
+              <Static id="Static00" taborder="6" text="년도" left="95" top="17" width="24" height="14"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00" taborder="1" text="인성/면접 결과표" left="18" top="13" width="94" height="14"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.div_container.form.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("getPiResultnewemp",
+					 "svcNewEmpInfoMgmt::piresultnewemp",
+					 "",
+					 "ds_personalityInterview=out_personalityInterview",
+					 "year="+this.div_container.form.cmb_year.value
+						+" half="+this.div_container.form.cmb_half.value
+						+" workplaceCode="+nexacro.getApplication().gds_emp.getColumn(0,"WORKPLACE_CODE"),
+					 "fn_callback");
+};
+
+this.fn_callback = function(sId, errCD, errMsg){
+	trace(sId);
+	trace(errCD);
+	trace(errMsg);
+	
+	if(errCD < 0){
+		alert(errCD + " : " + errMsg);
+	}
+	
+	if(sId == "getPiResultnewemp"){
+		this.calc();
+	}
+}
+
+this.calc = function(){
+	this.ds_personality.setColumn(0, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 3));
+	this.ds_personality.setColumn(1, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 4));
+	this.ds_personality.setColumn(2, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 5));
+	this.ds_personality.setColumn(3, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 6));
+	this.ds_personality.setColumn(4, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 7));
+	
+	this.ds_interview.setColumn(0, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 8));
+	this.ds_interview.setColumn(1, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 9));
+	this.ds_interview.setColumn(2, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 10));
+	this.ds_interview.setColumn(3, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 11));
+	this.ds_interview.setColumn(4, 1, this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 12));
+	
+	// 점수 평균 구하기
+	this.pAvg = (this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 3)
+		+ this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 4)
+		+ this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 5)
+		+ this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 6)
+		+ this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 7))
+		/ 5;
+		
+	this.iAvg = (this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 8)
+		+ this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 9)
+		+ this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 10)
+		+ this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 11)
+		+ this.ds_personalityInterview.getColumn(this.ds_personalityInterview.rowposition, 12))
+		/ 5;
+		
+	this.div_container.form.div_info.form.edt_psnAvg.set_value(this.pAvg);
+	this.div_container.form.div_info.form.edt_itvAvg.set_value(this.iAvg);
+}
+
+this.div_container_grd_resumelist_oncellposchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	if(this.ds_personalityInterview.getRowCount() > 0)
+		this.calc();
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_personalityInterview">
+        <ColumnInfo>
+          <Column id="P_CODE" type="STRING" size="256"/>
+          <Column id="P_NAME" type="STRING" size="256"/>
+          <Column id="P_AGE" type="INT" size="256"/>
+          <Column id="P_CHALLENGE" type="INT" size="256"/>
+          <Column id="P_CREATIVITY" type="INT" size="256"/>
+          <Column id="P_PASSION" type="INT" size="256"/>
+          <Column id="P_COOPERATION" type="INT" size="256"/>
+          <Column id="P_GLOBALMIND" type="INT" size="256"/>
+          <Column id="I_ATTITUDE" type="INT" size="256"/>
+          <Column id="I_SCRUPULOSITY" type="INT" size="256"/>
+          <Column id="I_RELIABILITY" type="INT" size="256"/>
+          <Column id="I_CREATIVITY" type="INT" size="256"/>
+          <Column id="I_POSITIVENESS" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_personality">
+        <ColumnInfo>
+          <Column id="category" type="STRING" size="256"/>
+          <Column id="value" type="INT" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="category">challenge</Col>
+            <Col id="value">0</Col>
+          </Row>
+          <Row>
+            <Col id="category">creativity</Col>
+            <Col id="value">0</Col>
+          </Row>
+          <Row>
+            <Col id="category">passion</Col>
+            <Col id="value">0</Col>
+          </Row>
+          <Row>
+            <Col id="category">cooperation</Col>
+            <Col id="value">0</Col>
+          </Row>
+          <Row>
+            <Col id="category">globalmind</Col>
+            <Col id="value">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_interview">
+        <ColumnInfo>
+          <Column id="category" type="STRING" size="256"/>
+          <Column id="value" type="INT" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="category">attitude</Col>
+            <Col id="value">0</Col>
+          </Row>
+          <Row>
+            <Col id="category">scrupulosity</Col>
+            <Col id="value">0</Col>
+          </Row>
+          <Row>
+            <Col id="category">reliability</Col>
+            <Col id="value">0</Col>
+          </Row>
+          <Row>
+            <Col id="category">creativity</Col>
+            <Col id="value">0</Col>
+          </Row>
+          <Row>
+            <Col id="category">positiveness</Col>
+            <Col id="value">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="div_container.form.div_info.form.edt_Pchallenge" propid="value" datasetid="ds_personalityInterview" columnid="P_CHALLENGE"/>
+      <BindItem id="item1" compid="div_container.form.div_info.form.edt_Pcreativity" propid="value" datasetid="ds_personalityInterview" columnid="P_CREATIVITY"/>
+      <BindItem id="item2" compid="div_container.form.div_info.form.edt_Ppassion" propid="value" datasetid="ds_personalityInterview" columnid="P_PASSION"/>
+      <BindItem id="item3" compid="div_container.form.div_info.form.edt_Pcooperation" propid="value" datasetid="ds_personalityInterview" columnid="P_COOPERATION"/>
+      <BindItem id="item4" compid="div_container.form.div_info.form.edt_Pglobalmind" propid="value" datasetid="ds_personalityInterview" columnid="P_GLOBALMIND"/>
+      <BindItem id="item5" compid="div_container.form.div_info.form.edt_Iattitude" propid="value" datasetid="ds_personalityInterview" columnid="I_ATTITUDE"/>
+      <BindItem id="item6" compid="div_container.form.div_info.form.edt_Iscrupulosity" propid="value" datasetid="ds_personalityInterview" columnid="I_SCRUPULOSITY"/>
+      <BindItem id="item7" compid="div_container.form.div_info.form.edt_Ireliability" propid="value" datasetid="ds_personalityInterview" columnid="I_RELIABILITY"/>
+      <BindItem id="item8" compid="div_container.form.div_info.form.edt_Icreativity" propid="value" datasetid="ds_personalityInterview" columnid="I_CREATIVITY"/>
+      <BindItem id="item9" compid="div_container.form.div_info.form.edt_Ipositiveness" propid="value" datasetid="ds_personalityInterview" columnid="I_POSITIVENESS"/>
+    </Bind>
+  </Form>
+</FDL>

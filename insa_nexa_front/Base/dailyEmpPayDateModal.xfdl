@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="paydaylist" width="560" height="500" onload="paydaylist_onload">
+    <Layouts>
+      <Layout height="500" mobileorientation="landscape" width="560">
+        <Grid id="Grid1" taborder="0" left="0" top="0" width="560" height="430" binddataset="ds_dailyEmpPayDate" autosizingtype="none" autofittype="col" oncelldblclick="Grid1_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="39" band="left"/>
+                <Column size="72"/>
+                <Column size="146"/>
+                <Column size="146"/>
+                <Column size="146"/>
+                <Column size="144"/>
+                <Column size="99"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="CODE"/>
+                <Cell col="2" text="지급일자"/>
+                <Cell col="3" colspan="2" text="출결기간"/>
+                <Cell col="5" text="지급형태"/>
+                <Cell col="6" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow +1"/>
+                <Cell col="1" text="bind:PAY_CODE" textAlign="center" edittype="text"/>
+                <Cell col="2" text="bind:PAY_DATE" textAlign="center" edittype="date" displaytype="date" calendardateformat="yyyy-MM-dd" calendardisplayinvalidtype="default" calendardisplaynulltype="nullmask"/>
+                <Cell col="3" text="bind:PAY_STARTDATE" textAlign="center" edittype="date" displaytype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltype="nullmask"/>
+                <Cell col="4" text="bind:PAY_ENDDATE" textAlign="center" edittype="date" displaytype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltype="nullmask"/>
+                <Cell col="5" text="bind:PAY_TYPE" displaytype="combotext" edittype="combo" textAlign="center" combodataset="ds_inner_PayType" combodatacol="datacol" autosizecol="default" autosizerow="default" controlautosizingtype="both" comboautoselect="true" combotype="dropdown" combocodecol="codecol"/>
+                <Cell col="6" text="bind:PAY_DESCRIPTION" textAlign="center" edittype="text"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="1" text="저장" left="282" top="443" width="120" height="47" onclick="Button00_onclick"/>
+        <Button id="Button00_00" taborder="2" text="추가" left="35" top="443" width="120" height="47" onclick="Button00_00_onclick"/>
+        <Button id="Button00_00_00" taborder="3" text="삭제" left="159" top="443" width="120" height="47" onclick="Button00_00_00_onclick"/>
+        <Button id="Button00_01" taborder="4" text="선택" left="406" top="443" width="120" height="47" onclick="Button00_01_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_dailyEmpPayDate">
+        <ColumnInfo>
+          <Column id="PAY_CODE" type="STRING" size="256"/>
+          <Column id="PAY_DATE" type="STRING" size="256"/>
+          <Column id="PAY_STARTDATE" type="STRING" size="256"/>
+          <Column id="PAY_ENDDATE" type="STRING" size="256"/>
+          <Column id="PAY_TYPE" type="STRING" size="256"/>
+          <Column id="PAY_DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_inner_PayType">
+        <ColumnInfo>
+          <Column id="codecol" type="STRING" size="256"/>
+          <Column id="datacol" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="codecol">0</Col>
+            <Col id="datacol">매일지급</Col>
+          </Row>
+          <Row>
+            <Col id="codecol">1</Col>
+            <Col id="datacol">일정기간지급</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.paydaylist_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	trace("테스트");
+	this.transaction(
+		"searchDailyEmpPayDateList",
+		"svcDailyEmpDate::searchpaydatelist",
+		"",
+		"ds_dailyEmpPayDate=ds_dailyEmpPayDate",
+		"",
+		"fn_callback"	
+	);
+};
+
+
+this.Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_dailyEmpPayDate.addRow();
+};
+
+this.Button00_00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_dailyEmpPayDate.deleteRow(this.ds_dailyEmpPayDate.rowposition);
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	for(var i=0; i<this.ds_dailyEmpPayDate.getRowCount() ; i++){
+		/*trace(this.ds_dailyEmpPayDate.getColumn(i, "PAY_CODE"));*/
+		if(this.ds_dailyEmpPayDate.getColumn(i, "PAY_CODE") == null) {
+			alert(" 코드를 입력해주세요 ")
+			return;
+		};
+		if(this.ds_dailyEmpPayDate.getColumn(i, "PAY_DATE") == null) {
+			alert(" 지급일자를 입력해주세요 ")
+			return;
+		};
+		if(this.ds_dailyEmpPayDate.getColumn(i, "PAY_STARTDATE") == null) {
+			alert(" 출결기간(시작날짜)을 입력해주세요 ")
+			return;
+		};
+		if(this.ds_dailyEmpPayDate.getColumn(i, "PAY_ENDDATE") == null) {
+			alert(" 출결기간(종료날짜)을 입력해주세요 ")
+			return;
+		};
+		if(this.ds_dailyEmpPayDate.getColumn(i, "PAY_TYPE") == null) {
+			alert(" 지급형태를 입력해주세요 ")
+			return;
+		};		
+	};
+		
+	this.transaction(
+		"saveDailyEmpPayDateList",
+		"svcDailyEmpDate::savepaydatelist",
+		"ds_dailyEmpPayDate=ds_dailyEmpPayDate:U",
+		"",
+		"",
+		"fn_callback"	
+	);
+	
+};
+this.fn_callback =function(trID ,ErrorCode ,ErrorMsg){
+	if(trID=="saveDailyEmpPayDateList"){
+		if(ErrorCode!=0){
+			alert("지급일 설정 저장 실패 : "+ErrorMsg);
+		}else{ //성공시
+			alert(" 지급일이 설정되었습니다. ");
+		}
+	};
+};
+
+this.Grid1_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+// 	var payCode=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_CODE");
+// 	var payDate=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_DATE");
+// 	var payStartdate=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_STARTDATE");
+// 	var payEnddate=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_ENDDATE");
+// 	var payType=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_TYPE");
+// 	
+// 	this.close(payCode + "/" +  payDate + "/" + payStartdate + "/" + payEnddate + "/" + payType);
+};
+
+
+this.Button00_01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var payCode=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_CODE");
+	var payDate=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_DATE");
+	var payStartdate=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_STARTDATE");
+	var payEnddate=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_ENDDATE");
+	var payType=this.ds_dailyEmpPayDate.getColumn(this.ds_dailyEmpPayDate.rowposition,"PAY_TYPE");
+	
+	this.close(payCode + "/" +  payDate + "/" + payStartdate + "/" + payEnddate + "/" + payType);
+};
+]]></Script>
+  </Form>
+</FDL>

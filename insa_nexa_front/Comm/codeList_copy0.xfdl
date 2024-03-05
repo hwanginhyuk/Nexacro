@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="codeList" width="1060" height="620" titletext="New Form" onload="codeList_onload">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Edit id="Edit00" taborder="0" left="117" top="120" width="147" height="40" oneditclick="Div00_00_Tab00_Tabpage1_Edit00_oneditclick" onchanged="Div00_00_Tab00_Tabpage1_Edit00_onchanged" displaynulltext="클릭하여 부서 선택"/>
+        <Calendar id="Calendar00" taborder="1" left="100" top="62" width="182" height="36" onchanged="Div00_00_Calendar00_onchanged" dateformat="yyyy-MM" editformat="yyyy-MM" displaynulltext="YYYY-MM"/>
+        <Button id="Button01" taborder="2" text="급여 조회" left="320" top="90" width="91" height="40" font="normal 16px/normal &quot;나눔고딕&quot;" onclick="Div00_00_Tab00_Tabpage1_Button01_onclick" background="#d0e3ed"/>
+        <Grid id="Grid00" taborder="3" left="42" top="162" width="783" height="251"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[]]></Script>
+    <Objects>
+      <Dataset id="ds_fullTimeSal">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="APPLY_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="BASIC_SALARY" type="INT" size="256"/>
+          <Column id="POSITION_SALARY" type="INT" size="256"/>
+          <Column id="FAMILY_SALARY" type="INT" size="256"/>
+          <Column id="FOOD_SALARY" type="INT" size="256"/>
+          <Column id="OVER_WORK_SALARY" type="INT" size="256"/>
+          <Column id="NATIONAL_PENSION" type="INT" size="256"/>
+          <Column id="HEALTH_INSURANCE" type="INT" size="256"/>
+          <Column id="LONG_TERM_INSURANCE" type="INT" size="256"/>
+          <Column id="EMPLOYMENT_INSURANCE" type="INT" size="256"/>
+          <Column id="RELIGION_DONATION" type="INT" size="256"/>
+          <Column id="INCOME_TAX" type="INT" size="256"/>
+          <Column id="RESIDENT_TAX" type="INT" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+          <Column id="BASIC_SAL_BEFORE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

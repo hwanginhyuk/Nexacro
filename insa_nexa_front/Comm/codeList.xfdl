@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="codeList" width="1060" height="620" titletext="New Form" onload="codeList_onload">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="35" top="20" width="1010" height="560" background="#D9E5FF">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="◼코드조회" left="161" top="46" width="214" height="49" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Grid id="Grid00" taborder="0" left="40" top="100" width="455" height="385" binddataset="ds_codeList" oncellclick="Div00_00_Grid00_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="113"/>
+                      <Column size="113"/>
+                      <Column size="113"/>
+                      <Column size="96"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="코드번호" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="코드이름" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="수정여부" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="3" text="상태" font="16px/normal &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:CODE_NUMBER"/>
+                      <Cell col="1" text="bind:CODE_NAME"/>
+                      <Cell col="2" text="bind:MODIFIABLE"/>
+                      <Cell col="3" text="bind:STATUS"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static00_00" taborder="2" text="◼세부코드조회" left="646" top="45" width="214" height="49" textAlign="center" font="18px/normal &quot;나눔고딕&quot;"/>
+              <Grid id="Grid00_00" taborder="3" left="520" top="100" width="455" height="385" binddataset="ds_detailCodeList">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="113"/>
+                      <Column size="113"/>
+                      <Column size="113"/>
+                      <Column size="113"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="33" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="상세코드번호" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="1" text="코드번호" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="2" text="상세코드명" font="16px/normal &quot;나눔고딕&quot;"/>
+                      <Cell col="3" text="사용가능여부" font="16px/normal &quot;나눔고딕&quot;"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:DETAIL_CODE_NUMBER"/>
+                      <Cell col="1" text="bind:CODE_NUMBER"/>
+                      <Cell col="2" text="bind:DETAIL_CODE_NAME"/>
+                      <Cell col="3" text="bind:DETAIL_CODE_NAMEUSING"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static00_01" taborder="4" text="◼코드조회" left="8" top="0" width="214" height="49" textAlign="left" font="18px/normal &quot;나눔고딕&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[//로딩시 
+this.codeList_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+					 "codeListID",
+					 "svcSystemmgmt::codelist/all",
+					 "",
+					 "ds_codeList=gds_codeList",
+					 "",
+					 "fn_callback");		
+};
+
+this.Div00_00_Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var clickCode=this.ds_codeList.getColumn(this.ds_codeList.rowposition,"CODE_NUMBER");
+	trace(clickCode);
+	
+	this.transaction(
+					 "detailcodeListID",
+					 "svcSystemmgmt::codelist",
+					 "",
+					 "ds_detailCodeList=gds_detailcode",
+					 "code='"+clickCode+"'",
+					 "fn_callback");		
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_codeList">
+        <ColumnInfo>
+          <Column id="CODE_NUMBER" type="STRING" size="256"/>
+          <Column id="CODE_NAME" type="STRING" size="256"/>
+          <Column id="MODIFIABLE" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_detailCodeList">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE_NUMBER" type="STRING" size="256"/>
+          <Column id="CODE_NUMBER" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAMEUSING" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

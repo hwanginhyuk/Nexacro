@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="overwork" width="1060" height="620" titletext="New Form" onload="overwork_onload">
+    <Layouts>
+      <Layout height="620" width="1060">
+        <Div id="Div00_00" taborder="0" text="" left="25" top="30" width="1010" height="560" font="bold 14px/normal &quot;나눔고딕&quot;">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Tab id="Tab00" taborder="1" tabindex="0" left="52" top="45" width="976" height="495" font="bold 14px/normal &quot;나눔고딕&quot;">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="초과근무신청">
+              <Layouts>
+                <Layout>
+                  <Static id="empName" taborder="0" text="신 청 자" left="494" top="33" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="empNameEdit" taborder="1" left="574" top="36" width="240" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" textAlign="center" readonly="true"/>
+                  <Static id="reason" taborder="2" text="사     유" left="95" top="283" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="reasonEdit" taborder="3" left="189" top="286" width="625" height="80" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Static id="dept" taborder="4" text="부     서" left="95" top="83" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Static id="position" taborder="5" text="직     급" left="494" top="83" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="positionEdit" taborder="6" left="574" top="86" width="240" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" textAlign="center" readonly="true"/>
+                  <Static id="days" taborder="7" text="일     수" left="95" top="133" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="daysEdit" taborder="8" left="189" top="136" width="240" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" textAlign="center" readonly="true"/>
+                  <Static id="certificate" taborder="9" text="증 명 서" left="494" top="133" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="certificateEdit" taborder="10" left="574" top="136" width="240" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                  <Static id="sortation" taborder="11" text="근무구분" left="95" top="33" width="139" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="sortationEdit" taborder="12" left="189" top="36" width="240" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" oneditclick="sortationEdit_oneditclick" textAlign="center"/>
+                  <Static id="startDate" taborder="13" text="시 작 일" left="95" top="183" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="startDateCal" taborder="14" left="189" top="186" width="240" height="35" onchanged="Tab00_Tabpage1_startDateCal_onchanged" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Static id="endDate" taborder="15" text="종 료 일" left="494" top="183" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="endDateCal" taborder="16" left="574" top="186" width="240" height="35" readonly="true" onchanged="Tab00_Tabpage1_endDateCal_onchanged" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="deptEdit" taborder="17" left="189" top="86" width="240" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" textAlign="center" readonly="true"/>
+                  <Static id="startTime" taborder="18" text="시작시간" left="95" top="233" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="startTimeEdit" taborder="19" left="189" top="236" width="240" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                  <Static id="endTime" taborder="20" text="종료시간" left="494" top="233" width="109" height="40" textAlign="left" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="endTimeEdit" taborder="21" left="574" top="236" width="240" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                  <Button id="Button00_00" taborder="22" text="신청 " left="359" top="396" width="110" height="40" font="bold 14px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage1_Button00_00_onclick" background="#6092ff" color="white" borderRadius="5px"/>
+                  <Button id="Button00_00_00" taborder="23" text="취소" left="489" top="396" width="110" height="40" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white" borderRadius="5px"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="초과근무조회">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="6" top="86" width="952" height="320" binddataset="ds_overwork" font="bold 14px/normal &quot;나눔고딕&quot;" oncellclick="Tab00_Tabpage2_Grid_oncellclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="50"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="37" band="head"/>
+                          <Row size="37"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="1" text="근태구분명" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="2" text="신청일자" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="3" text="시작일" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="4" text="종료일" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="5" text="일수" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="6" text="시작시간" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="7" text="종료시간" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="8" text="사유" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="9" text="승인여부" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                          <Cell col="10" text="반려사유" font="bold 14px/normal &quot;나눔고딕&quot;" background="#6092ff" color="white"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:STATUS" textAlign="center" displaytype="checkboxcontrol" edittype="checkbox"/>
+                          <Cell col="1" text="bind:REST_TYPE_NAME" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                          <Cell col="2" text="bind:REQUEST_DATE" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                          <Cell col="3" text="bind:START_DATE" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                          <Cell col="4" text="bind:END_DATE" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                          <Cell col="5" text="bind:NUMBER_OF_DAYS" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                          <Cell col="6" text="bind:START_TIME" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                          <Cell col="7" text="bind:END_TIME" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                          <Cell col="8" text="bind:CAUSE" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                          <Cell col="9" text="bind:APPLOVAL_STATUS" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                          <Cell col="10" text="" font="15px/normal &quot;나눔고딕&quot;" textAlign="center"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static00" taborder="1" text="조회범위 선택" left="178" top="23" width="205" height="40" textAlign="center" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="startDateCal" taborder="2" left="344" top="26" width="150" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" borderRadius="3px"/>
+                  <Static id="Static00_00" taborder="3" text="부터" left="495" top="23" width="48" height="40" textAlign="center" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Calendar id="endDateCal" taborder="4" left="553" top="26" width="150" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" borderRadius="3px"/>
+                  <Static id="Static00_00_00" taborder="5" text="까지" left="712" top="23" width="48" height="40" textAlign="center" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Button id="inquiryBtn" taborder="6" text="조회" left="783" top="26" width="80" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage2_inquiryBtn_onclick" background="#6092ff" color="white" borderRadius="5px"/>
+                  <Button id="eliminationBtn" taborder="7" text="삭제" left="873" top="26" width="80" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" onclick="Tab00_Tabpage2_eliminationBtn_onclick" background="#6092ff" color="white" borderRadius="5px"/>
+                  <Static id="Static00_01" taborder="8" text="구분" left="-4" top="23" width="48" height="40" textAlign="center" font="bold 14px/normal &quot;나눔고딕&quot;"/>
+                  <Edit id="sortationEdit" taborder="9" left="55" top="26" width="150" height="35" font="bold 14px/normal &quot;나눔고딕&quot;" textAlign="center" oneditclick="sortationEdit_oneditclick" borderRadius="3px"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs";
+include "Lib::commDate.xjs";
+include "Lib::commString.xjs";
+
+nexa = nexacro.getApplication();
+
+//로드
+var today;
+
+this.overwork_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.Tab00.Tabpage1.form.empNameEdit.set_value(nexa.g_empName);
+	this.Tab00.Tabpage1.form.deptEdit.set_value(nexa.g_deptName);
+	this.Tab00.Tabpage1.form.positionEdit.set_value(nexa.g_position);
+	todays = this.gfn_today();
+	today = todays.substring(0,4) + "-" + todays.substring(4,6) + "-" + todays.substring(6,8)
+	trace(today);
+};
+
+//초과근무구분
+var updateEdit;
+var restTypeCode;
+
+this.sortationEdit_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	updateEdit = obj;
+	this.gfnOpen("sortation", "Base::Modal.xfdl", "callback", {code:"CO-15"});
+};
+
+this.callback = function(codename, code)
+{
+	updateEdit.set_value(code.split(":")[0]);
+	restTypeCode = code.split(":")[1];
+}
+
+//시작일 입력하면 종료일 입력가능
+this.Tab00_Tabpage1_startDateCal_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	this.Tab00.Tabpage1.form.endDateCal.set_readonly(false);
+};
+
+//종료일 입력하면 일수값 저장
+this.Tab00_Tabpage1_endDateCal_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	var days = this.Tab00.Tabpage1.form.endDateCal.value - this.Tab00.Tabpage1.form.startDateCal.value
+	this.Tab00.Tabpage1.form.daysEdit.set_value(days+1);
+};
+
+//신청
+this.Tab00_Tabpage1_Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var startDate=this.Tab00.Tabpage1.form.startDateCal.value;
+	var endDate=this.Tab00.Tabpage1.form.endDateCal.value;
+	var startTime=this.Tab00.Tabpage1.form.startTimeEdit.value;
+	var endTime=this.Tab00.Tabpage1.form.endTimeEdit.value;
+	var reason=this.Tab00.Tabpage1.form.reasonEdit.value;
+	var sortation = this.Tab00.Tabpage1.form.sortationEdit.value;
+	
+	if(startDate==undefined){
+		alert("시작일을 정확히 입력해 주세요.");
+		return;
+	}if(endDate==undefined){
+		alert("종료일을 정확히 입력해 주세요.");
+		return;
+	}if(startTime==undefined){
+		alert("시작시간을 정확히 입력해 주세요.");
+		return;
+	}if(endTime==undefined){
+		alert("종료시간을 정확히 입력해 주세요.");
+		return;
+	}if(reason==undefined){
+		alert("사유를 정확히 입력해 주세요.");
+		return;
+	}if(sortation==undefined){
+		alert("구분을 선택해 주세요.");
+		return;
+	}
+	this.ds_overwork.setColumn(0,"EMP_CODE",nexa.g_empCode); 
+	this.ds_overwork.setColumn(0,"REST_TYPE_CODE",restTypeCode); 
+	this.ds_overwork.setColumn(0,"REST_TYPE_NAME",this.Tab00.Tabpage1.form.sortationEdit.value);
+	this.ds_overwork.setColumn(0,"REQUEST_DATE",today);
+	this.ds_overwork.setColumn(0,"START_DATE",this.Tab00.Tabpage1.form.startDateCal.value);
+	this.ds_overwork.setColumn(0,"END_DATE",this.Tab00.Tabpage1.form.endDateCal.value);
+	this.ds_overwork.setColumn(0,"NUMBER_OF_DAYS",this.Tab00.Tabpage1.form.daysEdit.value);
+	this.ds_overwork.setColumn(0,"CAUSE",this.Tab00.Tabpage1.form.reasonEdit.value);
+	this.ds_overwork.setColumn(0,"APPLOVAL_STATUS","승인대기");
+	this.ds_overwork.setColumn(0,"START_TIME",this.Tab00.Tabpage1.form.startTimeEdit.value);
+	this.ds_overwork.setColumn(0,"END_TIME",this.Tab00.Tabpage1.form.endTimeEdit.value);
+	
+	this.transaction("applicationID",
+					 "svcAttdmgmt::excused-attnd-create",
+					 "gds_restAttd=ds_overwork",
+					 "",
+					 "",
+					 "fn_callback");
+};
+
+//콜백
+this.fn_callback = function(trID ,ErrorCode ,ErrorMsg)
+{
+	if(trID=="applicationID"){
+		if(ErrorCode!=0){
+				alert("신청 실패 : "+ErrorMsg);
+			}else{
+				alert("신청되었습니다.");			
+				this.reload();
+			}
+		}
+		
+	if(trID=="deleteID"){
+		if(ErrorCode!=0){
+				alert("삭제 실패 : "+ErrorMsg);
+			}else{
+				alert("삭제되었습니다.");			
+				this.reload();
+			}
+	}
+}
+
+//============================================Tabpage2============================================
+
+//조회
+this.Tab00_Tabpage2_inquiryBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace("empCode :" + nexa.g_empCode.toString())
+	trace("startDate :"+this.Tab00.Tabpage2.form.startDateCal.value)
+	trace("endDate :" +this.Tab00.Tabpage2.form.endDateCal.value)
+	trace("code : "+restTypeCode)
+
+	this.transaction("overworkSearchID",
+					"svcAttdmgmt::excused-attnd2",
+					"",
+					"ds_overwork=gds_restAttd",
+					"empCode="+nexa.g_empCode.toString()+" startDate='"+this.Tab00.Tabpage2.form.startDateCal.value+"'"+
+					 " endDate='"+this.Tab00.Tabpage2.form.endDateCal.value+"'"+" code='"+restTypeCode+"'",
+					"");
+}
+
+//그리드 클릭
+this.Tab00_Tabpage2_Grid_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.ds_overwork.addColumn("STATUS","STRING");
+	
+// 	for(var i=0; i<this.ds_overwork.rowcount; i++){
+// 		this.ds_overwork.setColumn(i,"STATUS",undefined);
+// 	}
+	
+	this.ds_overwork.setColumn(this.ds_overwork.rowposition,"STATUS","Choice");
+}
+
+//삭제하기
+this.Tab00_Tabpage2_eliminationBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(confirm(" 삭제 하시겠습니까? ")){
+		this.transaction("deleteID",
+						 "svcAttdmgmt::excused-attnd-elimination",
+						 "gds_restAttd=ds_overwork:u",
+						 "",
+						 "",
+						 "fn_callback");
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="ds_overwork">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="REST_TYPE_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="NUMBER_OF_DAYS" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPLOVAL_STATUS" type="STRING" size="256"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="END_TIME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

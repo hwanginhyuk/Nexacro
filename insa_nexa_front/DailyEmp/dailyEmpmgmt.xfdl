@@ -1,0 +1,556 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dailyEmpmgmt" width="1270" height="930" titletext="New Form" onload="dailyEmpmgmt_onload">
+    <Layouts>
+      <Layout height="930" width="1270" stepcount="0" stepindex="1">
+        <Static id="Static00" taborder="0" text="일용직 사원등록" left="53" top="20" width="150" height="35" font="18px &quot;나눔고딕&quot;"/>
+        <Div id="div_searchCondition" taborder="1" text="Div00" left="53" top="70" width="1170" height="100" border="1px solid #6092ff" borderRadius="5px">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="사업장" left="19" top="8" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static01" taborder="1" text="부서" left="357" top="8" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static02" taborder="2" text="고용형태" left="711" top="8" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static03" taborder="3" text="급여형태" left="19" top="55" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static04" taborder="4" text="조회조건" left="357" top="55" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static05" taborder="5" text="기준일" left="711" top="55" width="100" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Static id="Static06" taborder="6" text="이전 퇴직자 제외" left="917" top="55" width="120" height="35" font="14px &quot;나눔고딕&quot;"/>
+              <Combo id="cmb_workplace" taborder="7" left="81" top="8" width="200" height="35" text="" innerdataset="gds_menu" onitemchanged="div_searchCondition_cmb_workplace_onitemchanged"/>
+              <Combo id="cmb_dept" taborder="8" left="428" top="8" width="200" height="35" text="" onitemchanged="div_searchCondition_cmb_dept_onitemchanged"/>
+              <Button id="btn_searchWorkplace" taborder="9" left="288" top="8" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" text="" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+              <Button id="btn_searchDept" taborder="10" left="635" top="8" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+              <Combo id="cmb_empStat" taborder="11" left="783" top="8" width="200" height="35"/>
+              <Button id="btn_searchEmpStat" taborder="12" left="990" top="8" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+              <Combo id="cmb_payStat" taborder="13" left="81" top="55" width="200" height="35"/>
+              <Button id="btn_searchPayStat" taborder="14" left="288" top="55" width="35" height="35" onclick="div_searchCondition_btn_searchWith_onclick" background="url('theme://images/btn_WF_Grdexpand.png') no-repeat center #ffffff"/>
+              <Combo id="cmb_searchCondition" taborder="15" left="428" top="55" width="80" height="35" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">DEMP_NAME</Col>
+                      <Col id="datacolumn">사원명</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">DEMP_CODE</Col>
+                      <Col id="datacolumn">사원 코드</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">JUMIN_NO</Col>
+                      <Col id="datacolumn">주민번호</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Edit id="edt_searchCondition" taborder="16" left="518" top="55" width="153" height="35"/>
+              <Calendar id="calen_baseDate" taborder="17" left="783" top="55" width="128" height="35"/>
+              <Button id="btn_search" taborder="18" text="조회" left="1059" top="8" width="80" height="35" onclick="div_searchCondition_btn_search_onclick" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+            </Layout>
+          </Layouts>
+          <InitValue/>
+        </Div>
+        <Tab id="tab_empInfos" taborder="2" tabindex="0" left="560" top="187" width="670" height="673" enable="true" onchanged="tab_empInfos_onchanged" preload="true">
+          <Tabpages>
+            <Tabpage id="tp_basicInfo" text="기본정보" url="DailyEmp::tab_basicInfo.xfdl" enable="true"/>
+            <Tabpage id="tp_additionalInfo" text="추가정보" url="DailyEmp::tab_additionalInfo.xfdl"/>
+          </Tabpages>
+        </Tab>
+        <Grid id="grd_dailyEmpList" taborder="3" left="53" top="236" width="479" height="520" autofittype="col" binddataset="ds_dailyEmp" oncellposchanged="grd_dailyEmpList_oncellposchanged">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="15"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="35" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="1" text="사원코드" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="2" text="사원명" edge="14px &quot;나눔고딕&quot;"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1" textAlign="center" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="1" text="bind:DEMP_CODE" edittype="text" textAlign="center" edge="14px &quot;나눔고딕&quot;"/>
+                <Cell col="2" text="bind:DEMP_NAME" edittype="text" textAlign="center" edge="14px &quot;나눔고딕&quot;"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_addEmp" taborder="4" text="추가" left="55" top="187" width="75" height="35" onclick="btn_addEmp_onclick" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+        <Button id="btn_delEmp" taborder="5" text="삭제" left="140" top="187" width="75" height="35" onclick="btn_delEmp_onclick" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+        <Button id="btn_saveEmpList" taborder="6" text="저장" left="225" top="187" width="75" height="35" onclick="btn_saveEmpList_onclick" background="#6092ff" color="WHITE" borderRadius="5PX" font="12PX SOLID &quot;나눔고딕&quot; BOLD"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_dailyEmp">
+        <ColumnInfo>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+          <Column id="DEMP_CODE" type="STRING" size="256"/>
+          <Column id="DEMP_NAME" type="STRING" size="256"/>
+          <Column id="JOIN_DATE" type="STRING" size="256"/>
+          <Column id="IS_FOREIGN" type="STRING" size="256"/>
+          <Column id="JUMIN_NO" type="STRING" size="256"/>
+          <Column id="FOREIGN_NO" type="STRING" size="256"/>
+          <Column id="ZIP_CODE" type="STRING" size="256"/>
+          <Column id="ADDR" type="STRING" size="256"/>
+          <Column id="ADDR_DETAIL" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="PHONE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="PJT_CODE" type="STRING" size="256"/>
+          <Column id="POS_CODE" type="STRING" size="256"/>
+          <Column id="EMP_STAT_CODE" type="STRING" size="256"/>
+          <Column id="JOB_CODE" type="STRING" size="256"/>
+          <Column id="PAY_STAT_CODE" type="STRING" size="256"/>
+          <Column id="TRANS_AC_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NO" type="STRING" size="256"/>
+          <Column id="DEPOSITOR" type="STRING" size="256"/>
+          <Column id="SALARY" type="STRING" size="256"/>
+          <Column id="HOUR_PRICE" type="STRING" size="256"/>
+          <Column id="RETIRE_DATE" type="STRING" size="256"/>
+          <Column id="IS_TAXFREE" type="STRING" size="256"/>
+          <Column id="IS_EMPINSURANCE" type="STRING" size="256"/>
+          <Column id="IS_NATIONALANNUITY" type="STRING" size="256"/>
+          <Column id="IS_HEALTHINSURANCE" type="STRING" size="256"/>
+          <Column id="NATIONALLITY_CODE" type="STRING" size="256"/>
+          <Column id="STAY_STAT" type="STRING" size="256"/>
+          <Column id="EMPINSURANCE_STAT_CODE" type="STRING" size="256"/>
+          <Column id="CH_JOB_CODE" type="STRING" size="256"/>
+          <Column id="MEMO" type="STRING" size="256"/>
+          <Column id="INS_IMPOSE" type="STRING" size="256"/>
+          <Column id="INS_IMPOSE_REASON" type="STRING" size="256"/>
+          <Column id="IS_STABLE_FUND" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_codeList">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE_NUMBER" type="STRING" size="256"/>
+          <Column id="CODE_NUMBER" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAMEUSING" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "Lib::commonOpen.xjs"; // 모달창 라이브러리
+
+this.dailyEmpmgmt_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	/*trace(this.tab_empInfos.tp_basicInfo.form.Static00.text);*/ // 하위 url 접근
+	
+	this.transaction("getDailyEmpList",
+					 "svcDailyEmp::list",
+					 "",
+					 "ds_dailyEmp=in_out_dailyEmp",
+					 "",
+					 "fn_callback");
+					 
+	 this.transaction("codeListID",
+					 "svcSystemmgmt::codelist",
+					 "",
+					 "ds_codeList=gds_detailcode",
+					 "",
+					 "fn_callback");
+					 
+// 	this.tab_empInfos.tp_basicInfo.form.edt_payStatCode.addEventHandler("onchanged", this.calcHourPrice, this);
+// 	this.tab_empInfos.tp_basicInfo.form.medt_salary.addEventHandler("canchange", this.calcHourPrice, this);
+};
+
+this.fn_callback = function(svcId, errCD, errMsg){
+	trace(svcId);
+// 	trace(errCD);
+// 	trace(errMsg);
+	
+	/*this.ds_dailyEmp.set_url("DailyEmp::tab_additionalInfo")*/
+	
+	/*trace(this.ds_codeList.lookup("DETAIL_CODE_NUMBER", "DEP004", "DETAIL_CODE_NAME"));*/
+	if(svcId == "getDailyEmpList"){
+		if(this.tab_empInfos.tp_basicInfo.form.cmb_isForeign.value == 1){
+			this.tab_empInfos.tp_basicInfo.form.medt_juminNo.set_enable(false);
+			this.tab_empInfos.tp_basicInfo.form.medt_foreignNo.set_enable(true);
+		}else{
+			this.tab_empInfos.tp_basicInfo.form.medt_juminNo.set_enable(true);
+			this.tab_empInfos.tp_basicInfo.form.medt_foreignNo.set_enable(false);
+		}
+	}
+
+	if(svcId == "saveDailyEmpList"){
+		alert(errCD+" : "+errMsg);
+	}
+	
+	if(svcId == "codeListID"){
+		
+		this.fn_printCodeName(this.tab_empInfos.tp_basicInfo.form.components);
+		this.fn_printCodeName(this.tab_empInfos.tp_additionalInfo.form.components);
+		/*this.calcHourPrice();*/
+		
+	}
+	if(svcId == "searchDailyEmpList"){
+		this.fn_printCodeName(this.tab_empInfos.tp_basicInfo.form.components);
+		this.fn_printCodeName(this.tab_empInfos.tp_additionalInfo.form.components);
+	}
+
+	
+}
+
+// 코드로 코드이름 출력하기
+this.fn_printCodeName = function(comp){
+	this.names = {};
+
+	for(var i=0; i<comp.length; i++){
+		if(comp[i].id.indexOf("Name") >= 0 && comp[i] == "[object Edit]"){
+			comp[i].set_value("");
+		}
+	}
+
+
+	for(var i=0; i<comp.length; i++){
+		if(comp[i].id.indexOf("Code") >= 0 && comp[i] == "[object Edit]"){
+			if(comp[i].id.indexOf("zip") < 0){
+				if(comp[i].value != null){
+// 						trace(this.basic[i].id);
+// 						trace(this.basic[i].value);
+					this.names[comp[i].id.substr(0, comp[i].id.length-4)+"Name"] = comp[i].value;
+				}
+			}
+		}
+	}
+	/*Object.keys(this.names).forEach(key=>trace(key+" : "+this.names[key]));*/
+	for(var i=0; i<comp.length; i++){
+		if(comp[i].id.indexOf("Name") >= 0 && comp[i] == "[object Edit]"){
+			if(this.names[comp[i].id] != null){
+				/*trace(this.basic[i].id);*/
+				comp[i].set_value(this.ds_codeList.lookup("DETAIL_CODE_NUMBER", this.names[comp[i].id], "DETAIL_CODE_NAME"));
+			}
+		}
+	}
+}
+
+this.grd_dailyEmpList_oncellposchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	/*trace(obj.getCellPos());*/ // 선택한 셀이 몇번째 컬럼 인덱스인지
+	/*trace(this.ds_dailyEmp.getColumn(this.ds_dailyEmp.rowposition, "JOIN_DATE"));*/
+// 	trace(obj.getCellValue(obj.getSelectedRows(),1))
+ 	this.empCode = obj.getCellValue(obj.getSelectedRows(),1);
+	
+	/*this.fn_dailyEmpInfoLoad();*/
+	
+	if(this.empCode != undefined){
+		/*trace("empCode is exist");*/
+		this.tab_empInfos.set_enable(true);
+	}else{
+		/*trace("empCode is not exist");*/
+		this.tab_empInfos.set_enable(false);
+	}
+	
+	if(this.tab_empInfos.tp_basicInfo.form.cmb_isForeign.value == 1){
+		this.tab_empInfos.tp_basicInfo.form.medt_juminNo.set_enable(false);
+		this.tab_empInfos.tp_basicInfo.form.medt_foreignNo.set_enable(true);
+	}else{
+		this.tab_empInfos.tp_basicInfo.form.medt_juminNo.set_enable(true);
+		this.tab_empInfos.tp_basicInfo.form.medt_foreignNo.set_enable(false);
+	}
+	
+	this.fn_printCodeName(this.tab_empInfos.tp_basicInfo.form.components);
+	this.fn_printCodeName(this.tab_empInfos.tp_additionalInfo.form.components);
+};
+
+this.btn_addEmp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_dailyEmp.addRow();
+	this.fn_printCodeName(this.tab_empInfos.tp_basicInfo.form.components);
+	this.fn_printCodeName(this.tab_empInfos.tp_additionalInfo.form.components);
+};
+
+this.btn_addEmp00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_dailyEmp.addRow();
+	this.fn_printCodeName(this.tab_empInfos.tp_basicInfo.form.components);
+	this.fn_printCodeName(this.tab_empInfos.tp_additionalInfo.form.components);
+};
+
+
+this.btn_delEmp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_dailyEmp.deleteRow(this.ds_dailyEmp.rowposition);
+	
+	if(this.tab_empInfos.tp_basicInfo.form.cmb_isForeign.value == 1){
+		this.tab_empInfos.tp_basicInfo.form.medt_juminNo.set_enable(false);
+		this.tab_empInfos.tp_basicInfo.form.medt_foreignNo.set_enable(true);
+	}else{
+		this.tab_empInfos.tp_basicInfo.form.medt_juminNo.set_enable(true);
+		this.tab_empInfos.tp_basicInfo.form.medt_foreignNo.set_enable(false);
+	}
+		
+	this.fn_printCodeName(this.tab_empInfos.tp_basicInfo.form.components);
+	this.fn_printCodeName(this.tab_empInfos.tp_additionalInfo.form.components);
+};
+
+this.btn_saveEmpList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	// 현재 로그인된 사용자의 사업장 코드
+	/*trace(nexacro.getApplication().gds_emp.getColumn(0,"WORKPLACE_CODE"));*/
+	this.isNothing = true;
+	if(this.ds_dailyEmp.getDeletedRowCount() > 0){this.isNothing = false}
+	for(var i=0; i<this.ds_dailyEmp.getRowCount() ; i++){
+	// 1-nomal, 2-insert, 4-update, 8-delete
+		/*if(this.ds_dailyEmp.getRowType(i) == 8){this.isNothing = false;}*/
+		if(this.ds_dailyEmp.getRowType(i) == 2 || this.ds_dailyEmp.getRowType(i) == 4){
+			this.isNothing = false;
+			if(this.ds_dailyEmp.getColumn(i, "DEMP_CODE") == null || this.ds_dailyEmp.getColumn(i, "DEMP_CODE").replace(/\s/gi, "").length == 0){
+				alert("사원코드를 입력하세요.");
+				this.ds_dailyEmp.set_rowposition(i);
+				this.grd_dailyEmpList.setCellPos(1, this.ds_dailyEmp.rowposition);
+				return;
+			}
+			if(this.ds_dailyEmp.getColumn(i, "DEMP_NAME") == null || this.ds_dailyEmp.getColumn(i, "DEMP_NAME").replace(/\s/gi, "").length == 0){
+				alert("이름을 입력하세요.");
+				this.ds_dailyEmp.set_rowposition(i)
+				this.grd_dailyEmpList.setCellPos(2, this.ds_dailyEmp.rowposition);
+				return;
+			}
+			if(this.ds_dailyEmp.getColumn(i, "IS_FOREIGN") == null){
+				alert("내국인 여부를 입력하세요.");
+				this.ds_dailyEmp.set_rowposition(i);
+				this.tab_empInfos.tp_basicInfo.form.cmb_isForeign.setFocus();
+				return;
+			}
+			if(this.ds_dailyEmp.getColumn(i, "IS_FOREIGN") == 0 && this.ds_dailyEmp.getColumn(i, "JUMIN_NO").replace(/\s/gi, "").length < 7){
+				alert("주민번호를 입력하세요.");
+				this.ds_dailyEmp.set_rowposition(i);
+				this.tab_empInfos.tp_basicInfo.form.medt_juminNo.setFocus();
+				return;
+			}
+			if(this.ds_dailyEmp.getColumn(i, "IS_FOREIGN") == 1 && this.ds_dailyEmp.getColumn(i, "FOREIGN_NO").replace(/\s/gi, "").length < 7){
+				alert("외국인번호를 입력하세요.");
+				this.ds_dailyEmp.set_rowposition(i);
+				this.tab_empInfos.tp_basicInfo.form.medt_foreignNo.setFocus();
+				return;
+			}
+			
+			if(this.ds_dailyEmp.getColumn(i, "DEPT_CODE") == null || this.ds_dailyEmp.getColumn(i, "DEPT_CODE").replace(/\s/gi, "").length == 0){
+				alert("부서코드를 입력하세요.")
+				this.ds_dailyEmp.set_rowposition(i);
+				this.tab_empInfos.tp_basicInfo.form.edt_deptCode.setFocus();
+				return;
+			}else if(this.ds_codeList.lookup("DETAIL_CODE_NUMBER", this.ds_dailyEmp.getColumn(i, "DEPT_CODE"), "DETAIL_CODE_NUMBER") == null){
+				alert("코드가 존재하지 않습니다.");
+				this.ds_dailyEmp.set_rowposition(i);
+				this.tab_empInfos.tp_basicInfo.form.edt_deptCode.setFocus();
+				return;
+			}
+			
+			if(this.ds_dailyEmp.getColumn(i, "EMP_STAT_CODE") == null || this.ds_dailyEmp.getColumn(i, "EMP_STAT_CODE").replace(/\s/gi, "").length == 0){
+				alert("고용형태를 입력하세요.");
+				this.ds_dailyEmp.set_rowposition(i);
+				this.tab_empInfos.tp_basicInfo.form.edt_empStatCode.setFocus();
+				return;
+			}else if(this.ds_codeList.lookup("DETAIL_CODE_NUMBER", this.ds_dailyEmp.getColumn(i, "EMP_STAT_CODE"), "DETAIL_CODE_NUMBER") == null){
+				alert("코드가 존재하지 않습니다.");
+				this.ds_dailyEmp.set_rowposition(i);
+				this.tab_empInfos.tp_basicInfo.form.edt_empStatCode.setFocus();
+				return;
+			}
+			
+			if(this.ds_dailyEmp.getColumn(i, "PAY_STAT_CODE") == null || this.ds_dailyEmp.getColumn(i, "PAY_STAT_CODE").replace(/\s/gi, "").length == 0){
+				alert("급여형태를 입력하세요.");
+				this.ds_dailyEmp.set_rowposition(i);
+				this.tab_empInfos.tp_basicInfo.form.edt_payStatCode.setFocus();
+				return;
+			}else if(this.ds_codeList.lookup("DETAIL_CODE_NUMBER", this.ds_dailyEmp.getColumn(i, "PAY_STAT_CODE"), "DETAIL_CODE_NUMBER") == null){
+				alert("코드가 존재하지 않습니다.");
+				this.ds_dailyEmp.set_rowposition(i);
+				this.tab_empInfos.tp_basicInfo.form.edt_payStatCode.setFocus();
+				return;
+			}
+		}
+	}
+	
+	if(this.isNothing){alert("저장할 데이터가 없습니다."); return;}
+	
+	this.transaction("saveDailyEmpList",
+					 "svcDailyEmp::save",
+					 "in_out_dailyEmp=ds_dailyEmp:u",
+					 "",
+					 "workplaceCode=" + nexacro.getApplication().gds_emp.getColumn(0,"WORKPLACE_CODE"),
+					 "fn_callback");
+};
+
+// 동적 바인딩 테스트
+// this.tab_empInfos_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
+// {
+// 	var objBindItem = new BindItem();
+// 	objBindItem.init("item33", "tab_empInfos.tp_additionalInfo.form.cmb_isStableFund", "value", "ds_dailyEmp", "IS_STABLE_FUND");
+// 	this.addChild("item33", objBindItem); 
+// 	objBindItem.bind();
+// };
+
+this.div_searchCondition_btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.comp = this.div_searchCondition.form.components;
+	
+	this.values = [];
+	
+	for(var i=0; i<this.comp.length; i++){
+		if(this.comp[i] == "[object Combo]" || this.comp[i] == "[object Edit]" ||this.comp[i] == "[object Calendar]"){
+// 			trace(this.comp[i].id);
+// 			trace(this.comp[i].text);
+// 			trace(this.comp[i].value);
+			this.values.push(this.comp[i].value);
+		}
+	}
+	this.transaction("searchDailyEmpList",
+					 "svcDailyEmp::searchlist",
+					 "",
+					 "ds_dailyEmp=in_out_dailyEmp",
+					 "workplaceCode="+this.values[0]
+					 +" deptCode="+this.values[1]
+					 +" empStatCode="+this.values[2]
+					 +" payStatCode="+this.values[3]
+					 +" searchCdt="+this.values[4]
+					 +" searchVal="+this.values[5]
+					 +" sDate="+this.values[6],
+					 "fn_callback");
+};
+
+this.div_searchCondition_btn_searchWith_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	/*this.div_searchCondition.form.cmb_workplace*/
+	/*trace(obj.id.substr(obj.id.indexOf("search")+6).toLowerCase());*/
+	this.modalId = obj.id.substr(obj.id.indexOf("search")+6).toLowerCase();
+	this.code = null;
+	switch(this.modalId){
+		case "workplace" : this.code = "CO-26"; break;
+		case "dept" : this.code = "CO-07"; break;
+		case "empstat" : this.code = "CO-05"; break;
+		case "paystat" : this.code = "CO-25"; break;
+	}
+	
+	var modalUrl = "Base::Modal.xfdl";
+	var modalEvent = "fn_popupCallback";
+	if(this.code != null){
+		this.gfnOpen(
+			this.modalId,
+			modalUrl, modalEvent,
+			{code:this.code}
+		);
+	}else{alert("테이블에 데이터 없음")}
+};
+
+this.fn_popupCallback = function(modalId, code)
+{
+// 	trace("@@@@@@"+code);
+// 	/*trace("@@@@@@"+code.split(":")[1]);*/
+// 	trace("###"+modalId);
+	// 0 - name, 1 - code
+	if(code != null){
+		this.codeInfo = code.split(":");
+		
+		switch(modalId){
+			case "workplace" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.div_searchCondition.form.cmb_workplace
+				);
+				break;
+			case "dept" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.div_searchCondition.form.cmb_dept
+				);
+				break;
+			case "empstat" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.div_searchCondition.form.cmb_empStat
+				);
+				break;
+			case "paystat" :
+				this.fn_createSearchCmbDataset(
+					modalId, this.codeInfo,
+					this.div_searchCondition.form.cmb_payStat
+				);
+				break;
+		}
+	}
+}
+
+this.fn_createSearchCmbDataset = function(modalId, codeInfo, combo) {
+	// objects.name == "ds_"+modalId
+	// remove
+	this.objs = this.objects;
+	for(var i=0; i<this.objs.length; i++){
+		/*trace(this.objs[i].name);*/
+		if(this.objs[i].name == "ds_"+modalId){
+			this.removeChild("ds_"+modalId);
+		}
+	}
+	
+	var objDs = new Dataset();
+	
+	objDs.name = "ds_"+modalId;
+	objDs.addColumn("CODE", "string");
+	objDs.addColumn("CODE_NAME", "string");
+	
+	this.addChild("ds_"+modalId, objDs);
+	
+	objDs.addRow();
+	objDs.setColumn(0, "CODE", "all");
+	objDs.setColumn(0, "CODE_NAME", "전체선택");
+	
+	objDs.addRow();
+	objDs.setColumn(1, "CODE", codeInfo[1]);
+	objDs.setColumn(1, "CODE_NAME", codeInfo[0]);
+	combo.setInnerDataset(objDs)
+	combo.set_codecolumn("CODE")
+	combo.set_datacolumn("CODE_NAME")
+	combo.set_text(codeInfo[0]);
+	
+}
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="tab_empInfos.tp_basicInfo.form.calen_joinDate" propid="value" datasetid="ds_dailyEmp" columnid="JOIN_DATE"/>
+      <BindItem id="item1" compid="tab_empInfos.tp_basicInfo.form.cmb_isForeign" propid="value" datasetid="ds_dailyEmp" columnid="IS_FOREIGN"/>
+      <BindItem id="item2" compid="tab_empInfos.tp_basicInfo.form.medt_juminNo" propid="value" datasetid="ds_dailyEmp" columnid="JUMIN_NO"/>
+      <BindItem id="item3" compid="tab_empInfos.tp_basicInfo.form.medt_foreignNo" propid="value" datasetid="ds_dailyEmp" columnid="FOREIGN_NO"/>
+      <BindItem id="item4" compid="tab_empInfos.tp_basicInfo.form.edt_zipCode" propid="value" datasetid="ds_dailyEmp" columnid="ZIP_CODE"/>
+      <BindItem id="item5" compid="tab_empInfos.tp_basicInfo.form.edt_addr" propid="value" datasetid="ds_dailyEmp" columnid="ADDR"/>
+      <BindItem id="item6" compid="tab_empInfos.tp_basicInfo.form.edt_addrDetail" propid="value" datasetid="ds_dailyEmp" columnid="ADDR_DETAIL"/>
+      <BindItem id="item7" compid="tab_empInfos.tp_basicInfo.form.edt_email" propid="value" datasetid="ds_dailyEmp" columnid="EMAIL"/>
+      <BindItem id="item8" compid="tab_empInfos.tp_basicInfo.form.medt_tel" propid="value" datasetid="ds_dailyEmp" columnid="TEL"/>
+      <BindItem id="item9" compid="tab_empInfos.tp_basicInfo.form.medt_phone" propid="value" datasetid="ds_dailyEmp" columnid="PHONE"/>
+      <BindItem id="item10" compid="tab_empInfos.tp_basicInfo.form.edt_deptCode" propid="value" datasetid="ds_dailyEmp" columnid="DEPT_CODE"/>
+      <BindItem id="item11" compid="tab_empInfos.tp_basicInfo.form.edt_pjtCode" propid="value" datasetid="ds_dailyEmp" columnid="PJT_CODE"/>
+      <BindItem id="item12" compid="tab_empInfos.tp_basicInfo.form.edt_posCode" propid="value" datasetid="ds_dailyEmp" columnid="POS_CODE"/>
+      <BindItem id="item13" compid="tab_empInfos.tp_basicInfo.form.edt_empStatCode" propid="value" datasetid="ds_dailyEmp" columnid="EMP_STAT_CODE"/>
+      <BindItem id="item14" compid="tab_empInfos.tp_basicInfo.form.edt_jobCode" propid="value" datasetid="ds_dailyEmp" columnid="JOB_CODE"/>
+      <BindItem id="item15" compid="tab_empInfos.tp_basicInfo.form.edt_payStatCode" propid="value" datasetid="ds_dailyEmp" columnid="PAY_STAT_CODE"/>
+      <BindItem id="item16" compid="tab_empInfos.tp_basicInfo.form.edt_transAcCode" propid="value" datasetid="ds_dailyEmp" columnid="TRANS_AC_CODE"/>
+      <BindItem id="item17" compid="tab_empInfos.tp_basicInfo.form.edt_accountNo" propid="value" datasetid="ds_dailyEmp" columnid="ACCOUNT_NO"/>
+      <BindItem id="item18" compid="tab_empInfos.tp_basicInfo.form.edt_depositor" propid="value" datasetid="ds_dailyEmp" columnid="DEPOSITOR"/>
+      <BindItem id="item19" compid="tab_empInfos.tp_basicInfo.form.medt_salary" propid="value" datasetid="ds_dailyEmp" columnid="SALARY"/>
+      <BindItem id="item20" compid="tab_empInfos.tp_basicInfo.form.medt_hourPrice" propid="value" datasetid="ds_dailyEmp" columnid="HOUR_PRICE"/>
+      <BindItem id="item21" compid="tab_empInfos.tp_basicInfo.form.calen_retireDate" propid="value" datasetid="ds_dailyEmp" columnid="RETIRE_DATE"/>
+      <BindItem id="item22" compid="tab_empInfos.tp_basicInfo.form.cmb_isTaxfree" propid="value" datasetid="ds_dailyEmp" columnid="IS_TAXFREE"/>
+      <BindItem id="item23" compid="tab_empInfos.tp_basicInfo.form.cmb_isEmpinsurance" propid="value" datasetid="ds_dailyEmp" columnid="IS_EMPINSURANCE"/>
+      <BindItem id="item24" compid="tab_empInfos.tp_basicInfo.form.cmb_isNationalannuity" propid="value" datasetid="ds_dailyEmp" columnid="IS_NATIONALANNUITY"/>
+      <BindItem id="item25" compid="tab_empInfos.tp_basicInfo.form.cmb_isHealthinsurance" propid="value" datasetid="ds_dailyEmp" columnid="IS_HEALTHINSURANCE"/>
+      <BindItem id="item26" compid="tab_empInfos.tp_additionalInfo.form.edt_nationalityCode" propid="value" datasetid="ds_dailyEmp" columnid="NATIONALLITY_CODE"/>
+      <BindItem id="item27" compid="tab_empInfos.tp_additionalInfo.form.edt_stayStat" propid="value" datasetid="ds_dailyEmp" columnid="STAY_STAT"/>
+      <BindItem id="item28" compid="tab_empInfos.tp_additionalInfo.form.edt_empInsuranceStatCode" propid="value" datasetid="ds_dailyEmp" columnid="EMPINSURANCE_STAT_CODE"/>
+      <BindItem id="item29" compid="tab_empInfos.tp_additionalInfo.form.edt_chJobCode" propid="value" datasetid="ds_dailyEmp" columnid="CH_JOB_CODE"/>
+      <BindItem id="item30" compid="tab_empInfos.tp_additionalInfo.form.edt_memo" propid="value" datasetid="ds_dailyEmp" columnid="MEMO"/>
+      <BindItem id="item31" compid="tab_empInfos.tp_additionalInfo.form.edt_insImpose" propid="value" datasetid="ds_dailyEmp" columnid="INS_IMPOSE"/>
+      <BindItem id="item32" compid="tab_empInfos.tp_additionalInfo.form.edt_insImposeReason" propid="value" datasetid="ds_dailyEmp" columnid="INS_IMPOSE_REASON"/>
+      <BindItem id="item33" compid="tab_empInfos.tp_additionalInfo.form.cmb_isStableFund" propid="value" datasetid="ds_dailyEmp" columnid="IS_STABLE_FUND"/>
+      <BindItem id="item36" compid="div_searchCondition.form.cmb_workplace" propid="value" datasetid="gds_emp" columnid="WORKPLACE_CODE"/>
+    </Bind>
+  </Form>
+</FDL>

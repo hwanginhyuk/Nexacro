@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="resumModal" width="390" height="560" titletext="New Form">
+    <Layouts>
+      <Layout height="560" width="390">
+        <Static id="Static00" taborder="0" text="이력서 수정" left="146" top="17" width="89" height="33" onclick="Static00_onclick" font="bold 18px/normal &quot;나눔스퀘어&quot;"/>
+        <Edit id="p_code" taborder="1" left="110" top="60" width="215" height="30"/>
+        <Edit id="p_name" taborder="2" left="110" top="104" width="215" height="30"/>
+        <Edit id="p_age" taborder="3" left="110" top="148" width="215" height="30"/>
+        <Edit id="p_gender" taborder="4" left="110" top="192" width="215" height="30"/>
+        <Edit id="p_address" taborder="5" left="110" top="236" width="215" height="30"/>
+        <Edit id="p_tel" taborder="6" left="110" top="280" width="215" height="30"/>
+        <Edit id="p_email" taborder="7" left="110" top="324" width="215" height="30"/>
+        <Edit id="p_dept" taborder="8" left="110" top="368" width="215" height="30"/>
+        <Edit id="p_last_school" taborder="9" left="110" top="412" width="215" height="30"/>
+        <Edit id="p_career" taborder="10" left="110" top="456" width="215" height="30"/>
+        <Static id="Static01" taborder="11" text="임시코드" left="37" top="63" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;"/>
+        <Static id="Static01_00" taborder="12" text="이름" left="37" top="107" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Static01_00_onclick"/>
+        <Static id="Static01_00_00" taborder="13" text="나이" left="37" top="151" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Static01_00_onclick"/>
+        <Static id="Static01_00_00_00" taborder="14" text="성별" left="37" top="195" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Static01_00_onclick"/>
+        <Static id="Static01_00_00_00_00" taborder="15" text="주소" left="37" top="240" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Static01_00_onclick"/>
+        <Static id="Static01_00_00_00_00_00" taborder="16" text="전화번호" left="37" top="283" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Static01_00_onclick"/>
+        <Static id="Static01_00_00_00_00_00_00" taborder="17" text="이메일" left="37" top="327" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Static01_00_onclick"/>
+        <Static id="Static01_00_00_00_00_00_00_00" taborder="18" text="부서" left="37" top="371" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Static01_00_onclick"/>
+        <Static id="Static01_00_00_00_00_00_00_00_00" taborder="19" text="학력" left="37" top="415" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Static01_00_onclick"/>
+        <Static id="Static01_00_00_00_00_00_00_00_00_00" taborder="20" text="경력" left="37" top="456" width="63" height="30" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Static01_00_onclick"/>
+        <Button id="Button00" taborder="21" text="저장" left="77" top="510" width="93" height="26" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="22" text="취소" left="203" top="510" width="102" height="26" font="bold 14px/normal &quot;나눔스퀘어&quot;" onclick="Button01_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var age = parseInt(this.p_age.value);
+	this.ds_resume.setColumn(0,"P_CODE",this.p_code.value);
+	this.ds_resume.setColumn(0,"P_NAME",this.p_name.value);
+	this.ds_resume.setColumn(0,"P_AGE",age);
+	this.ds_resume.setColumn(0,"P_GENDER",this.p_gender.value);
+	this.ds_resume.setColumn(0,"P_ADDRESS",this.p_address.value);
+	this.ds_resume.setColumn(0,"P_TEL",this.p_tel.value);
+	this.ds_resume.setColumn(0,"P_EMAIL",this.p_email.value);
+	this.ds_resume.setColumn(0,"P_DEPT",this.p_dept.value);
+	this.ds_resume.setColumn(0,"P_LAST_SCHOOL",this.p_last_school.value);
+	this.ds_resume.setColumn(0,"P_CAREER",this.p_career.value);
+	
+ 	this.transaction("resumemodify",
+ 					"svcNewemp::modifyresumemgmt",
+ 					"ds_resume=ds_resume:u",
+ 					"",
+ 					"",
+ 					"");
+	this.close();
+};
+
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+//PDF
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+  var doc = new jsPDF();
+  doc.text('Dataset to jsPDF', 14, 15)
+  doc.autoTable(this.CSV2Array(20,ds_resume.saveCSV()));
+  doc.save('table.pdf');
+};
+
+this.CSV2Array = function(nY, data) {
+  var i, j, result, field;
+  result = data.split( '\n' );
+  result.shift(); //dataset id info remove
+  result[0] = result[0].replace(/[:](.*?)[\)]/g,""); // column type remove
+  field = result[0].split(','); // create column array
+  result.shift(); // column info remove
+ 
+  result.pop(); // dummy data remove
+  result.pop(); // dummy data remove
+  i = result.length;
+  while( i-- ) {
+    result[i] = result[i].split( /,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/g); // Double quotes check
+    j = result[i].length;
+    while( j-- ) {
+      result[i][j] = result[i][j].replace(/\"/g, "");
+    }
+  }
+  return {
+    startY: nY,
+    head: [field],
+    body: result
+  }
+}]]></Script>
+    <Objects>
+      <Dataset id="ds_resume">
+        <ColumnInfo>
+          <Column id="P_CODE" type="STRING" size="256"/>
+          <Column id="P_NAME" type="STRING" size="256"/>
+          <Column id="P_AGE" type="INT" size="256"/>
+          <Column id="P_GENDER" type="STRING" size="256"/>
+          <Column id="P_ADDRESS" type="STRING" size="256"/>
+          <Column id="P_TEL" type="STRING" size="256"/>
+          <Column id="P_EMAIL" type="STRING" size="256"/>
+          <Column id="P_DEPT" type="STRING" size="256"/>
+          <Column id="P_LAST_SCHOOL" type="STRING" size="256"/>
+          <Column id="P_CAREER" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="p_code" propid="value" datasetid="gds_resume" columnid="P_CODE"/>
+      <BindItem id="item1" compid="p_name" propid="value" datasetid="gds_resume" columnid="P_NAME"/>
+      <BindItem id="item2" compid="p_age" propid="value" datasetid="gds_resume" columnid="P_AGE"/>
+      <BindItem id="item3" compid="p_gender" propid="value" datasetid="gds_resume" columnid="P_GENDER"/>
+      <BindItem id="item4" compid="p_address" propid="value" datasetid="gds_resume" columnid="P_ADDRESS"/>
+      <BindItem id="item5" compid="p_tel" propid="value" datasetid="gds_resume" columnid="P_TEL"/>
+      <BindItem id="item6" compid="p_email" propid="value" datasetid="gds_resume" columnid="P_EMAIL"/>
+      <BindItem id="item7" compid="p_dept" propid="value" datasetid="gds_resume" columnid="P_DEPT"/>
+      <BindItem id="item8" compid="p_last_school" propid="value" datasetid="gds_resume" columnid="P_LAST_SCHOOL"/>
+      <BindItem id="item9" compid="p_career" propid="value" datasetid="gds_resume" columnid="P_CAREER"/>
+    </Bind>
+  </Form>
+</FDL>
